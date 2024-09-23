@@ -34,7 +34,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="70dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="@string/welcome_text"
+            android:text="welcomeText"
             android:textAlignment="center"
             android:textColor="@color/textBlue"
             android:textSize="20sp" />
