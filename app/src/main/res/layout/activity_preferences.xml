@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Preferences">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/PreferencesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Preferences"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Settings Section -->
+    <LinearLayout
+        android:id="@+id/settings_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/settingsBrown"
+        app:layout_constraintTop_toBottomOf="@id/PreferencesTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/settingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_push_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Push notifications settings"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/arrow"
+            android:padding="10dp"
+            android:textColor="@color/BrownText"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_export_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Export app data"
+            android:textColor="@color/BrownText"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/arrow"
+            android:padding="10dp"
+            android:layout_marginBottom="16dp"/>
+    </LinearLayout>
+
+    <!-- Security Section -->
+    <LinearLayout
+        android:id="@+id/security_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/settingsBrown"
+        app:layout_constraintTop_toBottomOf="@id/settings_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/securityTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Security"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_change_password"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/arrow"
+            android:padding="10dp"
+            android:text="Change password"
+            android:textColor="@color/BrownText" />
+
+        <Button
+            android:id="@+id/btn_add_facial_recognition"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/arrow"
+            android:padding="10dp"
+            android:text="Add facial recognition"
+            android:textColor="@color/BrownText" />
+    </LinearLayout>
+
+    <!-- Support Section -->
+    <LinearLayout
+        android:id="@+id/support_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/settingsBrown"
+        app:layout_constraintTop_toBottomOf="@id/security_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/supportTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Support"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnFAQs"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/arrow"
+            android:padding="10dp"
+            android:text="FAQs"
+            android:textColor="@color/BrownText" />
+
+        <Button
+            android:id="@+id/btnNews"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/arrow"
+            android:padding="10dp"
+            android:text="Whats new at MedCheck"
+            android:textColor="@color/BrownText" />
+    </LinearLayout>
+
+    <!-- Legal Section -->
+    <LinearLayout
+        android:id="@+id/legal_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/settingsBrown"
+        app:layout_constraintTop_toBottomOf="@id/support_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/legalTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Legal"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnTermsAndCond"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/arrow"
+            android:padding="10dp"
+            android:text="Terms and conditions"
+            android:textColor="@color/BrownText" />
+
+        <Button
+            android:id="@+id/btnPrivacyPolicy"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/arrow"
+            android:padding="10dp"
+            android:text="Privacy policy"
+            android:textColor="@color/BrownText" />
+    </LinearLayout>
+
+    <!-- Legal Section -->
+    <LinearLayout
+        android:id="@+id/Focus_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/settingsBrown"
+        app:layout_constraintTop_toBottomOf="@id/support_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/focusTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Focus"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnFocus"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableEnd="@drawable/img_3"
+            android:padding="10dp"
+            android:text="Dark Mode"
+            android:textColor="@color/BrownText" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

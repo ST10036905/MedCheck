@@ -5,5 +5,6 @@
     <color name="gradientBlue">#8ACFD6</color>
     <color name="textBlue">#4A8E9E</color>
     <color name="red">#D53527</color>
-
+    <color name="settingsBrown">#D9D9D9</color>
+    <color name="BrownText">#B09D9C</color>
 </resources>
