@@ -7,4 +7,11 @@
     <color name="red">#D53527</color>
     <color name="settingsBrown">#D9D9D9</color>
     <color name="BrownText">#B09D9C</color>
+    <color name="DarkBrown">#CD650A</color>
+    <color name="night_mode">#612481</color>
+    <color name="notifications">#13B2C3</color>
+    <color name="private_account">#E6A326</color>
+    <color name="security">#D95F69</color>
+    <color name="terracotta">#AD7251</color>
+    <color name="caramel">#B17C5E</color>
 </resources>
