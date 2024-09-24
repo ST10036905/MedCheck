@@ -6,20 +6,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/settingsBrown"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".Preferences">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/img_2"
-            android:padding="14dp"/>
-    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -57,264 +46,334 @@
                 android:layout_gravity="center"/>
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="40dp"
                 android:orientation="vertical"
                 android:padding="15dp">
 
-                <!-- Dark mode / night mode -->
-                <RelativeLayout
+                <LinearLayout
+                    android:background="@drawable/container"
                     android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/nightModeIcon"
-                        android:src="@drawable/night_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
-
-                    <TextView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Night Mode"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/nightModeIcon"/>
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:switchMinWidth="50dp"
-                        android:theme="@style/nightModeSwitch"/>
-                     </RelativeLayout>
-
-                <!-- Notification -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/notificationMode"
-                        android:src="@drawable/notification_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
                     <TextView
-                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Push Notification"
+                        android:layout_gravity="center"
+                        android:text="Settings"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/notificationMode"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
 
-                </RelativeLayout>
+                    <!-- Dark mode / night mode -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
+                        android:layout_height="wrap_content">
 
-                <!-- Export data -->
-                <RelativeLayout
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/nightModeIcon"
+                            android:src="@drawable/night_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Night Mode"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/nightModeIcon"/>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:switchMinWidth="50dp"
+                            android:theme="@style/nightModeSwitch"/>
+                    </RelativeLayout>
+
+                    <!-- Notification -->
+                    <RelativeLayout
+                        android:id="@+id/pushNotificationID"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/notificationMode"
+                            android:src="@drawable/notification_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Push Notification"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/notificationMode"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/container"
                     android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/exportDataMode"
-                        android:src="@drawable/export_data_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
                     <TextView
-                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Export Data"
+                        android:layout_gravity="center"
+                        android:text="Legal"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/exportDataMode"/>
-                </RelativeLayout>
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
 
-                <!-- Change password -->
-                <RelativeLayout
+                    <!-- Export data -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/exportDataMode"
+                            android:src="@drawable/export_data_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Export Data"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/exportDataMode"/>
+                    </RelativeLayout>
+
+                    <!-- Terms and conditions -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/termsAndConditionsMode"
+                            android:src="@drawable/terms_and_conditions_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Terms And Conditions"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/termsAndConditionsMode"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/container"
                     android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/changePasswordMode"
-                        android:src="@drawable/change_password_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
                     <TextView
-                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Change Password"
+                        android:layout_gravity="center"
+                        android:text="Support"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/changePasswordMode"/>
-                </RelativeLayout>
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                    <!-- FQS -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
 
-                <!-- Add facial recognition -->
-                <RelativeLayout
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/FAQMode"
+                            android:src="@drawable/frequently_asked_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="FAQ"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/FAQMode"/>
+
+                    </RelativeLayout>
+
+                    <!-- Whats new -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/whatsNewMode"
+                            android:src="@drawable/news_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Whats new on MedCheck"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/whatsNewMode"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/container"
                     android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/facialRecognitionMode"
-                        android:src="@drawable/facial_recognition_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
-
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="15dp">
                     <TextView
-                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Add Facial Recognition"
+                        android:layout_gravity="center"
+                        android:text="Security"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/facialRecognitionMode"/>
-                </RelativeLayout>
-
-                <!-- FQS -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/FAQMode"
-                        android:src="@drawable/frequently_asked_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
-
-                    <TextView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                    <!-- Change password -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="FAQ"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/FAQMode"/>
+                        android:layout_marginTop="8dp">
 
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/changePasswordMode"
+                            android:src="@drawable/change_password_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
 
-                <!-- Whats new -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/whatsNewMode"
-                        android:src="@drawable/news_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
-
-                    <TextView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Change Password"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/changePasswordMode"/>
+                    </RelativeLayout>
+                    <!-- Add facial recognition -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Whats new on MedCheck"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/whatsNewMode"/>
+                        android:layout_marginTop="8dp">
 
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/facialRecognitionMode"
+                            android:src="@drawable/facial_recognition_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
 
-                <!-- Terms and conditions -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/termsAndConditionsMode"
-                        android:src="@drawable/terms_and_conditions_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
-
-                    <TextView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Add Facial Recognition"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/facialRecognitionMode"/>
+                    </RelativeLayout>
+                    <!-- Privacy -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Terms And Conditions"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/termsAndConditionsMode"/>
-                </RelativeLayout>
+                        android:layout_marginTop="8dp">
 
-                <!-- Privacy -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/round_back_secondaty_100"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/privacyMode"
+                            android:src="@drawable/privacy_icon"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"/>
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/privacyMode"
-                        android:src="@drawable/privacy_icon"
-                        android:background="@drawable/round_back_night_mode"
-                        android:padding="12dp"/>
-
-                    <TextView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Privacy"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@+id/privacyMode"/>
-                </RelativeLayout>
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Privacy"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/privacyMode"/>
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

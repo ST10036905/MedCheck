@@ -1,9 +1,11 @@
 package com.example.medcheck
 
 import android.os.Bundle
+import android.widget.RelativeLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import android.widget.Toast;
 import androidx.core.view.WindowInsetsCompat
 
 class Preferences : AppCompatActivity() {
@@ -15,6 +17,14 @@ class Preferences : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        // Declaring the buttons
+        val pushNotificationID: RelativeLayout = findViewById(R.id.pushNotificationID)
+
+        // Setting onclick events
+        pushNotificationID.setOnClickListener(){
+            Toast.makeText(this,"Export data is not available yet in your region",Toast.LENGTH_SHORT).show()
         }
     }
 }
