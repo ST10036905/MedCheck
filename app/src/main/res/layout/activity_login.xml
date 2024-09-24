@@ -7,4 +7,103 @@
     android:layout_height="match_parent"
     tools:context=".Login">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/txtLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/login"
+            android:textColor="@color/red"
+            android:textSize="28sp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/nameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp" />
+
+        <EditText
+            android:id="@+id/nameTxt"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/passwordLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/password"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/passwordTxt"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_edittext"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/poppins_bold"
+            android:backgroundTint="@color/gradientBlue"
+            android:layout_marginTop="50dp" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/back"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/poppins_bold"
+            android:backgroundTint="@color/gradientBlue"
+            android:layout_marginTop="20dp" />
+
+        <ImageButton
+            android:id="@+id/unableBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:src="@drawable/img_1" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
