@@ -32,31 +32,21 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="welcomeText"
+            android:text="@string/welcome"
             android:textAlignment="center"
             android:textColor="@color/textBlue"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:id="@+id/startBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/img_1"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/start"
-            android:textSize="20sp"
-            android:gravity="center" />
 
         <EditText
             android:id="@+id/editTextText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="-50dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/square_edittext"
             android:ems="10"
             android:text="@string/start"
             android:fontFamily="@font/poppins_bold"
