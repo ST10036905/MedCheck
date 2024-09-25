@@ -53,6 +53,9 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         // function to set the map type
         this.map = map
         map?.mapType = GoogleMap.MAP_TYPE_NORMAL
+        // adding zoom function
+        map?.uiSettings?.isZoomControlsEnabled = true
+        map?.uiSettings?.isZoomGesturesEnabled = true
         // sets the map default location
        val latLng = LatLng(-33.964314, 18.467859)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,19f))
