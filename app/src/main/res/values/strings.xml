@@ -16,7 +16,7 @@
     <string name="add_a_refill_reminder">Add a refill reminder</string>
     <string name="schedule_another_date">Schedule another date</string>
     <string name="take_as_needed">Take as needed</string>
-    <string name="dose">Dose</string>
+    <string name="dose">DOSES</string>
     <string name="medicine_details">Medicine Details</string>
     <string name="panado">Panado</string>
     <string name="MedicineName">Name</string>
@@ -69,4 +69,13 @@
     <string name="dashboard_get_refill">Get Refill</string>
     <string name="dashboard">Dashboard</string>
     <string name="calendar">Calendar</string>
+    <string name="mymedicine_name_and_strenght">NAME AND STRENGHT</string>
+    <string name="mymedicine_doses">DOSES</string>
+    <string name="mymedicine_take_as_much_needed">Take as much needed</string>
+    <string name="mymedicine_strength">Strength</string>
+    <string name="mymedicine_name">Medicine Name</string>
+    <string name="mymedicine_example_1_every_other_day">example 1 every other day</string>
+    <string name="mymedicine_5unit_reminder_textHint">Recieve a reminder when there are only 5 units of medicine remaining</string>
+    <string name="mymedicine_add_a_refill_reminder">Add a Refill Reminder</string>
+    <string name="mymedicine_schedule_another_date">Schedule Another Date</string>
 </resources>

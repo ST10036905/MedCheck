@@ -16,9 +16,9 @@
             android:name=".Dashboard"
             android:exported="false"
             android:theme="@style/Theme.MedCheck" />
-        <!--<activity
+       <activity
             android:name=".MyMedicineActivity"
-            android:exported="false" />-->
+            android:exported="false" />
         <!--<activity
             android:name=".MedicationDetailsActivity"
             android:exported="false" />-->
