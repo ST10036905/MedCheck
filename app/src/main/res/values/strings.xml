@@ -12,9 +12,5 @@
     <string name="create">Create account</string>
     <string name="back">BACK</string>
     <string name="reenter">Re-enter password:</string>
-    <string name="welcome">
-        Your health is our priority. MedMaster is here to help you stay on track with your medication schedule.\n
-        With easy reminders and personalized notifications, you'll never miss a dose.\n
-        Let's get started on your journey to better health, one reminder at a time!
-    </string>
+    <string name="welcome">Your health is our priority. Med Check is here to help you stay on track with your medication schedule.</string>
 </resources>

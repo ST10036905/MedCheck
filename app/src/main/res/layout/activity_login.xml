@@ -11,91 +11,93 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <TextView
             android:id="@+id/txtLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/login"
-            android:textColor="@color/red"
-            android:textSize="28sp"
             android:textAlignment="center"
-            android:layout_marginTop="10dp"/>
+            android:textColor="@color/red"
+            android:textSize="28sp" />
 
         <TextView
             android:id="@+id/nameLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"
-            android:fontFamily="@font/poppins_bold"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp" />
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/name"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/nameTxt"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:background="@drawable/rounded_edittext"
-            android:textSize="18sp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
             android:padding="10dp"
-            android:layout_marginTop="10dp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/passwordLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/password"
-            android:textSize="20sp"
             android:textColor="@android:color/black"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/passwordTxt"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:inputType="textPassword"
-            android:background="@drawable/rounded_edittext"
-            android:textSize="16sp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPassword"
             android:padding="10dp"
-            android:layout_marginTop="10dp" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="@string/submit"
             android:layout_gravity="center"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/poppins_bold"
+            android:layout_marginTop="50dp"
             android:backgroundTint="@color/gradientBlue"
-            android:layout_marginTop="50dp" />
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/submit"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btnBack"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/back"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/poppins_bold"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/gradientBlue"
-            android:layout_marginTop="20dp" />
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/back"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/unableBtn"
