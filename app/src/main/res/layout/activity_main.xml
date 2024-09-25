@@ -8,16 +8,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Main LinearLayout content -->
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/gradient_background"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/logoBtn"
@@ -41,18 +38,37 @@
             android:textColor="@color/textBlue"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editTextText"
+    </LinearLayout>
+
+    <!-- FrameLayout to overlay text on ImageButton -->
+    <FrameLayout
+        android:id="@+id/unableBtnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- ImageButton with the image -->
+        <ImageButton
+            android:id="@+id/unableBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
-            android:background="@drawable/square_edittext"
-            android:ems="10"
-            android:fontFamily="@font/poppins_bold"
+            android:src="@drawable/img_1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@null" />
+
+        <!-- TextView overlaying the image -->
+        <TextView
+            android:id="@+id/unableBtnText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/start"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/poppins_bold" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
