@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white1"
+    tools:context=".ScheduleDose">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Step and instruction text views -->
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/step2"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/red"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_text"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/cafe"
+                android:textSize="20sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Medicine name input -->
+            <TextView
+                android:id="@+id/timeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/when_to_take"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/medicineName"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="12:00-23:00"
+                android:inputType="datetime"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:drawableRight="@drawable/time"/>
+
+            <!-- Dosage input -->
+            <TextView
+                android:id="@+id/oftenLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/how_often"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/dosage"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Daily"
+                android:inputType="text"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:drawableRight="@drawable/calendar"/>
+
+            <!-- Frequency input -->
+            <TextView
+                android:id="@+id/dosesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/how_many"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/frequency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableRight="@drawable/manydose"
+                android:hint="1"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <!-- Schedule button -->
+            <Button
+                android:id="@+id/scheduleDose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="@color/textBlue"
+                android:text="@string/schedule_dose"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="12dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

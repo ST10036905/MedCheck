@@ -1,11 +1,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <!-- Size of the square -->
     <size
         android:width="100dp"
         android:height="100dp" />
 
-    <!-- Solid color for the square -->
     <solid android:color="@color/textBlue" />
 </shape>
