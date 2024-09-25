@@ -8,17 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".GoogleMap">
 
-    <!-- SearchView for searching places -->
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search nearby places..."
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"/>
 
     <!-- Fragment to display the map -->
     <androidx.fragment.app.FragmentContainerView
@@ -30,6 +19,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- SearchView for searching places -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/mapSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:queryHint="Searching for pharmacy..."
+        android:iconifiedByDefault="false"
+        android:elevation="5dp"
+        android:background="@drawable/bg_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
 
     <!-- MaterialCardView for map options aligned to bottom-left corner -->
     <com.google.android.material.card.MaterialCardView
@@ -83,6 +86,7 @@
                 android:text="Normal"
                 android:textColor="@color/black" />
         </RadioGroup>
+
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
