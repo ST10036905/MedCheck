@@ -32,8 +32,7 @@ class Register : AppCompatActivity() {
         }
 
         // Set up click listener for the submit button
-        binding.submitBtn.setOnClickListener()
-        {
+        binding.submitBtn.setOnClickListener {
             val name = binding.textName.text.toString()
             val age = binding.textAge.text.toString()
             val weight = binding.textWeight.text.toString()
@@ -41,7 +40,11 @@ class Register : AppCompatActivity() {
             val pass = binding.textPass.text.toString()
             val pass2 = binding.textPass2.text.toString()
 
+            // Check if any fields are empty
             if (name.isEmpty() || age.isEmpty() || weight.isEmpty() || height.isEmpty() || pass.isEmpty() || pass2.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                // Check if passwords match
                 if (pass == pass2) {
                     val intent = Intent(this, Login::class.java)
                     startActivity(intent)
@@ -49,8 +52,6 @@ class Register : AppCompatActivity() {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 }
             }
-                else
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            }
         }
     }
+}

@@ -51,7 +51,7 @@
 
         <!-- ImageButton with the image -->
         <ImageButton
-            android:id="@+id/unableBtn"
+            android:id="@+id/getStartedBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/img_1"
@@ -61,7 +61,7 @@
 
         <!-- TextView overlaying the image -->
         <TextView
-            android:id="@+id/unableBtnText"
+            android:id="@+id/getStartedBtnText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

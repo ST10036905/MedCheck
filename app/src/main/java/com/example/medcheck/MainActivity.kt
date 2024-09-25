@@ -26,9 +26,8 @@ class MainActivity : AppCompatActivity() {
         // Set the content view to the root view of the binding
         setContentView(binding.root)
 
-        // Get the "Get Started" button and set up click listener
-        val getStartedBtn = findViewById<Button>(R.id.getStartedBtn)
-        getStartedBtn.setOnClickListener {
+        // Get the "Get Started" button using binding
+        binding.getStartedBtn.setOnClickListener {
             val intent = Intent(this, Welcome::class.java)
             startActivity(intent)
         }
