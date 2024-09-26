@@ -54,17 +54,20 @@
             <EditText
                 android:id="@+id/doseInput"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:hint="12:00-23:00"
-                android:inputType="datetime"
+                android:layout_height="wrap_content"
+                android:hint="Select Time"
+                android:focusable="false"
+                android:clickable="true"
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
-                android:drawableRight="@drawable/time"/>
+                android:drawableRight="@drawable/time" />
 
-            <!-- Dosage input -->
+
+
+            <!-- Dosage input using a Spinner -->
             <TextView
                 android:id="@+id/oftenLabel"
                 android:layout_width="wrap_content"
@@ -75,18 +78,16 @@
                 android:fontFamily="@font/poppins_medium"
                 android:layout_marginBottom="4dp" />
 
-            <EditText
-                android:id="@+id/oftenInput"
+            <Spinner
+                android:id="@+id/oftenSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:hint="Daily"
-                android:inputType="text"
+                android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginBottom="16dp"
-                android:drawableRight="@drawable/calendar"/>
+                android:layout_marginBottom="16dp" />
+
 
             <!-- Frequency input -->
             <TextView
