@@ -69,7 +69,7 @@
                 android:id="@+id/dosageLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dosage"
+                android:text="@string/strength"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_medium"
@@ -93,24 +93,21 @@
                 android:id="@+id/frequencyLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/frequency"
+                android:text="@string/how_are"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_medium"
                 android:layout_marginBottom="4dp" />
 
-            <EditText
-                android:id="@+id/frequencyInput"
+            <Spinner
+                android:id="@+id/frequencySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edit_text_background"
-                android:drawableRight="@drawable/quantity"
-                android:hint="When to take it"
-                android:inputType="text"
                 android:padding="12dp"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
         </LinearLayout>
     </ScrollView>

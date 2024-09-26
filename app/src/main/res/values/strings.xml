@@ -23,6 +23,8 @@
     <string name="save_medication">SAVE MEDICATION</string>
     <string name="when_to_take">When is the dose taken?</string>
     <string name="how_often">How often is the dose taken?</string>
+    <string name="how_are">How are the doses taken?</string>
     <string name="how_many">"How many of each doses are taken?</string>
+    <string name="strength">Strength</string>
     <string name="welcome">Your health is our priority. Med Check is here to help you stay on track with your medication schedule.</string>
 </resources>
