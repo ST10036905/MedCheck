@@ -13,21 +13,24 @@
         android:theme="@style/Theme.MedCheck"
         tools:targetApi="31">
         <activity
+            android:name=".MyMedicine"
+            android:exported="false" />
+        <activity
             android:name=".Dashboard"
             android:exported="false"
             android:theme="@style/Theme.MedCheck" />
-       <activity
-            android:name=".MyMedicineActivity"
+        <activity
+            android:name=".MedicineDetailsActivity"
             android:exported="false" />
-        <!--<activity
+        <!--
+<activity
             android:name=".MedicationDetailsActivity"
-            android:exported="false" />-->
-
+            android:exported="false" />
+        -->
         <activity
             android:name=".Calendar"
             android:exported="false"
             android:theme="@style/Theme.MedCheck" />
-
         <activity
             android:name=".Preferences"
             android:exported="true">
