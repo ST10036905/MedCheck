@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white1"
+    tools:context=".AddMedicine">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Step and instruction text views -->
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/step"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/red"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_medicine"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/cafe"
+                android:textSize="20sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Medicine name input -->
+            <TextView
+                android:id="@+id/medicineNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medicine_name"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/nameInput"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Enter medicine name"
+                android:inputType="text"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:drawableRight="@drawable/name"/>
+
+            <!-- Dosage input -->
+            <TextView
+                android:id="@+id/dosageLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strength"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/strenghtInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableRight="@drawable/dose"
+                android:hint="Enter strenght of medicine"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <!-- Frequency input -->
+            <TextView
+                android:id="@+id/frequencyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/how_are"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginBottom="4dp" />
+
+            <Spinner
+                android:id="@+id/frequencySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- FrameLayout to overlay text on ImageButton -->
+    <FrameLayout
+        android:id="@+id/saveMedicationBtnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- ImageButton with the image -->
+        <ImageButton
+            android:id="@+id/saveMedicationBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@null" />
+
+        <!-- TextView overlaying the image -->
+        <TextView
+            android:id="@+id/saveMedicationext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/save_medication"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/poppins_bold" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
