@@ -12,6 +12,7 @@
     <string name="create">Create account</string>
     <string name="back">BACK</string>
     <string name="reenter">Re-enter password:</string>
+
     <string name="step">Step 1</string>
     <string name="step2">Step 2</string>
     <string name="medicine_name">Medicine name</string>
@@ -45,4 +46,5 @@
     <string name="facial_recognition">Add Facial Recognition</string>
     <string name="privacy">Privacy</string>
     <string name="legal">Legal</string>
+
 </resources>
