@@ -20,21 +20,24 @@
 
         <activity
             android:name=".GoogleMap"
-        <activity
-            android:name=".ScheduleDose"
-            android:exported="false" />
-        <activity
-            android:name=".AddMedicine"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ScheduleDose"
+            android:exported="false" />
+        <activity
+            android:name=".AddMedicine"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
         </activity>
         <activity
             android:name=".Login"
@@ -51,10 +54,6 @@
         <activity
             android:name=".Welcome"
             android:exported="false" />
-        <activity
-            android:name=".Preferences"
-            android:exported="true" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

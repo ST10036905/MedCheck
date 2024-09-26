@@ -25,4 +25,5 @@
     <string name="how_often">How often is the dose taken?</string>
     <string name="how_many">"How many of each doses are taken?</string>
     <string name="welcome">Your health is our priority. Med Check is here to help you stay on track with your medication schedule.</string>
+    <string name="image">Image</string>
 </resources>
