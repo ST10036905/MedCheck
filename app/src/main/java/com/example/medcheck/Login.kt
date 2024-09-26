@@ -25,6 +25,18 @@ class Login : AppCompatActivity() {
         // Set the content view to the root view of the binding
         setContentView(binding.root)
 
+        // Set up click listeners for forgot password up link
+        binding.forgotPasswordLink.setOnClickListener {
+            val intent = Intent(this, Preferences::class.java)
+            startActivity(intent)
+        }
+
+        // Set up click listeners for the sign up link
+        binding.signUpLink.setOnClickListener {
+            val intent = Intent(this, Register::class.java)
+            startActivity(intent)
+        }
+
         // Set up click listeners for the back button
         val backBtn = binding.backBtn
         backBtn.setOnClickListener {
