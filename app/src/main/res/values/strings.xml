@@ -78,4 +78,5 @@
     <string name="mymedicine_5unit_reminder_textHint">Recieve a reminder when there are only 5 units of medicine remaining</string>
     <string name="mymedicine_add_a_refill_reminder">Add a Refill Reminder</string>
     <string name="mymedicine_schedule_another_date">Schedule Another Date</string>
+    <string name="my_medicine_screen_title">My Medicine</string>
 </resources>
