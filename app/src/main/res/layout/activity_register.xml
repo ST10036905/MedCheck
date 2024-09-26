@@ -18,10 +18,11 @@
             android:id="@+id/txtRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/register"
             android:textColor="@color/red"
-            android:textSize="24sp"
+            android:textSize="28sp"
+            android:layout_marginTop="50dp"
             android:textAlignment="center"/>
 
         <TextView
@@ -161,7 +162,7 @@
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             android:text="@string/submit"
             android:backgroundTint="@color/textBlue"
@@ -175,7 +176,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="@string/back"
             android:backgroundTint="@color/textBlue"
             android:fontFamily="@font/poppins_bold"
