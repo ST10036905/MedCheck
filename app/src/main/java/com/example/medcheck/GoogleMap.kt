@@ -40,6 +40,40 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         enableEdgeToEdge()
         setContentView(R.layout.activity_google_map)
 
+        // initializing the places API with API key
+        Places.initialize(applicationContext,"AIzaSyCV5y_AsNgheuOBVZcQ8rsVts-Hv5922PA")
+        placesClient = Places.createClient(this)
+
+        // inizialize the autocompleteSupport fragment for the search bar
+        val autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autoComplete_fragment)
+        as AutocompleteSupportFragment
+
+        // specify the type of place data to return
+        autocompleteFragment.setPlaceFields(
+            listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG)
+        )
+
+        // set up a listener to handle the place selection
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
+            override fun onPlaceSelected(place: Place) {
+               // Respond to the places selected
+                val latLng = place.latLng
+                latLng?.let {
+                    map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                    map?.addMarker(MarkerOptions().position(latLng).title(place.name))
+                }
+            }
+
+            override fun onError(p0: Status) {
+               // handles the error that may occour
+                Toast.makeText(this@GoogleMap, "An error occurred: ",Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // set up map fragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -63,9 +97,8 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as? SupportMapFragment
-
-        mapFragment?.getMapAsync(this)
+       // val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as? SupportMapFragment
+      //  mapFragment?.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -93,7 +126,7 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         val markerOptions =MarkerOptions()
         markerOptions.position(latLng)
         markerOptions.title("Location")
-        markerOptions.snippet("Marker location")
+        markerOptions.snippet("You are here.")
         markerOptions.draggable(true)
         markerOptions.flat(true)
         // adds the marker to the map location
