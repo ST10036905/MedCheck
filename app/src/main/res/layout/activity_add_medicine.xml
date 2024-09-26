@@ -52,7 +52,7 @@
                 android:layout_marginBottom="4dp" />
 
             <EditText
-                android:id="@+id/medicineName"
+                android:id="@+id/nameInput"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:hint="Enter medicine name"
@@ -69,14 +69,14 @@
                 android:id="@+id/dosageLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dosage"
+                android:text="@string/strength"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_medium"
                 android:layout_marginBottom="4dp" />
 
             <EditText
-                android:id="@+id/dosage"
+                android:id="@+id/strenghtInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -93,39 +93,54 @@
                 android:id="@+id/frequencyLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/frequency"
+                android:text="@string/how_are"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_medium"
                 android:layout_marginBottom="4dp" />
 
-            <EditText
-                android:id="@+id/frequency"
+            <Spinner
+                android:id="@+id/frequencySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edit_text_background"
-                android:drawableRight="@drawable/quantity"
-                android:hint="When to take it"
-                android:inputType="text"
                 android:padding="12dp"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
-            <!-- Schedule button -->
-            <Button
-                android:id="@+id/saveMedication"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="0dp"
-                android:backgroundTint="@color/textBlue"
-                android:text="@string/save_medication"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_bold"
-                android:padding="12dp" />
         </LinearLayout>
     </ScrollView>
+
+    <!-- FrameLayout to overlay text on ImageButton -->
+    <FrameLayout
+        android:id="@+id/saveMedicationBtnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- ImageButton with the image -->
+        <ImageButton
+            android:id="@+id/saveMedicationBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@null" />
+
+        <!-- TextView overlaying the image -->
+        <TextView
+            android:id="@+id/saveMedicationext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/save_medication"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/poppins_bold" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
