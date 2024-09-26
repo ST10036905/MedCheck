@@ -19,7 +19,7 @@
 
 
         <activity
-            android:name=".GoogleMap"
+            android:name=".GoogleMap"/>
         <activity
             android:name=".ScheduleDose"
             android:exported="false" />
@@ -51,9 +51,6 @@
         <activity
             android:name=".Welcome"
             android:exported="false" />
-        <activity
-            android:name=".Preferences"
-            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"

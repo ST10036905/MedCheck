@@ -3,7 +3,7 @@
     <string name="start">GET STARTED &gt;</string> <!-- Corrected the ">" symbol -->
     <string name="register">Registration form</string>
     <string name="login">Login</string>
-    <string name="name">Name:</string>
+    <string name="email">Email:</string>
     <string name="age">Age:</string>
     <string name="weight">Weight:</string>
     <string name="height">Height:</string>
