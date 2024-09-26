@@ -25,14 +25,15 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:paddingTop="20dp"
-                android:src="@drawable/user_icon"/>
+                android:src="@drawable/user_icon"
+                android:contentDescription="@string/image" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:text="Username"
+                android:text="@string/username"
                 android:textColor="@color/BrownText"
                 android:textSize="25sp"
                 android:textStyle="bold"/>
@@ -40,7 +41,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="telephoneNumber"
+                android:text="@string/telephonenumber"
                 android:textColor="@color/BrownText"
                 android:textSize="15sp"
                 android:layout_gravity="center"/>
@@ -67,7 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Settings"
+                        android:text="@string/settings"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
@@ -84,14 +85,15 @@
                             android:id="@+id/nightModeIcon"
                             android:src="@drawable/night_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:contentDescription="@string/image" />
 
                         <TextView
                             android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Night Mode"
+                            android:text="@string/night_mode"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/nightModeIcon"/>
@@ -119,14 +121,15 @@
                             android:id="@+id/notificationMode"
                             android:src="@drawable/notification_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:contentDescription="@string/image" />
 
                         <TextView
                             android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Push Notification"
+                            android:text="@string/push_notification"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/notificationMode"/>
@@ -148,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Legal"
+                        android:text="@string/legal"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
@@ -173,7 +176,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Export Data"
+                            android:text="@string/export_data"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/exportDataMode"/>
@@ -192,14 +195,15 @@
                             android:id="@+id/termsAndConditionsMode"
                             android:src="@drawable/terms_and_conditions_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:contentDescription="@string/image" />
 
                         <TextView
                             android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Terms And Conditions"
+                            android:text="@string/terms_and_conditions"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/termsAndConditionsMode"/>
@@ -220,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Support"
+                        android:text="@string/support"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
@@ -244,7 +248,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="FAQ"
+                            android:text="@string/faq"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/FAQMode"/>
@@ -264,14 +268,15 @@
                             android:id="@+id/whatsNewMode"
                             android:src="@drawable/news_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:contentDescription="@string/image" />
 
                         <TextView
                             android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Whats new on MedCheck"
+                            android:text="@string/whats_new"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/whatsNewMode"/>
@@ -292,7 +297,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Security"
+                        android:text="@string/security"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
@@ -316,7 +321,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Change Password"
+                            android:text="@string/change_password"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/changePasswordMode"/>
@@ -341,7 +346,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Add Facial Recognition"
+                            android:text="@string/facial_recognition"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/facialRecognitionMode"/>
@@ -366,7 +371,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Privacy"
+                            android:text="@string/privacy"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_toEndOf="@+id/privacyMode"/>

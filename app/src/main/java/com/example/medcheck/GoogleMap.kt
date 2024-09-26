@@ -5,11 +5,13 @@ import android.graphics.Canvas
 import android.os.Bundle
 import android.widget.RadioGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,7 +20,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
 class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
 
@@ -26,7 +32,6 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
     // declaring the map variable
     private var map : GoogleMap? = null
     private lateinit var mapSearchView: SearchView
-
     // declaring the search
     private lateinit var placesClient: PlacesClient
 
@@ -34,31 +39,46 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_google_map)
-        // finds the search view by id
-        mapSearchView = findViewById(R.id.mapSearch);
 
+        // initializing the places API with API key
+        Places.initialize(applicationContext,"AIzaSyCV5y_AsNgheuOBVZcQ8rsVts-Hv5922PA")
+        placesClient = Places.createClient(this)
+
+        // inizialize the autocompleteSupport fragment for the search bar
+        val autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autoComplete_fragment)
+        as AutocompleteSupportFragment
+
+        // specify the type of place data to return
+        autocompleteFragment.setPlaceFields(
+            listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG)
+        )
+
+        // set up a listener to handle the place selection
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
+            override fun onPlaceSelected(place: Place) {
+               // Respond to the places selected
+                val latLng = place.latLng
+                latLng?.let {
+                    map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                    map?.addMarker(MarkerOptions().position(latLng).title(place.name))
+                }
+            }
+
+            override fun onError(p0: Status) {
+               // handles the error that may occour
+                Toast.makeText(this@GoogleMap, "An error occurred: ",Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // set up map fragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        mapSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // Handle search query submission
-                if (query != null) {
-                    searchLocation(query)  // This function would implement the search logic
-                }
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Handle live query changes if necessary
-                return false
-            }
-        })
-
 
         radioGroup = findViewById(R.id.radioGroup)
         radioGroup.setOnCheckedChangeListener{ _ , itemId : Int ->
@@ -77,20 +97,16 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as? SupportMapFragment
-
-        mapFragment?.getMapAsync(this)
+       // val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as? SupportMapFragment
+      //  mapFragment?.getMapAsync(this)
     }
 
-    private fun searchLocation(query: String) {
+    override fun onMapReady(googleMap: GoogleMap) {
 
-    }
-
-    override fun onMapReady(map: GoogleMap?) {
+        this.map = googleMap
         // setting a style for the map
         map?.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
         // function to set the map type
-        this.map = map
         map?.mapType = GoogleMap.MAP_TYPE_NORMAL
 
         // sets the map default location
@@ -110,13 +126,13 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         val markerOptions =MarkerOptions()
         markerOptions.position(latLng)
         markerOptions.title("Location")
-        markerOptions.snippet("Marker location")
+        markerOptions.snippet("You are here.")
         markerOptions.draggable(true)
         markerOptions.flat(true)
         // adds the marker to the map location
         map?.addMarker(markerOptions)
 
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(R.drawable.location)))
+        //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(R.drawable.location)))
     }
 
     private fun getBitmapFromDrawable(resId: Int): Bitmap? {
