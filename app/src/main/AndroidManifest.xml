@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,27 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedCheck"
         tools:targetApi="31">
+
         <activity
-            android:name=".MyMedicine"
+            android:name=".GoogleMap"
+        <activity
+            android:name=".ScheduleDose"
             android:exported="false" />
         <activity
-            android:name=".Dashboard"
-            android:exported="false"
-            android:theme="@style/Theme.MedCheck" />
-        <activity
-            android:name=".MedicineDetailsActivity"
+            android:name=".AddMedicine"
             android:exported="false" />
-        <!--
-<activity
-            android:name=".MedicationDetailsActivity"
-            android:exported="false" />
-        -->
         <activity
-            android:name=".Calendar"
-            android:exported="false"
-            android:theme="@style/Theme.MedCheck" />
-        <activity
-            android:name=".Preferences"
+            android:name=".MainActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,18 +40,26 @@
             android:exported="false"
             android:theme="@style/Theme.MedCheck" />
         <activity
+            android:name=".Preferences"
+            android:exported="false">
+
+        </activity>
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".Welcome"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+
             android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="MAPS_KEY" />
     </application>
 
 </manifest>

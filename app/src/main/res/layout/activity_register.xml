@@ -12,26 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/register"
             android:textColor="@color/red"
-            android:textSize="24sp"
+            android:textSize="28sp"
+            android:layout_marginTop="50dp"
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/txtname"
+            android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
@@ -46,7 +41,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:hint="Enter your name"
+            android:background="@drawable/rounded_edittext"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
@@ -68,7 +63,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:hint="Enter your age"
+            android:background="@drawable/rounded_edittext"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
@@ -90,7 +85,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:hint="Enter your weight"
+            android:background="@drawable/rounded_edittext"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
@@ -112,7 +107,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:hint="Enter your height"
+            android:background="@drawable/rounded_edittext"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
@@ -134,7 +129,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:hint="Enter your password"
+            android:background="@drawable/rounded_edittext"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
@@ -156,42 +151,48 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:hint="Re-enter your password "
+            android:background="@drawable/rounded_edittext"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/createAccBtn"
-            android:layout_width="250dp"
+            android:id="@+id/submitBtn"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
-            android:hint="SUBMIT"
-            android:backgroundTint="@color/gradientBlue"
+            android:text="@string/submit"
+            android:backgroundTint="@color/textBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="250dp"
+            android:id="@+id/backBtn"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:hint="BACK"
-            android:backgroundTint="@color/gradientBlue"
+            android:layout_marginTop="20dp"
+            android:text="@string/back"
+            android:backgroundTint="@color/textBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
             android:textColor="@color/white" />
 
-        <ImageButton
-            android:id="@+id/unableBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/img_1" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/unableBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:adjustViewBounds="true" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

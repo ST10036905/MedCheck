@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.MedCheck" parent="Base.Theme.MedCheck" />
+
+    <style name="nightModeSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/night_mode</item>
+        <item name="colorSwitchThumbNormal">#FFFFFF</item>
+        <item name="android:colorForeground">#BFBABA</item>
+    </style>
 </resources>

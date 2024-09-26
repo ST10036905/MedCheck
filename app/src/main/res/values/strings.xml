@@ -1,81 +1,15 @@
 <resources>
     <string name="app_name">MedCheck</string>
-    <string name="start">GET STARTED > </string>
-    <string name="register">Registration form </string>
+    <string name="start">GET STARTED &gt;</string> <!-- Corrected the ">" symbol -->
+    <string name="register">Registration form</string>
+    <string name="login">Login</string>
     <string name="name">Name:</string>
     <string name="age">Age:</string>
     <string name="weight">Weight:</string>
     <string name="height">Height:</string>
     <string name="password">Password:</string>
+    <string name="submit">SUBMIT</string>
+    <string name="create">Create account</string>
+    <string name="back">BACK</string>
     <string name="reenter">Re-enter password:</string>
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="stop_taking_medication">STOP TAKING MEDICATION</string>
-    <string name="add_a_refill_reminder">Add a refill reminder</string>
-    <string name="schedule_another_date">Schedule another date</string>
-    <string name="take_as_needed">Take as needed</string>
-    <string name="dose">DOSES</string>
-    <string name="medicine_details">Medicine Details</string>
-    <string name="panado">Panado</string>
-    <string name="MedicineName">Name</string>
-    <string name="enter_medicine_name">Enter medicine name</string>
-
-    <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
-        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
-        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
-        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
-        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
-        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
-        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
-        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
-        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
-        bibendum, vel congue leo egestas.\n\n
-        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
-        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
-        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
-        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
-        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
-        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
-        est.\n\n
-        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
-        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
-        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
-        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
-        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
-        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
-        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
-        convallis.\n\n
-        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
-        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
-        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
-        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
-        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
-        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
-    </string>
-    <string name="active_medication">Active Medication</string>
-    <string name="add_new_medication">Add new Medication</string>
-    <string name="awards">Awards</string>
-    <string name="award1_getting_started">Getting Started</string>
-    <string name="award2_my_reward">My Reward</string>
-    <string name="award3_dashboard_textlabel">1M Reach</string>
-    <string name="dashboard_refill">Refill</string>
-    <string name="dashboard_refill_your_medication_by_clicking_the_refill_button_below">Refill your medication by clicking the refill button below</string>
-    <string name="dashboard_get_refill">Get Refill</string>
-    <string name="dashboard">Dashboard</string>
-    <string name="calendar">Calendar</string>
-    <string name="mymedicine_name_and_strenght">NAME AND STRENGHT</string>
-    <string name="mymedicine_doses">DOSES</string>
-    <string name="mymedicine_take_as_much_needed">Take as much needed</string>
-    <string name="mymedicine_strength">Strength</string>
-    <string name="mymedicine_name">Medicine Name</string>
-    <string name="mymedicine_example_1_every_other_day">example 1 every other day</string>
-    <string name="mymedicine_5unit_reminder_textHint">Recieve a reminder when there are only 5 units of medicine remaining</string>
-    <string name="mymedicine_add_a_refill_reminder">Add a Refill Reminder</string>
-    <string name="mymedicine_schedule_another_date">Schedule Another Date</string>
 </resources>
