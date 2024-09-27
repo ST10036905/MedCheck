@@ -9,5 +9,7 @@
     <color name="cafe">#AA9594</color>
     <color name="settingsBrown">#D9D9D9</color>
     <color name="BrownText">#B09D9C</color>
+    <color name="BTN_darkerTextBlue">#2F5F67</color>
+    <color name="dashboardDarkerGradientBlue">#488A90</color>
 
 </resources>
