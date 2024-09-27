@@ -17,6 +17,5 @@ class TakenMedication : AppCompatActivity() {
         binding = ActivityTakenMedicationBinding.inflate(layoutInflater)
 
 
-
     }
 }
