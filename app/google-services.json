@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "956335925259",
+    "project_id": "medcheck-e2b60",
+    "storage_bucket": "medcheck-e2b60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956335925259:android:ef47f75b49691d636abf0e",
+        "android_client_info": {
+          "package_name": "com.example.medcheck"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB073qsyV2pJQVu6S5H76IB1RsKjh0pGbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
