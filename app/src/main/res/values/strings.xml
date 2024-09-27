@@ -29,6 +29,7 @@
     <string name="strength">Strength</string>
     <string name="sign_up">Do not have an account? Sign up.</string>
     <string name="forgot">Forgot password?</string>
+    <string name="taken">All Taken</string>
     <string name="welcome">Your health is our priority. Med Check is here to help you stay on track with your medication schedule.</string>
     <string name="image">Image</string>
     <string name="push_notification">Push Notification</string>

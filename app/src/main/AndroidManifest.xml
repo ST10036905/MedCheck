@@ -16,10 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedCheck"
         tools:targetApi="31">
-
         <activity
-            android:name=".GoogleMap"
-            android:exported="true"/>
+            android:name=".TakenMedication"
+            android:exported="false" />
+        <activity android:name=".GoogleMap" />
+        <activity
+            android:name=".ScheduleDose"
+            android:exported="false" />
+        <activity
+            android:name=".AddMedicine"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,25 +36,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScheduleDose"
-            android:exported="false" />
-        <activity
-            android:name=".AddMedicine"
-            android:exported="false" />
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
-        <activity
             android:name=".Login"
             android:exported="false"
             android:theme="@style/Theme.MedCheck" />
         <activity
             android:name=".Preferences"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Register"
             android:exported="false" />
