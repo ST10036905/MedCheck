@@ -17,8 +17,6 @@ places = "4.0.0"
 navigationFragmentKtx = "2.8.1"
 navigationUiKtx = "2.8.1"
 
-navigationFragmentKtx = "2.7.7"
-navigationUiKtx = "2.7.7"
 googleGmsGoogleServices = "4.4.2"
 firebaseDatabase = "21.0.0"
 firebaseAuthKtx = "23.0.0"
