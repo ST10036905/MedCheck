@@ -8,4 +8,21 @@
     <string name="height">Height:</string>
     <string name="password">Password:</string>
     <string name="reenter">Re-enter password:</string>
+    // android:hint="@string/"
+    // android:hint="@string/"
+    <string name="medicine_details_name">Name</string>
+    <string name="calendar_title">Calendar</string>
+    <string name="dashboard_title">Dashboard</string>
+    <string name="dashboard_username_title">Username</string>
+    <string name="dashboard_location_title">Location</string>
+    <string name="dashboard_active_medication">Active Medication</string>
+    <string name="dashboard_panado_example">Panado</string>
+    <string name="dashboard_add_new_medication">Add New Medication</string>
+    <string name="dashbaord_awards_title">Awards</string>
+    <string name="dashboard_getting_started_award">Getting Started</string>
+    <string name="dashboard_my_milestone_title">My Milestone</string>
+    <string name="dashboard_using_medcheck_title">Using MedCheck</string>
+    <string name="dashboard_refill_button">Refill</string>
+    <string name="dashboard_get_refill_btn">Get Refill</string>
+
 </resources>

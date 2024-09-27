@@ -7,8 +7,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
 import android.content.Intent
+import android.widget.ImageButton
 
 class MedicineDetailsActivity : AppCompatActivity() {
+	
+	/**
+	 *
+	 */
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
@@ -30,6 +35,21 @@ class MedicineDetailsActivity : AppCompatActivity() {
 			// and then the My Medicine 'MyMedicine' screen starts (shows the saved medication, not the medication details)
 			startActivity(intent)
 			
+			
+		}
+//-----------------------------------------------------------------------------------------------
+		/*
+		adding a button click that sends the user
+		to the refill screen after they click on the + button next
+		to "add a refill reminder' in the third cardview
+		 */
+		
+		
+		val to_refill_reminder_button: ImageButton = findViewById(R.id.imageButton_add_refill)
+		//setting an OnClickListener on the button
+		to_refill_reminder_button.setOnClickListener{
+			//val intent = Intent(this, )
 		}
 	}
+	
 }
