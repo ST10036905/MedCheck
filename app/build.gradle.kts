@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.map.secret)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -11,6 +12,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 
     defaultConfig {
         applicationId = "com.example.medcheck"
@@ -57,6 +59,8 @@ dependencies {
     implementation(libs.places)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
