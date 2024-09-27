@@ -17,7 +17,6 @@
         android:theme="@style/Theme.MedCheck"
         tools:targetApi="31">
 
-
         <activity
             android:name=".GoogleMap"/>
         <activity

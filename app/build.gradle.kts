@@ -13,6 +13,7 @@ android {
         viewBinding = true
     }
 
+
     defaultConfig {
         applicationId = "com.example.medcheck"
         minSdk = 26
