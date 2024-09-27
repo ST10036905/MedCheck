@@ -14,13 +14,13 @@
         android:id="@+id/tv_dashboard_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dashboard"
+        android:text="@string/dashboard_title"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:paddingBottom="16dp"
         android:gravity="center"
-        android:background="@drawable/gradient_background"
+        android:background="@color/dashboardDarkerGradientBlue"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -53,7 +53,7 @@
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="@string/dashboard_username_title"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location"
+                android:text="@string/dashboard_location_title"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
                 android:id="@+id/tv_active_medication_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/active_medication"
+                android:text="@string/dashboard_active_medication"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
@@ -99,7 +99,7 @@
                 android:id="@+id/tv_medication_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Panado"
+                android:text="@string/dashboard_panado_example"
                 android:textSize="16sp"/>
 
             <TextView
@@ -121,8 +121,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClick="addNewMedication"
-                android:text="@string/add_new_medication"
-                android:backgroundTint="@color/darkerTextBlue" />
+                android:text="@string/dashboard_add_new_medication"
+                android:backgroundTint="@color/BTN_darkerTextBlue" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -146,7 +146,7 @@
                 android:id="@+id/tv_awards_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/awards"
+                android:text="@string/dashbaord_awards_title"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
@@ -174,7 +174,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/award1_getting_started"
+                        android:text="@string/dashboard_getting_started_award"
                         android:textSize="12sp"/>
                 </LinearLayout>
 
@@ -193,7 +193,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/award2_my_reward"
+                        android:text="@string/dashboard_my_milestone_title"
                         android:textSize="12sp"/>
                 </LinearLayout>
 
@@ -212,7 +212,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/award3_dashboard_textlabel"
+                        android:text="@string/dashboard_using_medcheck_title"
                         android:textSize="12sp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -239,7 +239,7 @@
                 android:id="@+id/tv_refill_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dashboard_refill"
+                android:text="@string/dashboard_refill_button"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
@@ -249,7 +249,7 @@
                 android:id="@+id/tv_refill_instructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dashboard_refill_your_medication_by_clicking_the_refill_button_below"/>
+                android:text="To refill medication, click the 'Get refill' button below"/>
 
             <!-- Refill Button -->
             <Button
@@ -258,19 +258,22 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClick="getRefill"
-                android:text="@string/dashboard_get_refill"
-                android:backgroundTint="@color/darkerTextBlue"/>
+                android:text="@string/dashboard_get_refill_btn"
+                android:backgroundTint="@color/BTN_darkerTextBlue"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Bottom Navigation (Preferences, Today, Medicine)
+    <!-- Bottom Navigation (Preferences, Today, Medicine) -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation_menu"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"/> -->
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/BTN_darkerTextBlue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
