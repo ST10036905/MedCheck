@@ -57,6 +57,8 @@ dependencies {
     implementation(libs.google.maps)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.places)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.firebase.database)
