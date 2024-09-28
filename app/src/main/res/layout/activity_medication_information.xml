@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MedicationInformation">
+
+    <!-- Modernized SearchView -->
+    <SearchView
+        android:id="@+id/search_medication"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_search"
+        android:queryHint="Search medication..."
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Modernized TextViews for displaying drug info -->
+    <TextView
+        android:id="@+id/tv_drug_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Drug Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/search_medication"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/tv_drug_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_dosage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Dosage"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_warnings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Warnings"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/tv_dosage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
