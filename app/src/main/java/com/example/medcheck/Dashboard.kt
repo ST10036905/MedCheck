@@ -11,6 +11,7 @@ import com.example.medcheck.databinding.ActivityDashboardBinding
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class Dashboard : AppCompatActivity() {
@@ -81,6 +82,8 @@ class Dashboard : AppCompatActivity() {
 			binding.tvMedicationName.setText(medicineName)
 			binding.tvMedicationTime.setText(medicineStrength)
 			binding.tvLastTaken.setText(lastTaken)
+
+			
 			
 		}
 		/* private fun fetchUserData() {
@@ -107,5 +110,34 @@ class Dashboard : AppCompatActivity() {
 		}
 	} */
 	
+//-------------------------------------------------------------------------------------------
+	//for the navigation bar at the bottom.
+		/**
+		 * when an icon is clicked,the chosen activity is started (startActivoty) and
+		 * the user is sent to their  chosen screen. For
+		 * example: User clicks Today,
+		 * the taken medication activity starts, showing
+		 * the user the taken medication screen of today.
+		 */
+		// Check initialization of the bottom navigation
+		binding.bottomNavigation.setOnItemSelectedListener { item ->
+			when (item.itemId) {
+				R.id.nav_pref -> {
+					val prefIntent = Intent(this, Preferences::class.java)
+					startActivity(prefIntent)
+				}
+				R.id.nav_today -> {
+					val todayIntent = Intent(this, TakenMedication::class.java)
+					startActivity(todayIntent)
+				}
+				R.id.nav_meds -> {
+					val medsIntent = Intent(this, MyMedicine::class.java)
+					startActivity(medsIntent)
+				}
+				else -> return@setOnItemSelectedListener false  // Return false for unhandled cases
+			}
+			true  // Return true to indicate the menu item was handled successfully
+		}
+//------------------------------------------------------------------------------------------------------
 	}
 }
