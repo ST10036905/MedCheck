@@ -43,13 +43,13 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/mymedicine_name"
+                android:hint="@string/dashboard_panado_example"
                 android:inputType="text" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/mymedicine_strength"
+                android:hint="strenght"
                 android:inputType="text" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -68,7 +68,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="179dp"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -76,26 +76,28 @@
                 android:id="@+id/tv_doses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dose"
+                android:text="DOSES"
                 android:textColor="@color/BrownText" />
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mymedicine_take_as_much_needed"
-                android:textStyle="bold" />
+                android:hint="Take as much needed"
+                android:inputType="text"
+                android:textSize="20sp" />
 
             <Switch
                 android:id="@+id/switch_doses"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="end" />
 
             <EditText
                 android:id="@+id/my_medicine_doses_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/mymedicine_example_1_every_other_day"
+                android:hint="1 every other day"
                 android:inputType="text" />
 
             <!-- Label and Button in Horizontal Layout -->
@@ -108,7 +110,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/mymedicine_schedule_another_date"
+                    android:hint="Schedule another date"
                     android:inputType="text" />
 
                 <ImageButton
@@ -148,7 +150,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/mymedicine_add_a_refill_reminder"
+                    android:hint="Add a refill reminder"
                     android:inputType="text" />
 
                 <ImageButton
@@ -162,7 +164,8 @@
                 android:id="@+id/tv_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mymedicine_5unit_reminder_textHint" />
+                android:layout_gravity="center"
+                android:text="Receive a reminder when there are only 5 units of this medicine remaining" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -171,13 +174,25 @@
         android:id="@+id/btn_stop_taking_medication"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/textBlue"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/red"
         android:text="@string/stop_taking_medication"
-        app:layout_constraintTop_toBottomOf="@id/cardView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView3" />
+
+    <!-- Bottom Navigation (Preferences, Today, Medicine) -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp" />
-
+        android:background="@color/BTN_darkerTextBlue"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

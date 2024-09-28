@@ -9,6 +9,7 @@ import com.example.medcheck.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
+
 class Register : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
@@ -54,6 +55,13 @@ class Register : AppCompatActivity() {
                                 val intent = Intent(this, Login::class.java)
                                 startActivity(intent)
                                 finish() // To ensure users can't navigate back to the register page with the back button
+                            
+                                // Send email and age to the next activity Dashboard for display overview
+                                val intentDashboard = Intent(this, Dashboard::class.java)
+                                intent.putExtra("email", email)   // Passing email
+                                intent.putExtra("age", age)       // Passing age
+                                startActivity(intentDashboard)
+                                
                             } else {
                                 Toast.makeText(this, "Registration failed: ${it.exception?.message}", Toast.LENGTH_LONG).show()
                             }
