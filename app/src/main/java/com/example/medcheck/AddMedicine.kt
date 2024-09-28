@@ -72,6 +72,15 @@ class AddMedicine : AppCompatActivity() {
                 intent.putExtra("EXTRA_STRENGTH", dosage)
                 intent.putExtra("EXTRA_FREQUENCY", selectedFrequency)
                 startActivity(intent)
+                
+                //for the dashboard
+                
+                val DashboardIntent = Intent(this, Dashboard::class.java)
+                DashboardIntent.putExtra("EXTRA_MEDICINE_NAME", name)
+                DashboardIntent.putExtra("EXTRA_STRENGTH", dosage)
+                DashboardIntent.putExtra("EXTRA_FREQUENCY", selectedFrequency)
+                
+                startActivity(DashboardIntent)
             }
         }
     }
