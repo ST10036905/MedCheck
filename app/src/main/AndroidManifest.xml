@@ -19,8 +19,8 @@
 
         <activity
             android:name=".TakenMedication"
-            android:exported="false" />
-        <activity android:name=".GoogleMap" />
+            android:exported="false" >
+        </activity>
 
         <activity
             android:name=".MedicationInformation"
@@ -36,7 +36,6 @@
         <activity
             android:name=".GoogleMap"
             android:exported="false">
-
         </activity>
 
         <activity
@@ -62,7 +61,9 @@
             android:theme="@style/Theme.MedCheck" />
         <activity
             android:name=".Preferences"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".Register"
             android:exported="false" />
