@@ -8,12 +8,17 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
 import android.content.Intent
 import android.widget.ImageButton
+import android.widget.EditText
 
 class MedicineDetailsActivity : AppCompatActivity() {
 	
 	/**
 	 *
 	 */
+	
+	//declaring the edit texts for name and strenghts of medicine
+	private lateinit var medicineNameEditText: EditText
+	private lateinit var medicineStrengthEditText: EditText
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
@@ -50,6 +55,36 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		to_refill_reminder_button.setOnClickListener{
 			//val intent = Intent(this, )
 		}
+		
+		// Call the method to retrieve data from Firebase
+		//retrieveMedicationData("studentId123")  // Replace with the actual student ID
 	}
 	
+	/**
+	 * showing the view of what the user saved about their medication.
+	 * Need to show: Name + strenght based on how the user saved it.
+	 */
+// Create a method to retrieve data from Firebase Firestore
+	/* private fun retrieveMedicationData(studentId: String) {
+		// Firestore reference to the student document
+		val db = FirebaseFirestore.getInstance()
+		val savedMedsRef = db.collection("students").document(studentId)
+		
+		// Get the document
+		savedMedsRef.get().addOnSuccessListener { document ->
+			if (document != null && document.exists()) {
+				// Retrieve the data from the document
+				val firstName = document.getString("first_name")
+				val lastName = document.getString("last_name")
+				
+				// Set the data to the EditTexts
+				firstNameEditText.setText(firstName)
+				lastNameEditText.setText(lastName)
+			} else {
+				Log.d("Firestore", "No such document")
+			}
+		}.addOnFailureListener { exception ->
+			Log.d("Firestore", "get failed with ", exception)
+		}
+	} */
 }

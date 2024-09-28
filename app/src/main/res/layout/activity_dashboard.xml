@@ -49,21 +49,25 @@
                 android:layout_weight="1"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dashboard_username_title"
+                android:layout_height="48dp"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:ems="10"
+                android:hint="My email"
+                android:inputType="text"/>
 
-            <TextView
-                android:id="@+id/tv_location"
+            <EditText
+                android:id="@+id/tv_age"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dashboard_location_title"
+                android:layout_height="48dp"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:ems="10"
+                android:hint="My age "
+                android:inputType="text"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -95,24 +99,27 @@
                 android:textColor="@color/gradientBlue"/>
 
             <!-- Medication details -->
-            <TextView
+            <EditText
                 android:id="@+id/tv_medication_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dashboard_panado_example"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:inputType="text" /> <!-- Added inputType for text input -->
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_medication_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8:00 - 10:00 AM"/>
+                android:text="8:00 - 10:00 AM"
+                android:inputType="time" /> <!-- Set inputType to time for time input -->
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_last_taken"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1 taken at 9:29 AM"/>
+                android:text="1 taken at 9:29 AM"
+                android:inputType="text" />
 
             <!-- Add Medication Button -->
             <Button
