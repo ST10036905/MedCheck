@@ -41,4 +41,15 @@
     <string name="facial_recognition">Add Facial Recognition</string>
     <string name="privacy">Privacy</string>
     <string name="legal">Legal</string>
+    <string name="warnings_content">Warnings content</string>
+    <string name="adverse_reactions_content">Adverse reactions content</string>
+    <string name="adverse_reactions">Adverse Reactions</string>
+    <string name="indications_content">Indications content</string>
+    <string name="indications">Indications</string>
+    <string name="warnings">Warnings</string>
+    <string name="dosage_content">Dosage content</string>
+    <string name="description_content">Description content</string>
+    <string name="description">Description</string>
+    <string name="drug_name">Drug Name</string>
+    <string name="name_of_drug">Name of Drug</string>
 </resources>

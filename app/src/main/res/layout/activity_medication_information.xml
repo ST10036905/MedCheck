@@ -9,7 +9,7 @@
     android:padding="16dp"
     tools:context=".MedicationInformation">
 
-    <!-- Modern SearchView with Material Design -->
+    <!-- SearchView inside a MaterialCardView for better styling -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/search_card"
         android:layout_width="0dp"
@@ -31,7 +31,7 @@
             android:layout_margin="8dp"/>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- ScrollView to make the content scrollable for smaller devices -->
+    <!-- ScrollView to enable scrolling for smaller screens -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -46,7 +46,7 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-            <!-- CardView for better layout structure -->
+            <!-- Section for Drug Name -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,29 +59,62 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/label_drug_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name_of_drug"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
 
                     <TextView
                         android:id="@+id/tv_drug_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Drug Name"
+                        android:text="@string/drug_name"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Section for Description -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/label_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/description"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"/>
 
                     <TextView
                         android:id="@+id/tv_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Description"
-                        android:textSize="16sp"
+                        android:text="@string/description_content"
+                        android:textSize="18sp"
                         android:textColor="@android:color/darker_gray"
-                        android:layout_marginTop="8dp" />
-
+                        android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Dosage and Warnings Section -->
+            <!-- Section for Dosage and Warnings -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,27 +127,47 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/label_dosage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dosage"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
 
                     <TextView
                         android:id="@+id/tv_dosage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Dosage"
-                        android:textSize="16sp"
+                        android:text="@string/dosage_content"
+                        android:textSize="18sp"
                         android:textColor="@android:color/darker_gray"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/label_warnings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/warnings"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:layout_marginTop="16dp"/>
 
                     <TextView
                         android:id="@+id/tv_warnings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Warnings"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/darker_gray"/>
+                        android:text="@string/warnings_content"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Indications and Warnings Section -->
+            <!-- Section for Indications and Adverse Reactions -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,21 +182,41 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvIndications"
-                        android:layout_width="match_parent"
+                        android:id="@+id/label_indications"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Indications"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/darker_gray"
-                        android:layout_marginBottom="8dp"/>
+                        android:text="@string/indications"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
 
                     <TextView
-                        android:id="@+id/tvAdverseReactions"
+                        android:id="@+id/tv_indications"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Adverse Reactions"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/darker_gray"/>
+                        android:text="@string/indications_content"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/label_adverse_reactions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/adverse_reactions"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="16dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_adverse_reactions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/adverse_reactions_content"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
