@@ -1,5 +1,33 @@
 <resources>
-    <string name="email">Email:</string>
+ 
+    <string name="my_medicine_screen_title">My Medicine</string>
+    <string name="medicine_details_name">Name</string>
+    <string name="calendar_title">Calendar</string>
+    <string name="dashboard_title">Dashboard</string>
+    <string name="dashboard_username_title">Username</string>
+    <string name="dashboard_location_title">Location</string>
+    <string name="dashboard_active_medication">Active Medication</string>
+    <string name="dashboard_panado_example">Panado</string>
+    <string name="dashboard_add_new_medication">Add New Medication</string>
+    <string name="dashbaord_awards_title">Awards</string>
+    <string name="dashboard_getting_started_award">Getting Started</string>
+    <string name="dashboard_my_milestone_title">My Milestone</string>
+    <string name="dashboard_using_medcheck_title">Using MedCheck</string>
+    <string name="dashboard_refill_button">Refill</string>
+    <string name="dashboard_get_refill_btn">Get Refill</string>
+    <string name ="stop_taking_medication">Stop Taking Medication</string>
+
+   
+    <string name="dashboard_refill_title">Refill</string>
+    <string name="another_dose">Schedule another dose</string>"
+
+
+    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+    <string name="strength">Strength</string>
+    <string name="how_are">How are the dose taken</string>
+    <string name="today">Today</string>
+    <string name="medications">Medications</string>
+    <string name="preferences">Preferences</string>
     <string name="app_name">MedCheck</string>
     <string name="start">GET STARTED &gt;</string> <!-- Corrected the ">" symbol -->
     <string name="register">Registration form</string>
@@ -10,8 +38,6 @@
     <string name="height">Height:</string>
     <string name="password">Password:</string>
     <string name="submit">SUBMIT</string>
-    <string name="sign_up">Do not have an account? Sign up.</string>
-    <string name="google">Sign in with Google.</string>
     <string name="create">Create account</string>
     <string name="back">BACK</string>
     <string name="reenter">Re-enter password:</string>
@@ -44,35 +70,40 @@
     <string name="facial_recognition">Add Facial Recognition</string>
     <string name="privacy">Privacy</string>
     <string name="legal">Legal</string>
-    <string name="taken"> All Taken</string>
-
-    <string name="my_medicine_screen_title">My Medicine</string>
-    <string name="medicine_details_name">Name</string>
-    <string name="calendar_title">Calendar</string>
-    <string name="dashboard_title">Dashboard</string>
-    <string name="dashboard_username_title">Username</string>
-    <string name="dashboard_location_title">Location</string>
-    <string name="dashboard_active_medication">Active Medication</string>
-    <string name="dashboard_panado_example">Panado</string>
-    <string name="dashboard_add_new_medication">Add New Medication</string>
-    <string name="dashbaord_awards_title">Awards</string>
-    <string name="dashboard_getting_started_award">Getting Started</string>
-    <string name="dashboard_my_milestone_title">My Milestone</string>
-    <string name="dashboard_using_medcheck_title">Using MedCheck</string>
-    <string name="dashboard_refill_button">Refill</string>
-    <string name="dashboard_get_refill_btn">Get Refill</string>
-    <string name="stop_taking_medication">Stop Taking Medication</string>
-    <string name="dashboard_refill_title">Refill</string>
-    <string name="another_dose">Schedule another dose</string>"
-
-
-    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
-    <string name="strength">Strength</string>
-    <string name="how_are">How are the dose taken</string>
-    <string name="today">Today</string>
-    <string name="medications">Medications</string>
-    <string name="preferences">Preferences</string>
-    <string name="sign_out">Sign out\n</string>
-
-
+    <string name="warnings_content">Warnings content</string>
+    <string name="adverse_reactions_content">Adverse reactions content</string>
+    <string name="adverse_reactions">Adverse Reactions</string>
+    <string name="indications_content">Indications content</string>
+    <string name="indications">Indications</string>
+    <string name="warnings">Warnings</string>
+    <string name="dosage_content">Dosage content</string>
+    <string name="description_content">Description content</string>
+    <string name="description">Description</string>
+    <string name="drug_name">Drug Name</string>
+    <string name="name_of_drug">Name of Drug</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="terms_and_conditions_text">Terms and conditions for MedCheck</string>
+    <string name="welcome_terms_and_cond">Welcome to MedCheck! Please read these Terms and Conditions carefully before using the MedCheck mobile application (the “App”). By downloading, installing, or using MedCheck, you agree to comply with and be bound by these Terms and Conditions. If you do not agree to these Terms, you may not use the App.</string>
+    <string name="acceptance_of_terms">By accessing or using MedCheck, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions, as well as our Privacy Policy. We reserve the right to update or modify these Terms at any time, and your continued use of the App constitutes acceptance of any such changes.</string>
+    <string name="app_description">MedCheck is a medication management application that helps users track their medications, dosage schedules, refill requests, and relevant medical information. The App also provides general information about medications but does not provide professional medical advice. Always consult your healthcare provider for any medical concerns or questions.</string>
+    <string name="user_responsibilities">Accurate Information: You agree to provide accurate and up-to-date information when using the App. Failure to do so may result in incorrect medication tracking or notifications.\nMedical Advice Disclaimer: The information provided by MedCheck is for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified healthcare providers with any questions you may have regarding your medications or a medical condition.\nCompliance with Laws: You agree to comply with all applicable laws and regulations when using MedCheck. You may not use the App for any illegal or unauthorized purpose.</string>
+    <string name="user_account_terms">To use certain features of the App, you may be required to create an account. You are responsible for maintaining the confidentiality of your account credentials and for any activity that occurs under your account. You agree to notify us immediately if you suspect any unauthorized access to your account.</string>
+    <string name="data_privacy_terms">Your privacy is important to us. By using MedCheck, you agree to the collection and use of your personal information as outlined in our Privacy Policy. This includes information related to your medications, prescriptions, and usage history.</string>
+    <string name="notifications_terms">MedCheck may send you notifications regarding medication schedules, refill reminders, and other important updates. You are responsible for managing your notification preferences in the settings section of the App.</string>
+    <string name="intellectual_property_terms">All content, trademarks, logos, and intellectual property rights related to the MedCheck App are owned by us or our licensors. You may not use, copy, modify, or distribute any of the content without our express permission.</string>
+    <string name="termination_term">We reserve the right to suspend or terminate your access to the App at any time without notice, for any reason, including violation of these Terms and Conditions. Upon termination, your right to use MedCheck will immediately cease.\n</string>
+    <string name="third_party_services">MedCheck may integrate with third-party services such as pharmacies, healthcare providers, or external databases (e.g., OpenFDA). We do not control and are not responsible for the content or privacy practices of any third-party services. Your use of such services is governed by their respective terms.\n\n</string>
+    <string name="limitation_of_liability">MedCheck is provided on an “as-is” and “as-available” basis. We make no warranties, whether express or implied, regarding the accuracy, reliability, or availability of the App. We are not liable for any damages, including but not limited to, direct, indirect, incidental, or consequential damages, arising from your use or inability to use the App.\n\n</string>
+    <string name="frequently_asked_question">Frequently asked question(FAQ)</string>
+    <string name="termination_of_contract">Termination of Contract</string>
+    <string name="third_party_services_tittle">Third Party Services</string>
+    <string name="limitation_of_liability_tittle">Limitation of Liability</string>
+    <string name="application_notifications_tittle">Application Notifications</string>
+    <string name="data_privacy_tittle">Data Privacy</string>
+    <string name="user_account_tittle">User Account</string>
+    <string name="user_responsabilities_tittle">User Responsabilities</string>
+    <string name="about_medcheck_tittle">About MedCheck</string>
+    <string name="acceptance_of_terms_and_conditions_tittle">Acceptance of terms and conditions</string>
+    <string name="welcome_tittle">Welcome</string>
 </resources>
