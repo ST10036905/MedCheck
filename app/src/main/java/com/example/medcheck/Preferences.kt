@@ -15,7 +15,8 @@ import com.example.medcheck.databinding.ActivityPreferencesBinding
 
 class Preferences : AppCompatActivity() {
 
-    val termsFragment: Fragment = Terms_and_condition_fragment()
+    //val termsFragment: Fragment = Terms_and_condition_fragment()
+    //val faqFragment: Fragment = FaqFragment()
     private lateinit var binding : ActivityPreferencesBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,16 @@ class Preferences : AppCompatActivity() {
             val termsFragment = Terms_and_condition_fragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main, termsFragment)
+                .addToBackStack(null)
+                .commit()
+            startActivity(intent)
+        }
+
+        // setting the click listener for the FAQ button
+        binding.FAQMode.setOnClickListener {
+            val faqFragment = FaqFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main, faqFragment)
                 .addToBackStack(null)
                 .commit()
             startActivity(intent)

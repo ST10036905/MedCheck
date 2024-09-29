@@ -66,4 +66,5 @@
     <string name="termination_term">We reserve the right to suspend or terminate your access to the App at any time without notice, for any reason, including violation of these Terms and Conditions. Upon termination, your right to use MedCheck will immediately cease.\n</string>
     <string name="third_party_services">MedCheck may integrate with third-party services such as pharmacies, healthcare providers, or external databases (e.g., OpenFDA). We do not control and are not responsible for the content or privacy practices of any third-party services. Your use of such services is governed by their respective terms.\n\n</string>
     <string name="limitation_of_liability">MedCheck is provided on an “as-is” and “as-available” basis. We make no warranties, whether express or implied, regarding the accuracy, reliability, or availability of the App. We are not liable for any damages, including but not limited to, direct, indirect, incidental, or consequential damages, arising from your use or inability to use the App.\n\n</string>
+    <string name="frequently_asked_question">Frequently asked question(FAQ)</string>
 </resources>
