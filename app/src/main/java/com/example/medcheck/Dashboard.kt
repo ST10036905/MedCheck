@@ -8,38 +8,35 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.medcheck.databinding.ActivityDashboardBinding
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.android.material.bottomnavigation.BottomNavigationView
-
 
 class Dashboard : AppCompatActivity() {
 	/**
 	 * This Dashboard activity is designed to:
 	 *
 	 * Retrieve and display the logged-in user's email (which is the username) and age.
-	 * It fetches this data either
-	 * from an Intent (passed from the previous Register activity)
+	 * It fetches this data either from an Intent (passed from the previous Register activity)
 	 * or from Firebase Realtime Database.
 	 */
 	private lateinit var binding: ActivityDashboardBinding
-	//Used for accessing the UI elements like EditText for the username and age.
+	// Used for accessing the UI elements like TextView for the username and age.
 	
 	private lateinit var firebaseAuth: FirebaseAuth
-	//Used to manage the user authentication.
+	// Used to manage the user authentication.
 	
 	private lateinit var database: FirebaseDatabase
+	// For retrieval of email (username) and age interactions.
 	
-	//for retrieval of email(username) and age interactions
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		enableEdgeToEdge()
-		setContentView(R.layout.activity_dashboard)
+		enableEdgeToEdge()  // Enable edge-to-edge display for immersive UI
+		
 		// Initialize ViewBinding
 		binding = ActivityDashboardBinding.inflate(layoutInflater)
-		setContentView(binding.root)
+		setContentView(binding.root)  // Set the content view to the inflated binding
 		
+		// Set up window insets for proper padding
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -51,65 +48,38 @@ class Dashboard : AppCompatActivity() {
 		database = FirebaseDatabase.getInstance()
 		
 		// Get the email and age passed from the Register activity
-		val email = intent.getStringExtra("email")
-		val age = intent.getStringExtra("age")
+		val email = intent.getStringExtra("email") ?: "No email provided"
+		val age = intent.getStringExtra("age") ?: "Unknown age"
 		
-		// Display the email and age in the EditText fields
+		
+		// Display the email and age in the TextView fields
 		binding.tvUsername.setText(email)
 		binding.tvAge.setText(age)
 		
 		
-		// Fetch and display user data
-		//fetchUserData()
-		
-		//heading to the AddMedicine scree after button click
-		val to_add_medicine_screen_button: Button = findViewById(R.id.btn_add_medication)
+		// Setting up button to navigate to the AddMedicine screen
+		val toAddMedicineScreenButton: Button = binding.btnAddMedication
 		
 		// Setting an OnClickListener on the button
-		to_add_medicine_screen_button.setOnClickListener {
-			// Creating an Intent to move from MainActivity to NextActivity
+		toAddMedicineScreenButton.setOnClickListener {
+			// Creating an Intent to move from Dashboard to AddMedicine activity
 			val intent = Intent(this, AddMedicine::class.java)
-			
-			// and then addMedicine ' screen starts (so the user can add )
+			// Start the AddMedicine activity
 			startActivity(intent)
-			//----------------------------------------------------------------------------\
-			// Retrieve the passed data from Add Medicine Activity to display in Active Medication cv
-			val medicineName = intent.getStringExtra("EXTRA_MEDICINE_NAME")
-			val medicineStrength = intent.getStringExtra("EXTRA_STRENGTH")
-			val lastTaken = intent.getStringExtra("EXTRA_FREQUENCY")
-			
-			// Display the data in the EditText fields
-			binding.tvMedicationName.setText(medicineName)
-			binding.tvMedicationTime.setText(medicineStrength)
-			binding.tvLastTaken.setText(lastTaken)
-
-			
-			
 		}
-		/* private fun fetchUserData() {
-		 *//*
-		looking at the dashbaord activity username and age,
-		 the user sees a dashboard with
-		these details and its for user excitement
-		 *//*
-		val userId = firebaseAuth.currentUser?.uid
-		if (userId != null) {
-			val userRef = database.getReference("Users").child(userId)
-			
-			userRef.get().addOnSuccessListener { dataSnapshot ->
-				if (dataSnapshot.exists()) {
-					val email = dataSnapshot.child("email").getValue(String::class.java)
-					val age = dataSnapshot.child("age").getValue(String::class.java)
-					
-				} else {
-					Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show()
-				}
-			}.addOnFailureListener {
-				Toast.makeText(this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show()
-			}
-		}
-	} */
+		
+		// Retrieve the passed data from AddMedicine activity to display in Active Medication card view
+		val medicineName = intent.getStringExtra("EXTRA_MEDICINE_NAME")
+		val medicineStrength = intent.getStringExtra("EXTRA_STRENGTH")
+		val lastTaken = intent.getStringExtra("EXTRA_FREQUENCY")
+		//setText()
+		// Display the data in the TextView fields
+		binding.tvMedicationName.setText(medicineName) // Use text property instead of setText for TextView
+		binding.tvMedicationTime.setText(medicineStrength)
+		binding.tvLastTaken.setText( lastTaken)
 	
+
+
 //-------------------------------------------------------------------------------------------
 	//for the navigation bar at the bottom.
 		/**
@@ -123,3 +93,4 @@ class Dashboard : AppCompatActivity() {
 //------------------------------------------------------------------------------------------------------
 	}
 }
+

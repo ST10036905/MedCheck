@@ -34,7 +34,9 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		}
 		
 		//heading to the my medicine scree after button click
-		//val to_my_medicine_screen_button: Button = findViewById(R.id.btn_stop_taking_medication)
+
+		val to_my_medicine_screen_button: Button = findViewById(R.id.stopTakingBtn)
+
 		
 		// Setting an OnClickListener on the button
 		//to_my_medicine_screen_button.setOnClickListener {
@@ -74,31 +76,3 @@ class MedicineDetailsActivity : AppCompatActivity() {
 	}
 	
 
-
-/**
- * showing the view of what the user saved about their medication.
- * Need to show: Name + strenght based on how the user saved it.
- */
-// Create a method to retrieve data from Firebase Firestore
-/* private fun retrieveMedicationData(studentId: String) {
-	// Firestore reference to the student document
-	val db = FirebaseFirestore.getInstance()
-	val savedMedsRef = db.collection("students").document(studentId)
-	
-	// Get the document
-	savedMedsRef.get().addOnSuccessListener { document ->
-		if (document != null && document.exists()) {
-			// Retrieve the data from the document
-			val firstName = document.getString("first_name")
-			val lastName = document.getString("last_name")
-			
-			// Set the data to the EditTexts
-			firstNameEditText.setText(firstName)
-			lastNameEditText.setText(lastName)
-		} else {
-			Log.d("Firestore", "No such document")
-		}
-	}.addOnFailureListener { exception ->
-		Log.d("Firestore", "get failed with ", exception)
-	}
-} */
