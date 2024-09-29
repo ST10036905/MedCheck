@@ -45,7 +45,7 @@
         <string name="privacy">Privacy</string>
         <string name="legal">Legal</string>
         <string name="taken"> All Taken</string>
-
+ 
     <string name="my_medicine_screen_title">My Medicine</string>
     <string name="medicine_details_name">Name</string>
     <string name="calendar_title">Calendar</string>
@@ -62,8 +62,11 @@
     <string name="dashboard_refill_button">Refill</string>
     <string name="dashboard_get_refill_btn">Get Refill</string>
     <string name ="stop_taking_medication">Stop Taking Medication</string>
+
+   
     <string name="dashboard_refill_title">Refill</string>
     <string name="another_dose">Schedule another dose</string>"
+
 
 
     <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
@@ -72,6 +75,7 @@
     <string name="today">Today</string>
     <string name="medications">Medications</string>
     <string name="preferences">Preferences</string>
+
 
 
 </resources>
