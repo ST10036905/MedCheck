@@ -32,6 +32,7 @@ class Dashboard : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()  // Enable edge-to-edge display for immersive UI
 		
+		setContentView(R.layout.activity_dashboard) // Make sure the layout is correct
 		// Initialize ViewBinding
 		binding = ActivityDashboardBinding.inflate(layoutInflater)
 		setContentView(binding.root)  // Set the content view to the inflated binding

@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         // Get the "Get Started" button using binding
         binding.getStartedBtn.setOnClickListener {
-            val intent = Intent(this, Welcome::class.java)
+            val intent = Intent(this, Dashboard::class.java)
             startActivity(intent)
         }
         

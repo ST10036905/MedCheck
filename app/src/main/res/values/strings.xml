@@ -63,7 +63,15 @@
 
    
     <string name="dashboard_refill_title">Refill</string>
-    <string name="stop_taking_medication">Stop taking medication</string>
-    <string name="another_dose">Schedule another dose</string>"
 
+    <string name="another_dose">Schedule another dose</string>"
+    <string name="strength">Strength</string>
+    <string name="how_are">How are you?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot">Forgot Password</string>
+    <string name="next">Next</string>
+    <string name="lorem_ipsum">Lorem Ipsum</string>
+    <string name="previous">Previous</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
 </resources>

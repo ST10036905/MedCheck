@@ -13,12 +13,17 @@ import com.example.medcheck.databinding.ActivityTakenMedicationBinding
 
 class Preferences : AppCompatActivity() {
     
-    private lateinit var binding: ActivityTakenMedicationBinding
+    private lateinit var binding: ActivityPreferencesBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        
         super.onCreate(savedInstanceState)
+        
+        // Initialize binding properly
+        binding = ActivityPreferencesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        
         enableEdgeToEdge()
-        setContentView(R.layout.activity_preferences)
+        
+       // setContentView(R.layout.activity_preferences)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -46,8 +51,8 @@ class Preferences : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_pref -> {
-                    val prefIntent = Intent(this, Preferences::class.java)
-                    startActivity(prefIntent)
+                    // Already in Preferences, no need to restart
+                    return@setOnItemSelectedListener true
                 }
                 R.id.nav_today -> {
                     val todayIntent = Intent(this, TakenMedication::class.java)
@@ -62,6 +67,6 @@ class Preferences : AppCompatActivity() {
             true  // Return true to indicate the menu item was handled successfully
         }
 
-//------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------
     }
 }

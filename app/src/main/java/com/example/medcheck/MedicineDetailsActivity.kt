@@ -25,6 +25,8 @@ class MedicineDetailsActivity : AppCompatActivity() {
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		
+		
 		enableEdgeToEdge()
 		setContentView(R.layout.activity_medicine_details)
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
