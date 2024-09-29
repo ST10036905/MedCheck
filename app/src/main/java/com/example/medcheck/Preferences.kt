@@ -1,5 +1,6 @@
 package com.example.medcheck
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.RelativeLayout
@@ -15,9 +16,8 @@ import com.example.medcheck.databinding.ActivityPreferencesBinding
 
 class Preferences : AppCompatActivity() {
 
-    //val termsFragment: Fragment = Terms_and_condition_fragment()
-    //val faqFragment: Fragment = FaqFragment()
     private lateinit var binding : ActivityPreferencesBinding
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,7 +34,7 @@ class Preferences : AppCompatActivity() {
         }
         //--------------------------Handling the frame transitions ----------------//
         // setting the click listener for the termsAndConditionsMode button
-        binding.termsAndConditionsMode.setOnClickListener {
+        binding.termsAndConditionsRL.setOnClickListener {
             val termsFragment = Terms_and_condition_fragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main, termsFragment)
@@ -44,7 +44,7 @@ class Preferences : AppCompatActivity() {
         }
 
         // setting the click listener for the FAQ button
-        binding.FAQMode.setOnClickListener {
+        binding.FAQRL.setOnClickListener {
             val faqFragment = FaqFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main, faqFragment)
@@ -53,13 +53,28 @@ class Preferences : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // setting the click listener for the FAQ button
+        binding.whatsNewRL.setOnClickListener {
+            val whatsNew = WhatsNewOnMedCheck()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main, whatsNew)
+                .addToBackStack(null)
+                .commit()
+            startActivity(intent)
+        }
+
         //----------------------------------End of transitions ------------------//
         // Declaring the buttons
         val pushNotificationID: RelativeLayout = findViewById(R.id.pushNotificationID)
-
         // Setting onclick events
         pushNotificationID.setOnClickListener(){
-            Toast.makeText(this,"Export data is not available yet in your region",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"This option will be available soon!",Toast.LENGTH_SHORT).show()
+        }
+        // export data
+        val exportDataID: RelativeLayout = findViewById(R.id.exportDataID)
+        // Setting onclick events
+        exportDataID.setOnClickListener(){
+            Toast.makeText(this,"This option will be available soon!",Toast.LENGTH_SHORT).show()
         }
     }
 }
