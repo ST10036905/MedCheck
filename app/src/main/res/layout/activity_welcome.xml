@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,17 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".Welcome">
 
+    <!-- Main LinearLayout content -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:background="@color/white"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintBottom_toTopOf="@+id/unableBtn">
 
         <ImageButton
             android:id="@+id/logoBtn"
@@ -36,7 +34,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="90dp"
             android:gravity="center"
-            android:hint="Create account"
+            android:text="@string/create"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
@@ -49,7 +47,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:hint="Login"
+            android:text="@string/login"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
@@ -62,17 +60,22 @@
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:gravity="center"
-            android:hint="Back"
+            android:text="@string/back"
             android:backgroundTint="@color/gradientBlue"
             android:fontFamily="@font/poppins_bold"
             android:textSize="18sp"
             android:textColor="@android:color/white" />
 
-        <ImageButton
-            android:id="@+id/unableBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:src="@drawable/img_1" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/unableBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:adjustViewBounds="true" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
