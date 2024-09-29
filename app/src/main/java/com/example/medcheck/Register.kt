@@ -1,13 +1,18 @@
 package com.example.medcheck
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityRegisterBinding
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.initialize
 
 
 class Register : AppCompatActivity() {
@@ -16,24 +21,34 @@ class Register : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
-        // Initialize Firebase Auth and Database
-        firebaseAuth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
 
         // Initialize ViewBinding
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up click listeners for the back button
+        //-----------------SSO code
+        // Initialize Firebase
+        Firebase.initialize(this)
+        firebaseAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+
+
+        // Back button logic
         val backBtn = findViewById<Button>(R.id.backBtn)
         backBtn.setOnClickListener {
             val intent = Intent(this, Welcome::class.java)
             startActivity(intent)
         }
+
+        binding.submitBtn.setOnClickListener {
+            val email = binding.textEmail.text.toString()
+            // ... (Your existing logic for registration)
+        }
+
 
         // Set up click listener for the submit button
         binding.submitBtn.setOnClickListener {
@@ -74,7 +89,7 @@ class Register : AppCompatActivity() {
             }
         }
     }
-}
+
 
 
 
