@@ -66,9 +66,12 @@
     <string name="another_dose">Schedule another dose</string>"
 
 
-    <string name="web_client_id">949339555333-bocegqmetukcngl01up1f2ards5iae9v.apps.googleusercontent.com</string>
+    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
     <string name="strength">Strength</string>
     <string name="how_are">How are the dose taken</string>
+    <string name="today">Today</string>
+    <string name="medications">Medications</string>
+    <string name="preferences">Preferences</string>
 
 
 </resources>

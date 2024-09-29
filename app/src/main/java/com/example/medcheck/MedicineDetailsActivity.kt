@@ -34,10 +34,10 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		}
 		
 		//heading to the my medicine scree after button click
-		val to_my_medicine_screen_button: Button = findViewById(R.id.btn_stop_taking_medication)
+		//val to_my_medicine_screen_button: Button = findViewById(R.id.btn_stop_taking_medication)
 		
 		// Setting an OnClickListener on the button
-		to_my_medicine_screen_button.setOnClickListener {
+		//to_my_medicine_screen_button.setOnClickListener {
 			// Creating an Intent to move from MainActivity to NextActivity
 			val intent = Intent(this, MyMedicine::class.java)
 			
@@ -54,11 +54,7 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		 */
 		
 		
-		val to_refill_reminder_button: ImageButton = findViewById(R.id.imageButton_add_refill)
-		//setting an OnClickListener on the button
-		to_refill_reminder_button.setOnClickListener{
-			//val intent = Intent(this, )
-		}
+
 		
 		// Call the method to retrieve data from Firebase
 		//retrieveMedicationData("studentId123")  // Replace with the actual student ID
@@ -72,31 +68,13 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		 * the taken medication activity starts, showing
 		 * the user the taken medication screen of today.
 		 */
-		// Check initialization of the bottom navigation
-		binding.bottomNavigation.setOnItemSelectedListener { item ->
-			when (item.itemId) {
-				R.id.nav_pref -> {
-					val prefIntent = Intent(this, Preferences::class.java)
-					startActivity(prefIntent)
-				}
-				R.id.nav_today -> {
-					val todayIntent = Intent(this, TakenMedication::class.java)
-					startActivity(todayIntent)
-				}
-				R.id.nav_meds -> {
-					val medsIntent = Intent(this, MyMedicine::class.java)
-					startActivity(medsIntent)
-				}
-				else -> return@setOnItemSelectedListener false  // Return false for unhandled cases
-			}
-			true  // Return true to indicate the menu item was handled successfully
-		}
+
 		
 //------------------------------------------------------------------------------------------------------
 	}
 	
 
-}
+
 /**
  * showing the view of what the user saved about their medication.
  * Need to show: Name + strenght based on how the user saved it.
