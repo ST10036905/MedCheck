@@ -1,6 +1,0 @@
-package menu
-
-class bottomNavigationBar {
-
-
-}

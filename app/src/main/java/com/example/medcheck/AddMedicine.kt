@@ -82,6 +82,20 @@ class AddMedicine : AppCompatActivity() {
                 
                 startActivity(DashboardIntent)
             }
+            
+            //for my medicine
+            /**
+             * user clicks the save button in the AddMedicine activity,
+             * they will be navigated to the MyMedicine activity
+             * ,and the entered details  will be displayed in the EditText fields.
+             */
+            val mineIntent = Intent(this, MyMedicine::class.java)
+            mineIntent.putExtra("EXTRA_MEDICINE_NAME", name)
+            mineIntent.putExtra("EXTRA_STRENGTH", dosage)
+            mineIntent.putExtra("EXTRA_FREQUENCY", selectedFrequency)
+            startActivity(mineIntent)
         }
+        
+        
     }
 }
