@@ -16,55 +16,57 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedCheck"
         tools:targetApi="31">
-
+        <activity
+            android:name=".SignInActivity"
+            android:exported="false" />
         <activity
             android:name=".TakenMedication"
-            android:exported="false" >
-        </activity>
+            android:exported="false">
 
+        </activity>
         <activity
             android:name=".MedicationInformation"
             android:exported="false">
-        </activity>
 
+        </activity>
         <activity
             android:name=".GoogleMap"
             android:exported="false">
-        </activity>
 
+        </activity>
         <activity
             android:name=".ScheduleDose"
             android:exported="false" />
-
         <activity
             android:name=".AddMedicine"
             android:exported="false" />
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
-
         <activity
             android:name=".Login"
-            android:exported="true"
-            android:theme="@style/Theme.MedCheck" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MedCheck">
 
-
+        </activity>
         <activity
             android:name=".Preferences"
             android:exported="false">
+
         </activity>
 
         <activity
             android:name=".Register"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.MedCheck">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
 
         <activity
             android:name=".Welcome"

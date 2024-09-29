@@ -1,5 +1,6 @@
 package com.example.medcheck
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +13,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
-class LoginActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
+
 
     companion object {
         private const val RC_SIGN_IN = 9001
@@ -20,36 +22,38 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)  // Using your login layout
+        setContentView(R.layout.activity_sign_in)
 
         auth = FirebaseAuth.getInstance()
 
+
+
         val currentUser = auth.currentUser
+
         if (currentUser != null) {
-            // If user is already signed in, navigate to Dashboard
-            val intent = Intent(this, Dashboard::class.java)
+            // The user is already signed in, navigate to MainActivity
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            finish()
+            finish() // finish the current activity to prevent the user from coming back to the SignInActivity using the back button
         }
 
-        // Link Google Sign-In Button (LinearLayout from your XML)
-        val googleSignInBtn = findViewById<LinearLayout>(R.id.googleSignInBtn)
-        googleSignInBtn.setOnClickListener {
-            signInWithGoogle()
-        }
 
-        // Regular sign-in button (submit button) for email/password authentication if needed
-        val signInButton = findViewById<Button>(R.id.submitBtn)
+
+
+        val signInButton = findViewById<Button>(R.id.signInButton)
         signInButton.setOnClickListener {
-            // Add logic for email/password authentication if applicable
+            signIn()
         }
     }
 
-    private fun signInWithGoogle() {
+    private fun signIn() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.web_client_id))  // Make sure the correct web client ID is set in strings.xml
+            .requestIdToken(getString(R.string.web_client_id))
             .requestEmail()
             .build()
 
@@ -58,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -79,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, Dashboard::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
                     Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
@@ -88,6 +93,4 @@ class LoginActivity : AppCompatActivity() {
     }
 }
 
-class Login {
-
-}
+      
