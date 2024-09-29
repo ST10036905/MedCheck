@@ -89,25 +89,7 @@ class Dashboard : AppCompatActivity() {
 		 * the taken medication activity starts, showing
 		 * the user the taken medication screen of today.
 		 */
-		// Check initialization of the bottom navigation
-		binding.bottomNavigation.setOnItemSelectedListener { item ->
-			when (item.itemId) {
-				R.id.nav_pref -> {
-					val prefIntent = Intent(this, Preferences::class.java)
-					startActivity(prefIntent)
-				}
-				R.id.nav_today -> {
-					val todayIntent = Intent(this, TakenMedication::class.java)
-					startActivity(todayIntent)
-				}
-				R.id.nav_meds -> {
-					val medsIntent = Intent(this, MyMedicine::class.java)
-					startActivity(medsIntent)
-				}
-				else -> return@setOnItemSelectedListener false  // Return false for unhandled cases
-			}
-			true  // Return true to indicate the menu item was handled successfully
-		}
+
 //------------------------------------------------------------------------------------------------------
 	}
 }

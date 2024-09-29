@@ -101,34 +101,38 @@
             android:autoLink="web"
             android:clickable="true"
             android:focusable="true"
-            android:fontFamily="@font/merienda_light"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/sign_up"
             android:textColor="@color/textBlue"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/forgotPasswordLink"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:autoLink="web"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:padding="10dp"
             android:clickable="true"
             android:focusable="true"
-            android:fontFamily="@font/merienda_light"
-            android:text="@string/forgot"
-            android:textColor="@color/textBlue"
-            android:textSize="16sp" />
+            android:id="@+id/googleSignInBtn"
+            android:onClick="signInWithGoogle">
+
+            <ImageView
+                android:id="@+id/googleLogo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/google_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/google"
+                android:layout_marginStart="8dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
 
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/unableBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img_1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:adjustViewBounds="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

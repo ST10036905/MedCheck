@@ -24,18 +24,19 @@ class ScheduleDose : AppCompatActivity() {
         // Set up onClickListener to open TimePickerDialog for dose input
         binding.doseInput.setOnClickListener {
             // Get the current time as default values for the picker
-            val calendar = Calendar.getInstance()
-            val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
-            val currentMinute = calendar.get(Calendar.MINUTE)
+          //  val calendar = Calendar.getInstance()
+          //  val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+          //  val currentMinute = calendar.get(Calendar.MINUTE)
 
             // Launch the TimePickerDialog
+            /**
             val timePicker = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
                 // Format the selected time into HH:MM format
                 val formattedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
                 binding.doseInput.setText(formattedTime)
-            }, currentHour, currentMinute, true) // Use 24-hour format (change to false for AM/PM format)
+            }, currentHour, currentMinute, true) // Use 24-hour format (change to false for AM/PM format) **/
 
-            timePicker.show()
+           // timePicker.show()
         }
 
         // Populate the "How Often" spinner with options
@@ -63,3 +64,4 @@ class ScheduleDose : AppCompatActivity() {
         }
     }
 }
+
