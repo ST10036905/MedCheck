@@ -67,4 +67,14 @@
     <string name="third_party_services">MedCheck may integrate with third-party services such as pharmacies, healthcare providers, or external databases (e.g., OpenFDA). We do not control and are not responsible for the content or privacy practices of any third-party services. Your use of such services is governed by their respective terms.\n\n</string>
     <string name="limitation_of_liability">MedCheck is provided on an “as-is” and “as-available” basis. We make no warranties, whether express or implied, regarding the accuracy, reliability, or availability of the App. We are not liable for any damages, including but not limited to, direct, indirect, incidental, or consequential damages, arising from your use or inability to use the App.\n\n</string>
     <string name="frequently_asked_question">Frequently asked question(FAQ)</string>
+    <string name="termination_of_contract">Termination of Contract</string>
+    <string name="third_party_services_tittle">Third Party Services</string>
+    <string name="limitation_of_liability_tittle">Limitation of Liability</string>
+    <string name="application_notifications_tittle">Application Notifications</string>
+    <string name="data_privacy_tittle">Data Privacy</string>
+    <string name="user_account_tittle">User Account</string>
+    <string name="user_responsabilities_tittle">User Responsabilities</string>
+    <string name="about_medcheck_tittle">About MedCheck</string>
+    <string name="acceptance_of_terms_and_conditions_tittle">Acceptance of terms and conditions</string>
+    <string name="welcome_tittle">Welcome</string>
 </resources>

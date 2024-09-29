@@ -53,7 +53,6 @@ class Preferences : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         //----------------------------------End of transitions ------------------//
         // Declaring the buttons
         val pushNotificationID: RelativeLayout = findViewById(R.id.pushNotificationID)

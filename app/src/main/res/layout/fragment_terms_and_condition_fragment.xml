@@ -34,6 +34,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/welcome_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/welcome_terms_and_cond"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -41,6 +50,16 @@
                 android:gravity="start" />
 
             <!-- Section 2 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/acceptance_of_terms_and_conditions_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,12 +73,31 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/about_medcheck_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/app_description"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
                 android:gravity="start" />
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_responsabilities_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,6 +106,16 @@
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
                 android:gravity="start" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_account_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,12 +129,30 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/data_privacy_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/data_privacy_terms"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
                 android:gravity="start" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/application_notifications_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,11 +166,31 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/limitation_of_liability_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/limitation_of_liability"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
                 android:gravity="start" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/third_party_services_tittle"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -118,13 +204,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/termination_of_contract"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="8dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/termination_term"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
                 android:gravity="start" />
-
-            <!-- Add more sections here -->
 
         </LinearLayout>
 
