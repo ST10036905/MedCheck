@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "991660862357",
+    "firebase_url": "https://medcheck-f005f-default-rtdb.firebaseio.com",
+    "project_id": "medcheck-f005f",
+    "storage_bucket": "medcheck-f005f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991660862357:android:3dfbcb461ccc0bb663649c",
+        "android_client_info": {
+          "package_name": "com.example.medcheck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991660862357-padhddos9ftfl0l446qvgcoi2uo5ri7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medcheck",
+            "certificate_hash": "25c2af741678f700d7cf2cb3d75f9e847927837d"
+          }
+        },
+        {
+          "client_id": "991660862357-g7f5sk0s9884eghq8mkslikef6l9se1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVyXLnWE9pGmYrR6I4bGJfm7RyHq90eo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991660862357-g7f5sk0s9884eghq8mkslikef6l9se1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
