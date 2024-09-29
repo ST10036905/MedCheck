@@ -34,7 +34,7 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		}
 		
 		//heading to the my medicine scree after button click
-		val to_my_medicine_screen_button: Button = findViewById(R.id.btn_stop_taking_medication)
+		val to_my_medicine_screen_button: Button = findViewById(R.id.stopTakingBtn)
 		
 		// Setting an OnClickListener on the button
 		to_my_medicine_screen_button.setOnClickListener {

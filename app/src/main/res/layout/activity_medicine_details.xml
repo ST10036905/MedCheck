@@ -45,22 +45,14 @@
                 android:id="@+id/medicineNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:hint="@string/dashboard_panado_example"
-
                 android:hint="@string/medicine_name"
-
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/medicineStrengthText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:hint="strenght"
-
                 android:hint="@string/dosage"
-
                 android:inputType="text" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -102,9 +94,7 @@
                 android:id="@+id/switch_doses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end" />
-
-
+                android:layout_gravity="end"
                 android:text="@string/dosage"
                 android:textColor="@color/BrownText" />
 
@@ -115,7 +105,6 @@
                 android:layout_height="wrap_content"
 
                 android:layout_weight="1"
-                android:hint="1 every other day"
 
                 android:hint="@string/how_often"
 
@@ -132,7 +121,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/another_dose"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:layout_width="wrap_content"/>
 
                 <ImageButton
                     android:id="@+id/scheduleAnotherDate_btn"
@@ -173,7 +163,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Add a refill reminder"
-                    android:hint="@string/dashboard_refill_button"
                     android:inputType="text" />
 
                 <ImageButton
