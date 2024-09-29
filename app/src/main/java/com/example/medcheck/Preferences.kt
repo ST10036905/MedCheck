@@ -12,8 +12,8 @@ import com.example.medcheck.databinding.ActivityPreferencesBinding
 import com.example.medcheck.databinding.ActivityTakenMedicationBinding
 
 class Preferences : AppCompatActivity() {
-    
-    private lateinit var binding: ActivityTakenMedicationBinding
+
+    private lateinit var binding: ActivityPreferencesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         
