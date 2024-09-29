@@ -52,19 +52,22 @@
                 android:layout_marginBottom="4dp" />
 
             <EditText
-                android:id="@+id/medicineName"
+                android:id="@+id/doseInput"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:hint="12:00-23:00"
-                android:inputType="datetime"
+                android:layout_height="wrap_content"
+                android:hint="Select Time"
+                android:focusable="false"
+                android:clickable="true"
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
-                android:drawableRight="@drawable/time"/>
+                android:drawableRight="@drawable/time" />
 
-            <!-- Dosage input -->
+
+
+            <!-- Dosage input using a Spinner -->
             <TextView
                 android:id="@+id/oftenLabel"
                 android:layout_width="wrap_content"
@@ -75,18 +78,16 @@
                 android:fontFamily="@font/poppins_medium"
                 android:layout_marginBottom="4dp" />
 
-            <EditText
-                android:id="@+id/dosage"
+            <Spinner
+                android:id="@+id/oftenSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:hint="Daily"
-                android:inputType="text"
+                android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginBottom="16dp"
-                android:drawableRight="@drawable/calendar"/>
+                android:layout_marginBottom="16dp" />
+
 
             <!-- Frequency input -->
             <TextView
@@ -100,7 +101,7 @@
                 android:layout_marginBottom="4dp" />
 
             <EditText
-                android:id="@+id/frequency"
+                android:id="@+id/quantityInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -112,21 +113,39 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <!-- Schedule button -->
-            <Button
-                android:id="@+id/scheduleDose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="0dp"
-                android:backgroundTint="@color/textBlue"
-                android:text="@string/schedule_dose"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_bold"
-                android:padding="12dp" />
         </LinearLayout>
     </ScrollView>
 
+
+    <!-- FrameLayout to overlay text on ImageButton -->
+    <FrameLayout
+        android:id="@+id/scheduleBtnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- ImageButton with the image -->
+        <ImageButton
+            android:id="@+id/scheduleDoseBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@null" />
+
+        <!-- TextView overlaying the image -->
+        <TextView
+            android:id="@+id/scheduleDoseBtnText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/schedule_dose"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/poppins_bold" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
