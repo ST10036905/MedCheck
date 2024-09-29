@@ -15,8 +15,11 @@ class TakenMedication : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       // binding = ActivityTakenMedicationBinding.inflate(layoutInflater)
-
+      
+        binding = ActivityTakenMedicationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        
+        
 //-------------------------------------------------------------------------------------------
         //for the navigation bar at the bottom.
         /**
