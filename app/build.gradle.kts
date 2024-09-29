@@ -8,11 +8,10 @@ plugins {
 android {
     namespace = "com.example.medcheck"
     compileSdk = 34
-    
+
     buildFeatures {
         viewBinding = true
     }
-
 
     defaultConfig {
         applicationId = "com.example.medcheck"
@@ -46,7 +45,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
 }
 
 dependencies {
@@ -61,11 +59,20 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.firebase.database)
+
+    // Firebase and Google Sign-In dependencies
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.database)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.services.auth)
+    // Google Sign-In
+    implementation (libs.firebase.auth.ktx.v2200)
+    implementation (libs.play.services.auth.v2050)
+
+    implementation ("com.google.firebase:firebase-auth:22.0.0")
+    implementation ("com.google.android.gms:play-services-auth:20.5.0")  // Google Sign-In SDK
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.material)
 }

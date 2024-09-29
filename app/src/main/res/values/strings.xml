@@ -10,6 +10,8 @@
         <string name="height">Height:</string>
         <string name="password">Password:</string>
         <string name="submit">SUBMIT</string>
+        <string name="sign_up">Do not have an account? Sign up.</string>
+        <string name="google">Sign in with Google.</string>
         <string name="create">Create account</string>
         <string name="back">BACK</string>
         <string name="reenter">Re-enter password:</string>
@@ -63,7 +65,17 @@
 
    
     <string name="dashboard_refill_title">Refill</string>
-    <string name="stop_taking_medication">Stop taking medication</string>
     <string name="another_dose">Schedule another dose</string>"
+
+
+
+    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+    <string name="strength">Strength</string>
+    <string name="how_are">How are the dose taken</string>
+    <string name="today">Today</string>
+    <string name="medications">Medications</string>
+    <string name="preferences">Preferences</string>
+
+
 
 </resources>
