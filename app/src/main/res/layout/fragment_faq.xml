@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".FaqFragment">
+
+    <TextView
+        android:id="@+id/faqTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/frequently_asked_question"
+        android:textColor="@color/terracotta"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Frequently Asked Questions -->
+
+    <TextView
+        android:id="@+id/question1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. What is this app?"
+        android:textColor="@color/terracotta"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/answer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This app helps users manage their medications by tracking doses and sending refill requests."
+        android:textColor="@color/BrownText"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/question2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2. How do I set reminders for my medications?"
+        android:textColor="@color/terracotta"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/answer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You can set reminders in the settings section of the app, where you can customize your reminder times."
+        android:textColor="@color/BrownText"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/question3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3. Can I add my own medications?"
+        android:textColor="@color/terracotta"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/answer3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Yes, you can add medications manually through the 'Add Medication' feature in the app."
+        android:textColor="@color/BrownText"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+</LinearLayout>

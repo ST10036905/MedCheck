@@ -20,7 +20,6 @@
         android:textColor="@android:color/white"
         android:paddingBottom="16dp"
         android:gravity="center"
-        android:background="@color/dashboardDarkerGradientBlue"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -128,8 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClick="addNewMedication"
-                android:text="@string/dashboard_add_new_medication"
-                android:backgroundTint="@color/BTN_darkerTextBlue" />
+                android:text="@string/dashboard_add_new_medication" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -265,8 +263,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClick="getRefill"
-                android:text="@string/dashboard_get_refill_btn"
-                android:backgroundTint="@color/BTN_darkerTextBlue"/>
+                android:text="@string/dashboard_get_refill_btn"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -275,12 +272,10 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_navigation_menu"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/BTN_darkerTextBlue"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

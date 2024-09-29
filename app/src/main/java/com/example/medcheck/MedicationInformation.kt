@@ -78,7 +78,7 @@ class MedicationInformation : AppCompatActivity() {
                     if (!drugData?.results.isNullOrEmpty()) {
                         updateUIWithDrugData(drugData!!.results[0])
                     } else {
-                        showToast("No results found.")
+                        showToast("Sorry, this drug is not available in our database.")
                     }
                 } else {
                     showToast("Failed to retrieve data.")
@@ -92,11 +92,31 @@ class MedicationInformation : AppCompatActivity() {
     }
 
     private fun updateUIWithDrugData(drugLabel: DrugLabel) {
-        binding.tvDrugName.text = drugLabel.openfda.brand_name?.joinToString(", ") ?: "N/A"
-        binding.tvDescription.text = "Description: ${drugLabel.effective_time ?: "N/A"}"
-        binding.tvDosage.text = "Dosage: N/A" // Replace with actual dosage data if available
-        binding.tvWarnings.text = "Warnings: N/A" // Replace with actual warning data if available
+        // Display brand name
+        val brandName = drugLabel.openfda.brand_name?.joinToString(", ") ?: "N/A"
+        binding.tvDrugName.text = brandName
+
+        // Display description
+        val description = drugLabel.description?.joinToString("\n") ?: "No description available"
+        binding.tvDescription.text = "Description: $description"
+
+        // Display indications and usage
+        val indications = drugLabel.indications_and_usage?.joinToString("\n") ?: "No indications and usage available"
+        binding.tvIndications.text = "Indications and Usage: $indications"
+
+        // Display dosage and administration
+        val dosage = drugLabel.dosage_and_administration?.joinToString("\n") ?: "No dosage information available"
+        binding.tvDosage.text = "Dosage: $dosage"
+
+        // Display warnings
+        val warnings = drugLabel.warnings_and_cautions?.joinToString("\n") ?: "No warnings available"
+        binding.tvWarnings.text = "Warnings: $warnings"
+
+        // Display adverse reactions
+        val adverseReactions = drugLabel.adverse_reactions?.joinToString("\n") ?: "No adverse reactions available"
+        binding.tvAdverseReactions.text = "Adverse Reactions: $adverseReactions"
     }
+
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
