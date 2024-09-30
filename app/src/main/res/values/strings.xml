@@ -124,4 +124,5 @@
     <string name="google">sign up with google</string>
     <string name="taken">Taken</string>
     <string name="sign_out">Sign out</string>
+    <string name="logout">Logout</string>
 </resources>
