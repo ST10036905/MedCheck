@@ -101,6 +101,7 @@
             android:autoLink="web"
             android:clickable="true"
             android:focusable="true"
+            android:textAlignment="center"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/sign_up"
             android:textColor="@color/textBlue"
