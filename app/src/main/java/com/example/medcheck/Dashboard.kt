@@ -1,66 +1,91 @@
 package com.example.medcheck
-
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import androidx.activity.enableEdgeToEdge
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.medcheck.databinding.ActivityDashboardBinding
+import com.example.medcheck.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class Dashboard : AppCompatActivity() {
 
+	// Firebase references
+	private lateinit var auth: FirebaseAuth
+	private lateinit var databaseReference: DatabaseReference
 	private lateinit var binding: ActivityDashboardBinding
-	// Used for accessing the UI elements like TextView for the username and age.
-	
-	private lateinit var firebaseAuth: FirebaseAuth
-	// Used to manage the user authentication.
-	
-	private lateinit var database: FirebaseDatabase
-	// For retrieval of email (username) and age interactions.
-	
-	override fun onCreate(savedInstanceState: Bundle?) {
+
+	// UI elements
+	private lateinit var emailTextView: TextView
+	private lateinit var medicineTextView: TextView
+
+	@SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		enableEdgeToEdge()  // Enable edge-to-edge display for immersive UI
-		
-		// Initialize ViewBinding
-		binding = ActivityDashboardBinding.inflate(layoutInflater)
-		setContentView(binding.root)  // Set the content view to the inflated binding
-		
-		// Set up window insets for proper padding
-		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-			insets
+		setContentView(R.layout.activity_dashboard)
+
+		// Initialize Firebase Auth and Database reference
+		auth = FirebaseAuth.getInstance()
+		databaseReference = FirebaseDatabase.getInstance().getReference("users")
+
+		// Initialize UI elements
+		emailTextView = findViewById(R.id.tv_user_email) // Make sure to define this in your layout
+		medicineTextView = findViewById(R.id.tv_user_medicine) // Make sure to define this in your layout
+
+		// Fetch and display user info
+		fetchUserData()
+
+	}
+
+	private fun fetchUserData() {
+		val currentUser = auth.currentUser
+		if (currentUser != null) {
+			// Display the user's email from FirebaseAuth
+			emailTextView.text = currentUser.email
+
+			// Get the user's UID to fetch medicine data
+			val userId = currentUser.uid
+
+			// Reference to the user's medicines in the database
+			val userMedicineRef = databaseReference.child(userId).child("medicines")
+
+			// Fetch the medicine data from the database
+			userMedicineRef.addListenerForSingleValueEvent(object : ValueEventListener {
+				override fun onDataChange(snapshot: DataSnapshot) {
+					if (snapshot.exists()) {
+						// Assuming you have a medicine name stored under the "medicineName" key
+						val name = snapshot.child("name").getValue(String::class.java)
+						if (name != null) {
+							medicineTextView.text = name
+						} else {
+							medicineTextView.text = "No medicine found"
+						}
+					} else {
+						Toast.makeText(this@Dashboard, "No medicine data found", Toast.LENGTH_SHORT).show()
+					}
+				}
+
+				override fun onCancelled(error: DatabaseError) {
+					Toast.makeText(this@Dashboard, "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
+				}
+			})
+		} else {
+			Toast.makeText(this, "No user is logged in", Toast.LENGTH_SHORT).show()
 		}
-		
-		// Initialize Firebase Auth and Database
-		firebaseAuth = FirebaseAuth.getInstance()
-		database = FirebaseDatabase.getInstance()
-		
-		// Get the email and age passed from the Register activity
-		val email = intent.getStringExtra("email") ?: "No email provided"
-		val age = intent.getStringExtra("age") ?: "Unknown age"
-		
-		
-		// Display the email and age in the TextView fields
-		binding.emailTxt.setText(email)
-		binding.ageTxt.setText(age)
-		
-		
-		// Setting up button to navigate to the AddMedicine screen
-		val toAddMedicineScreenButton: Button = binding.btnAddMedication
-		
-		// Setting an OnClickListener on the button
-		toAddMedicineScreenButton.setOnClickListener {
-			// Creating an Intent to move from Dashboard to AddMedicine activity
-			val intent = Intent(this, AddMedicine::class.java)
-			// Start the AddMedicine activity
+
+		binding.knowMoreBtn.setOnClickListener{
+			val intent = Intent(this, MedicationInformation::class.java)
+			startActivity(intent)
+    }
+
+
+		binding.refillBtn.setOnClickListener{
+			val intent = Intent(this, GoogleMap::class.java)
 			startActivity(intent)
 		}
+
 		
 		// Retrieve the passed data from AddMedicine activity to display in Active Medication card view
 		val medicineName = intent.getStringExtra("EXTRA_MEDICINE_NAME")
@@ -117,9 +142,6 @@ class Dashboard : AppCompatActivity() {
 			}
 			false
 		}
-//--------------------------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------------------------------
 	}
 }
-

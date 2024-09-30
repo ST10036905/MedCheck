@@ -2,6 +2,7 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
@@ -67,9 +68,17 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		databaseReference?.child(medicineId)?.removeValue()?.addOnCompleteListener { task ->
 			if (task.isSuccessful) {
 				Toast.makeText(this, "Medication stopped and details deleted", Toast.LENGTH_SHORT).show()
+
+				// Debugging - check if the Intent is being created correctly
+				Log.d("DeleteMedicine", "Navigating to Dashboard")
+
 				// Navigate to the Dashboard activity
 				val intent = Intent(this, Dashboard::class.java)
 				startActivity(intent)
+
+				// Optionally, call finish() to close the current activity
+				finish()
+
 			} else {
 				Toast.makeText(this, "Failed to stop medication", Toast.LENGTH_SHORT).show()
 			}
