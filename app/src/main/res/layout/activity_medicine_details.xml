@@ -5,20 +5,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
     tools:context=".MedicineDetailsActivity">
 
-    <!-- Title: Medicine Details -->
     <TextView
         android:id="@+id/tv_medicine_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="Medicine Details"
+        android:text="@string/medicine_details"
         android:textColor="@color/BrownText"
-        android:textSize="34sp"
-        android:textStyle="bold"
+        android:textSize="28sp"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -42,18 +41,20 @@
             android:padding="16dp">
 
             <EditText
-                android:id="@+id/medicineNameText"
+                android:id="@+id/medicineNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/medicine_name"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="18sp" /> <!-- Adjusted font size -->
 
             <EditText
-                android:id="@+id/medicineStrengthText"
+                android:id="@+id/medicineStrengthInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/dosage"
-                android:inputType="text" />
+                android:hint="@string/strength"
+                android:inputType="text"
+                android:textSize="18sp" /> <!-- Adjusted font size -->
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -75,38 +76,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tv_doses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="DOSES"
-                android:textColor="@color/BrownText" />
-
             <EditText
-                android:layout_width="wrap_content"
+                android:id="@+id/frequencyInput"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Take as much needed"
+                android:hint="How are doses taken?"
                 android:inputType="text"
-                android:textSize="20sp" />
-
-
-            <Switch
-                android:id="@+id/switch_doses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="@string/dosage"
-                android:textColor="@color/BrownText" />
-
-            <EditText
-                android:id="@+id/howOftenText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:hint="@string/how_often"
-                android:inputType="text" />
+                android:textSize="18sp" /> <!-- Adjusted font size -->
 
 
             <LinearLayout
@@ -114,21 +90,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <EditText
+                <TextView
                     android:id="@+id/scheduleAnotherText"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:hint="@string/another_dose"
-                    android:inputType="text"
-                    android:layout_width="wrap_content"/>
+                    android:text="@string/another_dose"
+                    android:textSize="18sp" /> <!-- Adjusted font size -->
 
                 <ImageButton
-                    android:id="@+id/scheduleAnotherDate_btn"
+                    android:id="@+id/scheduleAnotherDoseBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@android:drawable/ic_input_add" />
             </LinearLayout>
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -155,56 +131,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <EditText
+                <TextView
                     android:id="@+id/refillReminderText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/dashboard_refill_button"
-                    android:inputType="text" />
+                    android:textSize="20sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/dashboard_refill_button" />
 
                 <ImageButton
-                    android:id="@+id/imageButton_add_refill"
+                    android:id="@+id/refillImageBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@android:drawable/ic_input_add" />
             </LinearLayout>
-
 
             <TextView
                 android:id="@+id/tv_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Receive a reminder when there are only 5 units of this medicine remaining" />
-
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/receive_a_reminder_when_there_are_only_5_units_of_this_medicine_remaining"
+                android:textSize="16sp" /> <!-- Adjusted font size -->
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/stopTakingBtn"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/red"
-        android:text="@string/stop_taking_medication"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardView3" />
-
-    <!-- Bottom Navigation View -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/stopMedicationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_margin="50dp"
+        android:backgroundTint="@color/red"
+        android:text="@string/stop_taking_medication"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/cardView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-

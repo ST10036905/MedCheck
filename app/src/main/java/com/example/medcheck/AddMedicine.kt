@@ -8,94 +8,92 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityAddMedicineBinding
+import com.google.android.gms.tasks.Task
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class AddMedicine : AppCompatActivity() {
-
-    // Declare binding variable
-    private lateinit var binding: ActivityAddMedicineBinding
+    private var binding: ActivityAddMedicineBinding? = null
+    private var databaseReference: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Enable edge-to-edge mode
         binding = ActivityAddMedicineBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
 
-        // Set the content view to the root view of the binding
-        setContentView(binding.root)
+        // Initialize Firebase Database reference
+        databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 
         // Populate the Spinner with options
         val frequencyOptions = arrayOf("Select an option", "Scheduled Dose", "As Needed")
         val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, frequencyOptions)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.frequencySpinner.adapter = spinnerAdapter
+        binding!!.frequencySpinner.adapter = spinnerAdapter
 
         // Variable to store the selected frequency
-        var selectedFrequency = ""
+        val selectedFrequency = arrayOf("")
 
         // Set up the Spinner item selection listener
-        binding.frequencySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                when (position) {
-                    1 -> { // "Scheduled Dose" selected
-                        selectedFrequency = "Scheduled Dose"
-                    }
-                    2 -> { // "As Needed" selected
-                        selectedFrequency = "As Needed"
+        binding!!.frequencySpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position > 0) {
+                        selectedFrequency[0] = frequencyOptions[position]
                     }
                 }
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing if no item is selected
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Do nothing
+                }
             }
-        }
 
         // Set up click listener for the save button
-        binding.saveMedicationBtn.setOnClickListener {
-            val name = binding.nameInput.text.toString()
-            val dosage = binding.strenghtInput.text.toString()
-
-            if (name.isEmpty() || dosage.isEmpty() || selectedFrequency.isEmpty()) {
+        binding!!.saveMedicationBtn.setOnClickListener { v ->
+            val name = binding!!.nameInput.text.toString()
+            val dosage = binding!!.strenghtInput.text.toString()
+            if (name.isEmpty() || dosage.isEmpty() || selectedFrequency[0].isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Medicine added successfully", Toast.LENGTH_SHORT).show()
-
-                // Navigate based on the selected frequency
-                val intent = when (selectedFrequency) {
-                    "Scheduled Dose" -> Intent(this, ScheduleDose::class.java)
-                    "As Needed" -> Intent(this, MainActivity::class.java) // Dashboard activity for "As Needed"
-                    else -> return@setOnClickListener
-                }
-
-                // Pass medicine details to the next activity
-                intent.putExtra("EXTRA_MEDICINE_NAME", name)
-                intent.putExtra("EXTRA_STRENGTH", dosage)
-                intent.putExtra("EXTRA_FREQUENCY", selectedFrequency)
-                startActivity(intent)
-                
-                //for the dashboard
-                
-                val DashboardIntent = Intent(this, Dashboard::class.java)
-                DashboardIntent.putExtra("EXTRA_MEDICINE_NAME", name)
-                DashboardIntent.putExtra("EXTRA_STRENGTH", dosage)
-                DashboardIntent.putExtra("EXTRA_FREQUENCY", selectedFrequency)
-                
-                startActivity(DashboardIntent)
+                // Store medicine details in Firebase and navigate accordingly
+                storeMedicineInFirebase(name, dosage, selectedFrequency[0])
             }
-            
-            //for my medicine
-            /**
-             * user clicks the save button in the AddMedicine activity,
-             * they will be navigated to the MyMedicine activity
-             * ,and the entered details  will be displayed in the EditText fields.
-             */
-            val mineIntent = Intent(this, MyMedicine::class.java)
-            mineIntent.putExtra("EXTRA_MEDICINE_NAME", name)
-            mineIntent.putExtra("EXTRA_STRENGTH", dosage)
-            mineIntent.putExtra("EXTRA_FREQUENCY", selectedFrequency)
-            startActivity(mineIntent)
         }
-        
-        
+    }
+
+    private fun storeMedicineInFirebase(name: String, dosage: String, frequency: String) {
+        val id = databaseReference!!.push().key
+        val medicineData: MutableMap<String, String> = HashMap()
+        medicineData["name"] = name
+        medicineData["dosage"] = dosage
+        medicineData["frequency"] = frequency
+
+        if (id != null) {
+            databaseReference!!.child(id).setValue(medicineData)
+                .addOnCompleteListener { task: Task<Void?> ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Medicine added successfully", Toast.LENGTH_SHORT).show()
+
+                        // Redirect based on selected frequency
+                        if (frequency == "Scheduled Dose") {
+                            // Navigate to ScheduleDose activity and pass medicine ID
+                            val scheduleDoseIntent = Intent(this, ScheduleDose::class.java)
+                            scheduleDoseIntent.putExtra("medicineId", id) // Pass the medicine ID
+                            startActivity(scheduleDoseIntent)
+                        } else if (frequency == "As Needed") {
+                            // Navigate to MyMedicine activity
+                            val myMedicineIntent = Intent(this, MyMedicine::class.java)
+                            startActivity(myMedicineIntent)
+                        }
+                    } else {
+                        Toast.makeText(this, "Failed to add medicine", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
     }
 }
