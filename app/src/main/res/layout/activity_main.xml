@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Main LinearLayout content -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -16,7 +15,7 @@
         android:background="@drawable/gradient_background"
         android:orientation="vertical">
 
-        <!-- App logo -->
+
         <ImageButton
             android:id="@+id/logoBtn"
             android:layout_width="wrap_content"
@@ -27,7 +26,6 @@
             android:scaleType="fitCenter"
             android:src="@drawable/img" />
 
-        <!-- Welcome Text -->
         <TextView
             android:id="@+id/textWelcome"
             android:layout_width="250dp"
@@ -39,9 +37,18 @@
             android:textAlignment="center"
             android:textColor="@color/textBlue"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textWelcomeUser"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/textBlue"
+            android:textSize="20sp"
+            android:fontFamily="@font/poppins_bold"/>
     </LinearLayout>
 
-    <!-- FrameLayout for "Get Started" button -->
+
     <FrameLayout
         android:id="@+id/unableBtnContainer"
         android:layout_width="match_parent"
@@ -50,7 +57,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- "Get Started" ImageButton -->
         <ImageButton
             android:id="@+id/getStartedBtn"
             android:layout_width="match_parent"
@@ -60,7 +66,6 @@
             android:scaleType="fitXY"
             android:background="@null" />
 
-        <!-- Overlay TextView on "Get Started" button -->
         <TextView
             android:id="@+id/getStartedBtnText"
             android:layout_width="wrap_content"
@@ -72,16 +77,4 @@
             android:fontFamily="@font/poppins_bold" />
     </FrameLayout>
 
-    <!-- Logout Button -->
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/sign_out"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/unableBtnContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

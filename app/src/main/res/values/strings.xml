@@ -120,8 +120,9 @@
     <string name="search_for_medications">Search for Medications</string>
     <string name="what_s_new_in_medcheck">What\'s New in MedCheck</string>
     <string name="email">Email</string>
-    <string name="sign_up">Do not have an account? sign up with google account</string>
-    <string name="google">sign up with google</string>
+    <string name="sign_up">Do not have an account? Sign up with google.</string>
+    <string name="google">Sign up with google</string>
     <string name="taken">Taken</string>
     <string name="sign_out">Sign out</string>
+    <string name="sign_up_manually">Register here.\n</string>
 </resources>

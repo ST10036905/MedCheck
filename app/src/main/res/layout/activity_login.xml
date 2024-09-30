@@ -93,20 +93,6 @@
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/signUpLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:autoLink="web"
-            android:clickable="true"
-            android:focusable="true"
-            android:textAlignment="center"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/sign_up"
-            android:textColor="@color/textBlue"
-            android:textSize="16sp" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
