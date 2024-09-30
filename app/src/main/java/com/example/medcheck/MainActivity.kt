@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
             // Display user name on welcome TextView
             binding.textWelcomeUser.text = "Welcome, ${user.email}"
         } else {
-            // Handle the case where the user is not signed in
             binding.textWelcomeUser.text = "Welcome, Guest"
         }
 
@@ -64,10 +63,11 @@ class MainActivity : AppCompatActivity() {
         mAuth.signOut()
 
         mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-            // Redirect to SignInActivity after sign out
+            // Redirect to Login activity after sign out
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
             finish()
         }
     }
+
 }

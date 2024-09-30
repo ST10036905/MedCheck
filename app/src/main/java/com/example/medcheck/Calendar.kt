@@ -2,6 +2,7 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,6 +10,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.medcheck.databinding.ActivityCalendarBinding
 import java.util.Calendar
 import android.widget.Toast
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 class Calendar : AppCompatActivity() {
 	
 	private lateinit var binding:ActivityCalendarBinding
@@ -31,27 +34,27 @@ class Calendar : AppCompatActivity() {
 		// Use View Binding to set the layout
 		binding = ActivityCalendarBinding.inflate(layoutInflater)
 		setContentView(binding.root)
-		
+
 		// getting today's date
 		val todayCalendar = Calendar.getInstance()
 		val todayYear = todayCalendar.get(Calendar.YEAR)
 		val todayMonth = todayCalendar.get(Calendar.MONTH)
 		val todayDay = todayCalendar.get(Calendar.DAY_OF_MONTH)
-		
+
 		// listener for when the user selects today's date  on the CalendarView
 		binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
 			// decision on whether the selected date is today's date
 			if (year == todayYear && month == todayMonth && dayOfMonth == todayDay) {
 				// Navigate to NextActivity
-				val TakenMedsintent = Intent(this,Dashboard::class.java)
-				startActivity(TakenMedsintent )
+				val TakenMedsintent = Intent(this, Dashboard::class.java)
+				startActivity(TakenMedsintent)
 			} else {
 				// Show a Toast if the selected date is not today
 				Toast.makeText(this, "Please Pick Today's Date", Toast.LENGTH_SHORT).show()
 			}
 		}
 
-//---------------------------------------BOTTOM NAV-------------------------------------------------
+		//---------------------------------------BOTTOM NAV-------------------------------------------------
 		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
 		// Handle navigation item selection
@@ -63,6 +66,11 @@ class Calendar : AppCompatActivity() {
 					return@setOnNavigationItemSelectedListener true
 				}
 
+				R.id.nav_calendar -> {
+					// Navigate to Calendar Activity
+					startActivity(Intent(this, Calendar::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
 
 				R.id.nav_dashboard -> {
 					// Navigate to Dashboard Activity
@@ -70,18 +78,19 @@ class Calendar : AppCompatActivity() {
 					return@setOnNavigationItemSelectedListener true
 				}
 
-//--------------------------------------------------------------------------------------------------
-		
-		//for the navigation bar at the bottom:
-		/**
-		 * when an icon is clicked,the chosen activity is started (startActivoty) and
-		 * the user is sent to their  chosen screen. For
-		 * example: User clicks Today,
-		 * the taken medication activity starts, showing
-		 * the user the taken medication screen of today.
-		 */
+				R.id.nav_konw_your_med -> {
+					// Navigate to About Med Activity
+					startActivity(Intent(this, MedicationInformation::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
 
-
-//--------------------------------------------------------------------------------------------------
+				R.id.nav_medication -> {
+					// Navigate to Medication Activity
+					startActivity(Intent(this, MyMedicine::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+			}
+			false
+		}
 	}
 }

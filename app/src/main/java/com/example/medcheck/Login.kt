@@ -45,7 +45,11 @@ class Login : AppCompatActivity() {
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                             checkFirstTimeLogin()
                         } else {
-                            Toast.makeText(this, "Authentication failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                "Authentication failed: ${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
             } else {
@@ -68,25 +72,24 @@ class Login : AppCompatActivity() {
     }
 
     // Check if it's the user's first time and navigate accordingly
+    // Check if it's the user's first time and navigate accordingly
     private fun checkFirstTimeLogin() {
         val isFirstTime = sharedPreferences.getBoolean(FIRST_TIME_KEY, true)
 
-        if (isFirstTime) {
-            // Navigate to AddMedicineActivity
-            val intent = Intent(this, AddMedicine::class.java)
-            startActivity(intent)
-
-            // Update SharedPreferences to mark that it's no longer the user's first time
-            with(sharedPreferences.edit()) {
-                putBoolean(FIRST_TIME_KEY, false)
-                apply()
-            }
+        val intent = if (isFirstTime) {
+            // Navigate to AddMedicineActivity if first time
+            Intent(this, AddMedicine::class.java)
         } else {
-            // Navigate to DashboardActivity
-            val intent = Intent(this, Dashboard::class.java)
-            startActivity(intent)
+            // Navigate to DashboardActivity otherwise
+            Intent(this, Dashboard::class.java)
         }
-        // Finish Login activity
+
+        if (isFirstTime) {
+            sharedPreferences.edit().putBoolean(FIRST_TIME_KEY, false).apply()  // Correct way to update the flag
+        }
+
+        startActivity(intent)
         finish()
     }
+
 }

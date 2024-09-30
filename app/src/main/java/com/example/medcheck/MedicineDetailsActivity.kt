@@ -3,19 +3,23 @@ package com.example.medcheck
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityMedicineDetailsBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.Calendar
 
 class MedicineDetailsActivity : AppCompatActivity() {
-	private var binding: ActivityMedicineDetailsBinding? = null
+
+	private lateinit var binding: ActivityMedicineDetailsBinding
 	private var databaseReference: DatabaseReference? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +44,13 @@ class MedicineDetailsActivity : AppCompatActivity() {
 			startActivity(scheduleDoseIntent)
 		}
 
+
+		binding.doneBtn.setOnClickListener {
+			val intent = Intent(this, Dashboard::class.java)
+			startActivity(intent)
+		}
+
+
 		// Set up the ImageButton to navigate to ScheduleDose activity
 		val refillButton: ImageButton = binding!!.refillImageBtn
 		refillButton.setOnClickListener {
@@ -57,6 +68,42 @@ class MedicineDetailsActivity : AppCompatActivity() {
 
 		// Retrieve medicine details from Firebase
 		retrieveMedicineDetails(medicineId)
+
+		//---------------------------------------BOTTOM NAV-------------------------------------------------
+		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+		// Handle navigation item selection
+		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+			when (item.itemId) {
+
+
+				R.id.nav_calendar -> {
+					// Navigate to Calendar Activity
+					startActivity(Intent(this, Calendar::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_dashboard -> {
+					// Navigate to Dashboard Activity
+					startActivity(Intent(this, Dashboard::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_konw_your_med -> {
+					// Navigate to About Med Activity
+					startActivity(Intent(this, MedicationInformation::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_medication -> {
+					// Navigate to Medication Activity
+					startActivity(Intent(this, MyMedicine::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+			}
+			false
+		}
+//--------------------------------------------------------------------------------------------------
 	}
 
 	private fun confirmDeletion(medicineId: String) {

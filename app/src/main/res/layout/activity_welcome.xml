@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="90dp"
             android:background="@null"
-            android:src="@drawable/img"
+            android:src="@drawable/medcheck_logo"
             android:scaleType="fitCenter" />
 
         <Button

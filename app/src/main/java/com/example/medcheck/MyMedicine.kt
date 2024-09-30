@@ -2,6 +2,7 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,7 +15,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityMyMedicineBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.*
+import java.util.Calendar
 
 class MyMedicine : AppCompatActivity() {
 	// Declare binding variable and Firebase reference
@@ -45,6 +48,42 @@ class MyMedicine : AppCompatActivity() {
 			val addMedicineIntent = Intent(this, AddMedicine::class.java)
 			startActivity(addMedicineIntent)
 		}
+
+		//---------------------------------------BOTTOM NAV-------------------------------------------------
+		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+		// Handle navigation item selection
+		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+			when (item.itemId) {
+
+
+				R.id.nav_calendar -> {
+					// Navigate to Calendar Activity
+					startActivity(Intent(this, Calendar::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_dashboard -> {
+					// Navigate to Dashboard Activity
+					startActivity(Intent(this, Dashboard::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_konw_your_med -> {
+					// Navigate to About Med Activity
+					startActivity(Intent(this, MedicationInformation::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_medication -> {
+					// Navigate to Medication Activity
+					startActivity(Intent(this, MyMedicine::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+			}
+			false
+		}
+//--------------------------------------------------------------------------------------------------
 	}
 
 	private fun fetchMedicinesFromFirebase() {
