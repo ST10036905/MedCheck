@@ -1,120 +1,103 @@
 package com.example.medcheck
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import android.widget.Button
 import android.content.Intent
-import android.view.MenuItem
+import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
-import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityMedicineDetailsBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.Calendar
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class MedicineDetailsActivity : AppCompatActivity() {
-	
-	/**
-	 *
-	 */
-	
-	//declaring the edit texts for name and strenghts of medicine
-	private lateinit var medicineNameEditText: EditText
-	private lateinit var medicineStrengthEditText: EditText
-	
-	private lateinit var binding: ActivityMedicineDetailsBinding
-	
+	private var binding: ActivityMedicineDetailsBinding? = null
+	private var databaseReference: DatabaseReference? = null
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		enableEdgeToEdge()
-		setContentView(R.layout.activity_medicine_details)
-		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-			insets
+		binding = ActivityMedicineDetailsBinding.inflate(layoutInflater)
+		setContentView(binding!!.root)
+
+		// Get the medicine ID passed from the previous activity
+		val medicineId = intent.getStringExtra("medicineId") ?: return
+
+		// Initialize Firebase Database reference
+		databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
+
+		// Retrieve medicine details from Firebase
+		retrieveMedicineDetails(medicineId)
+
+		// Set up the ImageButton to navigate to ScheduleDose activity
+		val scheduleDoseButton: ImageButton = binding!!.scheduleAnotherDoseBtn
+		scheduleDoseButton.setOnClickListener {
+			val scheduleDoseIntent = Intent(this, ScheduleDose::class.java)
+			scheduleDoseIntent.putExtra("medicineId", medicineId) // Pass the medicine ID
+			startActivity(scheduleDoseIntent)
 		}
 
-		//---------------------------------------BOTTOM NAV-------------------------------------------------
-		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+		// Set up the ImageButton to navigate to ScheduleDose activity
+		val refillButton: ImageButton = binding!!.refillImageBtn
+		refillButton.setOnClickListener {
+			val refill = Intent(this, MedicationInformation::class.java)
+			refill.putExtra("medicineId", medicineId) // Pass the medicine ID
+			startActivity(refill)
+		}
 
-		// Handle navigation item selection
-		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
-			when (item.itemId) {
-				R.id.nav_preferences -> {
-					// Navigates to preferences
-					startActivity(Intent(this, Preferences::class.java))
-					return@setOnNavigationItemSelectedListener true
-				}
+		// Set up stop medication button
+		val stopMedicationButton: Button = binding!!.stopMedicationButton
+		stopMedicationButton.setOnClickListener {
+			// Show confirmation before deletion
+			confirmDeletion(medicineId)
+		}
 
-				R.id.nav_calendar -> {
-					// Navigate to Calendar Activity
-					startActivity(Intent(this, Calendar::class.java))
-					return@setOnNavigationItemSelectedListener true
-				}
+		// Retrieve medicine details from Firebase
+		retrieveMedicineDetails(medicineId)
+	}
 
-				R.id.nav_dashboard -> {
-					// Navigate to Dashboard Activity
-					startActivity(Intent(this, Dashboard::class.java))
-					return@setOnNavigationItemSelectedListener true
-				}
+	private fun confirmDeletion(medicineId: String) {
+		// Delete the medicine from the database
+		deleteMedicineFromDatabase(medicineId)
+	}
 
-				R.id.nav_konw_your_med -> {
-					// Navigate to About Med Activity
-					startActivity(Intent(this, MedicationInformation::class.java))
-					return@setOnNavigationItemSelectedListener true
-				}
+	private fun deleteMedicineFromDatabase(medicineId: String) {
+		databaseReference?.child(medicineId)?.removeValue()?.addOnCompleteListener { task ->
+			if (task.isSuccessful) {
+				Toast.makeText(this, "Medication stopped and details deleted", Toast.LENGTH_SHORT).show()
+				// Navigate to the Dashboard activity
+				val intent = Intent(this, Dashboard::class.java)
+				startActivity(intent)
+			} else {
+				Toast.makeText(this, "Failed to stop medication", Toast.LENGTH_SHORT).show()
+			}
+		}
+	}
 
-				R.id.nav_medication -> {
-					// Navigate to Medication Activity
-					startActivity(Intent(this, MyMedicine::class.java))
-					return@setOnNavigationItemSelectedListener true
+
+	private fun retrieveMedicineDetails(medicineId: String) {
+		databaseReference?.child(medicineId)?.addListenerForSingleValueEvent(object : ValueEventListener {
+			override fun onDataChange(snapshot: DataSnapshot) {
+				if (snapshot.exists()) {
+					// Get medicine details
+					val name = snapshot.child("name").getValue(String::class.java)
+					val dosage = snapshot.child("dosage").getValue(String::class.java)
+					val frequency = snapshot.child("frequency").getValue(String::class.java)
+					// Update UI with retrieved data
+					binding?.medicineNameInput?.setText(name)
+					binding?.medicineStrengthInput?.setText(dosage)
+					binding?.frequencyInput?.setText(frequency)
+				} else {
+					Toast.makeText(this@MedicineDetailsActivity, "Medicine not found", Toast.LENGTH_SHORT).show()
 				}
 			}
-			false
-		}
-//--------------------------------------------------------------------------------------------------
-		//heading to the my medicine scree after button click
 
-		val to_my_medicine_screen_button: Button = findViewById(R.id.stopTakingBtn)
-
-		
-		// Setting an OnClickListener on the button
-		//to_my_medicine_screen_button.setOnClickListener {
-			// Creating an Intent to move from MainActivity to NextActivity
-			val intent = Intent(this, MyMedicine::class.java)
-			
-			// and then the My Medicine 'MyMedicine' screen starts (shows the saved medication, not the medication details)
-			startActivity(intent)
-			
-			
-		}
-//-----------------------------------------------------------------------------------------------
-		/*
-		adding a button click that sends the user
-		to the refill screen after they click on the + button next
-		to "add a refill reminder' in the third cardview
-		 */
-		
-		
-
-		
-		// Call the method to retrieve data from Firebase
-		//retrieveMedicationData("studentId123")  // Replace with the actual student ID
-
-//-------------------------------------------------------------------------------------------
-		//for the navigation bar at the bottom.
-		/**
-		 * when an icon is clicked,the chosen activity is started (startActivoty) and
-		 * the user is sent to their  chosen screen. For
-		 * example: User clicks Today,
-		 * the taken medication activity starts, showing
-		 * the user the taken medication screen of today.
-		 */
-
-		
-//------------------------------------------------------------------------------------------------------
+			override fun onCancelled(error: DatabaseError) {
+				Toast.makeText(this@MedicineDetailsActivity, "Error retrieving data", Toast.LENGTH_SHORT).show()
+			}
+		})
 	}
-	
 
+}

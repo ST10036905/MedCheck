@@ -45,10 +45,10 @@ class MainActivity : AppCompatActivity() {
         val user = Firebase.auth.currentUser
         if (user != null) {
             // Display user name on welcome TextView
-            binding.textWelcome.text = "Welcome, ${user.email}"
+            binding.textWelcomeUser.text = "Welcome, ${user.email}"
         } else {
             // Handle the case where the user is not signed in
-            binding.textWelcome.text = "Welcome, Guest"
+            binding.textWelcomeUser.text = "Welcome, Guest"
         }
 
         // "Get Started" button click listener to navigate to Welcome activity
@@ -57,10 +57,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Logout button click listener
-        binding.logoutButton.setOnClickListener {
-            signOutAndStartSignInActivity()
-        }
     }
 
     // Sign out from Firebase and Google, then navigate to the SignInActivity

@@ -43,7 +43,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".AddMedicine"
+            android:name=".Welcome"
             android:exported="false" >
         </activity>
 
@@ -64,24 +64,33 @@
         </activity>
 
         <activity
-            android:name=".Register"
-            android:exported="false" >
-        </activity>
-
-        <activity
             android:name=".MyMedicine"
-            android:exported="false" >
+            android:exported="false">
         </activity>
 
         <activity
+            android:name=".MedicineDetailsActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+
             android:name=".Calendar"
             android:exported="false" >
 
+            android:name=".Register"
+            android:exported="false" >
+
         </activity>
 
         <activity
-            android:name=".Welcome"
+            android:name=".AddMedicine"
             android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
 
         </activity>
 

@@ -2,26 +2,17 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.medcheck.databinding.ActivityDashboardBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import java.util.Calendar
 
 class Dashboard : AppCompatActivity() {
-	/**
-	 * This Dashboard activity is designed to:
-	 *
-	 * Retrieve and display the logged-in user's email (which is the username) and age.
-	 * It fetches this data either from an Intent (passed from the previous Register activity)
-	 * or from Firebase Realtime Database.
-	 */
+
 	private lateinit var binding: ActivityDashboardBinding
 	// Used for accessing the UI elements like TextView for the username and age.
 	
@@ -56,8 +47,8 @@ class Dashboard : AppCompatActivity() {
 		
 		
 		// Display the email and age in the TextView fields
-		binding.tvUsername.setText(email)
-		binding.tvAge.setText(age)
+		binding.emailTxt.setText(email)
+		binding.ageTxt.setText(age)
 		
 		
 		// Setting up button to navigate to the AddMedicine screen
@@ -79,8 +70,7 @@ class Dashboard : AppCompatActivity() {
 		// Display the data in the TextView fields
 		binding.tvMedicationName.setText(medicineName) // Use text property instead of setText for TextView
 		binding.tvMedicationTime.setText(medicineStrength)
-		binding.tvLastTaken.setText( lastTaken)
-	
+		//binding.tvLastTaken.setText( lastTaken)
 
 
 //-------------------------------------------------------------------------------------------
