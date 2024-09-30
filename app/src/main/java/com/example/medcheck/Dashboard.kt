@@ -1,5 +1,4 @@
 package com.example.medcheck
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -19,12 +18,11 @@ class Dashboard : AppCompatActivity() {
 	private lateinit var databaseReference: DatabaseReference
 	private lateinit var binding: ActivityDashboardBinding
 
-
 	// UI elements
 	private lateinit var emailTextView: TextView
 	private lateinit var medicineTextView: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_dashboard)
 		binding = ActivityDashboardBinding.inflate(layoutInflater)
@@ -34,20 +32,20 @@ class Dashboard : AppCompatActivity() {
 		auth = FirebaseAuth.getInstance()
 		databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
-		/**
 		// Initialize UI elements
-		emailTextView = findViewById(R.id.tv_user_email) // Make sure to define this in your layout
-		medicineTextView = findViewById(R.id.tv_user_medicine) // Make sure to define this in your layout
-		**/
+		emailTextView = findViewById(R.id.emailText) // Make sure to define this in your layout
+		medicineTextView = findViewById(R.id.medicineText) // Make sure to define this in your layout
+
 		// Fetch and display user info
 		fetchUserData()
+
 	}
 
 	private fun fetchUserData() {
 		val currentUser = auth.currentUser
 		if (currentUser != null) {
 			// Display the user's email from FirebaseAuth
-			//emailTextView.text = currentUser.email
+			emailTextView.text = currentUser.email
 
 			// Get the user's UID to fetch medicine data
 			val userId = currentUser.uid
@@ -79,17 +77,23 @@ class Dashboard : AppCompatActivity() {
 			Toast.makeText(this, "No user is logged in", Toast.LENGTH_SHORT).show()
 		}
 
+
+		binding.addMedicationBtn.setOnClickListener{
+			val intent = Intent(this, AddMedicine::class.java)
+			startActivity(intent)
+		}
+
 		binding.knowMoreBtn.setOnClickListener{
 			val intent = Intent(this, MedicationInformation::class.java)
 			startActivity(intent)
-    }
-
+		}
 
 		binding.refillBtn.setOnClickListener{
 			val intent = Intent(this, GoogleMap::class.java)
 			startActivity(intent)
 		}
 
+		//---------------------------------------BOTTOM NAV-------------------------------------------------
 		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
 		// Handle navigation item selection

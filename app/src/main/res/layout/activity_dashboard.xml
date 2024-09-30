@@ -54,7 +54,27 @@
                 android:layout_height="wrap_content"
                 android:elevation="4dp"
                 app:cardCornerRadius="8dp"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/emailText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:padding="16dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
             <!-- Active Medication Section -->
@@ -84,7 +104,7 @@
                         android:textColor="@color/gradientBlue"/>
 
                     <TextView
-                        android:id="@+id/tv_user_medicine"
+                        android:id="@+id/medicineText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Medicine"
