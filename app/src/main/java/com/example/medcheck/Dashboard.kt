@@ -53,8 +53,8 @@ class Dashboard : AppCompatActivity() {
 		
 		
 		// Display the email and age in the TextView fields
-		binding.tvUsername.setText(email)
-		binding.tvAge.setText(age)
+		binding.emailTxt.setText(email)
+		binding.ageTxt.setText(age)
 		
 		
 		// Setting up button to navigate to the AddMedicine screen
@@ -76,21 +76,9 @@ class Dashboard : AppCompatActivity() {
 		// Display the data in the TextView fields
 		binding.tvMedicationName.setText(medicineName) // Use text property instead of setText for TextView
 		binding.tvMedicationTime.setText(medicineStrength)
-		binding.tvLastTaken.setText( lastTaken)
+		//binding.tvLastTaken.setText( lastTaken)
 	
 
-
-//-------------------------------------------------------------------------------------------
-	//for the navigation bar at the bottom.
-		/**
-		 * when an icon is clicked,the chosen activity is started (startActivoty) and
-		 * the user is sent to their  chosen screen. For
-		 * example: User clicks Today,
-		 * the taken medication activity starts, showing
-		 * the user the taken medication screen of today.
-		 */
-
-//------------------------------------------------------------------------------------------------------
 	}
 }
 

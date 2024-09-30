@@ -37,7 +37,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".AddMedicine"
+            android:name=".Welcome"
             android:exported="false" >
         </activity>
 
@@ -63,7 +63,7 @@
         </activity>
 
         <activity
-            android:name=".Welcome"
+            android:name=".AddMedicine"
             android:exported="true" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

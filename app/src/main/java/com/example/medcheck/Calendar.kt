@@ -43,7 +43,7 @@ class Calendar : AppCompatActivity() {
 			// decision on whether the selected date is today's date
 			if (year == todayYear && month == todayMonth && dayOfMonth == todayDay) {
 				// Navigate to NextActivity
-				val TakenMedsintent = Intent(this,TakenMedication::class.java)
+				val TakenMedsintent = Intent(this,Dashboard::class.java)
 				startActivity(TakenMedsintent )
 			} else {
 				// Show a Toast if the selected date is not today
