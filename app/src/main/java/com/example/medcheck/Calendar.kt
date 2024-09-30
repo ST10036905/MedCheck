@@ -58,6 +58,7 @@ class Calendar : AppCompatActivity() {
 		 * the user is sent to their  chosen screen. For
 		 * example: User clicks Today,
 		 * the taken medication activity starts, showing
+		 * --
 		 * the user the taken medication screen of today.
 		 */
 
