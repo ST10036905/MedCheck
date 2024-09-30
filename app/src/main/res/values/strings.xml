@@ -114,7 +114,7 @@
     <string name="medication_reminders">Medication Reminders</string>
     <string name="find_the_nearest_pharmacies">Find the nearest pharmacies to your location, complete with directions and contact information.</string>
     <string name="search_for_nearby_pharmacies">Search for Nearby Pharmacies</string>
-    <string name="with_just_a_few_clicks">With just a few clicks, you can request refills for your prescriptions at your preferred pharmacy.</string>
+    <string name="with_just_a_few_clicks">With just a few clicks, you can request refills for your prescriptions at your preferred nearby pharmacy.</string>
     <string name="refill_your_medications">Refill Your Medications</string>
     <string name="you_can_now_search">You can now search for medications by name and get detailed information including usage, dosage, and warnings.</string>
     <string name="search_for_medications">Search for Medications</string>
@@ -125,4 +125,5 @@
     <string name="taken">Taken</string>
     <string name="sign_out">Sign out</string>
     <string name="sign_up_manually">Register here.\n</string>
+    <string name="dashboard_know_more_medicine">Get to know more about a medication.\n</string>
 </resources>
