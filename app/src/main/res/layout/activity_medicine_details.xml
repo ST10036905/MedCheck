@@ -149,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="@string/receive_a_reminder_when_there_are_only_5_units_of_this_medicine_remaining"
+                        android:text="@string/search_for_a_nearby_pharmachy_to_refill"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

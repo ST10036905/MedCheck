@@ -133,4 +133,5 @@
     <string name="done">Done</string>
     <string name="add_another_medicine">Add another medicine\n</string>
     <string name="my_medicine">My Medicine\n</string>
+    <string name="search_for_a_nearby_pharmachy_to_refill">Search for a nearby pharmachy to refill.</string>
 </resources>

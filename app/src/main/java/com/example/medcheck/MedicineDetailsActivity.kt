@@ -57,7 +57,7 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		// Set up the refill button to navigate to MedicationInformation activity to refill the medicine
 		val refillButton: ImageButton = binding.refillImageBtn
 		refillButton.setOnClickListener {
-			val refillIntent = Intent(this, MedicationInformation::class.java)
+			val refillIntent = Intent(this, GoogleMap::class.java)
 			refillIntent.putExtra("medicineId", medicineId) // Pass the medicine ID
 			startActivity(refillIntent)
 		}
