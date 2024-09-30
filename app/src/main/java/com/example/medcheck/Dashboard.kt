@@ -111,8 +111,6 @@ class Dashboard : AppCompatActivity() {
 					return@setOnNavigationItemSelectedListener true
 				}
 
-
-
 				R.id.nav_konw_your_med -> {
 					// Navigate to About Med Activity
 					startActivity(Intent(this, MedicationInformation::class.java))
