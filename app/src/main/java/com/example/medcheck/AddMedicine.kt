@@ -1,6 +1,5 @@
 package com.example.medcheck
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,14 +13,12 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class AddMedicine : AppCompatActivity() {
-    // Declare binding variable
     private var binding: ActivityAddMedicineBinding? = null
     private var databaseReference: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Enable edge-to-edge mode
         binding = ActivityAddMedicineBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
@@ -30,8 +27,8 @@ class AddMedicine : AppCompatActivity() {
 
         // Populate the Spinner with options
         val frequencyOptions = arrayOf("Select an option", "Scheduled Dose", "As Needed")
-        val spinnerAdapter = ArrayAdapter(this, R.layout.simple_spinner_item, frequencyOptions)
-        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, frequencyOptions)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding!!.frequencySpinner.adapter = spinnerAdapter
 
         // Variable to store the selected frequency
@@ -61,8 +58,7 @@ class AddMedicine : AppCompatActivity() {
             val name = binding!!.nameInput.text.toString()
             val dosage = binding!!.strenghtInput.text.toString()
             if (name.isEmpty() || dosage.isEmpty() || selectedFrequency[0].isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 // Store medicine details in Firebase and navigate accordingly
                 storeMedicineInFirebase(name, dosage, selectedFrequency[0])
@@ -71,7 +67,6 @@ class AddMedicine : AppCompatActivity() {
     }
 
     private fun storeMedicineInFirebase(name: String, dosage: String, frequency: String) {
-        // Create a unique key for each medicine entry
         val id = databaseReference!!.push().key
         val medicineData: MutableMap<String, String> = HashMap()
         medicineData["name"] = name
@@ -82,32 +77,21 @@ class AddMedicine : AppCompatActivity() {
             databaseReference!!.child(id).setValue(medicineData)
                 .addOnCompleteListener { task: Task<Void?> ->
                     if (task.isSuccessful) {
-                        Toast.makeText(
-                            this,
-                            "Medicine added successfully",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this, "Medicine added successfully", Toast.LENGTH_SHORT).show()
+
                         // Redirect based on selected frequency
                         if (frequency == "Scheduled Dose") {
-                            // Navigate to ScheduleDose activity
-                            val scheduleDoseIntent =
-                                Intent(
-                                    this,
-                                    ScheduleDose::class.java
-                                )
+                            // Navigate to ScheduleDose activity and pass medicine ID
+                            val scheduleDoseIntent = Intent(this, ScheduleDose::class.java)
+                            scheduleDoseIntent.putExtra("medicineId", id) // Pass the medicine ID
                             startActivity(scheduleDoseIntent)
                         } else if (frequency == "As Needed") {
                             // Navigate to MyMedicine activity
-                            val myMedicineIntent =
-                                Intent(
-                                    this,
-                                    MyMedicine::class.java
-                                )
+                            val myMedicineIntent = Intent(this, MyMedicine::class.java)
                             startActivity(myMedicineIntent)
                         }
                     } else {
-                        Toast.makeText(this, "Failed to add medicine", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(this, "Failed to add medicine", Toast.LENGTH_SHORT).show()
                     }
                 }
         }

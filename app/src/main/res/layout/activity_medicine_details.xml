@@ -17,6 +17,7 @@
         android:textColor="@color/BrownText"
         android:textSize="28sp"
         android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -106,7 +107,7 @@
                     android:textSize="18sp" /> <!-- Adjusted font size -->
 
                 <ImageButton
-                    android:id="@+id/scheduleAnotherDate_btn"
+                    android:id="@+id/scheduleAnotherDoseBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@android:drawable/ic_input_add" />
@@ -147,7 +148,7 @@
                     android:text="@string/dashboard_refill_button" />
 
                 <ImageButton
-                    android:id="@+id/imageButton_add_refill"
+                    android:id="@+id/refillImageBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@android:drawable/ic_input_add" />
@@ -165,10 +166,10 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/stopTakingBtn"
+        android:id="@+id/stopMedicationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="50dp"
         android:backgroundTint="@color/red"
         android:text="@string/stop_taking_medication"
         android:textSize="18sp"

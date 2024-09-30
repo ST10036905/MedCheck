@@ -11,7 +11,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
-
 class ScheduleDose : AppCompatActivity() {
 
     private lateinit var binding: ActivityScheduleDoseBinding
@@ -26,6 +25,9 @@ class ScheduleDose : AppCompatActivity() {
 
         // Initialize Firebase Database reference
         databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
+
+        // Get the medicine ID passed from the AddMedicine activity
+        val medicineId = intent.getStringExtra("medicineId") ?: return
 
         // Set up onClickListener to open TimePickerDialog for dose input
         binding.timeTakenInput.setOnClickListener {
@@ -56,11 +58,7 @@ class ScheduleDose : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 // Store dose details in Firebase
-                storeScheduledDoseInFirebase(doseTime, howOften, howMany)
-
-                // Navigating to Medicine Details
-                val intent = Intent(this, MedicineDetailsActivity::class.java)
-                startActivity(intent)
+                storeScheduledDoseInFirebase(medicineId, doseTime, howOften, howMany) // Pass the medicine ID
             }
         }
     }
@@ -71,29 +69,29 @@ class ScheduleDose : AppCompatActivity() {
         val minute = calendar.get(Calendar.MINUTE)
 
         val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-            // Format the selected time as a string
             val time = String.format("%02d:%02d", selectedHour, selectedMinute)
             binding.timeTakenInput.setText(time)
         }, hour, minute, true)
         timePickerDialog.show()
     }
 
-    private fun storeScheduledDoseInFirebase(doseTime: String, howOften: String, howMany: String) {
-        val id = databaseReference.push().key
+    private fun storeScheduledDoseInFirebase(medicineId: String, doseTime: String, howOften: String, howMany: String) {
         val doseData = HashMap<String, String>()
         doseData["doseTime"] = doseTime
         doseData["howOften"] = howOften
         doseData["howMany"] = howMany
 
-        if (id != null) {
-            databaseReference.child(id).setValue(doseData)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "Dose scheduled successfully", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Failed to schedule dose", Toast.LENGTH_SHORT).show()
-                    }
+        databaseReference.child(medicineId).child("schedules").push().setValue(doseData)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Dose scheduled successfully", Toast.LENGTH_SHORT).show()
+                    // Navigate to Medicine Details activity
+                    val intent = Intent(this, MedicineDetailsActivity::class.java)
+                    intent.putExtra("medicineId", medicineId) // Pass the medicine ID
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, "Failed to schedule dose", Toast.LENGTH_SHORT).show()
                 }
-        }
+            }
     }
 }
