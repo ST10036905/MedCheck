@@ -5,6 +5,10 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style
+        name="Theme.Google.SignIn" parent="Theme.AppCompat.DayNight.NoActionBar">
+    </style>
+
     <style name="Theme.MedCheck" parent="Base.Theme.MedCheck" />
 
     <style name="nightModeSwitch" parent="Theme.AppCompat.Light">
