@@ -8,6 +8,7 @@ The following mobile application is being designed using the Android Studio IDE.
 The application, which is being identified as "Med Check", it  has as a focal point, the ability of allowing users to log a medicine with the objective of them keeping track of the medical records. Med Check aims to provide a user-friendly interface for users to manage their medication schedules and improve their adherence to prescribed treatments. By centralizing medical records, users can easily monitor their health and well-being.
 
 Main features of the application :
+
 *** Create an account/sign up using google - in order for users to record their medication, they should have an account to maintain their data kept and centralized, which all starts by the creation of an account by entering their personalized characteristics. If user has a google account, they can automatically sign up by the use of a Single Sign In feature. The application  supports Google Sign-In through Firebase Authentication, allowing users to register quickly if they have a Google account.
 
 *** Login - Once the user has their account created, they can then login by entering their credentials which will be authenticated and verified if it exists in the database(meaning user is registered), therefore, they will be redirected to the Dashboard.
