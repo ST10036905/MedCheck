@@ -2,6 +2,7 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,34 @@ class MedicineDetailsActivity : AppCompatActivity() {
 			refill.putExtra("medicineId", medicineId) // Pass the medicine ID
 			startActivity(refill)
 		}
+
+		// Set up stop medication button
+		val stopMedicationButton: Button = binding!!.stopMedicationButton
+		stopMedicationButton.setOnClickListener {
+			// Show confirmation before deletion
+			confirmDeletion(medicineId)
+		}
+
+		// Retrieve medicine details from Firebase
+		retrieveMedicineDetails(medicineId)
+	}
+
+	private fun confirmDeletion(medicineId: String) {
+		// Delete the medicine from the database
+		deleteMedicineFromDatabase(medicineId)
+	}
+
+	private fun deleteMedicineFromDatabase(medicineId: String) {
+		databaseReference?.child(medicineId)?.removeValue()?.addOnCompleteListener { task ->
+			if (task.isSuccessful) {
+				Toast.makeText(this, "Medication stopped and details deleted", Toast.LENGTH_SHORT).show()
+				// Navigate to the Dashboard activity
+				val intent = Intent(this, Dashboard::class.java)
+				startActivity(intent)
+			} else {
+				Toast.makeText(this, "Failed to stop medication", Toast.LENGTH_SHORT).show()
+			}
+		}
 	}
 
 
@@ -56,12 +85,10 @@ class MedicineDetailsActivity : AppCompatActivity() {
 					val name = snapshot.child("name").getValue(String::class.java)
 					val dosage = snapshot.child("dosage").getValue(String::class.java)
 					val frequency = snapshot.child("frequency").getValue(String::class.java)
-					val time = snapshot.child("time").getValue(String::class.java)
 					// Update UI with retrieved data
 					binding?.medicineNameInput?.setText(name)
 					binding?.medicineStrengthInput?.setText(dosage)
 					binding?.frequencyInput?.setText(frequency)
-					binding?.timeInput?.setText(time)
 				} else {
 					Toast.makeText(this@MedicineDetailsActivity, "Medicine not found", Toast.LENGTH_SHORT).show()
 				}
@@ -72,4 +99,5 @@ class MedicineDetailsActivity : AppCompatActivity() {
 			}
 		})
 	}
+
 }
