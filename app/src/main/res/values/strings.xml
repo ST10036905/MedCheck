@@ -124,6 +124,7 @@
     <string name="google">Sign up with google</string>
     <string name="taken">Taken</string>
     <string name="sign_out">Sign out</string>
+    <string name="logout">Logout</string>
     <string name="sign_up_manually">Register here.\n</string>
     <string name="dashboard_know_more_medicine">Get to know more about a medication.\n</string>
     <string name="add_another_medicine_click_the_plus_button">Add another medicine click the plus button</string>
