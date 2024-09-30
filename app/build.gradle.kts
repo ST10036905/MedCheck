@@ -69,8 +69,8 @@ dependencies {
     implementation (libs.firebase.auth.ktx.v2200)
     implementation (libs.play.services.auth.v2050)
 
-    implementation ("com.google.firebase:firebase-auth:22.0.0")
-    implementation ("com.google.android.gms:play-services-auth:20.5.0")  // Google Sign-In SDK
+    implementation (libs.firebase.auth)
+    implementation (libs.services.auth)  // Google Sign-In SDK
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -37,14 +37,11 @@ class Login : AppCompatActivity() {
 
         // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.web_client_id)) // Make sure to add the web client ID in your strings.xml
+            .requestIdToken(getString(R.string.web_client_id))
             .requestEmail()
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        // Set up Google Sign-In button click listener
-        binding.googleSignInBtn.setOnClickListener { signInWithGoogle() }
 
         // Set up Email/Password login
         binding.submitBtn.setOnClickListener {

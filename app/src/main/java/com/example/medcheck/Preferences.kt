@@ -1,5 +1,6 @@
 package com.example.medcheck
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.RelativeLayout
@@ -8,15 +9,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.example.medcheck.databinding.ActivityPreferencesBinding
-import com.example.medcheck.databinding.ActivityTakenMedicationBinding
+
 
 class Preferences : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPreferencesBinding
-
+    private lateinit var binding : ActivityPreferencesBinding
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
-        
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_preferences)
@@ -32,7 +34,7 @@ class Preferences : AppCompatActivity() {
         }
         //--------------------------Handling the frame transitions ----------------//
         // setting the click listener for the termsAndConditionsMode button
-        binding.termsAndConditionsMode.setOnClickListener {
+        binding.termsAndConditionsRL.setOnClickListener {
             val termsFragment = Terms_and_condition_fragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main, termsFragment)
@@ -42,7 +44,7 @@ class Preferences : AppCompatActivity() {
         }
 
         // setting the click listener for the FAQ button
-        binding.FAQMode.setOnClickListener {
+        binding.FAQRL.setOnClickListener {
             val faqFragment = FaqFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main, faqFragment)
@@ -51,44 +53,28 @@ class Preferences : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // setting the click listener for the FAQ button
+        binding.whatsNewRL.setOnClickListener {
+            val whatsNew = WhatsNewOnMedCheck()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main, whatsNew)
+                .addToBackStack(null)
+                .commit()
+            startActivity(intent)
+        }
+
         //----------------------------------End of transitions ------------------//
         // Declaring the buttons
         val pushNotificationID: RelativeLayout = findViewById(R.id.pushNotificationID)
-
         // Setting onclick events
         pushNotificationID.setOnClickListener(){
-            Toast.makeText(this,"Export data is not available yet in your region",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"This option will be available soon!",Toast.LENGTH_SHORT).show()
         }
-        
-        //-------------------------------------------------------------------------------------------
-        //for the navigation bar at the bottom.
-        /**
-         * when an icon is clicked,the chosen activity is started (startActivoty) and
-         * the user is sent to their  chosen screen. For
-         * example: User clicks Today,
-         * the taken medication activity starts, showing
-         * the user the taken medication screen of today.
-         */
-        // Check initialization of the bottom navigation
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_pref -> {
-                    val prefIntent = Intent(this, Preferences::class.java)
-                    startActivity(prefIntent)
-                }
-                R.id.nav_today -> {
-                    val todayIntent = Intent(this, TakenMedication::class.java)
-                    startActivity(todayIntent)
-                }
-                R.id.nav_meds -> {
-                    val medsIntent = Intent(this, MyMedicine::class.java)
-                    startActivity(medsIntent)
-                }
-                else -> return@setOnItemSelectedListener false  // Return false for unhandled cases
-            }
-            true  // Return true to indicate the menu item was handled successfully
+        // export data
+        val exportDataID: RelativeLayout = findViewById(R.id.exportDataID)
+        // Setting onclick events
+        exportDataID.setOnClickListener(){
+            Toast.makeText(this,"This option will be available soon!",Toast.LENGTH_SHORT).show()
         }
-
-//------------------------------------------------------------------------------------------------------
     }
 }

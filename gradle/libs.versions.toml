@@ -25,10 +25,12 @@ googleGmsGoogleServices = "4.4.2"
 firebaseDatabase = "21.0.0"
 firebaseAuthKtx = "23.0.0"
 firebaseDatabaseKtx = "21.0.0"
+googleServices = "4.4.2"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuthKtxVersion" }
 firebase-auth-ktx-v2200 = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtxVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -50,6 +52,7 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
