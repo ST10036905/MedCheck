@@ -68,12 +68,6 @@ class MedicationInformation : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.nav_konw_your_med -> {
-                    // Navigate to About Med Activity
-                    startActivity(Intent(this, MedicationInformation::class.java))
-                    return@setOnNavigationItemSelectedListener true
-                }
-
                 R.id.nav_medication -> {
                     // Navigate to Medication Activity
                     startActivity(Intent(this, MyMedicine::class.java))

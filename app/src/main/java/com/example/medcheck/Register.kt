@@ -66,22 +66,24 @@ class Register : AppCompatActivity() {
                 if (pass == pass2) {
 
                     firebaseAuth.createUserWithEmailAndPassword(email, pass)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val userId = firebaseAuth.currentUser?.uid
+                                // Store user data in Firebase Database
+                                val userRef = database.getReference("Users").child(userId!!)
+                                val userData = mapOf("email" to email, "age" to age, "weight" to weight, "height" to height)
+                                userRef.setValue(userData)
+
                                 Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                                // Send the user to the Login activity after registration
-                                val intent = Intent(this, Login::class.java)
-                                startActivity(intent)
-                                finish() // To ensure users can't navigate back to the register page with the back button
-                            
-                                // Send email and age to the next activity Dashboard for display overview
+
+                                // Send the user to the Dashboard after registration
                                 val intentDashboard = Intent(this, Dashboard::class.java)
-                                intent.putExtra("email", email)   // Passing email
-                                intent.putExtra("age", age)       // Passing age
+                                intentDashboard.putExtra("email", email)
+                                intentDashboard.putExtra("age", age)
                                 startActivity(intentDashboard)
-                                
+                                finish()
                             } else {
-                                Toast.makeText(this, "Registration failed: ${it.exception?.message}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                             }
                         }
                 } else {

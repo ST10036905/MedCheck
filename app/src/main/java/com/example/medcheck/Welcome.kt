@@ -43,35 +43,18 @@ class Welcome : AppCompatActivity() {
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Configure Google Sign-In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+        // Automatically redirect logged-in users
+        if (firebaseAuth.currentUser != null) {
+            checkFirstTimeLoginAndRedirect()
+        }
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        // Set click listener for the "Create Account" button
+        // Set up button listeners
         binding.createAccBtn.setOnClickListener {
             val intent = Intent(this, Register::class.java)
             startActivity(intent)
         }
 
-        // Set click listener for the "Google Sign-In" button
-        binding.googleSignInBtn.setOnClickListener {
-            signInWithGoogle()
-        }
-
-        // Get the "Create Account" button and set up click listener
-        val createAccBtn = findViewById<Button>(R.id.createAccBtn)
-        createAccBtn.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
-            startActivity(intent)
-        }
-
-        // Get the "Login" button and set up click listener
-        val loginBtn = findViewById<Button>(R.id.loginBtn)
-        loginBtn.setOnClickListener {
+        binding.loginBtn.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
@@ -83,6 +66,23 @@ class Welcome : AppCompatActivity() {
         }
     }
 
+    // Check if this is the user's first login and redirect accordingly
+    private fun checkFirstTimeLoginAndRedirect() {
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val isFirstTime = sharedPreferences.getBoolean(KEY_FIRST_TIME_LOGIN, true)
+
+        val intent = if (isFirstTime) {
+            Intent(this, AddMedicine::class.java)
+        } else {
+            Intent(this, Dashboard::class.java)
+        }
+
+        startActivity(intent)
+        finish()
+    }
+
+
+    /**
     // Google Sign-In intent
     private fun signInWithGoogle() {
         val signInIntent = googleSignInClient.signInIntent
@@ -114,15 +114,13 @@ class Welcome : AppCompatActivity() {
                     val isFirstTime = isFirstTimeLogin()
                     val user = firebaseAuth.currentUser
                     Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
-
                     // Navigate based on whether it's the first login
                     if (isFirstTime) {
                         startActivity(Intent(this, AddMedicine::class.java))
-                        setFirstTimeLogin(false) // Mark first login as completed
+                        setFirstTimeLogin(false)
                     } else {
                         startActivity(Intent(this, Dashboard::class.java))
                     }
-
                     finish() // Close Welcome activity
                 } else {
                     Toast.makeText(this, "Authentication Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
@@ -144,4 +142,5 @@ class Welcome : AppCompatActivity() {
             apply()
         }
     }
+    **/
 }
