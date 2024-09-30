@@ -59,7 +59,6 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
     // Firebase and Google Sign-In dependencies
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.database)

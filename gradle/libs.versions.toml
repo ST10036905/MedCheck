@@ -11,6 +11,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.2"
 googleMaps = "19.0.0"
+materialVersion = "1.8.0"
 playServicesAuth = "20.5.0"
 retrofit="2.9.0"
 retrofit2="2.9.0"
@@ -39,6 +40,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 google-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "googleMaps" }
+material-v180 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 play-services-auth-v2050 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit2 = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit2" }

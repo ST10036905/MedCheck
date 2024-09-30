@@ -2,14 +2,17 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.medcheck.databinding.ActivityDashboardBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Calendar
 
 class Dashboard : AppCompatActivity() {
 	/**
@@ -89,6 +92,46 @@ class Dashboard : AppCompatActivity() {
 		 * the taken medication activity starts, showing
 		 * the user the taken medication screen of today.
 		 */
+
+		//---------------------------------------BOTTOM NAV-------------------------------------------------
+		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+		// Handle navigation item selection
+		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+			when (item.itemId) {
+				R.id.nav_preferences -> {
+					// Navigates to preferences
+					startActivity(Intent(this, Preferences::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_calendar -> {
+					// Navigate to Calendar Activity
+					startActivity(Intent(this, Calendar::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_dashboard -> {
+					// Navigate to Dashboard Activity
+					startActivity(Intent(this, Dashboard::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_konw_your_med -> {
+					// Navigate to About Med Activity
+					startActivity(Intent(this, MedicationInformation::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_medication -> {
+					// Navigate to Medication Activity
+					startActivity(Intent(this, MyMedicine::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+			}
+			false
+		}
+//--------------------------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------------------------------
 	}
