@@ -12,13 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class Dashboard : AppCompatActivity() {
-	/**
-	 * This Dashboard activity is designed to:
-	 *
-	 * Retrieve and display the logged-in user's email (which is the username) and age.
-	 * It fetches this data either from an Intent (passed from the previous Register activity)
-	 * or from Firebase Realtime Database.
-	 */
+
 	private lateinit var binding: ActivityDashboardBinding
 	// Used for accessing the UI elements like TextView for the username and age.
 	

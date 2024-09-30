@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Step and instruction text views -->
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
@@ -52,10 +52,11 @@
                 android:layout_marginBottom="4dp" />
 
             <EditText
-                android:id="@+id/doseInput"
+                android:id="@+id/timeTakenInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Select Time"
+                android:inputType="time"
                 android:focusable="false"
                 android:clickable="true"
                 android:background="@drawable/edit_text_background"
@@ -67,7 +68,6 @@
 
 
 
-            <!-- Dosage input using a Spinner -->
             <TextView
                 android:id="@+id/oftenLabel"
                 android:layout_width="wrap_content"
@@ -89,7 +89,6 @@
                 android:layout_marginBottom="16dp" />
 
 
-            <!-- Frequency input -->
             <TextView
                 android:id="@+id/dosesLabel"
                 android:layout_width="wrap_content"
@@ -101,7 +100,7 @@
                 android:layout_marginBottom="4dp" />
 
             <EditText
-                android:id="@+id/quantityInput"
+                android:id="@+id/howManyInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -117,7 +116,7 @@
     </ScrollView>
 
 
-    <!-- FrameLayout to overlay text on ImageButton -->
+
     <FrameLayout
         android:id="@+id/scheduleBtnContainer"
         android:layout_width="match_parent"
@@ -126,7 +125,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- ImageButton with the image -->
         <ImageButton
             android:id="@+id/scheduleDoseBtn"
             android:layout_width="match_parent"
@@ -136,7 +134,7 @@
             android:scaleType="fitXY"
             android:background="@null" />
 
-        <!-- TextView overlaying the image -->
+
         <TextView
             android:id="@+id/scheduleDoseBtnText"
             android:layout_width="wrap_content"

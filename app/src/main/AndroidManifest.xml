@@ -58,6 +58,16 @@
         </activity>
 
         <activity
+            android:name=".MyMedicine"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".MedicineDetailsActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
             android:name=".Register"
             android:exported="false" >
         </activity>

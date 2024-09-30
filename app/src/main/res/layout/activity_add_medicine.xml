@@ -61,7 +61,7 @@
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:layout_marginBottom="16dp"
                 android:drawableRight="@drawable/name"/>
 
@@ -87,7 +87,7 @@
                 android:inputType="text"
                 android:padding="12dp"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <!-- Frequency input -->
             <TextView

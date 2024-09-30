@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityAddMedicineBinding
@@ -51,7 +50,9 @@ class AddMedicine : AppCompatActivity() {
                         selectedFrequency[0] = frequencyOptions[position]
                     }
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Do nothing
                 }
             }
 
