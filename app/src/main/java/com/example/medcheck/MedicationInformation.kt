@@ -2,8 +2,10 @@ package com.example.medcheck
 
 import DrugData
 import DrugLabel
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
@@ -12,12 +14,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.medcheck.databinding.ActivityMainBinding
 import com.example.medcheck.databinding.ActivityMedicationInformationBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.URLEncoder
+import java.util.Calendar
 
 class MedicationInformation : AppCompatActivity() {
 
@@ -39,6 +43,46 @@ class MedicationInformation : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //---------------------------------------BOTTOM NAV-------------------------------------------------
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        // Handle navigation item selection
+        bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.nav_preferences -> {
+                    // Navigates to preferences
+                    startActivity(Intent(this, Preferences::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_calendar -> {
+                    // Navigate to Calendar Activity
+                    startActivity(Intent(this, Calendar::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_dashboard -> {
+                    // Navigate to Dashboard Activity
+                    startActivity(Intent(this, Dashboard::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_konw_your_med -> {
+                    // Navigate to About Med Activity
+                    startActivity(Intent(this, MedicationInformation::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_medication -> {
+                    // Navigate to Medication Activity
+                    startActivity(Intent(this, MyMedicine::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+//--------------------------------------------------------------------------------------------------
     }
 
     private fun setupUI() {

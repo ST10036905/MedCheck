@@ -3,6 +3,7 @@ package com.example.medcheck
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.medcheck.databinding.ActivityPreferencesBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Calendar
 
 
 class Preferences : AppCompatActivity() {
@@ -76,5 +79,45 @@ class Preferences : AppCompatActivity() {
         exportDataID.setOnClickListener(){
             Toast.makeText(this,"This option will be available soon!",Toast.LENGTH_SHORT).show()
         }
+
+        //---------------------------------------BOTTOM NAV-------------------------------------------------
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        // Handle navigation item selection
+        bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.nav_preferences -> {
+                    // Navigates to preferences
+                    startActivity(Intent(this, Preferences::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_calendar -> {
+                    // Navigate to Calendar Activity
+                    startActivity(Intent(this, Calendar::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_dashboard -> {
+                    // Navigate to Dashboard Activity
+                    startActivity(Intent(this, Dashboard::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_konw_your_med -> {
+                    // Navigate to About Med Activity
+                    startActivity(Intent(this, MedicationInformation::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_medication -> {
+                    // Navigate to Medication Activity
+                    startActivity(Intent(this, MyMedicine::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+//--------------------------------------------------------------------------------------------------
     }
 }

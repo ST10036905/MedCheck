@@ -1,26 +1,32 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/nav_preferences"
         android:icon="@drawable/setting_icon"
-        android:title="Preferences" />
+        android:title="Preferences"
+        app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/nav_calendar"
         android:icon="@drawable/calendar_nav_icon"
-        android:title="Calendar" />
+        android:title="Calendar"
+        app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/nav_dashboard"
         android:icon="@drawable/dashboard_icon"
-        android:title="Dashboard" />
+        android:title="Dashboard"
+        app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/nav_konw_your_med"
         android:icon="@drawable/about_med"
-        android:title="About Med" />
+        android:title="About Med"
+        app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/nav_medication"
         android:icon="@drawable/medication_icon"
-        android:title="Medication" />
+        android:title="Medication"
+        app:showAsAction="ifRoom|withText" />
 </menu>
