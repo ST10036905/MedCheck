@@ -56,7 +56,7 @@ class MyMedicine : AppCompatActivity() {
 		 * example: User clicks Today,
 		 * the taken medication activity starts, showing
 		 * the user the taken medication screen of today.
-		 */
+		 
 		// Check initialization of the bottom navigation
 		binding.bottomNavigation.setOnItemSelectedListener { item ->
 			when (item.itemId) {
@@ -78,6 +78,6 @@ class MyMedicine : AppCompatActivity() {
 		}
 
 //------------------------------------------------------------------------------------------------------
-	
+	*/
 	}
 }
