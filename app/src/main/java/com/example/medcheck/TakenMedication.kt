@@ -30,7 +30,7 @@ class TakenMedication : AppCompatActivity() {
          * the user the taken medication screen of today.
          */
         // Check initialization of the bottom navigation
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
+       /** binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_pref -> {
                     val prefIntent = Intent(this, Preferences::class.java)
@@ -47,7 +47,7 @@ class TakenMedication : AppCompatActivity() {
                 else -> return@setOnItemSelectedListener false  // Return false for unhandled cases
             }
             true  // Return true to indicate the menu item was handled successfully
-        }
+        }*/
 //------------------------------------------------------------------------------------------------------
 
     }

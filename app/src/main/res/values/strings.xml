@@ -1,4 +1,5 @@
 <resources>
+
  
     <string name="my_medicine_screen_title">My Medicine</string>
     <string name="medicine_details_name">Name</string>
@@ -21,6 +22,9 @@
     <string name="dashboard_refill_title">Refill</string>
     <string name="another_dose">Schedule another dose</string>"
 
+    <string name="default_web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+
+    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
     <string name="strength">Strength</string>
     <string name="how_are">How are the dose taken</string>
     <string name="today">Today</string>
@@ -104,4 +108,19 @@
     <string name="about_medcheck_tittle">About MedCheck</string>
     <string name="acceptance_of_terms_and_conditions_tittle">Acceptance of terms and conditions</string>
     <string name="welcome_tittle">Welcome</string>
+    <string name="keep_track_of_your_dosage">Keep track of your dosage history to ensure you\'re taking medications as prescribed.</string>
+    <string name="track_your_dosages">Track Your Dosages</string>
+    <string name="never_forget_to_take">Never forget to take your medication with customizable reminders that fit your schedule.</string>
+    <string name="medication_reminders">Medication Reminders</string>
+    <string name="find_the_nearest_pharmacies">Find the nearest pharmacies to your location, complete with directions and contact information.</string>
+    <string name="search_for_nearby_pharmacies">Search for Nearby Pharmacies</string>
+    <string name="with_just_a_few_clicks">With just a few clicks, you can request refills for your prescriptions at your preferred pharmacy.</string>
+    <string name="refill_your_medications">Refill Your Medications</string>
+    <string name="you_can_now_search">You can now search for medications by name and get detailed information including usage, dosage, and warnings.</string>
+    <string name="search_for_medications">Search for Medications</string>
+    <string name="what_s_new_in_medcheck">What\'s New in MedCheck</string>
+    <string name="email">Email</string>
+    <string name="sign_up">Do not have an account? sign up with google account</string>
+    <string name="google">sign up with google</string>
+    <string name="taken">Taken</string>
 </resources>
