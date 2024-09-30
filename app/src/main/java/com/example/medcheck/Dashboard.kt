@@ -78,12 +78,70 @@ class Dashboard : AppCompatActivity() {
 		binding.knowMoreBtn.setOnClickListener{
 			val intent = Intent(this, MedicationInformation::class.java)
 			startActivity(intent)
-		}
+    }
 
 
 		binding.refillBtn.setOnClickListener{
 			val intent = Intent(this, GoogleMap::class.java)
 			startActivity(intent)
 		}
+
+		
+		// Retrieve the passed data from AddMedicine activity to display in Active Medication card view
+		val medicineName = intent.getStringExtra("EXTRA_MEDICINE_NAME")
+		val medicineStrength = intent.getStringExtra("EXTRA_STRENGTH")
+		val lastTaken = intent.getStringExtra("EXTRA_FREQUENCY")
+		//setText()
+		// Display the data in the TextView fields
+		binding.tvMedicationName.setText(medicineName) // Use text property instead of setText for TextView
+		binding.tvMedicationTime.setText(medicineStrength)
+		//binding.tvLastTaken.setText( lastTaken)
+
+
+//-------------------------------------------------------------------------------------------
+	//for the navigation bar at the bottom.
+		/**
+		 * when an icon is clicked,the chosen activity is started (startActivoty) and
+		 * the user is sent to their  chosen screen. For
+		 * example: User clicks Today,
+		 * the taken medication activity starts, showing
+		 * the user the taken medication screen of today.
+		 */
+
+		//---------------------------------------BOTTOM NAV-------------------------------------------------
+		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+		// Handle navigation item selection
+		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+			when (item.itemId) {
+				R.id.nav_preferences -> {
+					// Navigates to preferences
+					startActivity(Intent(this, Preferences::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_calendar -> {
+					// Navigate to Calendar Activity
+					startActivity(Intent(this, Calendar::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+
+
+				R.id.nav_konw_your_med -> {
+					// Navigate to About Med Activity
+					startActivity(Intent(this, MedicationInformation::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_medication -> {
+					// Navigate to Medication Activity
+					startActivity(Intent(this, MyMedicine::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+			}
+			false
+		}
+
 	}
 }

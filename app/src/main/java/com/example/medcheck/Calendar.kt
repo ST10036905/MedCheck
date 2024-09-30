@@ -50,6 +50,26 @@ class Calendar : AppCompatActivity() {
 				Toast.makeText(this, "Please Pick Today's Date", Toast.LENGTH_SHORT).show()
 			}
 		}
+
+//---------------------------------------BOTTOM NAV-------------------------------------------------
+		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+		// Handle navigation item selection
+		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+			when (item.itemId) {
+				R.id.nav_preferences -> {
+					// Navigates to preferences
+					startActivity(Intent(this, Preferences::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+
+				R.id.nav_dashboard -> {
+					// Navigate to Dashboard Activity
+					startActivity(Intent(this, Dashboard::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
 //--------------------------------------------------------------------------------------------------
 		
 		//for the navigation bar at the bottom:
