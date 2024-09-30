@@ -111,11 +111,7 @@ class Dashboard : AppCompatActivity() {
 					return@setOnNavigationItemSelectedListener true
 				}
 
-				R.id.nav_dashboard -> {
-					// Navigate to Dashboard Activity
-					startActivity(Intent(this, Dashboard::class.java))
-					return@setOnNavigationItemSelectedListener true
-				}
+
 
 				R.id.nav_konw_your_med -> {
 					// Navigate to About Med Activity

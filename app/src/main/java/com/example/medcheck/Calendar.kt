@@ -59,11 +59,6 @@ class Calendar : AppCompatActivity() {
 					return@setOnNavigationItemSelectedListener true
 				}
 
-				R.id.nav_calendar -> {
-					// Navigate to Calendar Activity
-					startActivity(Intent(this, Calendar::class.java))
-					return@setOnNavigationItemSelectedListener true
-				}
 
 				R.id.nav_dashboard -> {
 					// Navigate to Dashboard Activity

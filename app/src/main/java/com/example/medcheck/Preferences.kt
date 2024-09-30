@@ -104,11 +104,7 @@ class Preferences : AppCompatActivity() {
         // Handle navigation item selection
         bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
             when (item.itemId) {
-                R.id.nav_preferences -> {
-                    // Navigates to preferences
-                    startActivity(Intent(this, Preferences::class.java))
-                    return@setOnNavigationItemSelectedListener true
-                }
+
 
                 R.id.nav_calendar -> {
                     // Navigate to Calendar Activity
