@@ -1,8 +1,5 @@
 ***Med Check Mobile Application
 ***OPSC7312 POE PART 2
-*** Azania Ncube ST10036066
-*** Mayra Selemane ST10036905
-*** Zacarias Antero ST10068763
 
 The following mobile application is being designed using the Android Studio IDE.
 The application, which is being identified as "Med Check", it  has as a focal point, the ability of allowing users to log a medicine with the objective of them keeping track of the medical records. Med Check aims to provide a user-friendly interface for users to manage their medication schedules and improve their adherence to prescribed treatments. By centralizing medical records, users can easily monitor their health and well-being.
@@ -40,3 +37,8 @@ Open FDA API: To provide access to medication information.
 
 *** GitHub and GitHub actions ***
 - GitHub was used as the version control to facilitate the cooperation and code change tracking throughout the development of the Med Check application, considering that the application was being designed by different team members. Continuous Integration and Deployment (CI/CD) using GitHub Actions was there to automate the deployment and testing procedures, by guaranteeing that, prior to being merged into the main branch, code changes are consistently built and tested.
+
+
+******* Azania Ncube ST10036066
+******* Mayra Selemane ST10036905
+******* Zacarias Antero ST10068763
