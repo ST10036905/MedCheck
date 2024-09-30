@@ -71,8 +71,55 @@ class Dashboard : AppCompatActivity() {
 		binding.tvMedicationName.setText(medicineName) // Use text property instead of setText for TextView
 		binding.tvMedicationTime.setText(medicineStrength)
 		//binding.tvLastTaken.setText( lastTaken)
-	
 
+
+//-------------------------------------------------------------------------------------------
+	//for the navigation bar at the bottom.
+		/**
+		 * when an icon is clicked,the chosen activity is started (startActivoty) and
+		 * the user is sent to their  chosen screen. For
+		 * example: User clicks Today,
+		 * the taken medication activity starts, showing
+		 * the user the taken medication screen of today.
+		 */
+
+		//---------------------------------------BOTTOM NAV-------------------------------------------------
+		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+		// Handle navigation item selection
+		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+			when (item.itemId) {
+				R.id.nav_preferences -> {
+					// Navigates to preferences
+					startActivity(Intent(this, Preferences::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_calendar -> {
+					// Navigate to Calendar Activity
+					startActivity(Intent(this, Calendar::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+
+
+				R.id.nav_konw_your_med -> {
+					// Navigate to About Med Activity
+					startActivity(Intent(this, MedicationInformation::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+
+				R.id.nav_medication -> {
+					// Navigate to Medication Activity
+					startActivity(Intent(this, MyMedicine::class.java))
+					return@setOnNavigationItemSelectedListener true
+				}
+			}
+			false
+		}
+//--------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------------------
 	}
 }
 

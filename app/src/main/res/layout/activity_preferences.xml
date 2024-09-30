@@ -357,6 +357,7 @@
 
                     <!-- Privacy -->
                     <RelativeLayout
+                        android:id="@+id/logoutRL"
                         android:layout_width="match_parent"
                         android:background="@drawable/round_logout_btn"
                         android:layout_height="wrap_content"
