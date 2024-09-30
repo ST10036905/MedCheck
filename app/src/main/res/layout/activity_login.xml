@@ -101,37 +101,11 @@
             android:autoLink="web"
             android:clickable="true"
             android:focusable="true"
+            android:textAlignment="center"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/sign_up"
             android:textColor="@color/textBlue"
             android:textSize="16sp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/googleSignInBtn"
-            android:onClick="signInWithGoogle">
-
-            <ImageView
-                android:id="@+id/googleLogo"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/google_logo" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/google"
-                android:layout_marginStart="8dp"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
 
     </LinearLayout>
 
