@@ -2,11 +2,14 @@ package com.example.medcheck
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityDashboardBinding
 import com.example.medcheck.databinding.ActivityLoginBinding
+import com.example.medcheck.databinding.ActivityWelcomeBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -21,10 +24,13 @@ class Dashboard : AppCompatActivity() {
 	private lateinit var emailTextView: TextView
 	private lateinit var medicineTextView: TextView
 
-	@SuppressLint("MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_dashboard)
+
+		// Initialize view binding
+		binding = ActivityDashboardBinding.inflate(layoutInflater)
 
 		// Initialize Firebase Auth and Database reference
 		auth = FirebaseAuth.getInstance()
@@ -86,27 +92,6 @@ class Dashboard : AppCompatActivity() {
 			startActivity(intent)
 		}
 
-		
-		// Retrieve the passed data from AddMedicine activity to display in Active Medication card view
-		val medicineName = intent.getStringExtra("EXTRA_MEDICINE_NAME")
-		val medicineStrength = intent.getStringExtra("EXTRA_STRENGTH")
-		val lastTaken = intent.getStringExtra("EXTRA_FREQUENCY")
-		//setText()
-		// Display the data in the TextView fields
-		binding.tvMedicationName.setText(medicineName) // Use text property instead of setText for TextView
-		binding.tvMedicationTime.setText(medicineStrength)
-		//binding.tvLastTaken.setText( lastTaken)
-
-
-//-------------------------------------------------------------------------------------------
-	//for the navigation bar at the bottom.
-		/**
-		 * when an icon is clicked,the chosen activity is started (startActivoty) and
-		 * the user is sent to their  chosen screen. For
-		 * example: User clicks Today,
-		 * the taken medication activity starts, showing
-		 * the user the taken medication screen of today.
-		 */
 
 		//---------------------------------------BOTTOM NAV-------------------------------------------------
 		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
