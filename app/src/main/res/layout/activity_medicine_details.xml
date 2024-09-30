@@ -31,7 +31,6 @@
                 android:fontFamily="@font/poppins_bold"
                 android:layout_marginTop="50dp" />
 
-            <!-- Medicine Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
@@ -64,7 +63,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Doses Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
                 android:layout_width="match_parent"
@@ -110,7 +108,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Refill Reminder Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
                 android:layout_width="match_parent"
@@ -167,7 +164,6 @@
                 android:textSize="18sp"
                 android:textColor="@android:color/white" />
 
-            <!-- Done button-->
             <Button
                 android:id="@+id/doneBtn"
                 android:layout_width="match_parent"
@@ -180,7 +176,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

@@ -47,7 +47,6 @@
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
-                    <!-- Dark mode / night mode -->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:background="@drawable/round_back_secondaty_100"
@@ -81,7 +80,6 @@
                             android:theme="@style/nightModeSwitch"/>
                     </RelativeLayout>
 
-                    <!-- Notification -->
                     <RelativeLayout
                         android:id="@+id/pushNotificationID"
                         android:layout_width="match_parent"
@@ -130,7 +128,6 @@
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
-                    <!-- Export data -->
                     <RelativeLayout
                         android:id="@+id/exportDataID"
                         android:layout_width="match_parent"
@@ -157,7 +154,6 @@
                             android:layout_toEndOf="@+id/exportDataMode"/>
                     </RelativeLayout>
 
-                    <!-- Terms and conditions -->
                     <RelativeLayout
                         android:id="@+id/termsAndConditionsRL"
                         android:layout_width="match_parent"
@@ -204,7 +200,7 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
-                    <!-- FQS -->
+
                     <RelativeLayout
                         android:id="@+id/FAQRL"
                         android:layout_width="match_parent"
@@ -232,7 +228,6 @@
 
                     </RelativeLayout>
 
-                    <!-- Whats new -->
                     <RelativeLayout
                         android:id="@+id/whatsNewRL"
                         android:layout_width="match_parent"
@@ -355,7 +350,6 @@
                             android:layout_toEndOf="@+id/privacyMode"/>
                     </RelativeLayout>
 
-                    <!-- Privacy -->
                     <RelativeLayout
                         android:id="@+id/logoutRL"
                         android:layout_width="match_parent"
@@ -388,7 +382,6 @@
         </LinearLayout>
 
     </ScrollView>
-    <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
