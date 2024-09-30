@@ -4,22 +4,28 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.example.medcheck.databinding.ActivityPreferencesBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Calendar
 
 
 class Preferences : AppCompatActivity() {
 
-    private lateinit var binding : ActivityPreferencesBinding
+    private lateinit var binding: ActivityPreferencesBinding
+
+    // Declaring the GoogleSignInClient
+    private var mGoogleSignInClient: GoogleSignInClient? = null
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,18 @@ class Preferences : AppCompatActivity() {
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //--------- Sign out
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        val logoutMode = findViewById<RelativeLayout>(R.id.logoutRL)
+        logoutMode.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                signOut()
+            }
+        })
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -70,14 +88,14 @@ class Preferences : AppCompatActivity() {
         // Declaring the buttons
         val pushNotificationID: RelativeLayout = findViewById(R.id.pushNotificationID)
         // Setting onclick events
-        pushNotificationID.setOnClickListener(){
-            Toast.makeText(this,"This option will be available soon!",Toast.LENGTH_SHORT).show()
+        pushNotificationID.setOnClickListener() {
+            Toast.makeText(this, "This option will be available soon!", Toast.LENGTH_SHORT).show()
         }
         // export data
         val exportDataID: RelativeLayout = findViewById(R.id.exportDataID)
         // Setting onclick events
-        exportDataID.setOnClickListener(){
-            Toast.makeText(this,"This option will be available soon!",Toast.LENGTH_SHORT).show()
+        exportDataID.setOnClickListener() {
+            Toast.makeText(this, "This option will be available soon!", Toast.LENGTH_SHORT).show()
         }
 
         //---------------------------------------BOTTOM NAV-------------------------------------------------
@@ -120,4 +138,18 @@ class Preferences : AppCompatActivity() {
         }
 //--------------------------------------------------------------------------------------------------
     }
+
+    private fun signOut() {
+        mGoogleSignInClient!!.signOut().addOnCompleteListener(this) {
+            // Sign-out successful, navigate back to login or main activity
+            val intent = Intent(
+                this@Preferences,
+                Welcome::class.java
+            ) // Change this to your login activity
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish() // Close current activity
+        }
+    }
+
 }
