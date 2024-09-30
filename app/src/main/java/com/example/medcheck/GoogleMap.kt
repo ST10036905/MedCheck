@@ -1,8 +1,10 @@
 package com.example.medcheck
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.RadioGroup
 import android.widget.SearchView
 import android.widget.Toast
@@ -25,6 +27,8 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Calendar
 
 class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
 
@@ -97,8 +101,46 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
-       // val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as? SupportMapFragment
-      //  mapFragment?.getMapAsync(this)
+
+        //---------------------------------------BOTTOM NAV-------------------------------------------------
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        // Handle navigation item selection
+        bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.nav_preferences -> {
+                    // Navigates to preferences
+                    startActivity(Intent(this, Preferences::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_calendar -> {
+                    // Navigate to Calendar Activity
+                    startActivity(Intent(this, Calendar::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_dashboard -> {
+                    // Navigate to Dashboard Activity
+                    startActivity(Intent(this, Dashboard::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_konw_your_med -> {
+                    // Navigate to About Med Activity
+                    startActivity(Intent(this, MedicationInformation::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.nav_medication -> {
+                    // Navigate to Medication Activity
+                    startActivity(Intent(this, MyMedicine::class.java))
+                    return@setOnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+//--------------------------------------------------------------------------------------------------
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
