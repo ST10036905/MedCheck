@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_preferences"
+        android:icon="@drawable/setting_icon"
+        android:title="Preferences" />
+
+    <item
+        android:id="@+id/nav_calendar"
+        android:icon="@drawable/calendar_nav_icon"
+        android:title="Calendar" />
+
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/dashboard_icon"
+        android:title="Dashboard" />
+
+    <item
+        android:id="@+id/nav_konw_your_med"
+        android:icon="@drawable/about_med"
+        android:title="About Med" />
+
+    <item
+        android:id="@+id/nav_medication"
+        android:icon="@drawable/medication_icon"
+        android:title="Medication" />
+</menu>

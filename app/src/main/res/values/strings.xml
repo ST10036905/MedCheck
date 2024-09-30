@@ -125,4 +125,7 @@
     <string name="taken">Taken</string>
     <string name="sign_out">Sign out</string>
     <string name="logout">Logout</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="medication">Medication</string>
+    <string name="calendar">Calendar</string>
 </resources>
