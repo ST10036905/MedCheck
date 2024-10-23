@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".GoogleMap">
 
-    <!-- Fragment to display the map -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map_fragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -19,9 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ImageButton for map options -->
-
-    <!-- CardView containing the search bar -->
     <ImageButton
         android:id="@+id/mapOptionMenu"
         android:layout_width="50dp"
@@ -47,7 +43,6 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/bg_search">
 
-        <!-- Autocomplete Fragment for search -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/autoComplete_fragment"
             android:layout_width="match_parent"
@@ -56,7 +51,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- MaterialCardView for RadioGroup -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +61,6 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- RadioGroup to choose map modes -->
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
@@ -110,7 +103,7 @@
         </RadioGroup>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Bottom Navigation View -->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

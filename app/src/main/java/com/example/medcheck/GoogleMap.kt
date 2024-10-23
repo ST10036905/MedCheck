@@ -1,4 +1,3 @@
-
 package com.example.medcheck
 
 import android.content.Intent
@@ -180,8 +179,8 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         map?.mapType = GoogleMap.MAP_TYPE_NORMAL
 
         // sets the map default location
-         val latLng = LatLng(-33.964314, 18.467859)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15f))
+        val latLng = LatLng(-33.9590961632977, 18.46986167931326)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,2f))
 
         // adding map functions
         map?.uiSettings?.isZoomControlsEnabled = true

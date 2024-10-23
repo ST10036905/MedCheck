@@ -17,20 +17,16 @@
         android:theme="@style/Theme.MedCheck"
         tools:targetApi="31">
 
-        <activity
-            android:name=".MedicationInformation"
-            android:exported="false">
-        </activity>
 
         <activity
-            android:name=".Dashboard"
+            android:name=".MainActivity"
             android:exported="false">
+
         </activity>
 
         <activity
             android:name=".GoogleMap"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,14 +44,18 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".AddMedicine"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".MedicationInformation"
+            android:exported="false">
         </activity>
 
         <activity
             android:name=".Login"
-            android:exported="false"
-            android:theme="@style/Theme.MedCheck" >
+            android:exported="false">
         </activity>
 
         <activity
@@ -74,24 +74,18 @@
         </activity>
 
         <activity
-
             android:name=".Calendar"
             android:exported="false" >
-
-            android:name=".Register"
-            android:exported="false" >
-
         </activity>
 
         <activity
-            android:name=".AddMedicine"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:name=".Register"
+            android:exported="false" >
+        </activity>
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
+        <activity
+            android:name=".Dashboard"
+            android:exported="false" >
         </activity>
 
         <meta-data
@@ -99,7 +93,7 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="MAPS_KEY" />
+            android:value="${MAPS_KEY}" />
     </application>
 
 </manifest>
