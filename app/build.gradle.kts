@@ -68,6 +68,8 @@ dependencies {
     implementation (libs.firebase.auth.ktx.v2200)
     implementation (libs.play.services.auth.v2050)
 
+    implementation (libs.rounde.image)
+
     implementation (libs.firebase.auth)
     implementation (libs.services.auth)  // Google Sign-In SDK
 
