@@ -9,7 +9,7 @@
     android:padding="16dp"
     tools:context="Dashboard">
 
-    <!-- ScrollView for Scrollable Content -->
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Title: Dashboard -->
+
             <TextView
                 android:id="@+id/tv_dashboard_title"
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"/>
 
-            <!-- Centered Icon Below the Dashboard Title -->
+
             <ImageView
                 android:id="@+id/dashboard_icon"
                 android:layout_width="96dp"
@@ -49,7 +49,7 @@
                 android:contentDescription="Dashboard Icon"
                 android:padding="10dp"/>
 
-            <!-- User Info Card -->
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_user_info"
                 android:layout_width="match_parent"
@@ -79,7 +79,6 @@
             </androidx.cardview.widget.CardView>
 
 
-            <!-- Active Medication Section -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_active_medication"
                 android:layout_width="match_parent"
@@ -116,7 +115,6 @@
                         android:padding="16dp"/>
 
 
-                    <!-- Add New Medication Button -->
                     <Button
                         android:id="@+id/addMedicationBtn"
                         android:layout_width="300dp"
@@ -137,7 +135,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Awards Section -->
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_awards"
                 android:layout_width="match_parent"
@@ -163,14 +161,14 @@
                         android:layout_gravity="center"
                         android:textColor="@color/gradientBlue"/>
 
-                    <!-- Awards Icons and Labels -->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center">
 
-                        <!-- First Award -->
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -190,7 +188,7 @@
                                 android:textSize="12sp"/>
                         </LinearLayout>
 
-                        <!-- Second Award -->
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -210,7 +208,6 @@
                                 android:textSize="12sp"/>
                         </LinearLayout>
 
-                        <!-- Third Award -->
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -233,7 +230,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Refill Section -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_refill"
                 android:layout_width="match_parent"
@@ -282,9 +278,9 @@
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
-    </ScrollView>
 
-    <!-- Bottom Navigation View -->
+
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -295,5 +291,4 @@
         app:itemIconTint="@color/nav_item_color"
         app:itemTextColor="@color/nav_item_color"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

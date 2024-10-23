@@ -15,59 +15,63 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
-    // Declare FirebaseAuth and GoogleSignInClient
+    // Declare GoogleSignInClient for handling Google sign-ins
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    // Declare FirebaseAuth for managing Firebase authentication
     private lateinit var mAuth: FirebaseAuth
 
-    // Declare view binding variable
+    // Declare a binding variable for using view binding to access views
     private lateinit var binding: ActivityMainBinding
 
+    // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Enable view binding
+        // Enable view binding to inflate layout and access UI elements
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Authentication instance
         mAuth = FirebaseAuth.getInstance()
 
-        // Configure Google Sign-In options
+        // Set up Google Sign-In options using default sign-in configuration
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.web_client_id))
-            .requestEmail()
+            .requestIdToken(getString(R.string.web_client_id)) // Request the web client ID from resources
+            .requestEmail() // Request user's email address
             .build()
 
-        // Initialize Google Sign-In client
+        // Initialize the GoogleSignInClient with the Google Sign-In options
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // Check if user is logged in
+        // Check if the user is already signed in with Firebase Authentication
         val user = Firebase.auth.currentUser
         if (user != null) {
-            // Display user name on welcome TextView
+            // If user is logged in, display their email in the welcome TextView
             binding.textWelcomeUser.text = "Welcome, ${user.email}"
         } else {
+            // If user is not logged in, display a default welcome message
             binding.textWelcomeUser.text = "Welcome, Guest"
         }
 
-        // "Get Started" button click listener to navigate to Welcome activity
+        // Set a click listener on the "Get Started" button to navigate to the Welcome activity
         binding.getStartedBtn.setOnClickListener {
             val intent = Intent(this, Welcome::class.java)
-            startActivity(intent)
+            startActivity(intent) // Start the Welcome activity
         }
 
     }
 
-    // Sign out from Firebase and Google, then navigate to the SignInActivity
+    // Function to sign out the user from Firebase and Google, and then navigate to the Login activity
     private fun signOutAndStartSignInActivity() {
+        // Sign out from Firebase Authentication
         mAuth.signOut()
 
+        // Sign out from Google Sign-In and upon completion, navigate to the Login activity
         mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-            // Redirect to Login activity after sign out
+            // After signing out, start the Login activity
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
-            finish()
+            finish() // Close the current activity so the user can't return with the back button
         }
     }
-
 }

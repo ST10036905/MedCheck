@@ -1,6 +1,10 @@
 ***Med Check Mobile Application
 ***OPSC7312 POE PART 2
 
+****Youtube link
+https://m.youtube.com/watch?v=1-WOMYdCUbY&pp=ygUITWVkY2hlY2s%3D
+
+
 The following mobile application is being designed using the Android Studio IDE.
 The application, which is being identified as "Med Check", it  has as a focal point, the ability of allowing users to log a medicine with the objective of them keeping track of the medical records. Med Check aims to provide a user-friendly interface for users to manage their medication schedules and improve their adherence to prescribed treatments. By centralizing medical records, users can easily monitor their health and well-being.
 

@@ -13,7 +13,9 @@ import java.util.Calendar
 
 class ScheduleDose : AppCompatActivity() {
 
+    // Binding variable for view binding
     private lateinit var binding: ActivityScheduleDoseBinding
+    // Reference to Firebase Database
     private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +25,7 @@ class ScheduleDose : AppCompatActivity() {
         binding = ActivityScheduleDoseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Database reference
+        // Initialize Firebase Database reference to "medicines"
         databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 
         // Get the medicine ID passed from the AddMedicine activity
@@ -31,10 +33,10 @@ class ScheduleDose : AppCompatActivity() {
 
         // Set up onClickListener to open TimePickerDialog for dose input
         binding.timeTakenInput.setOnClickListener {
-            openTimePicker()
+            openTimePicker() // Opens a dialog to select time
         }
 
-        // Populate the "How Often" spinner with options
+        // Populate the "How Often" spinner with dosage options
         val dosageOptions = arrayOf(
             "Select an option",
             "Every 4 Hours",
@@ -45,15 +47,16 @@ class ScheduleDose : AppCompatActivity() {
         )
         val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, dosageOptions)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.oftenSpinner.adapter = spinnerAdapter
+        binding.oftenSpinner.adapter = spinnerAdapter // Set the adapter for the spinner
 
         // Set up click listener for the "Schedule Dose" button
         binding.scheduleDoseBtn.setOnClickListener {
+            // Get values from input fields
             val doseTime = binding.timeTakenInput.text.toString()
             val howOften = binding.oftenSpinner.selectedItem.toString()
             val howMany = binding.howManyInput.text.toString()
 
-            // Validate inputs
+            // Validate inputs to ensure all fields are filled
             if (doseTime.isEmpty() || howMany.isEmpty() || howOften == "Select an option") {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
@@ -63,32 +66,36 @@ class ScheduleDose : AppCompatActivity() {
         }
     }
 
+    // Method to open a TimePickerDialog for selecting time
     private fun openTimePicker() {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
+        // Create and show the TimePickerDialog
         val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-            val time = String.format("%02d:%02d", selectedHour, selectedMinute)
-            binding.timeTakenInput.setText(time)
+            val time = String.format("%02d:%02d", selectedHour, selectedMinute) // Format the time
+            binding.timeTakenInput.setText(time) // Set the selected time in the input field
         }, hour, minute, true)
-        timePickerDialog.show()
+        timePickerDialog.show() // Display the dialog
     }
 
+    // Method to store scheduled dose information in Firebase
     private fun storeScheduledDoseInFirebase(medicineId: String, doseTime: String, howOften: String, howMany: String) {
         val doseData = HashMap<String, String>()
-        doseData["doseTime"] = doseTime
-        doseData["howOften"] = howOften
-        doseData["howMany"] = howMany
+        doseData["doseTime"] = doseTime // Store the dose time
+        doseData["howOften"] = howOften // Store how often the dose is taken
+        doseData["howMany"] = howMany // Store how many doses to take
 
+        // Push dose data to Firebase under the specified medicine ID
         databaseReference.child(medicineId).child("schedules").push().setValue(doseData)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Dose scheduled successfully", Toast.LENGTH_SHORT).show()
-                    // Navigate to Medicine Details activity
+                    // Navigate to Medicine Details activity after successful scheduling
                     val intent = Intent(this, MedicineDetailsActivity::class.java)
                     intent.putExtra("medicineId", medicineId) // Pass the medicine ID
-                    startActivity(intent)
+                    startActivity(intent) // Start the Medicine Details activity
                 } else {
                     Toast.makeText(this, "Failed to schedule dose", Toast.LENGTH_SHORT).show()
                 }

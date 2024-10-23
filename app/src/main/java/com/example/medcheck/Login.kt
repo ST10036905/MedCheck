@@ -11,40 +11,47 @@ import com.google.firebase.database.FirebaseDatabase
 
 class Login : AppCompatActivity() {
 
+    // Declare binding for accessing views and Firebase Auth for authentication
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var sharedPreferences: SharedPreferences
 
+    // Companion object to hold shared preference keys
     companion object {
-        private const val PREFS_NAME = "MedCheckPrefs"
-        private const val FIRST_TIME_KEY = "isFirstTime"
+        private const val PREFS_NAME = "MedCheckPrefs" // Name of the shared preferences file
+        private const val FIRST_TIME_KEY = "isFirstTime" // Key for checking if it's the user's first time
     }
 
+    // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Set up ViewBinding
+        // Set up ViewBinding to inflate the layout and access views
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Authentication instance
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Initialize SharedPreferences
+        // Initialize SharedPreferences to store/retrieve first-time login status
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
-        // Set up Email/Password login
+        // Set up the login button click listener for email/password authentication
         binding.submitBtn.setOnClickListener {
-            val email = binding.emailTxt.text.toString().trim()
-            val pass = binding.passwordTxt.text.toString().trim()
+            val email = binding.emailTxt.text.toString().trim() // Retrieve and trim the email input
+            val pass = binding.passwordTxt.text.toString().trim() // Retrieve and trim the password input
 
+            // Check if email and password are filled in
             if (email.isNotEmpty() && pass.isNotEmpty()) {
+                // Sign in with Firebase using email and password
                 firebaseAuth.signInWithEmailAndPassword(email, pass)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            // If login is successful, show a message and check if it's the user's first time
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                             checkFirstTimeLogin()
                         } else {
+                            // If login fails, display an error message
                             Toast.makeText(
                                 this,
                                 "Authentication failed: ${task.exception?.message}",
@@ -53,43 +60,47 @@ class Login : AppCompatActivity() {
                         }
                     }
             } else {
+                // Show a message if the email or password fields are empty
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Set up back button
+        // Set up the back button to navigate to the Welcome screen
         binding.backBtn.setOnClickListener {
             startActivity(Intent(this, Welcome::class.java))
         }
     }
 
-    // Check if user is already signed in
+    // Called when the activity becomes visible to the user
     override fun onStart() {
         super.onStart()
+        // Check if the user is already signed in with Firebase Auth
         if (firebaseAuth.currentUser != null) {
-            checkFirstTimeLogin()
+            checkFirstTimeLogin() // If signed in, check if it's the user's first time
         }
     }
 
-    // Check if it's the user's first time and navigate accordingly
-    // Check if it's the user's first time and navigate accordingly
+    // Function to check if it's the user's first time logging in and navigate accordingly
     private fun checkFirstTimeLogin() {
+        // Retrieve the stored value for whether it's the user's first time using the app
         val isFirstTime = sharedPreferences.getBoolean(FIRST_TIME_KEY, true)
 
+        // Determine which activity to navigate to based on the first-time flag
         val intent = if (isFirstTime) {
-            // Navigate to AddMedicineActivity if first time
+            // Navigate to AddMedicineActivity if it's the user's first time
             Intent(this, AddMedicine::class.java)
         } else {
-            // Navigate to DashboardActivity otherwise
+            // Navigate to DashboardActivity if it's not the first time
             Intent(this, Dashboard::class.java)
         }
 
+        // If it's the first time, update the flag to indicate it's no longer the first time
         if (isFirstTime) {
-            sharedPreferences.edit().putBoolean(FIRST_TIME_KEY, false).apply()  // Correct way to update the flag
+            sharedPreferences.edit().putBoolean(FIRST_TIME_KEY, false).apply()
         }
 
+        // Start the appropriate activity and finish the current one
         startActivity(intent)
         finish()
     }
-
 }
