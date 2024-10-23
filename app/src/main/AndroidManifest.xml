@@ -21,11 +21,17 @@
         <activity
             android:name=".MainActivity"
             android:exported="false">
+
         </activity>
 
         <activity
             android:name=".GoogleMap"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -79,12 +85,7 @@
 
         <activity
             android:name=".Dashboard"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false" >
         </activity>
 
         <meta-data
@@ -92,7 +93,7 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="MAPS_KEY" />
+            android:value="${MAPS_KEY}" />
     </application>
 
 </manifest>
