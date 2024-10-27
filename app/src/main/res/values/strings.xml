@@ -1,6 +1,6 @@
 <resources>
 
- 
+
     <string name="my_medicine_screen_title">My Medicine</string>
     <string name="medicine_details_name">Name</string>
     <string name="calendar_title">Calendar</string>
@@ -16,9 +16,9 @@
     <string name="dashboard_using_medcheck_title">Using MedCheck</string>
     <string name="dashboard_refill_button">Refill</string>
     <string name="dashboard_get_refill_btn">Get Refill</string>
-    <string name ="stop_taking_medication">Stop Taking Medication</string>
+    <string name="stop_taking_medication">Stop Taking Medication</string>
 
-   
+
     <string name="dashboard_refill_title">Refill</string>
     <string name="another_dose">Schedule another dose</string>"
 
@@ -133,6 +133,16 @@
     <string name="done">Done</string>
     <string name="add_another_medicine">Add another medicine\n</string>
     <string name="my_medicine">My Medicine\n</string>
-    <string name="search_for_a_nearby_pharmachy_to_refill">Search for a nearby pharmachy to refill.</string>
+    <string name="search_for_a_nearby_pharmachy_to_refill">Search for a nearby pharmacy to refill.</string>
     <string name="pharmacy_description">pharmacy Description</string>
+    <string name="portugues">Português</string>
+    <string name="english">English</string>
+    <string name="afrikaans">Afrikaans</string>
+
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Português</item>
+        <item>Afrikaans</item>
+    </string-array>
+
 </resources>

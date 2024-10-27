@@ -11,9 +11,12 @@
     tools:context=".Preferences">
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,12 +32,12 @@
                 android:padding="15dp">
 
                 <LinearLayout
-                    android:background="@drawable/container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/container"
                     android:orientation="vertical"
                     android:padding="15dp">
 
@@ -45,31 +48,31 @@
                         android:text="@string/settings"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/nightModeIcon"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/nightModeIcon"
-                            android:src="@drawable/night_icon"
                             android:background="@drawable/round_back_night_mode"
+                            android:contentDescription="@string/image"
                             android:padding="12dp"
-                            android:contentDescription="@string/image" />
+                            android:src="@drawable/night_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/nightModeIcon"
                             android:text="@string/night_mode"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/nightModeIcon"/>
+                            android:textStyle="bold" />
 
                         <androidx.appcompat.widget.SwitchCompat
                             android:layout_width="wrap_content"
@@ -77,45 +80,45 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:switchMinWidth="50dp"
-                            android:theme="@style/nightModeSwitch"/>
+                            android:theme="@style/nightModeSwitch" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/pushNotificationID"
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/notificationMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/notificationMode"
-                            android:src="@drawable/notification_icon"
                             android:background="@drawable/round_back_night_mode"
+                            android:contentDescription="@string/image"
                             android:padding="12dp"
-                            android:contentDescription="@string/image" />
+                            android:src="@drawable/notification_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/notificationMode"
                             android:text="@string/push_notification"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/notificationMode"/>
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:background="@drawable/container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/container"
                     android:orientation="vertical"
                     android:padding="15dp">
 
@@ -126,69 +129,69 @@
                         android:text="@string/legal"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <RelativeLayout
                         android:id="@+id/exportDataID"
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/exportDataMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/exportDataMode"
-                            android:src="@drawable/export_data_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:src="@drawable/export_data_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/exportDataMode"
                             android:text="@string/export_data"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/exportDataMode"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/termsAndConditionsRL"
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/termsAndConditionsMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/termsAndConditionsMode"
-                            android:src="@drawable/terms_and_conditions_icon"
                             android:background="@drawable/round_back_night_mode"
+                            android:contentDescription="@string/image"
                             android:padding="12dp"
-                            android:contentDescription="@string/image" />
+                            android:src="@drawable/terms_and_conditions_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/termsAndConditionsMode"
                             android:text="@string/terms_and_conditions"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/termsAndConditionsMode"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:background="@drawable/container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/container"
                     android:orientation="vertical"
                     android:padding="15dp">
 
@@ -199,73 +202,101 @@
                         android:text="@string/support"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <RelativeLayout
                         android:id="@+id/FAQRL"
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/FAQMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/FAQMode"
-                            android:src="@drawable/frequently_asked_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:src="@drawable/frequently_asked_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/FAQMode"
                             android:text="@string/faq"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/FAQMode"/>
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/LangaugeRL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
+
+                        <ImageView
+                            android:id="@+id/LanguageMode"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/round_back_night_mode"
+                            android:padding="12dp"
+                            android:src="@drawable/language" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/LanguageMode"
+                            android:text="Language"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/whatsNewRL"
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/whatsNewMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/whatsNewMode"
-                            android:src="@drawable/news_icon"
                             android:background="@drawable/round_back_night_mode"
+                            android:contentDescription="@string/image"
                             android:padding="12dp"
-                            android:contentDescription="@string/image" />
+                            android:src="@drawable/news_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/whatsNewMode"
                             android:text="@string/whats_new"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/whatsNewMode"/>
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:background="@drawable/container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/container"
                     android:orientation="vertical"
                     android:padding="15dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -273,107 +304,107 @@
                         android:text="@string/security"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                     <!-- Change password -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/changePasswordMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/changePasswordMode"
-                            android:src="@drawable/change_password_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:src="@drawable/change_password_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/changePasswordMode"
                             android:text="@string/change_password"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/changePasswordMode"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
                     <!-- Add facial recognition -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/facialRecognitionMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/facialRecognitionMode"
-                            android:src="@drawable/facial_recognition_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:src="@drawable/facial_recognition_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/facialRecognitionMode"
                             android:text="@string/facial_recognition"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/facialRecognitionMode"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
                     <!-- Privacy -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_back_secondaty_100"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
+                            android:id="@+id/privacyMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/privacyMode"
-                            android:src="@drawable/privacy_icon"
                             android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:src="@drawable/privacy_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/privacyMode"
                             android:text="@string/privacy"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/privacyMode"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/logoutRL"
                         android:layout_width="match_parent"
-                        android:background="@drawable/round_logout_btn"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/round_logout_btn">
 
                         <ImageView
+                            android:id="@+id/logoutMode"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/logoutMode"
-                            android:src="@drawable/logout_icon"
                             android:background="@drawable/round_logout_btn"
-                            android:padding="12dp"/>
+                            android:padding="12dp"
+                            android:src="@drawable/logout_icon" />
 
                         <TextView
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/logoutMode"
                             android:text="@string/logout"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:layout_toEndOf="@+id/logoutMode"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
                 </LinearLayout>
 
