@@ -1,6 +1,6 @@
 <resources>
 
- 
+
     <string name="my_medicine_screen_title">My Medicine</string>
     <string name="medicine_details_name">Name</string>
     <string name="calendar_title">Calendar</string>
@@ -16,9 +16,9 @@
     <string name="dashboard_using_medcheck_title">Using MedCheck</string>
     <string name="dashboard_refill_button">Refill</string>
     <string name="dashboard_get_refill_btn">Get Refill</string>
-    <string name ="stop_taking_medication">Stop Taking Medication</string>
+    <string name="stop_taking_medication">Stop Taking Medication</string>
 
-   
+
     <string name="dashboard_refill_title">Refill</string>
     <string name="another_dose">Schedule another dose</string>"
 
@@ -133,5 +133,33 @@
     <string name="done">Done</string>
     <string name="add_another_medicine">Add another medicine\n</string>
     <string name="my_medicine">My Medicine\n</string>
-    <string name="search_for_a_nearby_pharmachy_to_refill">Search for a nearby pharmachy to refill.</string>
+    <string name="search_for_a_nearby_pharmachy_to_refill">Search for a nearby pharmacy to refill.</string>
+    <string name="pharmacy_description">pharmacy Description</string>
+    <string name="portugues">Português</string>
+    <string name="english">English</string>
+    <string name="afrikaans">Afrikaans</string>
+    <string name="enter_medicine_name">Enter medicine name</string>
+    <string name="enter_strenght_of_medicine">Enter strenght of medicine</string>
+    <string name="medicine">Medicine</string>
+    <string name="satellite">Satellite</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="terrain">Terrain</string>
+    <string name="normal">Normal</string>
+    <string name="how_are_doses_taken">How are doses taken?</string>
+    <string name="language">Language</string>
+    <string name="select_time">Select Time</string>
+    <string name="new_pharmacy">New pharmacy</string>
+    <string name="this_app_helps_users_manage">This app helps users manage their medications by tracking doses and sending refill requests.</string>
+    <string name="_1_what_is_this_app">1. What is this app?</string>
+    <string name="_2_how_do_i_set_reminders_for_my_medications">2. How do I set reminders for my medications?</string>
+    <string name="you_can_set_reminders">You can set reminders in the settings section of the app, where you can customize your reminder times.</string>
+    <string name="_3_can_i_add_my_own_medications">3. Can I add my own medications?</string>
+    <string name="yes_you_can_add_medications">Yes, you can add medications manually through the \'Add Medication\' feature in the app.</string>
+
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Português</item>
+        <item>Afrikaans</item>
+    </string-array>
+
 </resources>

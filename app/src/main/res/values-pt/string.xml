@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="my_medicine_screen_title">Meu remédio</string>
+    <string name="medicine_details_name">Nome</string>
+    <string name="calendar_title">Calendário</string>
+    <string name="dashboard_title">Painel</string>
+    <string name="dashboard_username_title">Nome de usuário</string>
+    <string name="dashboard_location_title">Localização</string>
+    <string name="dashboard_active_medication">Medicação Ativa</string>
+    <string name="dashboard_panado_example">Panado</string>
+    <string name="dashboard_add_new_medication">Adicionar novo medicamento</string>
+    <string name="dashbaord_awards_title">Prêmios</string>
+    <string name="dashboard_getting_started_award">Começando</string>
+    <string name="dashboard_my_milestone_title">O meu marco</string>
+    <string name="dashboard_using_medcheck_title">Usando o MedCheck</string>
+    <string name="dashboard_refill_button">Reabastecer</string>
+    <string name="dashboard_get_refill_btn">Obter recarga</string>
+    <string name="stop_taking_medication">Deixe de tomar medicação</string>
+
+
+    <string name="dashboard_refill_title">Reabastecer</string>
+    <string name="another_dose">Agende outra dose</string>"
+
+    <string name="default_web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+
+    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+    <string name="strength">Força</string>
+    <string name="how_are">Como são tomadas as doses</string>
+    <string name="today">Hoje</string>
+    <string name="medications">Medicamentos</string>
+    <string name="preferences">Preferências</string>
+    <string name="app_name">MedCheck</string>
+    <string name="start">COMEÇAR</string>
+    <string name="register">Formulário de inscrição</string>
+    <string name="login">Conecte-se</string>
+    <string name="name">Nome:</string>
+    <string name="age">Idade:</string>
+    <string name="weight">Peso:</string>
+    <string name="height">Altura:</string>
+    <string name="password">Palavra-passe:</string>
+    <string name="submit">SUBMETER</string>
+    <string name="create">Criar uma conta</string>
+    <string name="back">VOLTAR</string>
+    <string name="reenter">Introduza novamente a senha:</string>
+    <string name="step">Passo 1</string>
+    <string name="step2">Passo 2</string>
+    <string name="medicine_name">Nome do medicamento</string>
+    <string name="dosage">Dosagem</string>
+    <string name="frequency">Frequência</string>
+    <string name="schedule_dose">AGENDAR DOSE</string>
+    <string name="schedule_text">Agende uma dose de medicamento.</string>
+    <string name="enter_medicine">Adicione um novo medicamento ou vitamina.</string>
+    <string name="save_medication">GUARDAR MEDICAÇÃO</string>
+    <string name="when_to_take">Quando é tomada a dose?</string>
+    <string name="how_often">Com que frequência é tomada a dose?</string>
+    <string name="how_many">Quantas doses de cada são tomadas?</string>
+    <string name="welcome">A sua saúde é a nossa prioridade. A Med Check está aqui para ajudá-lo a manter o controlo da sua programação de medicamentos.</string>
+    <string name="image">Imagem</string>
+    <string name="push_notification">Notificação</string>
+    <string name="night_mode">Modo noturno</string>
+    <string name="settings">Configurações</string>
+    <string name="telephonenumber">número de telefone</string>
+    <string name="username">Nome de utilizador</string>
+    <string name="export_data">Exportar dados</string>
+    <string name="terms_and_conditions">Termos e Condições</string>
+    <string name="support">Apoio ao cliente</string>
+    <string name="faq">Perguntas frequentes</string>
+    <string name="whats_new">O que há de novo no MedCheck</string>
+    <string name="security">Segurança</string>
+    <string name="change_password">Alterar a palavra-passe</string>
+    <string name="facial_recognition">Adicionar reconhecimento facial</string>
+    <string name="privacy">Privacidade</string>
+    <string name="legal">Legal</string>
+    <string name="warnings_content">Conteúdo de avisos</string>
+    <string name="adverse_reactions_content">Teor de reações adversas</string>
+    <string name="adverse_reactions">Reações adversas</string>
+    <string name="indications_content">Conteúdo das indicações</string>
+    <string name="indications">Indicações</string>
+    <string name="warnings">Avisos</string>
+    <string name="dosage_content">Conteúdo de dosagem</string>
+    <string name="description_content">Conteúdo da descrição</string>
+    <string name="description">Descrição</string>
+    <string name="drug_name">Nome do medicamento</string>
+    <string name="name_of_drug">Nome do medicamento</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="terms_and_conditions_text">Termos e condições do MedCheck</string>
+    <string name="welcome_terms_and_cond">Bem-vindo ao MedCheck! Leia estes Termos e Condições cuidadosamente antes de utilizar a aplicação móvel MedCheck (a “Aplicação”). Ao descarregar, instalar ou utilizar o MedCheck, concorda em cumprir e ficar vinculado a estes Termos e Condições. Se não concordar com estes Termos, não poderá utilizar a Aplicação.</string>
+    <string name="acceptance_of_terms">Ao aceder ou utilizar o MedCheck, reconhece que leu, compreendeu e concorda em ficar vinculado a estes Termos e Condições, bem como à nossa Política de Privacidade. Reservamo-nos o direito de atualizar ou modificar estes Termos a qualquer momento, e a utilização continuada da Aplicação constitui a aceitação de tais alterações.</string>
+    <string name="app_description">O MedCheck é uma aplicação de gestão de medicamentos que ajuda os utilizadores a acompanhar os seus medicamentos, horários de dosagem, pedidos de recarga e informações médicas relevantes. A aplicação também fornece informações gerais sobre medicamentos, mas não fornece aconselhamento médico profissional. Consulte sempre o seu médico para quaisquer preocupações ou dúvidas médicas.</string>
+    <string name="user_responsibilities">Informações precisas: concorda em fornecer informações precisas e atualizadas ao utilizar a aplicação. Se não o fizer, pode resultar em rastreio ou notificações incorretas de medicamentos. \nIsenção de responsabilidade de aconselhamento médico: as informações fornecidas pelo MedCheck são apenas para fins informativos. Não substitui o aconselhamento, diagnóstico ou tratamento médico profissional. Procure sempre o aconselhamento do seu médico ou de outros profissionais de saúde qualificados com qualquer dúvida que possa ter sobre os seus medicamentos ou uma condição médica. \nConformidade com as leis: concorda em cumprir todas as leis e regulamentos aplicáveis ​​ao utilizar o MedCheck . Não pode utilizar o Aplicativo para qualquer finalidade ilegal ou não autorizada.</string>
+    <string name="user_account_terms">Para utilizar determinadas funcionalidades da Aplicação, pode ser necessário criar uma conta. É responsável por manter a confidencialidade das credenciais da sua conta e por qualquer atividade que ocorra na sua conta. Concorda em notificar-nos imediatamente se suspeitar de qualquer acesso não autorizado à sua conta.</string>
+    <string name="data_privacy_terms">A sua privacidade é importante para nós. Ao utilizar o MedCheck, concorda com a recolha e utilização das suas informações pessoais, conforme descrito na nossa Política de Privacidade. Isto inclui informações relacionadas com os seus medicamentos, prescrições e histórico de utilização.</string>
+    <string name="notifications_terms">O MedCheck pode enviar notificações sobre os horários dos medicamentos, lembretes de recarga e outras atualizações importantes. É responsável por gerir as suas preferências de notificação na secção de definições do Aplicativo.</string>
+    <string name="intellectual_property_terms">Todo o conteúdo, marcas registadas, logótipos e direitos de propriedade intelectual relacionados com a aplicação MedCheck são propriedade nossa ou dos nossos licenciadores. Não pode utilizar, copiar, modificar ou distribuir qualquer conteúdo sem a nossa autorização expressa.</string>
+    <string name="termination_term">Reservamo-nos o direito de suspender ou terminar o seu acesso à Aplicação a qualquer momento, sem aviso prévio, por qualquer motivo, incluindo a violação destes Termos e Condições. Após a rescisão, o seu direito de utilizar o MedCheck cessará imediatamente.</string>
+    <string name="third_party_services">O MedCheck pode ser integrado em serviços de terceiros, como farmácias, prestadores de cuidados de saúde ou bases de dados externas (por exemplo, OpenFDA). Não controlamos e não somos responsáveis ​​pelo conteúdo ou pelas práticas de privacidade de quaisquer serviços de terceiros. A utilização de tais serviços é regida pelos respectivos termos.</string>
+    <string name="limitation_of_liability">O MedCheck é fornecido “no estado em que se encontra” e “conforme disponível”. Não oferecemos garantias, expressas ou implícitas, relativamente à exatidão, fiabilidade ou disponibilidade da Aplicação. Não somos responsáveis ​​por quaisquer danos, incluindo, entre outros, danos diretos, indiretos, acidentais ou consequentes, decorrentes da sua utilização ou incapacidade de utilização da Aplicação.</string>
+    <string name="frequently_asked_question">Perguntas frequentes (FAQ)</string>
+    <string name="termination_of_contract">Rescisão do Contrato</string>
+    <string name="third_party_services_tittle">Serviços de Terceiros</string>
+    <string name="limitation_of_liability_tittle">Limitação de responsabilidade</string>
+    <string name="application_notifications_tittle">Notificações do aplicativo</string>
+    <string name="data_privacy_tittle">Privacidade de dados</string>
+    <string name="user_account_tittle">Conta de utilizador</string>
+    <string name="user_responsabilities_tittle">Responsabilidades do utilizador</string>
+    <string name="about_medcheck_tittle">Sobre a MedCheck</string>
+    <string name="acceptance_of_terms_and_conditions_tittle">Aceitação dos termos e condições</string>
+    <string name="welcome_tittle">Boas-vindas</string>
+    <string name="keep_track_of_your_dosage">Acompanhe o seu histórico de dosagem para garantir que está a tomar os medicamentos prescritos.</string>
+    <string name="track_your_dosages">Acompanhe as suas dosagens</string>
+    <string name="never_forget_to_take">Nunca se esqueça de tomar a sua medicação com lembretes personalizáveis ​​que se adaptem ao seu horário.</string>
+    <string name="medication_reminders">Lembretes de medicação</string>
+    <string name="find_the_nearest_pharmacies">Encontre as farmácias mais próximas da sua localização, completas com instruções e informações de contacto.</string>
+    <string name="search_for_nearby_pharmacies">Procure farmácias próximas</string>
+    <string name="with_just_a_few_clicks">Com apenas alguns cliques, pode solicitar recargas das suas receitas na farmácia próxima da sua preferência.</string>
+    <string name="refill_your_medications">Reabasteça os seus medicamentos</string>
+    <string name="you_can_now_search">Agora pode pesquisar medicamentos por nome e obter informações detalhadas, incluindo utilização, dosagem e advertências.</string>
+    <string name="search_for_medications">Pesquisa de medicamentos</string>
+    <string name="what_s_new_in_medcheck">O que há de novo no MedCheck</string>
+    <string name="email">E-mail</string>
+    <string name="sign_up">Não tem conta? Registe-se com a Google.</string>
+    <string name="google">Inscreva-se no Google</string>
+    <string name="taken">Tomado</string>
+    <string name="sign_out">sair</string>
+    <string name="logout">Sair</string>
+    <string name="sign_up_manually">Registe-se aqui.</string>
+    <string name="dashboard_know_more_medicine">Saiba mais sobre um medicamento.</string>
+    <string name="add_another_medicine_click_the_plus_button">Adicione outro medicamento, clique no botão de adição</string>
+    <string name="medicine_details">Detalhes do medicamento</string>
+    <string name="receive_a_reminder_when_there_are_only_5_units_of_this_medicine_remaining">Receba um lembrete quando restarem apenas 5 unidades deste medicamento</string>
+    <string name="done">Concluído</string>
+    <string name="add_another_medicine">Adicione outro medicamento</string>
+    <string name="my_medicine">O meu remédio</string>
+    <string name="search_for_a_nearby_pharmachy_to_refill">Procure uma farmácia próxima para reabastecer.</string>
+    <string name="pharmacy_description">Descrição da farmácia</string>
+    <string name="portugues">Português</string>
+    <string name="english">Inglês</string>
+    <string name="afrikaans">Afrikaans</string>
+
+    <string name="enter_medicine_name">Introduza o nome do medicamento</string>
+    <string name="enter_strenght_of_medicine">Introduza a força do medicamento</string>
+    <string name="medicine">Medicina</string>
+    <string name="satellite">Satélite</string>
+    <string name="hybrid">Híbrido</string>
+    <string name="terrain">Terreno</string>
+    <string name="normal">Normal</string>
+    <string name="how_are_doses_taken">Como são tomadas as doses?</string>
+    <string name="language">Idioma</string>
+    <string name="select_time">Selecione a hora</string>
+    <string name="new_pharmacy">Nova farmácia</string>
+    <string name="this_app_helps_users_manage">Esta aplicação ajuda os utilizadores a gerir os seus medicamentos rastreando doses e enviando pedidos de recarga.</string>
+    <string name="_1_what_is_this_app">1. O que é esta aplicação?</string>
+    <string name="_2_how_do_i_set_reminders_for_my_medications">2. Como defino lembretes para os meus medicamentos?</string>
+    <string name="you_can_set_reminders">Pode definir lembretes na secção de definições da aplicação, onde pode personalizar os horários dos lembretes.</string>
+    <string name="_3_can_i_add_my_own_medications">3. Posso adicionar os meus próprios medicamentos?</string>
+    <string name="yes_you_can_add_medications">Sim, pode adicionar medicamentos manualmente através da funcionalidade "Adicionar Medicamentos" na aplicação.</string>
+
+
+    <string-array name="language_options">
+        <item>Inglês</item>
+        <item>Português</item>
+        <item>Afrikaans</item>
+    </string-array>
+
+</resources>

@@ -81,6 +81,15 @@ class Preferences : AppCompatActivity() {
                 .commit()
         }
 
+        // Setting up the click event for the Language setting
+        binding.LangaugeRL.setOnClickListener{
+            val languagePre = LanguageFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main,languagePre)
+                .addToBackStack(null)
+                .commit()
+        }
+
         //----------------------------------End of transitions ------------------//
         // Declaring the buttons for push notifications
         val pushNotificationID: RelativeLayout = findViewById(R.id.pushNotificationID)
