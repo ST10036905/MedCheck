@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="my_medicine_screen_title">My medisyne</string>
+    <string name="medicine_details_name">Naam</string>
+    <string name="calendar_title">Kalender</string>
+    <string name="dashboard_title">Kontroleskerm</string>
+    <string name="dashboard_username_title">Gebruikersnaam</string>
+    <string name="dashboard_location_title">Ligging</string>
+    <string name="dashboard_active_medication">Aktiewe medikasie</string>
+    <string name="dashboard_panado_example">Panado</string>
+    <string name="dashboard_add_new_medication">Voeg nuwe medikasie by</string>
+    <string name="dashbaord_awards_title">Toekennings</string>
+    <string name="dashboard_getting_started_award">Aan die gang</string>
+    <string name="dashboard_my_milestone_title">My mylpaal</string>
+    <string name="dashboard_using_medcheck_title">Gebruik MedCheck</string>
+    <string name="dashboard_refill_button">Hervul</string>
+    <string name="dashboard_get_refill_btn">Kry Hervul</string>
+    <string name="stop_taking_medication">Hou op om medikasie te neem</string>
+
+
+    <string name="dashboard_refill_title">Hervul</string>
+    <string name="another_dose">Skeduleer nog \'n dosis</string>"
+
+    <string name="default_web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+
+    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+    <string name="strength">Sterkte</string>
+    <string name="how_are">Hoe word die dosis geneem</string>
+    <string name="today">Vandag</string>
+    <string name="medications">Medikasie</string>
+    <string name="preferences">Voorkeure</string>
+    <string name="app_name">MedCheck</string>
+    <string name="start">BEGIN &gt;</string>
+    <string name="register">Registrasievorm</string>
+    <string name="login">Teken in</string>
+    <string name="name">Naam:</string>
+    <string name="age">Ouderdom:</string>
+    <string name="weight">Gewig:</string>
+    <string name="height">Hoogte:</string>
+    <string name="password">Wagwoord:</string>
+    <string name="submit">DIEN IN</string>
+    <string name="create">Skep rekening</string>
+    <string name="back">TERUG</string>
+    <string name="reenter">Voer wagwoord weer in:</string>
+    <string name="step">Stap 1</string>
+    <string name="step2">Stap 2</string>
+    <string name="medicine_name">Medisyne naam</string>
+    <string name="dosage">Dosis</string>
+    <string name="frequency">Frekwensie</string>
+    <string name="schedule_dose">SKEDULE DOSIS</string>
+    <string name="schedule_text">Beplan \'n dosis medikasie.</string>
+    <string name="enter_medicine">Voeg \'n nuwe medisyne of vitamien by.</string>
+    <string name="save_medication">SPAAR MEDIKASIE</string>
+    <string name="when_to_take">Wanneer word die dosis geneem?</string>
+    <string name="how_often">Hoe gereeld word die dosis geneem?</string>
+    <string name="how_many">Hoeveel van elke dosisse word geneem?</string>
+    <string name="welcome">Jou gesondheid is ons prioriteit. Med Check is hier om jou te help om op koers te bly met jou medikasieskedule.</string>
+    <string name="image">Beeld</string>
+    <string name="push_notification">Drukkennisgewing</string>
+    <string name="night_mode">Nagmodus</string>
+    <string name="settings">Instellings</string>
+    <string name="telephonenumber">telefoonnommer</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="export_data">Voer data uit</string>
+    <string name="terms_and_conditions">Bepalings En Voorwaardes</string>
+    <string name="support">Ondersteuning</string>
+    <string name="faq">Gereelde vrae</string>
+    <string name="whats_new">Wat is nuut op MedCheck</string>
+    <string name="security">Sekuriteit</string>
+    <string name="change_password">Verander wagwoord</string>
+    <string name="facial_recognition">Voeg gesigsherkenning by</string>
+    <string name="privacy">Privaatheid</string>
+    <string name="legal">Wettig</string>
+    <string name="warnings_content">Waarskuwingsinhoud</string>
+    <string name="adverse_reactions_content">Nadelige reaksies inhoud</string>
+    <string name="adverse_reactions">Nadelige reaksies</string>
+    <string name="indications_content">Aanduidings inhoud</string>
+    <string name="indications">Aanduidings</string>
+    <string name="warnings">Waarskuwings</string>
+    <string name="dosage_content">Dosis inhoud</string>
+    <string name="description_content">Beskrywing inhoud</string>
+    <string name="description">Beskrywing</string>
+    <string name="drug_name">Dwelm naam</string>
+    <string name="name_of_drug">Naam van dwelm</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="terms_and_conditions_text">Bepalings en voorwaardes vir MedCheck</string>
+    <string name="welcome_terms_and_cond">Welkom by MedCheck! Lees asseblief hierdie Bepalings en Voorwaardes noukeurig deur voordat jy die MedCheck-selfoontoepassing (die "Toep") gebruik. Deur MedCheck af te laai, te installeer of te gebruik, stem jy in om aan hierdie Bepalings en Voorwaardes te voldoen en daaraan gebind te wees. As jy nie tot hierdie Bepalings instem nie, mag jy nie die Toep gebruik nie.</string>
+    <string name="acceptance_of_terms">Deur toegang tot MedCheck te verkry of te gebruik, erken jy dat jy hierdie Bepalings en Voorwaardes, sowel as ons Privaatheidsbeleid gelees het, verstaan ​​en instem om gebonde te wees aan hierdie Bepalings en Voorwaardes. Ons behou die reg voor om hierdie Bepalings te eniger tyd op te dateer of te wysig, en jou voortgesette gebruik van die Toepassing behels aanvaarding van enige sodanige veranderinge.</string>
+    <string name="app_description">MedCheck is \'n medikasiebestuurtoepassing wat gebruikers help om hul medikasie, dosisskedules, hervulversoeke en relevante mediese inligting op te spoor. Die toepassing verskaf ook algemene inligting oor medikasie, maar verskaf nie professionele mediese advies nie. Raadpleeg altyd jou gesondheidsorgverskaffer vir enige mediese bekommernisse of vrae.</string>
+    <string name="user_responsibilities">Akkurate inligting: U stem in om akkurate en bygewerkte inligting te verskaf wanneer u die toepassing gebruik. Versuim om dit te doen, kan lei tot verkeerde medikasienasporing of -kennisgewings.\nVrywaring van mediese advies: Die inligting wat deur MedCheck verskaf word, is slegs vir inligtingsdoeleindes. Dit is nie \'n plaasvervanger vir professionele mediese advies, diagnose of behandeling nie. Soek altyd die advies van jou dokter of ander gekwalifiseerde gesondheidsorgverskaffers met enige vrae wat jy mag hê oor jou medikasie of 'n mediese toestand.\nVoldoening aan Wette: Jy stem in om aan alle toepaslike wette en regulasies te voldoen wanneer jy MedCheck gebruik. Jy mag nie die toepassing vir enige onwettige of ongemagtigde doel gebruik nie.</string>
+    <string name="user_account_terms">Om sekere kenmerke van die Toep te gebruik, kan daar van u verwag word om \'n rekening te skep. Jy is verantwoordelik vir die handhawing van die vertroulikheid van jou rekeningbewyse en vir enige aktiwiteit wat onder jou rekening plaasvind. U stem in om ons onmiddellik in kennis te stel indien u enige ongemagtigde toegang tot u rekening vermoed.</string>
+    <string name="data_privacy_terms">Jou privaatheid is vir ons belangrik. Deur MedCheck te gebruik, stem jy in tot die versameling en gebruik van jou persoonlike inligting soos uiteengesit in ons Privaatheidsbeleid. Dit sluit inligting in wat verband hou met jou medikasie, voorskrifte en gebruiksgeskiedenis.</string>
+    <string name="notifications_terms">MedCheck kan vir jou kennisgewings stuur oor medikasieskedules, hervulling-herinneringe en ander belangrike opdaterings. Jy is verantwoordelik vir die bestuur van jou kennisgewingvoorkeure in die instellingsafdeling van die App.</string>
+    <string name="intellectual_property_terms">Alle inhoud, handelsmerke, logo\'s en intellektuele eiendomsregte wat met die MedCheck-toepassing verband hou, word deur ons of ons lisensiehouers besit. Jy mag nie enige van die inhoud gebruik, kopieer, wysig of versprei sonder ons uitdruklike toestemming nie.</string>
+    <string name="termination_term">Ons behou die reg voor om jou toegang tot die Toep enige tyd op te skort of te beëindig sonder kennisgewing, vir enige rede, insluitend oortreding van hierdie Bepalings en Voorwaardes. By beëindiging sal jou reg om MedCheck te gebruik onmiddellik ophou.</string>
+    <string name="third_party_services">MedCheck kan integreer met derdepartydienste soos apteke, gesondheidsorgverskaffers of eksterne databasisse (bv. OpenFDA). Ons beheer nie en is nie verantwoordelik vir die inhoud of privaatheidspraktyke van enige derdeparty-dienste nie. Jou gebruik van sulke dienste word deur hul onderskeie bepalings beheer.</string>
+    <string name="limitation_of_liability">MedCheck word verskaf op \'n "soos dit is" en "soos beskikbaar" basis. Ons gee geen waarborge, hetsy uitdruklik of geïmpliseer, met betrekking tot die akkuraatheid, betroubaarheid of beskikbaarheid van die toepassing nie. Ons is nie aanspreeklik vir enige skade nie, insluitend maar nie beperk nie tot, direkte, indirekte, toevallige of gevolglike skade wat voortspruit uit jou gebruik of onvermoë om die Toep te gebruik.</string>
+    <string name="frequently_asked_question">Gereelde vraag (Gereelde Vrae)</string>
+    <string name="termination_of_contract">Beëindiging van Kontrak</string>
+    <string name="third_party_services_tittle">Derdepartydienste</string>
+    <string name="limitation_of_liability_tittle">Beperking van aanspreeklikheid</string>
+    <string name="application_notifications_tittle">Aansoekkennisgewings</string>
+    <string name="data_privacy_tittle">Data Privaatheid</string>
+    <string name="user_account_tittle">Gebruikersrekening</string>
+    <string name="user_responsabilities_tittle">Gebruikersverantwoordelikhede</string>
+    <string name="about_medcheck_tittle">Oor MedCheck</string>
+    <string name="acceptance_of_terms_and_conditions_tittle">Aanvaarding van bepalings en voorwaardes</string>
+    <string name="welcome_tittle">Welkom</string>
+    <string name="keep_track_of_your_dosage">Bly op hoogte van jou dosisgeskiedenis om te verseker dat jy medikasie neem soos voorgeskryf.</string>
+    <string name="track_your_dosages">Volg jou dosisse</string>
+    <string name="never_forget_to_take">Moet nooit vergeet om jou medikasie te neem met aanpasbare aanmanings wat by jou skedule pas nie.</string>
+    <string name="medication_reminders">Medikasie Herinnerings</string>
+    <string name="find_the_nearest_pharmacies">Vind die naaste apteke aan jou ligging, kompleet met aanwysings en kontakinligting.</string>
+    <string name="search_for_nearby_pharmacies">Soek na nabygeleë apteke</string>
+    <string name="with_just_a_few_clicks">Met net \'n paar kliek kan jy hervullings vir jou voorskrifte by jou voorkeur nabygeleë apteek versoek.</string>
+    <string name="refill_your_medications">Hervul jou medikasie</string>
+    <string name="you_can_now_search">Jy kan nou op naam na medikasie soek en gedetailleerde inligting kry, insluitend gebruik, dosis en waarskuwings.</string>
+    <string name="search_for_medications">Soek medikasie</string>
+    <string name="what_s_new_in_medcheck">Wat is nuut in MedCheck</string>
+    <string name="email">E-pos</string>
+    <string name="sign_up">Het jy nie \'n rekening nie? Sluit aan met google.</string>
+    <string name="google">Sluit aan met google</string>
+    <string name="taken">Geneem</string>
+    <string name="sign_out">Meld af</string>
+    <string name="logout">Teken uit</string>
+    <string name="sign_up_manually">Registreer hier.</string>
+    <string name="dashboard_know_more_medicine">Leer meer oor \'n medikasie te wete.</string>
+    <string name="add_another_medicine_click_the_plus_button">Voeg nog \'n medisyne by, klik op die plusknoppie</string>
+    <string name="medicine_details">Medicine Details</string>
+    <string name="receive_a_reminder_when_there_are_only_5_units_of_this_medicine_remaining">Ontvang \'n herinnering wanneer daar net 5 eenhede van hierdie medisyne oor is</string>
+    <string name="done">Klaar</string>
+    <string name="add_another_medicine">Voeg nog \'n medisyne by</string>
+    <string name="my_medicine">My medisyne</string>
+    <string name="search_for_a_nearby_pharmachy_to_refill">Soek na \'n nabygeleë apteek om te hervul.</string>
+    <string name="pharmacy_description">Apteek Beskrywing</string>
+    <string name="portugues">Portugese</string>
+    <string name="english">Engels</string>
+    <string name="afrikaans">Afrikaans</string>
+
+    <string-array name="language_options">
+        <item>Engels</item>
+        <item>Portugese</item>
+        <item>Afrikaans</item>
+    </string-array>
+
+</resources>
