@@ -1,6 +1,7 @@
 package com.example.medcheck
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -12,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,13 +21,29 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     // Declare FirebaseAuth for managing Firebase authentication
     private lateinit var mAuth: FirebaseAuth
+    //
+    private lateinit var sharedPreferences: SharedPreferences
 
     // Declare a binding variable for using view binding to access views
     private lateinit var binding: ActivityMainBinding
 
     // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Gets the shared preferences
+        sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE)
+        // Get saved language preference
+        val languageCode = sharedPreferences.getString("LANGUAGE", "en")
+
+        // Update the locale
+        val locale = Locale(languageCode!!)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        createConfigurationContext(config)
+
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
 
         // Enable view binding to inflate layout and access UI elements
         binding = ActivityMainBinding.inflate(layoutInflater)

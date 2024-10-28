@@ -139,6 +139,25 @@
     <string name="english">Inglês</string>
     <string name="afrikaans">Afrikaans</string>
 
+    <string name="enter_medicine_name">Introduza o nome do medicamento</string>
+    <string name="enter_strenght_of_medicine">Introduza a força do medicamento</string>
+    <string name="medicine">Medicina</string>
+    <string name="satellite">Satélite</string>
+    <string name="hybrid">Híbrido</string>
+    <string name="terrain">Terreno</string>
+    <string name="normal">Normal</string>
+    <string name="how_are_doses_taken">Como são tomadas as doses?</string>
+    <string name="language">Idioma</string>
+    <string name="select_time">Selecione a hora</string>
+    <string name="new_pharmacy">Nova farmácia</string>
+    <string name="this_app_helps_users_manage">Esta aplicação ajuda os utilizadores a gerir os seus medicamentos rastreando doses e enviando pedidos de recarga.</string>
+    <string name="_1_what_is_this_app">1. O que é esta aplicação?</string>
+    <string name="_2_how_do_i_set_reminders_for_my_medications">2. Como defino lembretes para os meus medicamentos?</string>
+    <string name="you_can_set_reminders">Pode definir lembretes na secção de definições da aplicação, onde pode personalizar os horários dos lembretes.</string>
+    <string name="_3_can_i_add_my_own_medications">3. Posso adicionar os meus próprios medicamentos?</string>
+    <string name="yes_you_can_add_medications">Sim, pode adicionar medicamentos manualmente através da funcionalidade "Adicionar Medicamentos" na aplicação.</string>
+
+
     <string-array name="language_options">
         <item>Inglês</item>
         <item>Português</item>

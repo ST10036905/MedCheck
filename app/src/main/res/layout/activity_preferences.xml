@@ -252,7 +252,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
                             android:layout_toEndOf="@+id/LanguageMode"
-                            android:text="Language"
+                            android:text="@string/language"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 

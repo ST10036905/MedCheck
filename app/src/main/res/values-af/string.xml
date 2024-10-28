@@ -31,7 +31,7 @@
     <string name="medications">Medikasie</string>
     <string name="preferences">Voorkeure</string>
     <string name="app_name">MedCheck</string>
-    <string name="start">BEGIN &gt;</string>
+    <string name="start">BEGIN </string>
     <string name="register">Registrasievorm</string>
     <string name="login">Teken in</string>
     <string name="name">Naam:</string>
@@ -89,7 +89,7 @@
     <string name="welcome_terms_and_cond">Welkom by MedCheck! Lees asseblief hierdie Bepalings en Voorwaardes noukeurig deur voordat jy die MedCheck-selfoontoepassing (die "Toep") gebruik. Deur MedCheck af te laai, te installeer of te gebruik, stem jy in om aan hierdie Bepalings en Voorwaardes te voldoen en daaraan gebind te wees. As jy nie tot hierdie Bepalings instem nie, mag jy nie die Toep gebruik nie.</string>
     <string name="acceptance_of_terms">Deur toegang tot MedCheck te verkry of te gebruik, erken jy dat jy hierdie Bepalings en Voorwaardes, sowel as ons Privaatheidsbeleid gelees het, verstaan ​​en instem om gebonde te wees aan hierdie Bepalings en Voorwaardes. Ons behou die reg voor om hierdie Bepalings te eniger tyd op te dateer of te wysig, en jou voortgesette gebruik van die Toepassing behels aanvaarding van enige sodanige veranderinge.</string>
     <string name="app_description">MedCheck is \'n medikasiebestuurtoepassing wat gebruikers help om hul medikasie, dosisskedules, hervulversoeke en relevante mediese inligting op te spoor. Die toepassing verskaf ook algemene inligting oor medikasie, maar verskaf nie professionele mediese advies nie. Raadpleeg altyd jou gesondheidsorgverskaffer vir enige mediese bekommernisse of vrae.</string>
-    <string name="user_responsibilities">Akkurate inligting: U stem in om akkurate en bygewerkte inligting te verskaf wanneer u die toepassing gebruik. Versuim om dit te doen, kan lei tot verkeerde medikasienasporing of -kennisgewings.\nVrywaring van mediese advies: Die inligting wat deur MedCheck verskaf word, is slegs vir inligtingsdoeleindes. Dit is nie \'n plaasvervanger vir professionele mediese advies, diagnose of behandeling nie. Soek altyd die advies van jou dokter of ander gekwalifiseerde gesondheidsorgverskaffers met enige vrae wat jy mag hê oor jou medikasie of 'n mediese toestand.\nVoldoening aan Wette: Jy stem in om aan alle toepaslike wette en regulasies te voldoen wanneer jy MedCheck gebruik. Jy mag nie die toepassing vir enige onwettige of ongemagtigde doel gebruik nie.</string>
+    <string name="user_responsibilities">Akkurate inligting: U stem in om akkurate en bygewerkte inligting te verskaf wanneer u die toepassing gebruik. Versuim om dit te doen, kan lei tot verkeerde medikasienasporing of -kennisgewings.\nVrywaring van mediese advies: Die inligting wat deur MedCheck verskaf word, is slegs vir inligtingsdoeleindes. Dit is nie \'n plaasvervanger vir professionele mediese advies diagnose of behandeling nie. </string>
     <string name="user_account_terms">Om sekere kenmerke van die Toep te gebruik, kan daar van u verwag word om \'n rekening te skep. Jy is verantwoordelik vir die handhawing van die vertroulikheid van jou rekeningbewyse en vir enige aktiwiteit wat onder jou rekening plaasvind. U stem in om ons onmiddellik in kennis te stel indien u enige ongemagtigde toegang tot u rekening vermoed.</string>
     <string name="data_privacy_terms">Jou privaatheid is vir ons belangrik. Deur MedCheck te gebruik, stem jy in tot die versameling en gebruik van jou persoonlike inligting soos uiteengesit in ons Privaatheidsbeleid. Dit sluit inligting in wat verband hou met jou medikasie, voorskrifte en gebruiksgeskiedenis.</string>
     <string name="notifications_terms">MedCheck kan vir jou kennisgewings stuur oor medikasieskedules, hervulling-herinneringe en ander belangrike opdaterings. Jy is verantwoordelik vir die bestuur van jou kennisgewingvoorkeure in die instellingsafdeling van die App.</string>
@@ -138,6 +138,25 @@
     <string name="portugues">Portugese</string>
     <string name="english">Engels</string>
     <string name="afrikaans">Afrikaans</string>
+
+    <string name="enter_medicine_name">Voer medisynenaam in</string>
+    <string name="enter_strenght_of_medicine">Voer sterkte van medisyne in</string>
+    <string name="medicine">Medisyne</string>
+    <string name="satellite">Satelliet</string>
+    <string name="hybrid">Hibried</string>
+    <string name="terrain">Terrein</string>
+    <string name="normal">Normaal</string>
+    <string name="how_are_doses_taken">Hoe word dosisse geneem?</string>
+    <string name="language">Taal</string>
+    <string name="select_time">Kies Tyd</string>
+    <string name="new_pharmacy">Nuwe apteek</string>
+    <string name="this_app_helps_users_manage">Hierdie toepassing help gebruikers om hul medikasie te bestuur deur dosisse op te spoor en hervulversoeke te stuur.</string>
+    <string name="_1_what_is_this_app">1. Wat is hierdie toepassing?</string>
+    <string name="_2_how_do_i_set_reminders_for_my_medications">2. Hoe stel ek aanmanings vir my medikasie?</string>
+    <string name="you_can_set_reminders">Jy kan onthounotas in die instellingsafdeling van die toepassing stel, waar jy jou herinneringtye kan aanpas.</string>
+    <string name="_3_can_i_add_my_own_medications">3. Can I add my own medications?</string>
+    <string name="yes_you_can_add_medications">Ja, jy kan medikasie handmatig byvoeg deur die \'Voeg medikasie by'-funksie in die toepassing.</string>
+
 
     <string-array name="language_options">
         <item>Engels</item>
