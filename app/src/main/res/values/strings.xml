@@ -130,4 +130,8 @@
     <string name="add_another_medicine_click_the_plus_button">Add another medicine click the plus button</string>
     <string name="medicine_details">Medicine Details</string>
     <string name="receive_a_reminder_when_there_are_only_5_units_of_this_medicine_remaining">Receive a reminder when there are only 5 units of this medicine remaining</string>
+    <string name="done">Done</string>
+    <string name="add_another_medicine">Add another medicine\n</string>
+    <string name="my_medicine">My Medicine\n</string>
+    <string name="search_for_a_nearby_pharmachy_to_refill">Search for a nearby pharmachy to refill.</string>
 </resources>
