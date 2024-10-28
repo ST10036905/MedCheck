@@ -72,7 +72,8 @@ dependencies {
 
     implementation (libs.firebase.auth)
     implementation (libs.services.auth)  // Google Sign-In SDK
-
+    // Dependency for translation
+    implementation(libs.mlkit)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

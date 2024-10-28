@@ -9,12 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.Translator
+import com.google.mlkit.nl.translate.TranslatorOptions
 import java.util.Locale
-
 
 class LanguageFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var radioGroup: RadioGroup
+    private var translator: Translator? = null  // Make translator nullable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +31,13 @@ class LanguageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_langauge_fragment, container, false)
-
-        // Initialize the RadioGroup and set listeners
         radioGroup = view.findViewById(R.id.languageRadioGroup)
         setupRadioButtons(view)
-
         return view
     }
 
     private fun setupRadioButtons(view: View) {
-        // Set the selected language from SharedPreferences
         val selectedLanguage = sharedPreferences.getString("LANGUAGE", "en")
 
         when (selectedLanguage) {
@@ -47,29 +48,72 @@ class LanguageFragment : Fragment() {
 
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.radioEnglish -> updateLanguage("en")
-                R.id.radioPortuguese -> updateLanguage("pt")
-                R.id.radioAfrikaans -> updateLanguage("af")
+                R.id.radioEnglish -> updateLanguage("en", TranslateLanguage.ENGLISH)
+                R.id.radioPortuguese -> updateLanguage("pt", TranslateLanguage.PORTUGUESE)
+                R.id.radioAfrikaans -> updateLanguage("af", TranslateLanguage.AFRIKAANS)
             }
         }
     }
 
-    private fun updateLanguage(languageCode: String) {
-        // Save the selected language to SharedPreferences
-        with(sharedPreferences.edit()) {
-            putString("LANGUAGE", languageCode)
-            apply()
-        }
+    private fun updateLanguage(languageCode: String, targetLanguage: String) {
+        sharedPreferences.edit().putString("LANGUAGE", languageCode).apply()
 
-        // Update the app's locale
+        // Close and release previous translator if necessary
+        translator?.close()
+
+        val options = TranslatorOptions.Builder()
+            .setSourceLanguage(TranslateLanguage.ENGLISH)
+            .setTargetLanguage(targetLanguage)
+            .build()
+
+        translator = Translation.getClient(options)
+
+        // Download the language model for offline use
+        downloadLanguageModel(languageCode)
+    }
+
+    private fun downloadLanguageModel(languageCode: String) {
+        val conditions = DownloadConditions.Builder().requireWifi().build()
+
+        translator?.downloadModelIfNeeded(conditions)
+            ?.addOnSuccessListener {
+                Toast.makeText(context, "Language model for $languageCode downloaded", Toast.LENGTH_SHORT).show()
+                updateAppLocale(languageCode)
+                translateSampleText() // Translate a sample text to confirm
+            }
+            ?.addOnFailureListener { exception ->
+                Toast.makeText(context, "Failed to download model: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun updateAppLocale(languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
         val config = resources.configuration
         config.setLocale(locale)
         requireContext().createConfigurationContext(config)
 
-        // Recreate the activity to apply the new language
-        activity?.recreate()
+        parentFragmentManager.beginTransaction().detach(this).attach(this).commit()
+    }
+
+    private fun translateText(text: String) {
+        translator?.translate(text)
+            ?.addOnSuccessListener { translatedText ->
+                Toast.makeText(context, "Translated: $translatedText", Toast.LENGTH_SHORT).show()
+            }
+            ?.addOnFailureListener { exception ->
+                Toast.makeText(context, "Translation failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    override fun onDestroy() {
+        translator?.close()  // Only close if not null
+        super.onDestroy()
+    }
+
+    private fun translateSampleText() {
+        val sampleText = "Hello, how are you?"
+        translateText(sampleText)
     }
 
     companion object {
