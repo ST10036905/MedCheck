@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Welcome::class.java)
             startActivity(intent) // Start the Welcome activity
         }
-
     }
 
     // Function to sign out the user from Firebase and Google, and then navigate to the Login activity
