@@ -155,7 +155,9 @@
     <string name="_2_how_do_i_set_reminders_for_my_medications">2. Hoe stel ek aanmanings vir my medikasie?</string>
     <string name="you_can_set_reminders">Jy kan onthounotas in die instellingsafdeling van die toepassing stel, waar jy jou herinneringtye kan aanpas.</string>
     <string name="_3_can_i_add_my_own_medications">3. Can I add my own medications?</string>
-    <string name="yes_you_can_add_medications">Ja, jy kan medikasie handmatig byvoeg deur die \'Voeg medikasie by'-funksie in die toepassing.</string>
+    <string name="yes_you_can_add_medications">Ja, jy kan medikasie handmatig byvoeg deur die "Voeg medikasie by"-funksie in die toepassing.</string>
+
+
 
 
     <string-array name="language_options">

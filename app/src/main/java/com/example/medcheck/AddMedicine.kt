@@ -11,13 +11,15 @@ import com.example.medcheck.databinding.ActivityAddMedicineBinding
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-
+import com.example.medcheck.Database.DatabaseHandler
 class AddMedicine : AppCompatActivity() {
     // Declare binding variable to link XML layout components
     private var binding: ActivityAddMedicineBinding? = null
 
     // Declare a Firebase database reference
     private var databaseReference: DatabaseReference? = null
+    
+    private  var databaseHandler: DatabaseHandler? =  null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,10 @@ class AddMedicine : AppCompatActivity() {
 
         // Initialize Firebase database and point to the "medicines" node
         databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
-
+        
+        // Initialize DatabaseHandler
+        databaseHandler = DatabaseHandler(this)
+        
         // Define the options for medication frequency in the Spinner (dropdown)
         val frequencyOptions = arrayOf("Select an option", "Scheduled Dose", "As Needed")
         // Set up an adapter to handle the list of options and define how each item should look
@@ -86,7 +91,7 @@ class AddMedicine : AppCompatActivity() {
         medicineData["name"] = name
         medicineData["dosage"] = dosage
         medicineData["frequency"] = frequency
-
+        saveMedicine(name, dosage, frequency)
         // Check if the ID is not null before adding the data to Firebase
         if (id != null) {
             databaseReference!!.child(id).setValue(medicineData)
@@ -113,5 +118,29 @@ class AddMedicine : AppCompatActivity() {
                     }
                 }
         }
+    }
+    
+    //using sql lite to save medicine
+    
+    private fun saveMedicine(name: String, dosage: String, frequency: String) {
+        val result = databaseHandler?.addMedicine(name, dosage, frequency)
+        if (result != -1L) {
+            Toast.makeText(this, "Medicine added successfully", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Failed to add medicine", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun retrieveMedicines() {
+        val cursor = databaseHandler?.getAllMedicines()
+        if (cursor?.moveToFirst() == true) {
+            do {
+                val medicineName = cursor.getString(cursor.getColumnIndexOrThrow("medicineName"))
+                val strength = cursor.getString(cursor.getColumnIndexOrThrow("strength"))
+                val frequency = cursor.getString(cursor.getColumnIndexOrThrow("frequency"))
+                Toast.makeText(this, "Medicine: $medicineName, Strength: $strength, Frequency: $frequency", Toast.LENGTH_LONG).show()
+            } while (cursor.moveToNext())
+        }
+        cursor?.close()
     }
 }
