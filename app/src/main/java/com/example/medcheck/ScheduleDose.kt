@@ -1,11 +1,19 @@
 package com.example.medcheck
 
+import android.Manifest
+import android.content.Context
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.medcheck.databinding.ActivityScheduleDoseBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -17,6 +25,7 @@ class ScheduleDose : AppCompatActivity() {
     private lateinit var binding: ActivityScheduleDoseBinding
     // Reference to Firebase Database
     private lateinit var databaseReference: DatabaseReference
+    private val REQUEST_NOTIFICATION_PERMISSION = 1 // Permission request code
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +39,13 @@ class ScheduleDose : AppCompatActivity() {
 
         // Get the medicine ID passed from the AddMedicine activity
         val medicineId = intent.getStringExtra("medicineId") ?: return
+
+        // Notification permission request for Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQUEST_NOTIFICATION_PERMISSION)
+            }
+        }
 
         // Set up onClickListener to open TimePickerDialog for dose input
         binding.timeTakenInput.setOnClickListener {
@@ -92,6 +108,10 @@ class ScheduleDose : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Dose scheduled successfully", Toast.LENGTH_SHORT).show()
+
+                    // Schedule the notification
+                    scheduleNotification(medicineId, doseTime, howOften)
+
                     // Navigate to Medicine Details activity after successful scheduling
                     val intent = Intent(this, MedicineDetailsActivity::class.java)
                     intent.putExtra("medicineId", medicineId) // Pass the medicine ID
@@ -101,4 +121,48 @@ class ScheduleDose : AppCompatActivity() {
                 }
             }
     }
+
+    // Schedule the notification based on dose time and frequency
+    private fun scheduleNotification(medicineId: String, doseTime: String, howOften: String) {
+        val calendar = Calendar.getInstance()
+        val (hour, minute) = doseTime.split(":").map { it.toInt() }
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        calendar.set(Calendar.SECOND, 0)
+
+        val intervalMillis = when (howOften) {
+            "Every 4 Hours" -> AlarmManager.INTERVAL_HOUR * 4
+            "Every 8 Hours" -> AlarmManager.INTERVAL_HOUR * 8
+            "Every 12 Hours" -> AlarmManager.INTERVAL_HOUR * 12
+            "Daily" -> AlarmManager.INTERVAL_DAY
+            "Weekly" -> AlarmManager.INTERVAL_DAY * 7
+            else -> AlarmManager.INTERVAL_DAY // Default to daily
+        }
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, MedicationReminderReceiver::class.java).apply {
+            putExtra("medicineId", medicineId)
+        }
+        val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, pendingIntentFlags)
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, intervalMillis, pendingIntent)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_NOTIFICATION_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
+                // Schedule notification if the permission is granted
+            } else {
+                Toast.makeText(this, "Notification permission required for reminders", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 }

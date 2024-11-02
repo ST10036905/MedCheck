@@ -7,7 +7,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import com.google.firebase.database.FirebaseDatabase
+import java.util.concurrent.Executor
 
 class Login : AppCompatActivity() {
 
@@ -15,21 +19,28 @@ class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     // Companion object to hold shared preference keys
     companion object {
         private const val PREFS_NAME = "MedCheckPrefs" // Name of the shared preferences file
         private const val FIRST_TIME_KEY = "isFirstTime" // Key for checking if it's the user's first time
+        //
+        private const val BIOMETRIC_ENABLED_KEY = "biometricEnabled"
     }
 
-    // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Set up ViewBinding to inflate the layout and access views
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // If biometric login is enabled, show the biometric prompt
+        if (sharedPreferences.getBoolean(BIOMETRIC_ENABLED_KEY, false)) {
+            setupBiometricPrompt()
+            biometricPrompt.authenticate(promptInfo)
+        }
         // Initialize Firebase Authentication instance
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -100,6 +111,38 @@ class Login : AppCompatActivity() {
         }
 
         // Start the appropriate activity and finish the current one
+        startActivity(intent)
+        finish()
+    }
+    // Biometric code
+    private fun setupBiometricPrompt() {
+        val executor: Executor = ContextCompat.getMainExecutor(this)
+        biometricPrompt = BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
+                navigateToMainApp()
+            }
+
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                super.onAuthenticationError(errorCode, errString)
+                Toast.makeText(applicationContext, "Authentication error: $errString", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onAuthenticationFailed() {
+                super.onAuthenticationFailed()
+                Toast.makeText(applicationContext, "Authentication failed", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Biometric Login")
+            .setSubtitle("Log in using your fingerprint")
+            .setNegativeButtonText("Use Password")
+            .build()
+    }
+
+    private fun navigateToMainApp() {
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
