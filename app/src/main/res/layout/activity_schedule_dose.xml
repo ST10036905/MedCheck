@@ -66,8 +66,6 @@
                 android:layout_marginBottom="16dp"
                 android:drawableRight="@drawable/time" />
 
-
-
             <TextView
                 android:id="@+id/oftenLabel"
                 android:layout_width="wrap_content"

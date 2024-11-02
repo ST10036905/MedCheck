@@ -1,7 +1,11 @@
 package com.example.medcheck
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -33,17 +37,16 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE)
         // Get saved language preference
         val languageCode = sharedPreferences.getString("LANGUAGE", "en")
-
         // Update the locale
         val locale = Locale(languageCode!!)
         Locale.setDefault(locale)
         val config = resources.configuration
         config.setLocale(locale)
         createConfigurationContext(config)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        // calls the notification channel
+        createNotificationChannel()
 
         // Enable view binding to inflate layout and access UI elements
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -76,7 +79,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Welcome::class.java)
             startActivity(intent) // Start the Welcome activity
         }
-
     }
 
     // Function to sign out the user from Firebase and Google, and then navigate to the Login activity
@@ -92,4 +94,18 @@ class MainActivity : AppCompatActivity() {
             finish() // Close the current activity so the user can't return with the back button
         }
     }
+
+    fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Medication Reminder Channel"
+            val descriptionText = "Channel for medication reminders"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("medication_channel", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }
