@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/black"
-                android:text="Satellite"
+                android:text="@string/satellite"
                 android:textColor="@color/black" />
 
             <RadioButton
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/black"
-                android:text="Hybrid"
+                android:text="@string/hybrid"
                 android:textColor="@color/black" />
 
             <RadioButton
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/black"
-                android:text="Terrain"
+                android:text="@string/terrain"
                 android:textColor="@color/black" />
 
             <RadioButton
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/black"
                 android:checked="true"
-                android:text="Normal"
+                android:text="@string/normal"
                 android:textColor="@color/black" />
         </RadioGroup>
     </com.google.android.material.card.MaterialCardView>

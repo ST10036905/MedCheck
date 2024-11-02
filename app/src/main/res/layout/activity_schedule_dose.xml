@@ -55,7 +55,7 @@
                 android:id="@+id/timeTakenInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Select Time"
+                android:hint="@string/select_time"
                 android:inputType="time"
                 android:focusable="false"
                 android:clickable="true"

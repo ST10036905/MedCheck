@@ -81,7 +81,7 @@
                         android:id="@+id/frequencyInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="How are doses taken?"
+                        android:hint="@string/how_are_doses_taken"
                         android:inputType="text"
                         android:textSize="18sp" />
 

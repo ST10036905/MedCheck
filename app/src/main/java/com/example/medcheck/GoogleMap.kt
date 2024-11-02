@@ -24,6 +24,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
@@ -75,7 +76,7 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         Places.initialize(applicationContext,"AIzaSyCV5y_AsNgheuOBVZcQ8rsVts-Hv5922PA")
         placesClient = Places.createClient(this)
 
-        // inizialize the autocompleteSupport fragment for the search bar
+        // initialize the autocompleteSupport fragment for the search bar
         val autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autoComplete_fragment)
                 as AutocompleteSupportFragment
 
@@ -201,10 +202,17 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         markerOptions.draggable(true)
         markerOptions.flat(true)
         // adds the marker to the map location
-        map?.addMarker(markerOptions)
+       val marker = map?.addMarker(markerOptions)
+
+        marker?.tag = CustomInfoWindowData("XYZ Pharmacy", getString(R.string.pharmacy_description), R.drawable.pharmacy)
         // checks the permission to get user location
         checkLocationPermission()
-        //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(R.drawable.location)))
+        markerOptions.icon(getBitmapFromDrawable(R.drawable.location)?.let {
+            BitmapDescriptorFactory.fromBitmap(
+                it
+            )
+        })
+        map?.setInfoWindowAdapter(CustomInfoWindowAdapter(this))
     }
 
     private fun enableUserLocation() {
