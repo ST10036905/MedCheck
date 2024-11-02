@@ -18,4 +18,6 @@
     <color name="security">#D95F69</color>
     <color name="terracotta">#AD7251</color>
     <color name="caramel">#B17C5E</color>
+    <color name="preferences_text"> #AA9594</color>
+    <color name="medication_container">#4A8E9E</color>
 </resources>

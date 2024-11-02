@@ -5,143 +5,80 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.medcheck.databinding.ActivityMainBinding
 import com.example.medcheck.databinding.ActivityWelcomeBinding
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 
 class Welcome : AppCompatActivity() {
 
+    // Declare binding variable for the welcome screen layout
     private lateinit var binding: ActivityWelcomeBinding
+
+    // Declare Google Sign-In and FirebaseAuth instances (not used in the current version but prepared for future Google Sign-In)
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
 
     companion object {
+        // Request code for Google Sign-In (used in the commented-out code)
         private const val RC_SIGN_IN = 9001
+
+        // Constants for SharedPreferences to track first-time login status
         private const val PREFS_NAME = "MedCheckPrefs"
         private const val KEY_FIRST_TIME_LOGIN = "firstTimeLogin"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Make sure the app takes full control of the window, including edge-to-edge layout
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        // Initialize view binding
+        // Initialize view binding to access layout elements
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
-        // Set the content view to the root view of the binding
-        setContentView(binding.root)
+        setContentView(binding.root) // Set the content view to the layout root
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Auth for user authentication
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Configure Google Sign-In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+        // Automatically redirect the user if they're already logged in
+        if (firebaseAuth.currentUser != null) {
+            checkFirstTimeLoginAndRedirect() // Call function to check if it's the user's first login
+        }
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        // Set click listener for the "Create Account" button
+        // Set up button listeners for the "Create Account" button
         binding.createAccBtn.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
+            val intent = Intent(this, Register::class.java) // Redirect to the Register screen
             startActivity(intent)
         }
 
-        // Set click listener for the "Google Sign-In" button
-        binding.googleSignInBtn.setOnClickListener {
-            signInWithGoogle()
-        }
-
-        // Get the "Create Account" button and set up click listener
-        val createAccBtn = findViewById<Button>(R.id.createAccBtn)
-        createAccBtn.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
+        // Set up button listener for the "Login" button
+        binding.loginBtn.setOnClickListener {
+            val intent = Intent(this, Login::class.java) // Redirect to the Login screen
             startActivity(intent)
         }
 
-        // Get the "Login" button and set up click listener
-        val loginBtn = findViewById<Button>(R.id.loginBtn)
-        loginBtn.setOnClickListener {
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-        }
-
-        // Get the "Back" button and set up click listener
+        // Set up the "Back" button to finish the current activity and go back to the previous screen
         val backBtn = findViewById<Button>(R.id.backBtn)
         backBtn.setOnClickListener {
-            finish()
+            finish() // Closes the current activity and returns to the previous one
         }
     }
 
-    // Google Sign-In intent
-    private fun signInWithGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    // Handle result from Google Sign-In intent
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                Toast.makeText(this, "Google sign-in failed: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    // Authenticate with Firebase using the Google ID token
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Check if this is the user's first login
-                    val isFirstTime = isFirstTimeLogin()
-                    val user = firebaseAuth.currentUser
-                    Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
-
-                    // Navigate based on whether it's the first login
-                    if (isFirstTime) {
-                        startActivity(Intent(this, AddMedicine::class.java))
-                        setFirstTimeLogin(false) // Mark first login as completed
-                    } else {
-                        startActivity(Intent(this, Dashboard::class.java))
-                    }
-
-                    finish() // Close Welcome activity
-                } else {
-                    Toast.makeText(this, "Authentication Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    // Check if this is the user's first login
-    private fun isFirstTimeLogin(): Boolean {
+    // Check if this is the user's first login using SharedPreferences and redirect accordingly
+    private fun checkFirstTimeLoginAndRedirect() {
+        // Access shared preferences to check the stored login status
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean(KEY_FIRST_TIME_LOGIN, true) // Default to true if not found
-    }
+        val isFirstTime = sharedPreferences.getBoolean(KEY_FIRST_TIME_LOGIN, true) // Default is true
 
-    // Set first-time login status
-    private fun setFirstTimeLogin(isFirstTime: Boolean) {
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        with(sharedPreferences.edit()) {
-            putBoolean(KEY_FIRST_TIME_LOGIN, isFirstTime)
-            apply()
+        // Create an Intent to navigate to the appropriate screen based on the login status
+        val intent = if (isFirstTime) {
+            Intent(this, AddMedicine::class.java) // Redirect to AddMedicine if first-time login
+        } else {
+            Intent(this, Dashboard::class.java) // Redirect to Dashboard if not first-time
         }
+        startActivity(intent) // Start the selected activity
+        finish() // Close the Welcome activity so it's no longer in the back stack
     }
 }

@@ -59,7 +59,6 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
     // Firebase and Google Sign-In dependencies
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.database)
@@ -69,9 +68,12 @@ dependencies {
     implementation (libs.firebase.auth.ktx.v2200)
     implementation (libs.play.services.auth.v2050)
 
+    implementation (libs.rounde.image)
+
     implementation (libs.firebase.auth)
     implementation (libs.services.auth)  // Google Sign-In SDK
-
+    // Dependency for translation
+    implementation(libs.mlkit)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

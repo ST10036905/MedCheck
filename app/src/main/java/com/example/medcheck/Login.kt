@@ -1,146 +1,106 @@
 package com.example.medcheck
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityLoginBinding
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 
 class Login : AppCompatActivity() {
 
-    private lateinit var googleSignInClient: GoogleSignInClient
+    // Declare binding for accessing views and Firebase Auth for authentication
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var sharedPreferences: SharedPreferences
 
+    // Companion object to hold shared preference keys
     companion object {
-        private const val RC_SIGN_IN = 9001
+        private const val PREFS_NAME = "MedCheckPrefs" // Name of the shared preferences file
+        private const val FIRST_TIME_KEY = "isFirstTime" // Key for checking if it's the user's first time
     }
 
+    // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Set up ViewBinding
+        // Set up ViewBinding to inflate the layout and access views
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Authentication instance
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Configure Google Sign-In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.web_client_id))
-            .requestEmail()
-            .build()
+        // Initialize SharedPreferences to store/retrieve first-time login status
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        // Set up Email/Password login
+        // Set up the login button click listener for email/password authentication
         binding.submitBtn.setOnClickListener {
-            val email = binding.emailTxt.text.toString().trim()
-            val pass = binding.passwordTxt.text.toString().trim()
+            val email = binding.emailTxt.text.toString().trim() // Retrieve and trim the email input
+            val pass = binding.passwordTxt.text.toString().trim() // Retrieve and trim the password input
 
+            // Check if email and password are filled in
             if (email.isNotEmpty() && pass.isNotEmpty()) {
+                // Sign in with Firebase using email and password
                 firebaseAuth.signInWithEmailAndPassword(email, pass)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            // If login is successful, show a message and check if it's the user's first time
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                            navigateToAddMedicine()
+                            checkFirstTimeLogin()
                         } else {
-                            Toast.makeText(this, "Authentication failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            // If login fails, display an error message
+                            Toast.makeText(
+                                this,
+                                "Authentication failed: ${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
             } else {
+                // Show a message if the email or password fields are empty
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Set up sign-up link
-        binding.signUpLink.setOnClickListener {
-            startActivity(Intent(this, Register::class.java))
-        }
-
-        // Set up back button
+        // Set up the back button to navigate to the Welcome screen
         binding.backBtn.setOnClickListener {
             startActivity(Intent(this, Welcome::class.java))
         }
     }
 
-    // Check if user is already signed in
+    // Called when the activity becomes visible to the user
     override fun onStart() {
         super.onStart()
+        // Check if the user is already signed in with Firebase Auth
         if (firebaseAuth.currentUser != null) {
-            navigateToAddMedicine()
+            checkFirstTimeLogin() // If signed in, check if it's the user's first time
         }
     }
 
-    // Google Sign-In intent
-    private fun signInWithGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
+    // Function to check if it's the user's first time logging in and navigate accordingly
+    private fun checkFirstTimeLogin() {
+        // Retrieve the stored value for whether it's the user's first time using the app
+        val isFirstTime = sharedPreferences.getBoolean(FIRST_TIME_KEY, true)
 
-    // Handle result from Google Sign-In intent
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                Toast.makeText(this, "Google sign-in failed: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+        // Determine which activity to navigate to based on the first-time flag
+        val intent = if (isFirstTime) {
+            // Navigate to AddMedicineActivity if it's the user's first time
+            Intent(this, AddMedicine::class.java)
+        } else {
+            // Navigate to DashboardActivity if it's not the first time
+            Intent(this, Dashboard::class.java)
         }
-    }
 
-    // Authenticate with Firebase using the Google ID token
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = firebaseAuth.currentUser
-                    Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
+        // If it's the first time, update the flag to indicate it's no longer the first time
+        if (isFirstTime) {
+            sharedPreferences.edit().putBoolean(FIRST_TIME_KEY, false).apply()
+        }
 
-                    // Save user to Firebase Database
-                    saveUserToDatabase(user)
-                } else {
-                    Toast.makeText(this, "Authentication Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    // Save user data to Firebase Realtime Database
-    private fun saveUserToDatabase(user: FirebaseUser?) {
-        val userId = user?.uid
-        val userEmail = user?.email
-        val database = FirebaseDatabase.getInstance().reference
-        val userData = hashMapOf("email" to userEmail)
-
-        database.child("users").child(userId!!).updateChildren(userData as Map<String, Any>)
-            .addOnCompleteListener { databaseTask ->
-                if (databaseTask.isSuccessful) {
-                    Toast.makeText(this, "User ID has been saved to database", Toast.LENGTH_SHORT).show()
-                    navigateToAddMedicine()
-                } else {
-                    Toast.makeText(this, "Failed to save user ID to database", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    // Navigate to the AddMedicine Activity
-    private fun navigateToAddMedicine() {
-        startActivity(Intent(this, AddMedicine::class.java))
+        // Start the appropriate activity and finish the current one
+        startActivity(intent)
         finish()
     }
 }
