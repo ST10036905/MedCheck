@@ -1,3 +1,4 @@
+
 ***Med Check Mobile Application
 ***OPSC7312 POE PART 2
 
@@ -46,3 +47,4 @@ Open FDA API: To provide access to medication information.
 ******* Azania Ncube ST10036066
 ******* Mayra Selemane ST10036905
 ******* Zacarias Antero ST10068763
+
