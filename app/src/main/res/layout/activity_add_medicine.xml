@@ -18,7 +18,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Step and instruction text views -->
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/red"
                 android:textSize="24sp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginBottom="8dp" />
 
             <TextView
@@ -37,10 +36,10 @@
                 android:text="@string/enter_medicine"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/cafe"
+                android:layout_marginTop="10dp"
                 android:textSize="20sp"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Medicine name input -->
             <TextView
                 android:id="@+id/medicineNameLabel"
                 android:layout_width="wrap_content"
@@ -55,16 +54,16 @@
                 android:id="@+id/nameInput"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:hint="Enter medicine name"
+                android:hint="@string/enter_medicine_name"
                 android:inputType="text"
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:layout_marginBottom="16dp"
                 android:drawableRight="@drawable/name"/>
 
-            <!-- Dosage input -->
+
             <TextView
                 android:id="@+id/dosageLabel"
                 android:layout_width="wrap_content"
@@ -82,13 +81,13 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableRight="@drawable/dose"
-                android:hint="Enter strenght of medicine"
+                android:hint="@string/enter_strenght_of_medicine"
                 android:inputType="text"
                 android:padding="12dp"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
-            <!-- Frequency input -->
+
             <TextView
                 android:id="@+id/frequencyLabel"
                 android:layout_width="wrap_content"
@@ -112,7 +111,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- FrameLayout to overlay text on ImageButton -->
+
     <FrameLayout
         android:id="@+id/saveMedicationBtnContainer"
         android:layout_width="match_parent"
@@ -121,7 +120,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- ImageButton with the image -->
+
         <ImageButton
             android:id="@+id/saveMedicationBtn"
             android:layout_width="match_parent"
@@ -131,7 +130,7 @@
             android:scaleType="fitXY"
             android:background="@null" />
 
-        <!-- TextView overlaying the image -->
+
         <TextView
             android:id="@+id/saveMedicationext"
             android:layout_width="wrap_content"

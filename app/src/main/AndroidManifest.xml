@@ -1,88 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- user permission -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/medcheck_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/medcheck_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedCheck"
         tools:targetApi="31">
 
-        <activity android:name=".Calendar"
-            android:exported="true"/>
 
-        <activity android:name=".Dashboard"
+        <activity
+            android:name=".MainActivy
+            android:exported="false">
+
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity
-            android:name=".TakenMedication"
-            android:exported="false" />
-        <activity android:name=".GoogleMap" />
+            android:name=".GoogleMap"
+            android:exported="false">
 
-        <activity
-            android:name=".MedicationInformation"
-            android:exported="true"/>
-
-           <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity-->
-        <activity android:name=".MedicineDetailsActivity"
-            android:exported="true"/>
-
-        <activity android:name=".MyMedicine"
-            android:exported="true"/>
-
+        </activity>
 
         <activity
             android:name=".ScheduleDose"
             android:exported="false" />
+
+        <activity
+            android:name=".Welcome"
+            android:exported="false" >
+        </activity>
+
         <activity
             android:name=".AddMedicine"
-            android:exported="false" />
-        <activity android:name=".MainActivity"
-            android:exported="true"/>
+            android:exported="false">
+        </activity>
 
+        <activity
+            android:name=".MedicationInformation"
+            android:exported="false">
+        </activity>
 
         <activity
             android:name=".Login"
-            android:exported="false"
-            android:theme="@style/Theme.MedCheck" />
+            android:exported="false">
+        </activity>
+
         <activity
             android:name=".Preferences"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MyMedicine"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".MedicineDetailsActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".Calendar"
+            android:exported="false" >
+        </activity>
+
         <activity
             android:name=".Register"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
+
         <activity
-            android:name=".Welcome"
-            android:exported="false" />
+            android:name=".Dashboard"
+            android:exported="false" >
+            android:exported="true" >
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="MAPS_KEY" />
+            android:value="${MAPS_KEY}" />
     </application>
 
 </manifest>
