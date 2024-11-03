@@ -29,13 +29,35 @@
                 android:textColor="@color/BrownText"
                 android:textSize="24sp"/>
 
-            <ListView
-                android:id="@+id/medicineListView"
+            <TextView
+                android:id="@+id/medicineView_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:divider="@android:color/darker_gray"
-                android:dividerHeight="1dp" />
+                android:text="Panado"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/viewMedicineBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/textBlue"
+                    android:text="View My Medicine" />
+
+                <Button
+                    android:id="@+id/clearMedicineBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Clear My Cabinet" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,6 +83,7 @@
                     android:background="@null"
                     app:srcCompat="@android:drawable/ic_input_add"
                     android:padding="16dp" />
+
             </LinearLayout>
 
         </LinearLayout>
