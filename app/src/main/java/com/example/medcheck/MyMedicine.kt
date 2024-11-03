@@ -54,22 +54,28 @@ class MyMedicine : AppCompatActivity() {
 		
 		// Initialize the database helper and views
 		databaseHandler = DatabaseHandler(this)
-		        val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
-		//medicineListView = findViewById(R.id.medicineListView)
-		medicineTextView = findViewById(R.id.medicineView_tv)
+//		        val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
+//		//medicineListView = findViewById(R.id.medicineListView)
+//		medicineTextView = findViewById(R.id.medicineView_tv)
 //click listener to retrieve sql lite data for viewing the saved medication
 //		binding!!.viewMedicineBtn.setOnClickListener{
 //
 //		}
-		retrieveButton.setOnClickListener {
-			val cursor = databaseHandler.getAllMedicines()
+		// Set up click listener for the add button to navigate to AddMedicine activity
+		binding!!.viewMedicineBtn.setOnClickListener {
 			retrieveMedicines()
+			val addMedicineIntent = Intent(this, AddMedicine::class.java)
+			startActivity(addMedicineIntent)
 		}
+//		retrieveButton.setOnClickListener {
+//			val cursor = databaseHandler.getAllMedicines()
+//			retrieveMedicines()
+//		}
 
 		//clearing the medicine
-		val clearMedicineBtn = findViewById<Button>(R.id.clearMedicineBtn)
+		//val clearMedicineBtn = findViewById<Button>(R.id.clearMedicineBtn)
 		// Click listener to clear the TextView
-		clearMedicineBtn.setOnClickListener {
+		binding!!.clearMedicineBtn.setOnClickListener {
 			medicineTextView.text = ""  // Clears the TextView content
 		}
 		//---------------------------------------BOTTOM NAV-------------------------------------------------

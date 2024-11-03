@@ -63,74 +63,66 @@ class AddMedicine : AppCompatActivity() {
                     // Do nothing if no item is selected
                 }
             }
-
-        // Handle the click event for the "Save" button
+        
+        // Updated onClickListener to ensure data is saved independently
         binding!!.saveMedicationBtn.setOnClickListener { v ->
-            // Retrieve the medication name and dosage from the input fields
+            // Retrieve medication details from input fields
             val name = binding!!.nameInput.text.toString()
             val dosage = binding!!.strenghtInput.text.toString()
-
-            // Check if all fields are filled out
+            
+            // Check for empty fields
             if (name.isEmpty() || dosage.isEmpty() || selectedFrequency[0].isEmpty()) {
-                // Show a message prompting the user to complete all fields
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                // Proceed to store the medication details in Firebase
+                // Save to both Firebase and SQLite independently
                 storeMedicineInFirebase(name, dosage, selectedFrequency[0])
-                saveMedicine(name, dosage ,selectedFrequency[0])
+                saveMedicine(name, dosage, selectedFrequency[0])
             }
         }
     }
 
     // Method to store the medication data in Firebase
+    // Firebase storage method - removed duplicate call to saveMedicine here
     private fun storeMedicineInFirebase(name: String, dosage: String, frequency: String) {
-        // Generate a unique key for each medicine entry in Firebase
         val id = databaseReference!!.push().key
-
-        // Create a map to store the medicine details (name, dosage, frequency)
+        
         val medicineData: MutableMap<String, String> = HashMap()
         medicineData["name"] = name
         medicineData["dosage"] = dosage
         medicineData["frequency"] = frequency
-        saveMedicine(name, dosage, frequency)
-        // Check if the ID is not null before adding the data to Firebase
+        
         if (id != null) {
             databaseReference!!.child(id).setValue(medicineData)
                 .addOnCompleteListener { task: Task<Void?> ->
-                    // If the data is successfully added to Firebase
                     if (task.isSuccessful) {
-                        // Notify the user that the medicine was added successfully
-                        Toast.makeText(this, "Medicine added successfully", Toast.LENGTH_SHORT).show()
-
-                        // Redirect based on the selected frequency option
-                        if (frequency == "Scheduled Dose") {
-                            // If "Scheduled Dose" is selected, navigate to the ScheduleDose screen and pass the medicine ID
-                            val scheduleDoseIntent = Intent(this, ScheduleDose::class.java)
-                            scheduleDoseIntent.putExtra("medicineId", id) // Pass medicine ID
-                            startActivity(scheduleDoseIntent)
-                        } else if (frequency == "As Needed") {
-                            // If "As Needed" is selected, navigate to the MyMedicine screen
-                            val myMedicineIntent = Intent(this, MyMedicine::class.java)
-                            startActivity(myMedicineIntent)
+                        Toast.makeText(this, "Medicine added to Firebase", Toast.LENGTH_SHORT).show()
+                        
+                        // Navigation based on frequency
+                        val intent = when (frequency) {
+                            "Scheduled Dose" -> Intent(this, ScheduleDose::class.java).apply {
+                                putExtra("medicineId", id)
+                            }
+                            "As Needed" -> Intent(this, MyMedicine::class.java)
+                            else -> null
                         }
+                        intent?.let { startActivity(it) }
                     } else {
-                        // Notify the user if there was an error adding the medicine
-                        Toast.makeText(this, "Failed to add medicine", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Failed to add to Firebase", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
     }
     
-    //using sql lite to save medicine
     
+    // SQLite storage method - no changes needed here
     private fun saveMedicine(name: String, dosage: String, frequency: String) {
         val result = databaseHandler?.addMedicine(name, dosage, frequency)
         if (result != -1L) {
-            Toast.makeText(this, "Medicine added successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Medicine added to SQLite", Toast.LENGTH_SHORT).show()
             val myMedicineIntent = Intent(this, MyMedicine::class.java)
             startActivity(myMedicineIntent)
         } else {
-            Toast.makeText(this, "Failed to add medicine", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Failed to add to SQLite", Toast.LENGTH_SHORT).show()
         }
     }
     
