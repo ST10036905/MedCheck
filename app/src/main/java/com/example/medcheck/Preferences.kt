@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.hardware.biometrics.BiometricPrompt
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricPrompt
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -35,7 +33,7 @@ class Preferences : AppCompatActivity() {
     //--------------- Code for Biometric preference
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private lateinit var promptInfo: BiometricPrompt
     // View binding for this activity
     private lateinit var binding: ActivityPreferencesBinding
     // Declaring the GoogleSignInClient
