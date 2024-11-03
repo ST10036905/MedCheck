@@ -1,3 +1,4 @@
+
 ***Med Check Mobile Application
 ***OPSC7312 POE PART 2
 
@@ -30,6 +31,14 @@ Main features of the application :
 
 *** Gamification - the dashboard consists of awards for the user based on how they take their medicine and how often they use the application. 
 
+Language selection
+- A user has an option to pick between the 3 languages (English, Afrikaans and Portugues) to interact with the app. The LanguageFragment XML layout defines a simple interface where users can choose their preferred language using a set of radio buttons:
+
+Radio Group (languageRadioGroup): Contains radio buttons for language selection.
+English (radioEnglish) - text set by @string/english
+Portuguese (radioPortuguese) - text set by @string/portuguese
+Afrikaans (radioAfrikaans) - text set by @string/afrikaans
+
 *** Technologies Used ***
 Android Studio: The primary IDE for developing the application.
 Firebase: For user authentication and database management.
@@ -42,7 +51,32 @@ Open FDA API: To provide access to medication information.
 *** GitHub and GitHub actions ***
 - GitHub was used as the version control to facilitate the cooperation and code change tracking throughout the development of the Med Check application, considering that the application was being designed by different team members. Continuous Integration and Deployment (CI/CD) using GitHub Actions was there to automate the deployment and testing procedures, by guaranteeing that, prior to being merged into the main branch, code changes are consistently built and tested.
 
+***how data is saved and displayed in the MedCheck app, specifically for the "Add Medicine" and "My Medicine" functionalities.***
+
+***Features Overview***
+1. Add Medicine
+The Add Medicine feature allows users to input medication details, such as name, strength, and frequency.
+These details are saved to two storage systems:
+Firebase Realtime Database: Stores medication data for broader use across multiple devices.
+SQLite: Stores medication data locally on the device, allowing offline access.
+
+3. My Medicine
+The My Medicine feature allows users to view the list of saved medications.
+It displays data from both Firebase and SQLite:
+Firebase Data: Shows medication data that is synced with the server.
+SQLite Data: Shows medication data saved locally on the device, useful for offline access.
+
+**Data Storage Workflow**
+Firebase Database
+Purpose: Cloud-based storage for storing medication data. It enables syncing across multiple devices and accessing data even after app reinstallation.
+Structure: Medication data is stored under a medicines node in Firebase, with each medication entry containing details such as name, strength, and frequency.
+**Data Retrieval Workflow**
+My Medicine (Display Data)
+From Firebase: Data is fetched in real-time from the Firebase database and displayed in a ListView. This allows users to see medications that are synced across devices.
+From SQLite: Data is retrieved from SQLite and displayed in a TextView, providing a list of medications that can be accessed offline.
+
 
 ******* Azania Ncube ST10036066
 ******* Mayra Selemane ST10036905
 ******* Zacarias Antero ST10068763
+
