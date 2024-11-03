@@ -149,7 +149,7 @@
     <string name="you_can_set_reminders">You can set reminders in the settings section of the app, where you can customize your reminder times.</string>
     <string name="_3_can_i_add_my_own_medications">3. Can I add my own medications?</string>
 
-    <string name="yes_you_can_add_medications">Yes, you can add medications manually through the \'Add Medication\' feature in the app.</string>
+
     <string name="dashboard">Dashboard</string>
     <string name="nav_preferences">Preferences</string>
     <string name="calendar">Calendar</string>

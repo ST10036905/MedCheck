@@ -26,17 +26,11 @@
 
         <receiver android:name=".MedicationReminderReceiver" />
 
-        <activity
-            android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
-
 
         <activity
             android:name=".MyFirebaseMessagingService"
             android:exported="false" />
-        <!-- Activities -->
+
         <activity
             android:name=".Login"
             android:exported="false" />
@@ -56,17 +50,7 @@
         <activity
             android:name=".MedicationInformation"
 
-            android:exported="false">
-        </activity>
-
-        <activity
-            android:name=".Login"
-            android:exported="false">
-
-        </activity>
-
-
-            android:exported="false" />
+            android:exported="false"/>
 
         <activity
             android:name=".MainActivity"
@@ -77,6 +61,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Preferences"
             android:exported="false" />
@@ -94,12 +79,10 @@
             android:exported="false" />
         <activity
             android:name=".Dashboard"
-
             android:exported="false" >
         </activity>
 
 
-            android:exported="false" /> <!-- Firebase configuration -->
 
         <meta-data
             android:name="preloaded_fonts"

@@ -3,6 +3,7 @@ package com.example.medcheck
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
+import android.hardware.biometrics.BiometricPrompt
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import android.os.Build
@@ -169,7 +170,7 @@ class Preferences : AppCompatActivity() {
     private fun signOut() {
         mGoogleSignInClient!!.signOut().addOnCompleteListener(this) {
             // Sign-out successful, navigate back to login or main activity
-            val intent = Intent(this@Preferences, Welcome::class.java) // Change this to your login activity
+            val intent = Intent(this@Preferences, MainActivity::class.java) // Change this to your login activity
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK) // Clear activity stack
             startActivity(intent) // Start the login activity
             finish() // Close the current activity
