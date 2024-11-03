@@ -17,6 +17,8 @@ retrofit="2.9.0"
 retrofit2="2.9.0"
 roundeImage="2.3.0"
 mlkit="17.0.3"
+fingerprint = "1.1.0"
+
 constraintlayout = "2.1.4"
 places = "4.0.0"
 firebase ="23.0.0"
@@ -51,6 +53,9 @@ services-auth = { group = "com.google.android.gms", name = "play-services-auth",
 
 rounde-Image = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundeImage" }
 mlkit = { group = "com.google.mlkit", name = "translate", version.ref = "mlkit" }
+
+fingerprint = { group = "androidx.biometric", name = "biometric", version.ref = "fingerprint" }
+
 
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }

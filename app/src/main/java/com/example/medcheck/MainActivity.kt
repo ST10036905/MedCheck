@@ -1,9 +1,16 @@
 package com.example.medcheck
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
+
 import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +35,24 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: ActivityMainBinding
 
+
+    // Called when the activity is created
+    override fun onCreate(savedInstanceState: Bundle?) {
+        // Gets the shared preferences
+        sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE)
+        // Get saved language preference
+        val languageCode = sharedPreferences.getString("LANGUAGE", "en")
+        // Update the locale
+        val locale = Locale(languageCode!!)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        createConfigurationContext(config)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        // calls the notification channel
+        createNotificationChannel()
+
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -46,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE)
         val languageCode = sharedPreferences.getString("LANGUAGE", "en") ?: "en"
         setAppLocale(languageCode)
+
 
         // Enable view binding
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -70,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         binding.getStartedBtn.setOnClickListener {
             startActivity(Intent(this, Welcome::class.java))
         }
+
     }
 
     private fun fetchToken() {
@@ -114,6 +141,7 @@ class MainActivity : AppCompatActivity() {
             // For Android versions below TIRAMISU, permissions for notifications are granted by default
             fetchToken() // No need to request permission, proceed to fetch token
         }
+
     }
 
 
@@ -125,4 +153,18 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Medication Reminder Channel"
+            val descriptionText = "Channel for medication reminders"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("medication_channel", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }

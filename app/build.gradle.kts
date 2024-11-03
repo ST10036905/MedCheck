@@ -67,6 +67,8 @@ dependencies {
     // Google Sign-In
     implementation (libs.firebase.auth.ktx.v2200)
     implementation (libs.play.services.auth.v2050)
+    // for finger print
+    implementation(libs.fingerprint)
 
     implementation (libs.rounde.image)
 
