@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun createNotificationChannel() {
+    private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Medication Reminder Channel"
             val descriptionText = "Channel for medication reminders"
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             val channel = NotificationChannel("medication_channel", name, importance).apply {
                 description = descriptionText
             }
-            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager: NotificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
     }

@@ -1,7 +1,11 @@
 package com.example.medcheck
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,7 +39,8 @@ class Login : AppCompatActivity() {
         // Set up ViewBinding to inflate the layout and access views
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //------------Calls the notification
+        createNotificationChannel()
         // Initialize SharedPreferences for checking biometric login status
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         // Initialize Firebase Authentication instance
@@ -146,4 +151,20 @@ class Login : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    //-----------Notification chanel
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Medication Reminders"
+            val descriptionText = "Channel for medication reminder notifications"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("medication_channel", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }
