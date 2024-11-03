@@ -77,6 +77,7 @@ class AddMedicine : AppCompatActivity() {
             } else {
                 // Proceed to store the medication details in Firebase
                 storeMedicineInFirebase(name, dosage, selectedFrequency[0])
+                saveMedicine(name, dosage ,selectedFrequency[0])
             }
         }
     }
@@ -126,6 +127,8 @@ class AddMedicine : AppCompatActivity() {
         val result = databaseHandler?.addMedicine(name, dosage, frequency)
         if (result != -1L) {
             Toast.makeText(this, "Medicine added successfully", Toast.LENGTH_SHORT).show()
+            val myMedicineIntent = Intent(this, MyMedicine::class.java)
+            startActivity(myMedicineIntent)
         } else {
             Toast.makeText(this, "Failed to add medicine", Toast.LENGTH_SHORT).show()
         }

@@ -63,7 +63,7 @@ class MyMedicine : AppCompatActivity() {
 //		}
 		retrieveButton.setOnClickListener {
 			val cursor = databaseHandler.getAllMedicines()
-			displayData(cursor)
+			retrieveMedicines()
 		}
 
 		//clearing the medicine
@@ -157,5 +157,27 @@ class MyMedicine : AppCompatActivity() {
 		}
 	}
 	
-	//sql lite: clearing the data from the database after a user button tap
+	//more sql lite
+	private fun retrieveMedicines() {
+		val cursor = databaseHandler.getAllMedicines()
+		val medicinesList = StringBuilder()
+		
+		if (cursor?.moveToFirst() == true) {
+			do {
+				val medicineName = cursor.getString(cursor.getColumnIndexOrThrow("medicineName"))
+				val strength = cursor.getString(cursor.getColumnIndexOrThrow("strength"))
+				val frequency = cursor.getString(cursor.getColumnIndexOrThrow("frequency"))
+				
+				// Format each record
+				medicinesList.append("Medicine: $medicineName\nStrength: $strength\nFrequency: $frequency\n\n")
+			} while (cursor.moveToNext())
+		} else {
+			medicinesList.append("No medicines found.")
+		}
+		
+		cursor?.close()
+		
+		// Display retrieved data in the TextView
+		medicineTextView.text = medicinesList.toString()
+	}
 }
