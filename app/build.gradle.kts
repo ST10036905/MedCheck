@@ -69,7 +69,6 @@ dependencies {
     implementation (libs.play.services.auth.v2050)
     // for finger print
     implementation(libs.fingerprint)
-
     implementation (libs.rounde.image)
 
     implementation (libs.firebase.auth)
@@ -79,6 +78,7 @@ dependencies {
     implementation(libs.mlkit)
     //implementing messaging feature
     implementation(libs.firebase.messaging.ktx)
+    implementation(libs.androidx.biometric.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -90,6 +90,8 @@ dependencies {
     // Firebase Analytics and Messaging
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-messaging")
+
+    implementation ("androidx.biometric:biometric:1.2.0-alpha05")  // latest stable version as of the last update
 
 
 }
