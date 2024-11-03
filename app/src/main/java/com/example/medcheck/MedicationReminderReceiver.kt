@@ -11,26 +11,28 @@ import androidx.core.app.NotificationManagerCompat
 
 class MedicationReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        // Retrieve any extra data (e.g., medicine name) if needed
+        // Retrieve medicine name from the intent extras
         val medicineName = intent.getStringExtra("medicineName") ?: "Medication Reminder"
 
-        // Create a notification to remind the user to take their medication
+        // Create notification to remind the user to take their medication
         val notification = NotificationCompat.Builder(context, "medication_channel")
-            .setSmallIcon(R.drawable.medcheck_logo)  // replace with your app's icon
+            .setSmallIcon(R.drawable.medcheck_logo)
             .setContentTitle("Medication Reminder")
             .setContentText("It's time to take your medication: $medicineName.")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true) // Dismisses the notification when tapped
             .build()
 
-        // Show the notification
+        // Check if notification permissions are granted (for Android 13+)
         if (ActivityCompat.checkSelfPermission(
-                context, // Updated to use `context` here
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
+                context, Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
-            return
+            // Display the notification
+            NotificationManagerCompat.from(context).notify(medicineName.hashCode(), notification)
+        } else {
+            // Log or notify that permissions are not available
+            // Toast or log statement here if needed
         }
-        NotificationManagerCompat.from(context).notify(medicineName.hashCode(), notification)
     }
 }

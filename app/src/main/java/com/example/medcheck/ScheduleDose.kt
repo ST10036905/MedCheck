@@ -47,7 +47,7 @@ class ScheduleDose : AppCompatActivity() {
             }
         }
 
-        // Set up onClickListener to open TimePickerDialog for dose input
+        //----------Set up onClickListener to open TimePickerDialog for dose input
         binding.timeTakenInput.setOnClickListener {
             openTimePicker() // Opens a dialog to select time
         }
@@ -141,14 +141,21 @@ class ScheduleDose : AppCompatActivity() {
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, MedicationReminderReceiver::class.java).apply {
-            putExtra("medicineId", medicineId)
+            putExtra("medicineName", "Your Medicine Name") // Replace with actual medicine name or retrieve from database if stored
         }
         val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         } else {
             PendingIntent.FLAG_UPDATE_CURRENT
         }
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, pendingIntentFlags)
+
+        // Use medicineId.hashCode() to ensure a unique PendingIntent for each medication
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            medicineId.hashCode(), // Unique ID for each medication
+            intent,
+            pendingIntentFlags
+        )
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, intervalMillis, pendingIntent)
     }
