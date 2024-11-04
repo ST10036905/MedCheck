@@ -73,6 +73,7 @@
                         android:textColor="@android:color/black"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
+                        android:fontFamily="@font/poppins_medium"
                         android:padding="16dp"/>
 
                 </LinearLayout>
@@ -111,6 +112,7 @@
                         android:text="@string/medicine"
                         android:textSize="18sp"
                         android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_medium"
                         app:layout_constraintStart_toStartOf="parent"
                         android:padding="16dp"/>
 
@@ -121,7 +123,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:backgroundTint="@color/textBlue"
-                        android:text="@string/dashboard_add_new_medication" />
+                        android:text="@string/dashboard_add_new_medication"
+                        android:fontFamily="@font/poppins_medium"/>
 
                     <Button
                         android:id="@+id/knowMoreBtn"
@@ -130,6 +133,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/textBlue"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/dashboard_know_more_medicine" />
 
                 </LinearLayout>

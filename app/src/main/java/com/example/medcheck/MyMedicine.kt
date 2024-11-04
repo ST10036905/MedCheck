@@ -29,7 +29,8 @@ class MyMedicine : AppCompatActivity() {
 	private lateinit var medicines: MutableList<String> // Mutable list to hold medicine names
 	private lateinit var databaseHandler: DatabaseHandler
 	private lateinit var medicineTextView: TextView //textview to view the saved sql lite meds
-	
+	private var latestMedicine: String? = null 	// Declare a variable to hold the latest medicine name
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
@@ -50,18 +51,13 @@ class MyMedicine : AppCompatActivity() {
 		// Set up click listener for the add button to navigate to AddMedicine activity
 		binding!!.addAnotherMedicine.setOnClickListener {
 			val addMedicineIntent = Intent(this, AddMedicine::class.java)
-			startActivity(addMedicineIntent)
+			startActivityForResult(addMedicineIntent, ADD_MEDICINE_REQUEST_CODE)
 		}
 		
 		// Initialize the database helper and views
 		databaseHandler = DatabaseHandler(this)
 		        val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
-		//medicineListView = findViewById(R.id.medicineListView)
-		medicineTextView = findViewById(R.id.medicineView_tv)
-//click listener to retrieve sql lite data for viewing the saved medication
-//		binding!!.viewMedicineBtn.setOnClickListener{
-//
-//		}
+
 		retrieveButton.setOnClickListener {
 			val cursor = databaseHandler.getAllMedicines()
 			retrieveMedicines()
@@ -121,6 +117,10 @@ class MyMedicine : AppCompatActivity() {
 						medicines.add(medicineName) // Add medicine name to the list
 					}
 				}
+				// Set the latest medicine if the list is not empty
+				if (medicines.isNotEmpty()) {
+					latestMedicine = medicines.last() // Assuming the last medicine is the latest
+				}
 				// Update ListView with the fetched data
 				val adapter = ArrayAdapter(this@MyMedicine, android.R.layout.simple_list_item_1, medicines)
 				medicineListView.adapter = adapter
@@ -131,6 +131,23 @@ class MyMedicine : AppCompatActivity() {
 				Toast.makeText(this@MyMedicine, "Failed to load medicines.", Toast.LENGTH_SHORT).show()
 			}
 		})
+	}
+
+	// Handle the result when returning from AddMedicine
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		if (requestCode == ADD_MEDICINE_REQUEST_CODE && resultCode == RESULT_OK) {
+			// Pass latest medicine to Dashboard
+			val dashboardIntent = Intent(this, Dashboard::class.java).apply {
+				putExtra("latestMedicine", latestMedicine)
+			}
+			startActivity(dashboardIntent)
+		}
+	}
+
+	// Define a request code
+	companion object {
+		private const val ADD_MEDICINE_REQUEST_CODE = 1
 	}
 	
 	//sql lite : retreiving from the database after the user taps on the View button.
