@@ -23,6 +23,8 @@ class AddMedicine : AppCompatActivity() {
     private var databaseHandler: DatabaseHandler? = null
     private lateinit var firebaseAuth: FirebaseAuth // Firebase Auth instance
 
+    private var selectedFrequency = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,8 +47,6 @@ class AddMedicine : AppCompatActivity() {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding!!.frequencySpinner.adapter = spinnerAdapter
 
-        val selectedFrequency = arrayOf("")
-
         // Handle item selection in the Spinner
         binding!!.frequencySpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -54,7 +54,7 @@ class AddMedicine : AppCompatActivity() {
                     parent: AdapterView<*>?, view: View, position: Int, id: Long
                 ) {
                     if (position > 0) {
-                        selectedFrequency[0] = frequencyOptions[position]
+                        selectedFrequency = frequencyOptions[position]
                     }
                 }
 
@@ -68,12 +68,12 @@ class AddMedicine : AppCompatActivity() {
             val name = binding!!.nameInput.text.toString()
             val dosage = binding!!.strenghtInput.text.toString()
 
-            if (name.isEmpty() || dosage.isEmpty() || selectedFrequency[0].isEmpty()) {
+            if (name.isEmpty() || dosage.isEmpty() || selectedFrequency.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 // Save to both Firebase and SQLite independently
-                storeMedicineInFirebase(name, dosage, selectedFrequency[0])
-                saveMedicine(name, dosage, selectedFrequency[0])
+                storeMedicineInFirebase(name, dosage, selectedFrequency)
+                saveMedicine(name, dosage, selectedFrequency)
             }
         }
     }
@@ -100,6 +100,17 @@ class AddMedicine : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Medicine added to Firebase", Toast.LENGTH_SHORT).show()
                         // Optionally navigate after saving
+                        // Navigate based on selected frequency
+                        val nextActivity = when (selectedFrequency) {
+                            "As Needed" -> Dashboard::class.java
+                            "Scheduled Dose" -> ScheduleDose::class.java
+                            else -> null
+                        }
+
+                        if (nextActivity != null) {
+                            val intent = Intent(this, nextActivity)
+                            startActivity(intent)
+                        }
                     } else {
                         Toast.makeText(this, "Failed to add to Firebase", Toast.LENGTH_SHORT).show()
                     }
@@ -111,8 +122,6 @@ class AddMedicine : AppCompatActivity() {
         val result = databaseHandler?.addMedicine(name, dosage, frequency)
         if (result != -1L) {
             Toast.makeText(this, "Medicine added to SQLite", Toast.LENGTH_SHORT).show()
-            val myMedicineIntent = Intent(this, MyMedicine::class.java)
-            startActivity(myMedicineIntent) // Navigate to MyMedicine after saving
         } else {
             Toast.makeText(this, "Failed to add to SQLite", Toast.LENGTH_SHORT).show()
         }
