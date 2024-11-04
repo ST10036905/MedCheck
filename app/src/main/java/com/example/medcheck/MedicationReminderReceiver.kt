@@ -23,7 +23,6 @@ class MedicationReminderReceiver : BroadcastReceiver() {
             allTakenIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-
         // Create notification to remind the user to take their medication
         val notification = NotificationCompat.Builder(context, "medication_channel")
             .setSmallIcon(R.drawable.medcheck_logo)
