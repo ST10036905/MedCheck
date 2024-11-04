@@ -50,6 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/medicine_name"
+                        android:fontFamily="@font/poppins_medium"
                         android:inputType="text"
                         android:textSize="18sp" />
 
@@ -58,6 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/strength"
+                        android:fontFamily="@font/poppins_medium"
                         android:inputType="text"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -82,6 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/how_are_doses_taken"
+                        android:fontFamily="@font/poppins_medium"
                         android:inputType="text"
                         android:textSize="18sp" />
 
@@ -97,6 +100,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_weight="1"
                             android:text="@string/another_dose"
+                            android:fontFamily="@font/poppins_medium"
                             android:textSize="18sp" />
 
                         <ImageButton
@@ -161,6 +165,7 @@
                 android:layout_marginTop="50dp"
                 android:backgroundTint="@color/red"
                 android:text="@string/stop_taking_medication"
+                android:fontFamily="@font/poppins_medium"
                 android:textSize="18sp"
                 android:textColor="@android:color/white" />
 
@@ -171,6 +176,7 @@
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/textBlue"
                 android:text="@string/done"
+                android:fontFamily="@font/poppins_medium"
                 android:textSize="18sp"
                 android:textColor="@android:color/white" />
         </LinearLayout>
