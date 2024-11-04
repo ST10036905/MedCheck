@@ -149,6 +149,7 @@
     <string name="you_can_set_reminders">You can set reminders in the settings section of the app, where you can customize your reminder times.</string>
     <string name="_3_can_i_add_my_own_medications">3. Can I add my own medications?</string>
 
+
     <string name="dashboard">Dashboard</string>
     <string name="nav_preferences">Preferences</string>
     <string name="calendar">Calendar</string>
@@ -159,6 +160,7 @@
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="msg_token_fmt" translatable="false">FCM Registration Token: %1$s</string>
+    <string name="all_taken">All Taken</string>
 
 
     <string-array name="language_options">
