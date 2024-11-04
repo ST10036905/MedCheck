@@ -1,13 +1,19 @@
 package com.example.medcheck
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
+import java.util.concurrent.Executor
 
 class Login : AppCompatActivity() {
 
@@ -15,26 +21,34 @@ class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     // Companion object to hold shared preference keys
     companion object {
         private const val PREFS_NAME = "MedCheckPrefs" // Name of the shared preferences file
         private const val FIRST_TIME_KEY = "isFirstTime" // Key for checking if it's the user's first time
+        //
+        private const val BIOMETRIC_ENABLED_KEY = "biometricEnabled"
     }
 
-    // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Set up ViewBinding to inflate the layout and access views
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //------------Calls the notification
+        createNotificationChannel()
+        // Initialize SharedPreferences for checking biometric login status
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         // Initialize Firebase Authentication instance
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Initialize SharedPreferences to store/retrieve first-time login status
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        // Check if biometric login is enabled
+        if (sharedPreferences.getBoolean(BIOMETRIC_ENABLED_KEY, false)) {
+            setupBiometricPrompt() // Initialize biometric prompt and info
+            biometricPrompt.authenticate(promptInfo) // Automatically show biometric prompt if enabled
+        }
 
         // Set up the login button click listener for email/password authentication
         binding.submitBtn.setOnClickListener {
@@ -103,4 +117,52 @@ class Login : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+    //---------------Biometric code
+    private fun setupBiometricPrompt() {
+        val executor: Executor = ContextCompat.getMainExecutor(this)
+        biometricPrompt = BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
+                navigateToMainApp()
+            }
+
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                super.onAuthenticationError(errorCode, errString)
+                Toast.makeText(applicationContext, "Authentication error: $errString", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onAuthenticationFailed() {
+                super.onAuthenticationFailed()
+                Toast.makeText(applicationContext, "Authentication failed", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Biometric Login")
+            .setSubtitle("Log in using your fingerprint")
+            .setNegativeButtonText("Use Password")
+            .build()
+    }
+
+    private fun navigateToMainApp() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    //-----------Notification chanel
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Medication Reminders"
+            val descriptionText = "Channel for medication reminder notifications"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("medication_channel", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }

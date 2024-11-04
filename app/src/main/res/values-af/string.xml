@@ -18,12 +18,10 @@
     <string name="dashboard_get_refill_btn">Kry Hervul</string>
     <string name="stop_taking_medication">Hou op om medikasie te neem</string>
 
-
     <string name="dashboard_refill_title">Hervul</string>
     <string name="another_dose">Skeduleer nog \'n dosis</string>"
 
     <string name="default_web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
-
     <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
     <string name="strength">Sterkte</string>
     <string name="how_are">Hoe word die dosis geneem</string>
@@ -83,8 +81,7 @@
     <string name="description">Beskrywing</string>
     <string name="drug_name">Dwelm naam</string>
     <string name="name_of_drug">Naam van dwelm</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="terms_and_conditions_text">Bepalings en voorwaardes vir MedCheck</string>
     <string name="welcome_terms_and_cond">Welkom by MedCheck! Lees asseblief hierdie Bepalings en Voorwaardes noukeurig deur voordat jy die MedCheck-selfoontoepassing (die "Toep") gebruik. Deur MedCheck af te laai, te installeer of te gebruik, stem jy in om aan hierdie Bepalings en Voorwaardes te voldoen en daaraan gebind te wees. As jy nie tot hierdie Bepalings instem nie, mag jy nie die Toep gebruik nie.</string>
     <string name="acceptance_of_terms">Deur toegang tot MedCheck te verkry of te gebruik, erken jy dat jy hierdie Bepalings en Voorwaardes, sowel as ons Privaatheidsbeleid gelees het, verstaan ​​en instem om gebonde te wees aan hierdie Bepalings en Voorwaardes. Ons behou die reg voor om hierdie Bepalings te eniger tyd op te dateer of te wysig, en jou voortgesette gebruik van die Toepassing behels aanvaarding van enige sodanige veranderinge.</string>
@@ -155,8 +152,14 @@
     <string name="_2_how_do_i_set_reminders_for_my_medications">2. Hoe stel ek aanmanings vir my medikasie?</string>
     <string name="you_can_set_reminders">Jy kan onthounotas in die instellingsafdeling van die toepassing stel, waar jy jou herinneringtye kan aanpas.</string>
     <string name="_3_can_i_add_my_own_medications">3. Can I add my own medications?</string>
-    <string name="yes_you_can_add_medications">Ja, jy kan medikasie handmatig byvoeg deur die "Voeg medikasie by"-funksie in die toepassing.</string>
 
+    <string name="yes_you_can_add_medications">Ja, jy kan medikasie handmatig byvoeg deur die "Voeg medikasie by"-funksie in die toepassing.</string>
+    <string name="dashboard">Kontroleskerm</string>
+
+    <string name="nav_preferences">Voorkeure</string>
+    <string name="calendar">Kalender</string>
+    <string name="about_med">Oor Med</string>
+    <string name="medication">Medikasie</string>
 
 
 

@@ -17,6 +17,8 @@ retrofit="2.9.0"
 retrofit2="2.9.0"
 roundeImage="2.3.0"
 mlkit="17.0.3"
+fingerprint = "1.1.0"
+
 constraintlayout = "2.1.4"
 places = "4.0.0"
 firebase ="23.0.0"
@@ -29,6 +31,7 @@ firebaseDatabase = "21.0.0"
 firebaseAuthKtx = "23.0.0"
 firebaseDatabaseKtx = "21.0.0"
 googleServices = "4.4.2"
+firebaseMessagingKtx = "24.0.3"
 
 
 [libraries]
@@ -51,6 +54,9 @@ services-auth = { group = "com.google.android.gms", name = "play-services-auth",
 rounde-Image = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundeImage" }
 mlkit = { group = "com.google.mlkit", name = "translate", version.ref = "mlkit" }
 
+fingerprint = { group = "androidx.biometric", name = "biometric", version.ref = "fingerprint" }
+
+
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
@@ -59,6 +65,7 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database",
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

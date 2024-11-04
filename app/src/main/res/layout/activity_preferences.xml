@@ -75,6 +75,7 @@
                             android:textStyle="bold" />
 
                         <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/themeSwitch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -332,13 +333,14 @@
                     </RelativeLayout>
                     <!-- Add facial recognition -->
                     <RelativeLayout
+                        android:id="@+id/enableBiometricButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/round_back_secondaty_100">
 
                         <ImageView
-                            android:id="@+id/facialRecognitionMode"
+                            android:id="@+id/enableBiometricIV"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/round_back_night_mode"
@@ -350,7 +352,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/facialRecognitionMode"
+                            android:layout_toEndOf="@+id/enableBiometricIV"
                             android:text="@string/facial_recognition"
                             android:textColor="@color/white"
                             android:textStyle="bold" />

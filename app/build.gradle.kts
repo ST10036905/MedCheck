@@ -67,14 +67,29 @@ dependencies {
     // Google Sign-In
     implementation (libs.firebase.auth.ktx.v2200)
     implementation (libs.play.services.auth.v2050)
+    // for finger print
+    implementation(libs.fingerprint)
 
     implementation (libs.rounde.image)
 
     implementation (libs.firebase.auth)
-    implementation (libs.services.auth)  // Google Sign-In SDK
+    implementation (libs.services.auth)
+    // Google Sign-In SDK
     // Dependency for translation
     implementation(libs.mlkit)
+    //implementing messaging feature
+    implementation(libs.firebase.messaging.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    // Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+
+    // Firebase Analytics and Messaging
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-messaging")
+
+
 }

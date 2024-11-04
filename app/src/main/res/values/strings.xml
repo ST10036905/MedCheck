@@ -1,6 +1,4 @@
 <resources>
-
-
     <string name="my_medicine_screen_title">My Medicine</string>
     <string name="medicine_details_name">Name</string>
     <string name="calendar_title">Calendar</string>
@@ -17,13 +15,10 @@
     <string name="dashboard_refill_button">Refill</string>
     <string name="dashboard_get_refill_btn">Get Refill</string>
     <string name="stop_taking_medication">Stop Taking Medication</string>
-
-
     <string name="dashboard_refill_title">Refill</string>
     <string name="another_dose">Schedule another dose</string>"
 
     <string name="default_web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
-
     <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
     <string name="strength">Strength</string>
     <string name="how_are">How are the dose taken</string>
@@ -31,7 +26,7 @@
     <string name="medications">Medications</string>
     <string name="preferences">Preferences</string>
     <string name="app_name">MedCheck</string>
-    <string name="start">GET STARTED &gt;</string> <!-- Corrected the ">" symbol -->
+    <string name="start">GET STARTED </string>
     <string name="register">Registration form</string>
     <string name="login">Login</string>
     <string name="name">Name:</string>
@@ -83,8 +78,7 @@
     <string name="description">Description</string>
     <string name="drug_name">Drug Name</string>
     <string name="name_of_drug">Name of Drug</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="terms_and_conditions_text">Terms and conditions for MedCheck</string>
     <string name="welcome_terms_and_cond">Welcome to MedCheck! Please read these Terms and Conditions carefully before using the MedCheck mobile application (the “App”). By downloading, installing, or using MedCheck, you agree to comply with and be bound by these Terms and Conditions. If you do not agree to these Terms, you may not use the App.</string>
     <string name="acceptance_of_terms">By accessing or using MedCheck, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions, as well as our Privacy Policy. We reserve the right to update or modify these Terms at any time, and your continued use of the App constitutes acceptance of any such changes.</string>
@@ -118,15 +112,15 @@
     <string name="refill_your_medications">Refill Your Medications</string>
     <string name="you_can_now_search">You can now search for medications by name and get detailed information including usage, dosage, and warnings.</string>
     <string name="search_for_medications">Search for Medications</string>
-    <string name="what_s_new_in_medcheck">What\'s New in MedCheck</string>
+    <string name="what_s_new_in_medcheck">What is new in MedCheck</string>
     <string name="email">Email</string>
     <string name="sign_up">Do not have an account? Sign up with google.</string>
     <string name="google">Sign up with google</string>
     <string name="taken">Taken</string>
     <string name="sign_out">Sign out</string>
     <string name="logout">Logout</string>
-    <string name="sign_up_manually">Register here.\n</string>
-    <string name="dashboard_know_more_medicine">Get to know more about a medication.\n</string>
+    <string name="sign_up_manually">Register here.</string>
+    <string name="dashboard_know_more_medicine">Get to know more about a medication.</string>
     <string name="add_another_medicine_click_the_plus_button">Add another medicine click the plus button</string>
     <string name="medicine_details">Medicine Details</string>
     <string name="receive_a_reminder_when_there_are_only_5_units_of_this_medicine_remaining">Receive a reminder when there are only 5 units of this medicine remaining</string>
@@ -139,7 +133,7 @@
     <string name="english">English</string>
     <string name="afrikaans">Afrikaans</string>
     <string name="enter_medicine_name">Enter medicine name</string>
-    <string name="enter_strenght_of_medicine">Enter strenght of medicine</string>
+    <string name="enter_strenght_of_medicine">Enter strength of medicine</string>
     <string name="medicine">Medicine</string>
     <string name="satellite">Satellite</string>
     <string name="hybrid">Hybrid</string>
@@ -154,7 +148,19 @@
     <string name="_2_how_do_i_set_reminders_for_my_medications">2. How do I set reminders for my medications?</string>
     <string name="you_can_set_reminders">You can set reminders in the settings section of the app, where you can customize your reminder times.</string>
     <string name="_3_can_i_add_my_own_medications">3. Can I add my own medications?</string>
+
     <string name="yes_you_can_add_medications">Yes, you can add medications manually through the \'Add Medication\' feature in the app.</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="nav_preferences">Preferences</string>
+    <string name="calendar">Calendar</string>
+    <string name="about_med">About Med</string>
+    <string name="medication">Medication</string>
+
+    <string name="yes_you_can_add_medications">Yes you can add medications manually through the Add Medication feature in the app.</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="msg_token_fmt" translatable="false">FCM Registration Token: %1$s</string>
+
 
     <string-array name="language_options">
         <item>English</item>
