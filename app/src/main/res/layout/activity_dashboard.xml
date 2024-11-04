@@ -184,6 +184,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/black"
                                 android:text="@string/dashboard_getting_started_award"
                                 android:textSize="12sp"/>
                         </LinearLayout>
@@ -205,6 +206,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/dashboard_my_milestone_title"
                                 android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/black"
                                 android:textSize="12sp"/>
                         </LinearLayout>
 
@@ -224,6 +226,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/dashboard_using_medcheck_title"
                                 android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/black"
                                 android:textSize="12sp"/>
                         </LinearLayout>
                     </LinearLayout>
