@@ -2,6 +2,7 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -95,41 +96,48 @@ class Dashboard : AppCompatActivity() {
 	private fun fetchUserData() {
 		val currentUser = auth.currentUser
 		if (currentUser != null) {
-			// Display the user's email in the emailTextView
+			// Set email in emailTextView
 			emailTextView.text = currentUser.email
 
-			// Get the unique user ID from Firebase Authentication
+			// Get the user ID
 			val userId = currentUser.uid
+			Log.d("Dashboard", "Current User ID: $userId")
 
-			// Reference to the user's medicines in the Firebase database
-			val userMedicineRef = databaseReference.child(userId).child("medicines")
+			// Reference to the medicines table
+			val medicinesRef = FirebaseDatabase.getInstance().getReference("medicines")
 
-			// Retrieve the medicine data from the database for the current user
-			userMedicineRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(object : ValueEventListener {
-				override fun onDataChange(snapshot: DataSnapshot) {
-					if (snapshot.exists()) {
-						// Fetch the latest medicine name
-						for (medicineSnapshot in snapshot.children) {
-							val name = medicineSnapshot.child("name").getValue(String::class.java)
-							if (name != null) {
-								medicineTextView.text = "Recent Medicine: $name"
+			// Query to fetch medicines where userId matches current user's ID
+			medicinesRef.orderByChild("userId").equalTo(userId)
+				.addListenerForSingleValueEvent(object : ValueEventListener {
+					override fun onDataChange(snapshot: DataSnapshot) {
+						Log.d("Dashboard", "Snapshot: ${snapshot.value}")
+						if (snapshot.exists()) {
+							var latestMedicineName: String? = null
+							for (medicineSnapshot in snapshot.children) {
+								// Fetch each medicine's name
+								val name = medicineSnapshot.child("name").getValue(String::class.java)
+								if (name != null) {
+									latestMedicineName = name  // Store each name, resulting in the last one being saved
+									Log.d("Dashboard", "Found Medicine: $name")
+								}
+							}
+
+							// Display the latest (last retrieved) medicine name
+							if (latestMedicineName != null) {
+								medicineTextView.text = "Recent Medicine: $latestMedicineName"
 							} else {
 								medicineTextView.text = "No medicine found"
 							}
+						} else {
+							medicineTextView.text = "No medicine data found"
 						}
-					} else {
-						// Show a message if no medicine data is found
-						medicineTextView.text = "No medicine data found"
 					}
-				}
 
-				override fun onCancelled(error: DatabaseError) {
-					// Handle errors while fetching data
-					Toast.makeText(this@Dashboard, "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
-				}
-			})
+					override fun onCancelled(error: DatabaseError) {
+						Toast.makeText(this@Dashboard, "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
+					}
+				})
 		} else {
-			// Notify the user if they are not logged in
 			Toast.makeText(this, "No user is logged in", Toast.LENGTH_SHORT).show()
 		}
 	}
