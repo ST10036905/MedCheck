@@ -12,6 +12,8 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -28,27 +30,34 @@ class Preferences : AppCompatActivity() {
     companion object {
         private const val PREFS_NAME = "MedCheckPrefs"
         private const val BIOMETRIC_ENABLED_KEY = "biometricEnabled"
+        private const val DARK_MODE_KEY = "night"
     }
 
-    //--------------- Code for Biometric preference
+    //--------------- Declarations
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
-    // View binding for this activity
     private lateinit var binding: ActivityPreferencesBinding
-    // Declaring the GoogleSignInClient
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
     @SuppressLint("MissingInflatedId") // Suppresses warnings for missing inflated IDs
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_preferences)
         // Initialize the binding
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
-        setContentView(binding.root) // Set content view to the binding root
+        setContentView(binding.root)
+
         //--------------Gets the shared preferences
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        //set  initial dark mode state from shared preferences
+        val isDarkModeEnabled = sharedPreferences.getBoolean(DARK_MODE_KEY, false)
+        setDarkMode(isDarkModeEnabled)
+        // sets the default value to light mode
+        //val nightMode = sharedPreferences.getBoolean("night", false)
 
         //--------Initialize biometric prompt setup
         setupBiometricPrompt()
@@ -62,6 +71,15 @@ class Preferences : AppCompatActivity() {
             .requestEmail() // Request email for Google Sign-In
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso) // Initialize GoogleSignInClient
+
+
+        //--------------Theme switch toggle action
+        val themeSwitch = findViewById<SwitchCompat>(R.id.themeSwitch)
+        themeSwitch.isChecked = isDarkModeEnabled
+        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            setDarkMode(isChecked)
+            editor.putBoolean(DARK_MODE_KEY, isChecked).apply()
+        }
 
         // Setting up the logout button click listener
         val logoutMode = findViewById<RelativeLayout>(R.id.logoutRL)
@@ -164,6 +182,24 @@ class Preferences : AppCompatActivity() {
         //--------------------------------------------------------------------------------------------------
     }
 
+
+    private fun setDarkMode(isEnabled: Boolean) {
+        if (isEnabled) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
+    // Sign-out method using GoogleSignInClient
+    private fun signOut() {
+        mGoogleSignInClient!!.signOut().addOnCompleteListener(this) {
+            // Sign-out successful, navigate back to login or main activity
+            val intent = Intent(this@Preferences, Welcome::class.java) // Change this to your login activity
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK) // Clear activity stack
+            startActivity(intent) // Start the login activity
+            finish() // Close the current activity
+        }
 
 
     // In your logout function (like in SettingsActivity or where you log out)
