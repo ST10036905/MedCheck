@@ -42,7 +42,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:backgroundTint="@color/textBlue"
-                    android:text="View My Medicine" />
+                    android:text="View My Medicine"
+                    android:fontFamily="@font/poppins_medium"/>
 
                 <Button
                     android:id="@+id/clearMedicineBtn"
@@ -50,7 +51,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="@color/caramel"
-                    android:text="Clear My Cabinet" />
+                    android:text="Clear My Cabinet"
+                    android:fontFamily="@font/poppins_medium"/>
             </LinearLayout>
 
             <LinearLayout

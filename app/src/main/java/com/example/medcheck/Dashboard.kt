@@ -22,6 +22,7 @@ class Dashboard : AppCompatActivity() {
 	private lateinit var emailTextView: TextView
 	private lateinit var medicineTextView: TextView
 
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		// Set the content view using the layout for the dashboard
@@ -41,13 +42,21 @@ class Dashboard : AppCompatActivity() {
 		emailTextView = findViewById(R.id.emailText) // Ensure this ID is defined in your layout
 		medicineTextView = findViewById(R.id.medicineText) // Ensure this ID is defined in your layout
 
+		// Get the latest medicine from the intent
+		val latestMedicine = intent.getStringExtra("latestMedicine")
+
+		// Display the latest medicine if it exists
+		if (latestMedicine != null) {
+			medicineTextView.text = "Recent Medicine: $latestMedicine"
+		} else {
+			medicineTextView.text = "No latest medicine available"
+		}
+
 		// Fetch the user's data from Firebase (email, medicines, etc.)
 		fetchUserData()
 	}
 
-	/**
-	 * Fetches the user's data from Firebase, including their email and stored medicines.
-	 */
+	//Fetches the user's data from Firebase, including their email and stored medicines.
 	private fun fetchUserData() {
 		val currentUser = auth.currentUser
 		if (currentUser != null) {
