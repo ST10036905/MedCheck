@@ -31,6 +31,7 @@ firebaseDatabase = "21.0.0"
 firebaseAuthKtx = "23.0.0"
 firebaseDatabaseKtx = "21.0.0"
 googleServices = "4.4.2"
+firebaseMessagingKtx = "24.0.3"
 
 
 [libraries]
@@ -64,6 +65,7 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database",
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

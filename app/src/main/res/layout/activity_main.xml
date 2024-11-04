@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="0dp"
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/medcheck_logo" />
@@ -31,7 +31,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/welcome"
             android:textAlignment="center"
@@ -47,6 +47,7 @@
             android:textColor="@color/textBlue"
             android:textSize="20sp"
             android:fontFamily="@font/poppins_bold"/>
+
     </LinearLayout>
 
 
