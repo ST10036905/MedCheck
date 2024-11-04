@@ -9,6 +9,9 @@ https://m.youtube.com/watch?v=1-WOMYdCUbY&pp=ygUITWVkY2hlY2s%3D
 The following mobile application is being designed using the Android Studio IDE.
 The application, which is being identified as "Med Check", it  has as a focal point, the ability of allowing users to log a medicine with the objective of them keeping track of the medical records. Med Check aims to provide a user-friendly interface for users to manage their medication schedules and improve their adherence to prescribed treatments. By centralizing medical records, users can easily monitor their health and well-being.
 
+The following screenshot below is shwoing the Med Check logo:
+
+
 Main features of the application :
 
 *** Create an account/sign up using google - in order for users to record their medication, they should have an account to maintain their data kept and centralized, which all starts by the creation of an account by entering their personalized characteristics. If user has a google account, they can automatically sign up by the use of a Single Sign In feature. The application  supports Google Sign-In through Firebase Authentication, allowing users to register quickly if they have a Google account.
@@ -38,6 +41,10 @@ Radio Group (languageRadioGroup): Contains radio buttons for language selection.
 English (radioEnglish) - text set by @string/english
 Portuguese (radioPortuguese) - text set by @string/portuguese
 Afrikaans (radioAfrikaans) - text set by @string/afrikaans
+
+**Biometrics (fingerprint) system**
+
+**Real-time notification**
 
 *** Technologies Used ***
 Android Studio: The primary IDE for developing the application.
@@ -74,6 +81,9 @@ Structure: Medication data is stored under a medicines node in Firebase, with ea
 My Medicine (Display Data)
 From Firebase: Data is fetched in real-time from the Firebase database and displayed in a ListView. This allows users to see medications that are synced across devices.
 From SQLite: Data is retrieved from SQLite and displayed in a TextView, providing a list of medications that can be accessed offline.
+
+The following images are showing the medicine details user input being saved and displayed. Add Medicine requuires user input of the medication while My Medicine allows the user to read about their saved mediciation after tapping on the view button. 
+
 
 
 ******* Azania Ncube ST10036066
