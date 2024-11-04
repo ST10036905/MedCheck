@@ -7,18 +7,14 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityMyMedicineBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.*
 import com.example.medcheck.Database.DatabaseHandler
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-
-
+import com.google.firebase.auth.FirebaseAuth
 
 class MyMedicine : AppCompatActivity() {
 
@@ -28,8 +24,8 @@ class MyMedicine : AppCompatActivity() {
 	private lateinit var medicineListView: ListView // ListView to display the list of medicines
 	private lateinit var medicines: MutableList<String> // Mutable list to hold medicine names
 	private lateinit var databaseHandler: DatabaseHandler
-	private lateinit var medicineTextView: TextView //textview to view the saved sql lite meds
-	private var latestMedicine: String? = null 	// Declare a variable to hold the latest medicine name
+	private var latestMedicine: String? = null // Variable to hold the latest medicine name
+	private var userId: String? = null // Store user ID to filter medicines
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -38,12 +34,18 @@ class MyMedicine : AppCompatActivity() {
 		binding = ActivityMyMedicineBinding.inflate(layoutInflater)
 		setContentView(binding!!.root)
 
+		// Get the current user's ID
+		userId = FirebaseAuth.getInstance().currentUser?.uid
+
 		// Initialize Firebase Database reference
 		databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 
 		// Initialize ListView and medicines list
 		medicineListView = binding!!.medicineListView
 		medicines = mutableListOf()
+
+		// Initialize the database handler
+		databaseHandler = DatabaseHandler(this)
 
 		// Fetch medicines from Firebase
 		fetchMedicinesFromFirebase()
@@ -53,84 +55,77 @@ class MyMedicine : AppCompatActivity() {
 			val addMedicineIntent = Intent(this, AddMedicine::class.java)
 			startActivityForResult(addMedicineIntent, ADD_MEDICINE_REQUEST_CODE)
 		}
-		
-		// Initialize the database helper and views
-		databaseHandler = DatabaseHandler(this)
-		        val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
 
+		// Set up click listener for the retrieve button
+		val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
 		retrieveButton.setOnClickListener {
-			val cursor = databaseHandler.getAllMedicines()
-			retrieveMedicines()
+			retrieveMedicines() // Fetch medicines from SQLite and display them
 		}
 
-		//clearing the medicine
-		val clearMedicineBtn = findViewById<Button>(R.id.clearMedicineBtn)
-		// Click listener to clear the TextView
-		clearMedicineBtn.setOnClickListener {
-			medicineTextView.text = ""  // Clears the TextView content
+		// Set up click listener for the clear button
+		val clearButton = findViewById<Button>(R.id.clearMedicineBtn)
+		clearButton.setOnClickListener {
+			clearMedicines() // Clear the medicines and display a toast
 		}
-		//---------------------------------------BOTTOM NAV-------------------------------------------------
+
+		// Set up Bottom Navigation
 		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
-		// Handle navigation item selection for the bottom navigation bar
 		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
 			when (item.itemId) {
-
 				R.id.nav_calendar -> {
-					// Navigate to Calendar Activity
 					startActivity(Intent(this, Calendar::class.java))
-					return@setOnNavigationItemSelectedListener true
+					true
 				}
-
 				R.id.nav_dashboard -> {
-					// Navigate to Dashboard Activity
 					startActivity(Intent(this, Dashboard::class.java))
-					return@setOnNavigationItemSelectedListener true
+					true
 				}
-
 				R.id.nav_konw_your_med -> {
-					// Navigate to About Med Activity
 					startActivity(Intent(this, MedicationInformation::class.java))
-					return@setOnNavigationItemSelectedListener true
+					true
 				}
-
 				R.id.nav_medication -> {
-					// Navigate to MyMedicine Activity
 					startActivity(Intent(this, MyMedicine::class.java))
-					return@setOnNavigationItemSelectedListener true
+					true
 				}
+				else -> false
 			}
-			false
 		}
-		//--------------------------------------------------------------------------------------------------
 	}
 
-	// Fetch medicines from Firebase Realtime Database
 	private fun fetchMedicinesFromFirebase() {
-		// Add a ValueEventListener to the database reference
-		databaseReference!!.addValueEventListener(object : ValueEventListener {
-			override fun onDataChange(dataSnapshot: DataSnapshot) {
-				medicines.clear() // Clear the list before adding new data
-				for (snapshot in dataSnapshot.children) {
-					val medicineName = snapshot.child("name").getValue(String::class.java) // Get medicine name
-					if (medicineName != null) {
-						medicines.add(medicineName) // Add medicine name to the list
-					}
-				}
-				// Set the latest medicine if the list is not empty
-				if (medicines.isNotEmpty()) {
-					latestMedicine = medicines.last() // Assuming the last medicine is the latest
-				}
-				// Update ListView with the fetched data
-				val adapter = ArrayAdapter(this@MyMedicine, android.R.layout.simple_list_item_1, medicines)
-				medicineListView.adapter = adapter
-			}
+		val userId = FirebaseAuth.getInstance().currentUser?.uid
 
-			override fun onCancelled(databaseError: DatabaseError) {
-				// Show error message if data retrieval fails
-				Toast.makeText(this@MyMedicine, "Failed to load medicines.", Toast.LENGTH_SHORT).show()
-			}
-		})
+		if (userId != null) {
+			databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
+
+			// Query to get medicines for the specific user
+			databaseReference!!.orderByChild("userId").equalTo(userId)
+				.addValueEventListener(object : ValueEventListener {
+					override fun onDataChange(dataSnapshot: DataSnapshot) {
+						medicines.clear() // Clear the list before adding new data
+						for (snapshot in dataSnapshot.children) {
+							val medicineName = snapshot.child("name").getValue(String::class.java)
+							if (medicineName != null) {
+								medicines.add(medicineName)
+							}
+						}
+
+						// Update ListView with the fetched data
+						val adapter = ArrayAdapter(this@MyMedicine, android.R.layout.simple_list_item_1, medicines)
+						medicineListView.adapter = adapter
+
+						// Set the latest medicine if the list is not empty
+						latestMedicine = if (medicines.isNotEmpty()) medicines.last() else null // No medicines available
+					}
+
+					override fun onCancelled(databaseError: DatabaseError) {
+						Toast.makeText(this@MyMedicine, "Failed to load medicines.", Toast.LENGTH_SHORT).show()
+					}
+				})
+		} else {
+			Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show()
+		}
 	}
 
 	// Handle the result when returning from AddMedicine
@@ -149,56 +144,46 @@ class MyMedicine : AppCompatActivity() {
 	companion object {
 		private const val ADD_MEDICINE_REQUEST_CODE = 1
 	}
-	
-	//sql lite : retreiving from the database after the user taps on the View button.
-	private fun displayData(cursor: Cursor) {
-		// Display the retrieved data in the TextView
-		// Create a list to store data
-		val data = mutableListOf<String>()
-		
-		// Loop through the cursor and retrieve data
-		if (cursor.moveToFirst()) {
-			do {
-				// Assuming your table has a "name" column; adjust the column name accordingly
-				val medicineName = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-				data.add(medicineName)
-			} while (cursor.moveToNext())
-		}
-		
-		cursor.close() // Close the cursor after use
-		
-		// Display the data in the TextView
-		medicineTextView.text = if (data.isNotEmpty()) {
-			data.joinToString("\n")
-		} else {
-			"No data found"
-		}
-	}
-	
-	//more sql lite
+
+	// SQLite: retrieving from the database after the user taps on the View button.
 	private fun retrieveMedicines() {
 		Log.d("MyMedicine", "retrieveMedicines: Retrieving medicines from SQLite.")
-		val cursor = databaseHandler.getAllMedicines()
+		val cursor: Cursor? = databaseHandler.getAllMedicines()
 		val medicinesList = StringBuilder()
-		
-		if (cursor?.moveToFirst() == true) {
-			do {
-				val medicineName = cursor.getString(cursor.getColumnIndexOrThrow("medicineName"))
-				val strength = cursor.getString(cursor.getColumnIndexOrThrow("strength"))
-				val frequency = cursor.getString(cursor.getColumnIndexOrThrow("frequency"))
-				
-				// Format each record
-				medicinesList.append("Medicine: $medicineName\nStrength: $strength\nFrequency: $frequency\n\n")
-			} while (cursor.moveToNext())
-			Log.d("MyMedicine", "retrieveMedicines: Data retrieved successfully.")
-		} else {
-			Log.d("MyMedicine", "retrieveMedicines: No medicines found in SQLite.")
-			medicinesList.append("No medicines found.")
+
+		cursor?.use {
+			if (it.moveToFirst()) {
+				do {
+					val medicineName = it.getString(it.getColumnIndexOrThrow("name"))
+					val strength = it.getString(it.getColumnIndexOrThrow("strength"))
+					val frequency = it.getString(it.getColumnIndexOrThrow("frequency"))
+
+					// Format each record
+					medicinesList.append("Medicine: $medicineName\nStrength: $strength\nFrequency: $frequency\n\n")
+				} while (it.moveToNext())
+				Log.d("MyMedicine", "retrieveMedicines: Data retrieved successfully.")
+			} else {
+				Log.d("MyMedicine", "retrieveMedicines: No medicines found in SQLite.")
+				medicinesList.append("No medicines found.")
+			}
 		}
-		
-		cursor?.close()
-		
-		// Display retrieved data in the TextView
-		medicineTextView.text = medicinesList.toString()
+
+		// Show a Toast with retrieved data or update the ListView if desired
+		if (medicinesList.isNotEmpty()) {
+			Toast.makeText(this, medicinesList.toString(), Toast.LENGTH_LONG).show() // Display medicines in a Toast
+		} else {
+			Toast.makeText(this, "No medicines found.", Toast.LENGTH_SHORT).show()
+		}
+	}
+
+	// Function to clear medicines and display a toast message
+	private fun clearMedicines() {
+		medicines.clear() // Clear the list of medicines
+
+		// Notify the ListView adapter that the data set has changed
+		(medicineListView.adapter as? ArrayAdapter<*>)?.notifyDataSetChanged()
+
+		// Display a toast message
+		Toast.makeText(this, "Medicine cabinet will be cleared.", Toast.LENGTH_SHORT).show()
 	}
 }

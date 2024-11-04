@@ -25,34 +25,27 @@ class Dashboard : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		// Set the content view using the layout for the dashboard
 		setContentView(R.layout.activity_dashboard)
 
-		// Initialize view binding for accessing views in the layout
 		binding = ActivityDashboardBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
-		// Initialize Firebase Auth to handle user authentication
 		auth = FirebaseAuth.getInstance()
-
-		// Reference the Firebase database, specifically the "users" node
 		databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
-		// Initialize the TextViews to display user email and medicine data
-		emailTextView = findViewById(R.id.emailText) // Ensure this ID is defined in your layout
-		medicineTextView = findViewById(R.id.medicineText) // Ensure this ID is defined in your layout
+		emailTextView = findViewById(R.id.emailText)
+		medicineTextView = findViewById(R.id.medicineText)
 
 		// Get the latest medicine from the intent
 		val latestMedicine = intent.getStringExtra("latestMedicine")
 
 		// Display the latest medicine if it exists
-		if (latestMedicine != null) {
+		if (!latestMedicine.isNullOrEmpty()) {
 			medicineTextView.text = "Recent Medicine: $latestMedicine"
 		} else {
 			medicineTextView.text = "No latest medicine available"
 		}
 
-		// Fetch the user's data from Firebase (email, medicines, etc.)
 		fetchUserData()
 	}
 
