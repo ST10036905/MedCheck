@@ -1,11 +1,11 @@
 
 *Med Check Mobile Application*
-**OPSC7312 POE PART 2**
+**OPSC7312 POE PART**
 *** Azania Ncube ST10036066***
 *** Mayra Selemane ST10036905***
 *** Zacarias Antero ST10068763***
 
-****Youtube link
+****Youtube link (PART 2)
 https://m.youtube.com/watch?v=1-WOMYdCUbY&pp=ygUITWVkY2hlY2s%3D
 
 
