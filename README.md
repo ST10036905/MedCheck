@@ -1,6 +1,9 @@
 
-***Med Check Mobile Application
-***OPSC7312 POE PART 2
+*Med Check Mobile Application*
+**OPSC7312 POE PART 2**
+*** Azania Ncube ST10036066***
+*** Mayra Selemane ST10036905***
+*** Zacarias Antero ST10068763***
 
 ****Youtube link
 https://m.youtube.com/watch?v=1-WOMYdCUbY&pp=ygUITWVkY2hlY2s%3D
@@ -105,7 +108,5 @@ The saved medicine shown as a list:
 
 Google Developers, 2024. Authenticate with Biometric Login on Android. Available at: https://developer.android.com/identity/sign-in/biometric-auth [Accessed 4 November 2024].
 
-******* Azania Ncube ST10036066
-******* Mayra Selemane ST10036905
-******* Zacarias Antero ST10068763
+
 
