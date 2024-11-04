@@ -3,7 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BgColor"
     tools:context=".Terms_and_condition_fragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:paddingBottom="32dp">
 
     <!-- Title for the Terms and Conditions -->
     <TextView
@@ -18,19 +27,19 @@
         android:textColor="@color/black" />
 
     <!-- ScrollView for the Terms and Conditions Text -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="72dp"
-        android:layout_marginBottom="20dp"
-        android:padding="16dp"
-        android:paddingBottom="60dp"
-        android:background="@color/white">
+        <!-- ScrollView for the Terms and Conditions Text -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/BgColor"
+            android:paddingBottom="32dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="18dp">
 
             <!-- Section 1 -->
             <TextView
@@ -41,7 +50,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +59,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:gravity="start"
+                android:layout_marginBottom="10dp"/>
 
             <!-- Section 2 -->
             <TextView
@@ -60,7 +71,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -69,7 +81,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:gravity="start"
+                android:layout_marginBottom="10dp"/>
 
             <!-- Section 3 -->
             <TextView
@@ -80,7 +93,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +102,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:gravity="start"
+                android:layout_marginBottom="10dp"/>
 
 
             <TextView
@@ -99,7 +114,9 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,7 +124,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:gravity="start"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -117,7 +135,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -126,7 +145,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:gravity="start"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -136,7 +156,9 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,7 +166,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:gravity="start"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -154,7 +177,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,7 +186,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:gravity="start"
+                android:layout_marginBottom="10dp"/>
 
 
             <TextView
@@ -173,7 +198,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -182,7 +208,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:gravity="start"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -192,7 +219,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -201,7 +229,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:layout_marginBottom="10dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -211,7 +239,9 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:lineSpacingExtra="8dp" />
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="10dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -219,10 +249,11 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:lineSpacingExtra="8dp"
-                android:gravity="start" />
+                android:layout_marginBottom="20dp" />
 
         </LinearLayout>
-
     </ScrollView>
+
+    </LinearLayout>
 
 </FrameLayout>

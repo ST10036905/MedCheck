@@ -47,6 +47,9 @@ class Preferences : AppCompatActivity() {
         setContentView(R.layout.activity_preferences)
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // resizes the nav bar icons depending of the screen size of the phone or device used
+        val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
