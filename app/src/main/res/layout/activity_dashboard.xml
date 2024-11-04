@@ -125,7 +125,7 @@
                     <Button
                         android:id="@+id/knowMoreBtn"
                         android:layout_width="300dp"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/textBlue"

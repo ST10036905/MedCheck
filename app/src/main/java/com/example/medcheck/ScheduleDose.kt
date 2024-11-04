@@ -9,7 +9,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -38,22 +37,34 @@ class ScheduleDose : AppCompatActivity() {
         // Initialize Firebase Database reference to "medicines"
         databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 
-        val medicineId = intent.getStringExtra("medicineId")
+        // Get the medicine ID passed from the AddMedicine activity
+        val medicineId = intent.getStringExtra("medicineId") ?: return
+        //---------- checks if the id is null
         if (medicineId.isNullOrEmpty()) {
             Toast.makeText(this, "Error: Medicine ID is missing", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
 
-        // Notification permission request for Android 13+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQUEST_NOTIFICATION_PERMISSION)
+        // Set up click listener for the "Schedule Dose" button
+        binding.scheduleDoseBtn.setOnClickListener {
+            // Get values from input fields
+            val doseTime = binding.timeTakenInput.text.toString()
+            val howOften = binding.oftenSpinner.selectedItem.toString()
+            val howMany = binding.howManyInput.text.toString()
+
+            // Validate inputs to ensure all fields are filled
+            if (doseTime.isEmpty() || howMany.isEmpty() || howOften == "Select an option") {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                // Store dose details in Firebase
+                storeScheduledDoseInFirebase(medicineId, doseTime, howOften, howMany) // Pass the medicine ID
             }
         }
 
+        //----------Set up onClickListener to open TimePickerDialog for dose input
         binding.timeTakenInput.setOnClickListener {
-            openTimePicker()
+            openTimePicker() // Opens a dialog to select time
         }
 
         // Populate the "How Often" spinner with dosage options
@@ -67,17 +78,13 @@ class ScheduleDose : AppCompatActivity() {
         )
         val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, dosageOptions)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.oftenSpinner.adapter = spinnerAdapter
+        binding.oftenSpinner.adapter = spinnerAdapter // Set the adapter for the spinner
 
-        binding.scheduleDoseBtn.setOnClickListener {
-            val doseTime = binding.timeTakenInput.text.toString()
-            val howOften = binding.oftenSpinner.selectedItem.toString()
-            val howMany = binding.howManyInput.text.toString()
 
-            if (doseTime.isEmpty() || howMany.isEmpty() || howOften == "Select an option") {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            } else {
-                storeScheduledDoseInFirebase(medicineId, doseTime, howOften, howMany)
+        // Notification permission request for Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQUEST_NOTIFICATION_PERMISSION)
             }
         }
     }
@@ -88,41 +95,38 @@ class ScheduleDose : AppCompatActivity() {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
+        // Create and show the TimePickerDialog
         val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-            val time = String.format("%02d:%02d", selectedHour, selectedMinute)
-            binding.timeTakenInput.setText(time)
+            val time = String.format("%02d:%02d", selectedHour, selectedMinute) // Format the time
+            binding.timeTakenInput.setText(time) // Set the selected time in the input field
         }, hour, minute, true)
-        timePickerDialog.show()
+        timePickerDialog.show() // Display the dialog
     }
 
     // Method to store scheduled dose information in Firebase
     private fun storeScheduledDoseInFirebase(medicineId: String, doseTime: String, howOften: String, howMany: String) {
-        try {
-            val doseData = HashMap<String, String>()
-            doseData["doseTime"] = doseTime
-            doseData["howOften"] = howOften
-            doseData["howMany"] = howMany
+        val doseData = HashMap<String, String>()
+        doseData["doseTime"] = doseTime // Store the dose time
+        doseData["howOften"] = howOften // Store how often the dose is taken
+        doseData["howMany"] = howMany // Store how many doses to take
 
-            databaseReference.child(medicineId).child("schedules").push().setValue(doseData)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "Dose scheduled successfully", Toast.LENGTH_SHORT).show()
+        // Push dose data to Firebase under the specified medicine ID
+        databaseReference.child(medicineId).child("schedules").push().setValue(doseData)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Dose scheduled successfully", Toast.LENGTH_SHORT).show()
 
-                        // Navigate to MedicineDetailsActivity with the medicineId
-                        val intent = Intent(this, MedicineDetailsActivity::class.java)
-                        intent.putExtra("medicineId", medicineId)
-                        startActivity(intent)
-                    } else {
-                        Toast.makeText(this, "Failed to schedule dose", Toast.LENGTH_SHORT).show()
-                    }
-                }.addOnFailureListener { exception ->
-                    Log.e("ScheduleDose", "Error saving to Firebase: ${exception.message}")
-                    Toast.makeText(this, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
+                    // Schedule the notification
+                    scheduleNotification(medicineId, doseTime, howOften)
+
+                    // Navigate to Medicine Details activity after successful scheduling
+                    val intent = Intent(this, MyMedicine::class.java)
+                    intent.putExtra("medicineId", medicineId) // Pass the medicine ID
+                    startActivity(intent) // Start the Medicine Details activity
+                } else {
+                    Toast.makeText(this, "Failed to schedule dose", Toast.LENGTH_SHORT).show()
                 }
-        } catch (e: Exception) {
-            Log.e("ScheduleDose", "Exception in storeScheduledDoseInFirebase: ${e.message}")
-            Toast.makeText(this, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
+            }
     }
 
     // Schedule the notification based on dose time and frequency

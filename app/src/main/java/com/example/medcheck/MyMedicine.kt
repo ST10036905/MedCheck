@@ -101,11 +101,10 @@ class MyMedicine : AppCompatActivity() {
 		if (userId != null) {
 			databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 
-			// Query to get medicines for the specific user
 			databaseReference!!.orderByChild("userId").equalTo(userId)
 				.addValueEventListener(object : ValueEventListener {
 					override fun onDataChange(dataSnapshot: DataSnapshot) {
-						medicines.clear() // Clear the list before adding new data
+						medicines.clear()
 						for (snapshot in dataSnapshot.children) {
 							val medicineName = snapshot.child("name").getValue(String::class.java)
 							if (medicineName != null) {
@@ -113,16 +112,14 @@ class MyMedicine : AppCompatActivity() {
 							}
 						}
 
-						// Update ListView with the fetched data
 						val adapter = ArrayAdapter(this@MyMedicine, android.R.layout.simple_list_item_1, medicines)
 						medicineListView.adapter = adapter
 
-						// Set the latest medicine if the list is not empty
-						latestMedicine = if (medicines.isNotEmpty()) medicines.last() else null // No medicines available
+						latestMedicine = if (medicines.isNotEmpty()) medicines.last() else null
 					}
 
 					override fun onCancelled(databaseError: DatabaseError) {
-						Toast.makeText(this@MyMedicine, "Failed to load medicines.", Toast.LENGTH_SHORT).show()
+						Toast.makeText(this@MyMedicine, "Failed to load medicines: ${databaseError.message}", Toast.LENGTH_SHORT).show()
 					}
 				})
 		} else {
