@@ -1,16 +1,22 @@
 package com.example.medcheck
 
-import android.content.Intent
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.content.Context
+import android.content.Intent
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.BroadcastReceiver
 
 class TakenMedicine : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +29,24 @@ class TakenMedicine : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        //----------------Method to handle the notification
+        val action = intent.action
+        val medicineName = intent.getStringExtra("medicineName") ?: "Medication"
+
+        when (action) {
+            "ACTION_TAKEN" -> {
+                // Handle medication taken feedback
+                Toast.makeText(this, "Medication taken: $medicineName", Toast.LENGTH_SHORT).show()
+
+                // Dismiss the notification
+                NotificationManagerCompat.from(this).cancel(medicineName.hashCode())
+            }
+            "ACTION_SNOOZE" -> {
+                // Handle snooze action (e.g., reschedule notification)
+                Toast.makeText(this, "Snoozed: $medicineName", Toast.LENGTH_SHORT).show()
+                scheduleSnoozeNotification(medicineName)
+            }
         }
 
         // Set today's date and day in the TextView
@@ -58,6 +82,26 @@ class TakenMedicine : AppCompatActivity() {
         //--------------------------------------------------------------------------------------------------
     }
 
+    private fun scheduleSnoozeNotification(medicineName: String) {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val snoozeIntent = Intent(this, MedicationReminderReceiver::class.java).apply {
+            putExtra("medicineName", medicineName)
+        }
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            medicineName.hashCode(),
+            snoozeIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Schedule the alarm for 15 minutes from now
+        val triggerTime = System.currentTimeMillis() + (15 * 60 * 1000)
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            triggerTime,
+            pendingIntent
+        )
+    }
     // Function to get the current date in "EEEE, MMMM d, yyyy" format
     private fun getCurrentDate(): String {
         val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
