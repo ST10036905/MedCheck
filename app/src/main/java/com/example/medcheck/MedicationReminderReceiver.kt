@@ -1,6 +1,7 @@
 package com.example.medcheck
 
 import android.Manifest
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -13,6 +14,15 @@ class MedicationReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         // Retrieve medicine name from the intent extras
         val medicineName = intent.getStringExtra("medicineName") ?: "Medication Reminder"
+
+        // Intent to open the AllTaken activity when notification is tapped
+        val allTakenIntent = Intent(context, TakenMedicine::class.java)
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            allTakenIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 
         // Create notification to remind the user to take their medication
         val notification = NotificationCompat.Builder(context, "medication_channel")

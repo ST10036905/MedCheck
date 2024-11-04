@@ -4,19 +4,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
 import android.content.SharedPreferences
-
-import android.Manifest
-import android.content.Intent
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
-
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.medcheck.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -24,16 +16,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
+    // Declare GoogleSignInClient for handling Google sign-ins
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    // Declare FirebaseAuth for managing Firebase authentication
     private lateinit var mAuth: FirebaseAuth
+    //
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var binding: ActivityMainBinding
 
+    // Declare a binding variable for using view binding to access views
+    private lateinit var binding: ActivityMainBinding
 
     // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,106 +47,54 @@ class MainActivity : AppCompatActivity() {
         // calls the notification channel
         createNotificationChannel()
 
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
-            fetchToken() // Fetch token only after permission is granted
-        } else {
-            Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Load shared preferences and set up language
-        sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE)
-        val languageCode = sharedPreferences.getString("LANGUAGE", "en") ?: "en"
-        setAppLocale(languageCode)
-
-
-        // Enable view binding
+        // Enable view binding to inflate layout and access UI elements
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth and Google Sign-In client
+        // Initialize Firebase Authentication instance
         mAuth = FirebaseAuth.getInstance()
-        setupGoogleSignIn()
 
-        // Check notification permission
-        askNotificationPermission()
-
-        // Check if user is signed in
-        val user = Firebase.auth.currentUser
-        binding.textWelcomeUser.text = if (user != null) {
-            "Welcome, ${user.email}"
-        } else {
-            "Welcome, Guest"
-        }
-
-        // Set up button click listener
-        binding.getStartedBtn.setOnClickListener {
-            startActivity(Intent(this, Welcome::class.java))
-        }
-
-    }
-
-    private fun fetchToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
-                return@addOnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result
-
-            // Log token and display in a long toast
-            Log.d("MainActivity", "FCM Token: $token")
-            Toast.makeText(applicationContext, "FCM Token: $token", Toast.LENGTH_LONG).show()
-
-        }
-    }
-
-
-
-    private fun setupGoogleSignIn() {
+        // Set up Google Sign-In options using default sign-in configuration
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.web_client_id))
-            .requestEmail()
+            .requestIdToken(getString(R.string.web_client_id)) // Request the web client ID from resources
+            .requestEmail() // Request user's email address
             .build()
+
+        // Initialize the GoogleSignInClient with the Google Sign-In options
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-    }
 
-    private fun setAppLocale(languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val config = resources.configuration
-        config.setLocale(locale)
-        createConfigurationContext(config)
-    }
-
-    private fun askNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        // Check if the user is already signed in with Firebase Authentication
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+            // If user is logged in, display their email in the welcome TextView
+            binding.textWelcomeUser.text = "Welcome, ${user.email}"
         } else {
-            // For Android versions below TIRAMISU, permissions for notifications are granted by default
-            fetchToken() // No need to request permission, proceed to fetch token
+            // If user is not logged in, display a default welcome message
+            binding.textWelcomeUser.text = "Welcome, Guest"
         }
 
+        // Set a click listener on the "Get Started" button to navigate to the Welcome activity
+        binding.getStartedBtn.setOnClickListener {
+            val intent = Intent(this, Welcome::class.java)
+            startActivity(intent) // Start the Welcome activity
+        }
     }
 
-
+    // Function to sign out the user from Firebase and Google, and then navigate to the Login activity
     private fun signOutAndStartSignInActivity() {
+        // Sign out from Firebase Authentication
         mAuth.signOut()
+
+        // Sign out from Google Sign-In and upon completion, navigate to the Login activity
         mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+            // After signing out, start the Login activity
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
-            finish()
+            finish() // Close the current activity so the user can't return with the back button
         }
     }
+
+
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -165,5 +108,4 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
 }

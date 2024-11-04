@@ -1,18 +1,16 @@
 package com.example.medcheck
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
-import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
@@ -24,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import java.util.concurrent.Executor
 
 class Preferences : AppCompatActivity() {
@@ -85,7 +84,7 @@ class Preferences : AppCompatActivity() {
         // Setting up the logout button click listener
         val logoutMode = findViewById<RelativeLayout>(R.id.logoutRL)
         logoutMode.setOnClickListener {
-            signOut() // Call signOut() method when clicked
+            logout() // Call logOut() method when clicked
         }
 
         // Adjusts the padding for the main view to accommodate system bars
@@ -183,6 +182,7 @@ class Preferences : AppCompatActivity() {
         //--------------------------------------------------------------------------------------------------
     }
 
+
     private fun setDarkMode(isEnabled: Boolean) {
         if (isEnabled) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -200,7 +200,25 @@ class Preferences : AppCompatActivity() {
             startActivity(intent) // Start the login activity
             finish() // Close the current activity
         }
+
+
+    // In your logout function (like in SettingsActivity or where you log out)
+    private fun logout() {
+        // Show a toast message indicating the user is being logged out
+        Toast.makeText(this, "User is being logged out...", Toast.LENGTH_SHORT).show()
+        FirebaseAuth.getInstance().signOut()
+
+        // Clear SharedPreferences for a fresh login flow
+        val sharedPreferences = getSharedPreferences("MedCheckPrefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+
+        // Redirect to Welcome screen with cleared task history
+        val intent = Intent(this, Welcome::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
+
+
 
     //-----------------------Method for biometrics
 
@@ -252,4 +270,3 @@ class Preferences : AppCompatActivity() {
         }
     }
 }
-

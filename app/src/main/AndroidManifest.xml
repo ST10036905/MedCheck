@@ -7,11 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
-
 
     <application
         android:allowBackup="true"
@@ -24,7 +21,6 @@
         android:theme="@style/Theme.MedCheck"
         tools:targetApi="31">
 
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -33,18 +29,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".TakenMedicine"
+            android:exported="false" />
 
         <receiver android:name=".MedicationReminderReceiver" />
 
         <activity
             android:name=".MyFirebaseMessagingService"
             android:exported="false" />
-        <!-- Activities -->
         <activity
             android:name=".Login"
             android:exported="false" />
-
 
         <activity
             android:name=".GoogleMap"
@@ -57,22 +53,19 @@
             android:name=".Welcome"
             android:exported="false" />
 
-
         <activity
             android:name=".AddMedicine"
             android:exported="false" />
-
         <activity
             android:name=".MedicationInformation"
             android:exported="false" />
-
+    
         <activity
             android:name=".Preferences"
             android:exported="false" />
         <activity
             android:name=".MyMedicine"
             android:exported="false" />
-
 
         <activity
             android:name=".Calendar"
@@ -85,7 +78,6 @@
         <activity
             android:name=".Dashboard"
             android:exported="true" />
-
 
         <meta-data
             android:name="preloaded_fonts"
