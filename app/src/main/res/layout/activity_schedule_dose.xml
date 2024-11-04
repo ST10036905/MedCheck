@@ -55,9 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/select_time"
-                android:inputType="time"
-                android:focusable="false"
-                android:clickable="true"
+                android:inputType="none"
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
                 android:textColor="@color/black"
@@ -130,7 +128,6 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:background="@null" />
-
 
         <TextView
             android:id="@+id/scheduleDoseBtnText"
