@@ -16,6 +16,7 @@ import com.example.medcheck.Database.DatabaseHandler
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 
 
@@ -40,8 +41,8 @@ class MyMedicine : AppCompatActivity() {
 		databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 
 		// Initialize ListView and medicines list
-//		medicineListView = binding!!.medicineListView
-//		medicines = mutableListOf()
+		medicineListView = binding!!.medicineListView
+		medicines = mutableListOf()
 
 		// Fetch medicines from Firebase
 		fetchMedicinesFromFirebase()
@@ -54,28 +55,22 @@ class MyMedicine : AppCompatActivity() {
 		
 		// Initialize the database helper and views
 		databaseHandler = DatabaseHandler(this)
-//		        val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
-//		//medicineListView = findViewById(R.id.medicineListView)
-//		medicineTextView = findViewById(R.id.medicineView_tv)
+		        val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
+		//medicineListView = findViewById(R.id.medicineListView)
+		medicineTextView = findViewById(R.id.medicineView_tv)
 //click listener to retrieve sql lite data for viewing the saved medication
 //		binding!!.viewMedicineBtn.setOnClickListener{
 //
 //		}
-		// Set up click listener for the add button to navigate to AddMedicine activity
-		binding!!.viewMedicineBtn.setOnClickListener {
+		retrieveButton.setOnClickListener {
+			val cursor = databaseHandler.getAllMedicines()
 			retrieveMedicines()
-			val addMedicineIntent = Intent(this, AddMedicine::class.java)
-			startActivity(addMedicineIntent)
 		}
-//		retrieveButton.setOnClickListener {
-//			val cursor = databaseHandler.getAllMedicines()
-//			retrieveMedicines()
-//		}
 
 		//clearing the medicine
-		//val clearMedicineBtn = findViewById<Button>(R.id.clearMedicineBtn)
+		val clearMedicineBtn = findViewById<Button>(R.id.clearMedicineBtn)
 		// Click listener to clear the TextView
-		binding!!.clearMedicineBtn.setOnClickListener {
+		clearMedicineBtn.setOnClickListener {
 			medicineTextView.text = ""  // Clears the TextView content
 		}
 		//---------------------------------------BOTTOM NAV-------------------------------------------------
@@ -165,6 +160,7 @@ class MyMedicine : AppCompatActivity() {
 	
 	//more sql lite
 	private fun retrieveMedicines() {
+		Log.d("MyMedicine", "retrieveMedicines: Retrieving medicines from SQLite.")
 		val cursor = databaseHandler.getAllMedicines()
 		val medicinesList = StringBuilder()
 		
@@ -177,7 +173,9 @@ class MyMedicine : AppCompatActivity() {
 				// Format each record
 				medicinesList.append("Medicine: $medicineName\nStrength: $strength\nFrequency: $frequency\n\n")
 			} while (cursor.moveToNext())
+			Log.d("MyMedicine", "retrieveMedicines: Data retrieved successfully.")
 		} else {
+			Log.d("MyMedicine", "retrieveMedicines: No medicines found in SQLite.")
 			medicinesList.append("No medicines found.")
 		}
 		
