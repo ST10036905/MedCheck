@@ -23,10 +23,11 @@ class Calendar : AppCompatActivity() {
 
 		// Enable edge-to-edge display for immersive experience
 		enableEdgeToEdge()
-
 		// Set content view to the XML layout file for this activity
 		setContentView(R.layout.activity_calendar)
-
+		// resizes the nav bar icons depending of the screen size of the phone or device used
+		val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+		bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
 		// Adjust padding for system bars (status bar, navigation bar) for a better user experience
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

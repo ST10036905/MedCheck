@@ -36,7 +36,9 @@ class MedicationInformation : AppCompatActivity() {
         // Initializing ViewBinding for the activity to easily access UI components
         binding = ActivityMedicationInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        // resizes the nav bar icons depending of the screen size of the phone or device used
+        val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
         // Set up the UI components like handling system insets (e.g., status bar)
         setupUI()
 
