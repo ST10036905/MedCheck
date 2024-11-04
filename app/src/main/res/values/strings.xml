@@ -162,6 +162,7 @@
     <string name="msg_token_fmt" translatable="false">FCM Registration Token: %1$s</string>
     <string name="all_taken">All Taken</string>
 
+    <string name="MAPS_KEY" translatable="false">AIzaSyDiUmzGCP2DrEDHC3dwkba3y0Mh0FcjKQc</string>
 
     <string-array name="language_options">
         <item>English</item>

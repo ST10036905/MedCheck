@@ -160,6 +160,7 @@
     <string name="calendar">Calendário</string>
     <string name="about_med">Sobre a Med</string>
     <string name="medication">Medicamento</string>
+    <string name="all_taken">Tomado</string>
 
     <string-array name="language_options">
         <item>Inglês</item>

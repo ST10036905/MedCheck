@@ -29,7 +29,7 @@
 
 
     <!-- Background colors for night mode -->
-    <color name="black_background">#121212</color>
+
     <color name="dark_surface">#1E1E1E</color>
     <!-- Primary and accent colors for night mode -->
     <color name="blue_primary_dark">#BB86FC</color>
