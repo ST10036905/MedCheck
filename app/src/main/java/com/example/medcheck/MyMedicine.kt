@@ -56,12 +56,7 @@ class MyMedicine : AppCompatActivity() {
 		// Initialize the database helper and views
 		databaseHandler = DatabaseHandler(this)
 		        val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
-		//medicineListView = findViewById(R.id.medicineListView)
-		medicineTextView = findViewById(R.id.medicineView_tv)
-//click listener to retrieve sql lite data for viewing the saved medication
-//		binding!!.viewMedicineBtn.setOnClickListener{
-//
-//		}
+
 		retrieveButton.setOnClickListener {
 			val cursor = databaseHandler.getAllMedicines()
 			retrieveMedicines()
