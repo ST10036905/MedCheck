@@ -160,6 +160,7 @@
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="msg_token_fmt" translatable="false">FCM Registration Token: %1$s</string>
+    <string name="all_taken">All Taken</string>
 
 
     <string-array name="language_options">

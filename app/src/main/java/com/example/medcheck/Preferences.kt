@@ -170,7 +170,6 @@ class Preferences : AppCompatActivity() {
     private fun logout() {
         // Show a toast message indicating the user is being logged out
         Toast.makeText(this, "User is being logged out...", Toast.LENGTH_SHORT).show()
-
         FirebaseAuth.getInstance().signOut()
 
         // Clear SharedPreferences for a fresh login flow
