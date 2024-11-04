@@ -55,7 +55,9 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_google_map)
-
+        // resizes the nav bar icons depending of the screen size of the phone or device used
+        val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
         // Initialize views
         radioGroup = findViewById(R.id.radioGroup);
         mapOptionMenu = findViewById(R.id.mapOptionMenu);
@@ -72,8 +74,11 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
             isRadioGroupVisible = !isRadioGroupVisible // Toggle state
         }
 
+        val applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+        val apiKey = applicationInfo.metaData.getString("com.google.android.geo.API_KEY")
+
         // initializing the places API with API key
-        Places.initialize(applicationContext,"AIzaSyCV5y_AsNgheuOBVZcQ8rsVts-Hv5922PA")
+        Places.initialize(applicationContext,"MAPS_KEY")
         placesClient = Places.createClient(this)
 
         // initialize the autocompleteSupport fragment for the search bar

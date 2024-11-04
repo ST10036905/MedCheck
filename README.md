@@ -1,6 +1,9 @@
 
-***Med Check Mobile Application
-***OPSC7312 POE PART 2
+*Med Check Mobile Application*
+**OPSC7312 POE PART 2**
+*** Azania Ncube ST10036066***
+*** Mayra Selemane ST10036905***
+*** Zacarias Antero ST10068763***
 
 ****Youtube link
 https://m.youtube.com/watch?v=1-WOMYdCUbY&pp=ygUITWVkY2hlY2s%3D
@@ -8,6 +11,10 @@ https://m.youtube.com/watch?v=1-WOMYdCUbY&pp=ygUITWVkY2hlY2s%3D
 
 The following mobile application is being designed using the Android Studio IDE.
 The application, which is being identified as "Med Check", it  has as a focal point, the ability of allowing users to log a medicine with the objective of them keeping track of the medical records. Med Check aims to provide a user-friendly interface for users to manage their medication schedules and improve their adherence to prescribed treatments. By centralizing medical records, users can easily monitor their health and well-being.
+
+The following screenshot below is shwoing the Med Check logo:
+![LogoMDC](https://github.com/user-attachments/assets/0d873efb-128d-4e70-b796-f6e7abb25193)
+
 
 Main features of the application :
 
@@ -39,6 +46,20 @@ English (radioEnglish) - text set by @string/english
 Portuguese (radioPortuguese) - text set by @string/portuguese
 Afrikaans (radioAfrikaans) - text set by @string/afrikaans
 
+![1000006511](https://github.com/user-attachments/assets/8a1c653d-6ed7-4ef1-bf08-297c43fea1e8)
+
+
+**Biometrics (fingerprint) system**
+As stated by Android Developers,"One method of protecting sensitive information or premium content within your app is to request biometric authentication, such as using face recognition or fingerprint recognition. This guide explains how to support biometric login flows in your app."(2024)
+This login authentication style helps correctly identify,  allow rightful Med Check users to check their mediciation details. To handle biometric secuirty, a user must tab on the preferencec tab on the navigation tab, they are able to change the password, add facial recognition, privacy and log out option.
+![1000006509](https://github.com/user-attachments/assets/52437a4c-1cdf-45dd-868b-55ad1c84c164)
+
+**Real-time notification**
+The notification help the Med Check users continue engaging with the application by customizing the notifcation based on the time they want to be alerted. To use this feature, a user must tap on the Preferences tab below on the navigation bar then looks over the second option with the bell icon. 
+
+![1000006509](https://github.com/user-attachments/assets/8a50333a-797b-4d0a-91e1-1f738edb5b4f)
+
+
 *** Technologies Used ***
 Android Studio: The primary IDE for developing the application.
 Firebase: For user authentication and database management.
@@ -59,12 +80,14 @@ The Add Medicine feature allows users to input medication details, such as name,
 These details are saved to two storage systems:
 Firebase Realtime Database: Stores medication data for broader use across multiple devices.
 SQLite: Stores medication data locally on the device, allowing offline access.
+![IMG_9867](https://github.com/user-attachments/assets/760ae55c-79fd-49fc-af91-c9d800c70621)
 
 3. My Medicine
 The My Medicine feature allows users to view the list of saved medications.
 It displays data from both Firebase and SQLite:
 Firebase Data: Shows medication data that is synced with the server.
 SQLite Data: Shows medication data saved locally on the device, useful for offline access.
+![1000006510](https://github.com/user-attachments/assets/9770ad23-1031-4623-a8e7-037186ae4d38)
 
 **Data Storage Workflow**
 Firebase Database
@@ -75,8 +98,15 @@ My Medicine (Display Data)
 From Firebase: Data is fetched in real-time from the Firebase database and displayed in a ListView. This allows users to see medications that are synced across devices.
 From SQLite: Data is retrieved from SQLite and displayed in a TextView, providing a list of medications that can be accessed offline.
 
+The following images are showing the medicine details user input being saved and displayed. Add Medicine requuires user input of the medication while My Medicine allows the user to read about their saved mediciation after tapping on the view button. 
 
-******* Azania Ncube ST10036066
-******* Mayra Selemane ST10036905
-******* Zacarias Antero ST10068763
+The user is typing:
+![IMG_9868](https://github.com/user-attachments/assets/6fb32117-abb3-4c35-8252-27ea17294b70)
+
+The saved medicine shown as a list:
+![1000006510](https://github.com/user-attachments/assets/67c532ed-8acb-40d1-bf08-bd3f7cd00371)
+
+Google Developers, 2024. Authenticate with Biometric Login on Android. Available at: https://developer.android.com/identity/sign-in/biometric-auth [Accessed 4 November 2024].
+
+
 

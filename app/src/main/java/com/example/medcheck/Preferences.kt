@@ -23,6 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import java.util.concurrent.Executor
 
 class Preferences : AppCompatActivity() {
@@ -38,6 +39,7 @@ class Preferences : AppCompatActivity() {
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private lateinit var binding: ActivityPreferencesBinding
     private var mGoogleSignInClient: GoogleSignInClient? = null
+    private var currentUser: FirebaseUser? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,18 @@ class Preferences : AppCompatActivity() {
         setContentView(R.layout.activity_preferences)
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //---------resizes the nav bar icons depending of the screen size of the phone or device used
+        val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
+
+        // Initialize Firebase user
+        currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "No user is logged in", Toast.LENGTH_SHORT).show()
+            // Optionally, redirect to login screen here
+        } else {
+            Toast.makeText(this, "Welcome, ${currentUser?.email}", Toast.LENGTH_SHORT).show()
+        }
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -113,16 +127,6 @@ class Preferences : AppCompatActivity() {
                 .replace(R.id.main, languagePre)
                 .addToBackStack(null)
                 .commit()
-        }
-
-        val pushNotificationID: RelativeLayout = findViewById(R.id.pushNotificationID)
-        pushNotificationID.setOnClickListener {
-            Toast.makeText(this, "This option will be available soon!", Toast.LENGTH_SHORT).show()
-        }
-
-        val exportDataID: RelativeLayout = findViewById(R.id.exportDataID)
-        exportDataID.setOnClickListener {
-            Toast.makeText(this, "This option will be available soon!", Toast.LENGTH_SHORT).show()
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)

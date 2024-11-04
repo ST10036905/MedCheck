@@ -33,7 +33,9 @@ class MedicineDetailsActivity : AppCompatActivity() {
 
 		// Retrieve the medicine ID passed from the previous activity, return if null to prevent errors
 		val medicineId = intent.getStringExtra("medicineId") ?: return
-
+		// resizes the nav bar icons depending of the screen size of the phone or device used
+		val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+		bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
 		// Initialize the Firebase Database reference to point to the "medicines" node
 		databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 

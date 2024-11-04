@@ -31,6 +31,11 @@ class Dashboard : AppCompatActivity() {
 		binding = ActivityDashboardBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
+		// resizes the nav bar icons depending of the screen size of the phone or device used
+		val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+		bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
+		// Initialize Firebase Auth to handle user authentication
+
 		auth = FirebaseAuth.getInstance()
 		databaseReference = FirebaseDatabase.getInstance().getReference("users")
 

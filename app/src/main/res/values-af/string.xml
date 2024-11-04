@@ -67,7 +67,7 @@
     <string name="whats_new">Wat is nuut op MedCheck</string>
     <string name="security">Sekuriteit</string>
     <string name="change_password">Verander wagwoord</string>
-    <string name="facial_recognition">Voeg gesigsherkenning by</string>
+    <string name="facial_recognition">Voeg biometriese aanmelding by</string>
     <string name="privacy">Privaatheid</string>
     <string name="legal">Wettig</string>
     <string name="warnings_content">Waarskuwingsinhoud</string>
@@ -160,7 +160,7 @@
     <string name="calendar">Kalender</string>
     <string name="about_med">Oor Med</string>
     <string name="medication">Medikasie</string>
-
+    <string name="all_taken">Alles geneem</string>
 
 
     <string-array name="language_options">

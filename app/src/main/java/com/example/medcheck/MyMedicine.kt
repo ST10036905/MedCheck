@@ -39,7 +39,9 @@ class MyMedicine : AppCompatActivity() {
 
 		// Initialize Firebase Database reference
 		databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
-
+		// resizes the nav bar icons depending of the screen size of the phone or device used
+		val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+		bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
 		// Initialize ListView and medicines list
 		medicineListView = binding!!.medicineListView
 		medicines = mutableListOf()
