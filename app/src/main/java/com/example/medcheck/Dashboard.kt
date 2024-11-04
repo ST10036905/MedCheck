@@ -36,58 +36,7 @@ class Dashboard : AppCompatActivity() {
 		emailTextView = findViewById(R.id.emailText)
 		medicineTextView = findViewById(R.id.medicineText)
 
-		// Get the latest medicine from the intent
-		val latestMedicine = intent.getStringExtra("latestMedicine")
-
-		// Display the latest medicine if it exists
-		if (!latestMedicine.isNullOrEmpty()) {
-			medicineTextView.text = "Recent Medicine: $latestMedicine"
-		} else {
-			medicineTextView.text = "No latest medicine available"
-		}
-
 		fetchUserData()
-	}
-
-	//Fetches the user's data from Firebase, including their email and stored medicines.
-	private fun fetchUserData() {
-		val currentUser = auth.currentUser
-		if (currentUser != null) {
-			// Display the user's email in the emailTextView
-			emailTextView.text = currentUser.email
-
-			// Get the unique user ID from Firebase Authentication
-			val userId = currentUser.uid
-
-			// Reference to the user's medicines in the Firebase database
-			val userMedicineRef = databaseReference.child(userId).child("medicines")
-
-			// Retrieve the medicine data from the database for the current user
-			userMedicineRef.addListenerForSingleValueEvent(object : ValueEventListener {
-				override fun onDataChange(snapshot: DataSnapshot) {
-					if (snapshot.exists()) {
-						// Fetch the medicine name stored under the "name" key
-						val name = snapshot.child("name").getValue(String::class.java)
-						if (name != null) {
-							medicineTextView.text = name
-						} else {
-							medicineTextView.text = "No medicine found"
-						}
-					} else {
-						// Show a message if no medicine data is found
-						Toast.makeText(this@Dashboard, "No medicine data found", Toast.LENGTH_SHORT).show()
-					}
-				}
-
-				override fun onCancelled(error: DatabaseError) {
-					// Handle errors while fetching data
-					Toast.makeText(this@Dashboard, "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
-				}
-			})
-		} else {
-			// Notify the user if they are not logged in
-			Toast.makeText(this, "No user is logged in", Toast.LENGTH_SHORT).show()
-		}
 
 		// Button to navigate to AddMedicine activity
 		binding.addMedicationBtn.setOnClickListener {
@@ -139,6 +88,49 @@ class Dashboard : AppCompatActivity() {
 				}
 			}
 			false
+		}
+	}
+
+	// Fetches the user's data from Firebase, including their email and last medicine.
+	private fun fetchUserData() {
+		val currentUser = auth.currentUser
+		if (currentUser != null) {
+			// Display the user's email in the emailTextView
+			emailTextView.text = currentUser.email
+
+			// Get the unique user ID from Firebase Authentication
+			val userId = currentUser.uid
+
+			// Reference to the user's medicines in the Firebase database
+			val userMedicineRef = databaseReference.child(userId).child("medicines")
+
+			// Retrieve the medicine data from the database for the current user
+			userMedicineRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(object : ValueEventListener {
+				override fun onDataChange(snapshot: DataSnapshot) {
+					if (snapshot.exists()) {
+						// Fetch the latest medicine name
+						for (medicineSnapshot in snapshot.children) {
+							val name = medicineSnapshot.child("name").getValue(String::class.java)
+							if (name != null) {
+								medicineTextView.text = "Recent Medicine: $name"
+							} else {
+								medicineTextView.text = "No medicine found"
+							}
+						}
+					} else {
+						// Show a message if no medicine data is found
+						medicineTextView.text = "No medicine data found"
+					}
+				}
+
+				override fun onCancelled(error: DatabaseError) {
+					// Handle errors while fetching data
+					Toast.makeText(this@Dashboard, "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
+				}
+			})
+		} else {
+			// Notify the user if they are not logged in
+			Toast.makeText(this, "No user is logged in", Toast.LENGTH_SHORT).show()
 		}
 	}
 }
