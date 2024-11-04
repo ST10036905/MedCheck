@@ -22,6 +22,7 @@
     <color name="caramel">#B17C5E</color>
     <color name="preferences_text"> #AA9594</color>
     <color name="medication_container">#4A8E9E</color>
+
     <color name="containerColor">#D9D9D9</color>
     <color name="BgColor">#FFFFFF</color>
     <color name="navBG">#F1E9F7</color>
@@ -46,4 +47,6 @@
     <color name="blue_accent_light">#82B1FF</color>
     <color name="gray_background_light">#F5F5F5</color>
     <color name="gray_text">#757575</color>
+
+    <color name="black_background">#000000</color>
 </resources>

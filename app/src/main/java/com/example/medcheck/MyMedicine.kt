@@ -6,10 +6,19 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityMyMedicineBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.*
+import com.example.medcheck.Database.DatabaseHandler
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+
+
 
 class MyMedicine : AppCompatActivity() {
 
@@ -18,6 +27,9 @@ class MyMedicine : AppCompatActivity() {
 	private var databaseReference: DatabaseReference? = null
 	private lateinit var medicineListView: ListView // ListView to display the list of medicines
 	private lateinit var medicines: MutableList<String> // Mutable list to hold medicine names
+	private lateinit var databaseHandler: DatabaseHandler
+	private lateinit var medicineTextView: TextView //textview to view the saved sql lite meds
+	private var latestMedicine: String? = null 	// Declare a variable to hold the latest medicine name
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -41,9 +53,24 @@ class MyMedicine : AppCompatActivity() {
 		// Set up click listener for the add button to navigate to AddMedicine activity
 		binding!!.addAnotherMedicine.setOnClickListener {
 			val addMedicineIntent = Intent(this, AddMedicine::class.java)
-			startActivity(addMedicineIntent)
+			startActivityForResult(addMedicineIntent, ADD_MEDICINE_REQUEST_CODE)
+		}
+		
+		// Initialize the database helper and views
+		databaseHandler = DatabaseHandler(this)
+		        val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
+
+		retrieveButton.setOnClickListener {
+			val cursor = databaseHandler.getAllMedicines()
+			retrieveMedicines()
 		}
 
+		//clearing the medicine
+		val clearMedicineBtn = findViewById<Button>(R.id.clearMedicineBtn)
+		// Click listener to clear the TextView
+		clearMedicineBtn.setOnClickListener {
+			medicineTextView.text = ""  // Clears the TextView content
+		}
 		//---------------------------------------BOTTOM NAV-------------------------------------------------
 		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
@@ -92,6 +119,10 @@ class MyMedicine : AppCompatActivity() {
 						medicines.add(medicineName) // Add medicine name to the list
 					}
 				}
+				// Set the latest medicine if the list is not empty
+				if (medicines.isNotEmpty()) {
+					latestMedicine = medicines.last() // Assuming the last medicine is the latest
+				}
 				// Update ListView with the fetched data
 				val adapter = ArrayAdapter(this@MyMedicine, android.R.layout.simple_list_item_1, medicines)
 				medicineListView.adapter = adapter
@@ -102,5 +133,74 @@ class MyMedicine : AppCompatActivity() {
 				Toast.makeText(this@MyMedicine, "Failed to load medicines.", Toast.LENGTH_SHORT).show()
 			}
 		})
+	}
+
+	// Handle the result when returning from AddMedicine
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		if (requestCode == ADD_MEDICINE_REQUEST_CODE && resultCode == RESULT_OK) {
+			// Pass latest medicine to Dashboard
+			val dashboardIntent = Intent(this, Dashboard::class.java).apply {
+				putExtra("latestMedicine", latestMedicine)
+			}
+			startActivity(dashboardIntent)
+		}
+	}
+
+	// Define a request code
+	companion object {
+		private const val ADD_MEDICINE_REQUEST_CODE = 1
+	}
+	
+	//sql lite : retreiving from the database after the user taps on the View button.
+	private fun displayData(cursor: Cursor) {
+		// Display the retrieved data in the TextView
+		// Create a list to store data
+		val data = mutableListOf<String>()
+		
+		// Loop through the cursor and retrieve data
+		if (cursor.moveToFirst()) {
+			do {
+				// Assuming your table has a "name" column; adjust the column name accordingly
+				val medicineName = cursor.getString(cursor.getColumnIndexOrThrow("name"))
+				data.add(medicineName)
+			} while (cursor.moveToNext())
+		}
+		
+		cursor.close() // Close the cursor after use
+		
+		// Display the data in the TextView
+		medicineTextView.text = if (data.isNotEmpty()) {
+			data.joinToString("\n")
+		} else {
+			"No data found"
+		}
+	}
+	
+	//more sql lite
+	private fun retrieveMedicines() {
+		Log.d("MyMedicine", "retrieveMedicines: Retrieving medicines from SQLite.")
+		val cursor = databaseHandler.getAllMedicines()
+		val medicinesList = StringBuilder()
+		
+		if (cursor?.moveToFirst() == true) {
+			do {
+				val medicineName = cursor.getString(cursor.getColumnIndexOrThrow("medicineName"))
+				val strength = cursor.getString(cursor.getColumnIndexOrThrow("strength"))
+				val frequency = cursor.getString(cursor.getColumnIndexOrThrow("frequency"))
+				
+				// Format each record
+				medicinesList.append("Medicine: $medicineName\nStrength: $strength\nFrequency: $frequency\n\n")
+			} while (cursor.moveToNext())
+			Log.d("MyMedicine", "retrieveMedicines: Data retrieved successfully.")
+		} else {
+			Log.d("MyMedicine", "retrieveMedicines: No medicines found in SQLite.")
+			medicinesList.append("No medicines found.")
+		}
+		
+		cursor?.close()
+		
+		// Display retrieved data in the TextView
+		medicineTextView.text = medicinesList.toString()
 	}
 }

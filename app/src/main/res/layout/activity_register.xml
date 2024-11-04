@@ -23,7 +23,7 @@
             android:text="@string/register"
             android:textColor="@color/red"
             android:textSize="28sp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="0dp"
             android:textAlignment="center"/>
 
         <TextView
