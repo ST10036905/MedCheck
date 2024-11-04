@@ -44,7 +44,9 @@
 
         <activity
             android:name=".GoogleMap"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
 
         <activity
             android:name=".ScheduleDose"
@@ -75,6 +77,8 @@
             android:name=".Register"
             android:exported="false" />
 
+        <receiver android:name=".MedicationReminderReceiver" />
+
         <activity
             android:name=".Dashboard"
             android:exported="true" />
@@ -85,7 +89,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_KEY}" />
+            android:value="@string/MAPS_KEY" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

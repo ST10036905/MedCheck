@@ -84,33 +84,7 @@
                             android:theme="@style/nightModeSwitch" />
                     </RelativeLayout>
 
-                    <RelativeLayout
-                        android:id="@+id/pushNotificationID"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/round_back_secondaty_100">
 
-                        <ImageView
-                            android:id="@+id/notificationMode"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/round_back_night_mode"
-                            android:contentDescription="@string/image"
-                            android:padding="12dp"
-                            android:src="@drawable/notification_icon" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/notificationMode"
-                            android:text="@string/push_notification"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -132,31 +106,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <RelativeLayout
-                        android:id="@+id/exportDataID"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/round_back_secondaty_100">
 
-                        <ImageView
-                            android:id="@+id/exportDataMode"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"
-                            android:src="@drawable/export_data_icon" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/exportDataMode"
-                            android:text="@string/export_data"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/termsAndConditionsRL"
@@ -306,31 +256,7 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
-                    <!-- Change password -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/round_back_secondaty_100">
 
-                        <ImageView
-                            android:id="@+id/changePasswordMode"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"
-                            android:src="@drawable/change_password_icon" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/changePasswordMode"
-                            android:text="@string/change_password"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
                     <!-- Add facial recognition -->
                     <RelativeLayout
                         android:id="@+id/enableBiometricButton"
@@ -357,31 +283,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold" />
                     </RelativeLayout>
-                    <!-- Privacy -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/round_back_secondaty_100">
 
-                        <ImageView
-                            android:id="@+id/privacyMode"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/round_back_night_mode"
-                            android:padding="12dp"
-                            android:src="@drawable/privacy_icon" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/privacyMode"
-                            android:text="@string/privacy"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/logoutRL"

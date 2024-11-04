@@ -77,12 +77,9 @@ dependencies {
     // Dependency for translation
     implementation(libs.mlkit)
     //implementing messaging feature
-    implementation(libs.firebase.messaging.ktx)
-    implementation(libs.androidx.biometric.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
 
     // Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
