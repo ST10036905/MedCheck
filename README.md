@@ -10,6 +10,7 @@ The following mobile application is being designed using the Android Studio IDE.
 The application, which is being identified as "Med Check", it  has as a focal point, the ability of allowing users to log a medicine with the objective of them keeping track of the medical records. Med Check aims to provide a user-friendly interface for users to manage their medication schedules and improve their adherence to prescribed treatments. By centralizing medical records, users can easily monitor their health and well-being.
 
 The following screenshot below is shwoing the Med Check logo:
+![LogoMDC](https://github.com/user-attachments/assets/0d873efb-128d-4e70-b796-f6e7abb25193)
 
 
 Main features of the application :
@@ -76,6 +77,7 @@ The Add Medicine feature allows users to input medication details, such as name,
 These details are saved to two storage systems:
 Firebase Realtime Database: Stores medication data for broader use across multiple devices.
 SQLite: Stores medication data locally on the device, allowing offline access.
+![IMG_9867](https://github.com/user-attachments/assets/760ae55c-79fd-49fc-af91-c9d800c70621)
 
 3. My Medicine
 The My Medicine feature allows users to view the list of saved medications.
@@ -95,6 +97,11 @@ From SQLite: Data is retrieved from SQLite and displayed in a TextView, providin
 
 The following images are showing the medicine details user input being saved and displayed. Add Medicine requuires user input of the medication while My Medicine allows the user to read about their saved mediciation after tapping on the view button. 
 
+The user is typing:
+![IMG_9868](https://github.com/user-attachments/assets/6fb32117-abb3-4c35-8252-27ea17294b70)
+
+The saved medicine shown as a list:
+![1000006510](https://github.com/user-attachments/assets/67c532ed-8acb-40d1-bf08-bd3f7cd00371)
 
 Google Developers, 2024. Authenticate with Biometric Login on Android. Available at: https://developer.android.com/identity/sign-in/biometric-auth [Accessed 4 November 2024].
 
