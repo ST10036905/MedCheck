@@ -69,7 +69,7 @@
     <string name="whats_new">O que há de novo no MedCheck</string>
     <string name="security">Segurança</string>
     <string name="change_password">Alterar a palavra-passe</string>
-    <string name="facial_recognition">Adicionar reconhecimento facial</string>
+    <string name="facial_recognition">Adicionar login biométrico</string>
     <string name="privacy">Privacidade</string>
     <string name="legal">Legal</string>
     <string name="warnings_content">Conteúdo de avisos</string>

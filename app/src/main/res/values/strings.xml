@@ -64,7 +64,7 @@
     <string name="whats_new">Whats new on MedCheck</string>
     <string name="security">Security</string>
     <string name="change_password">Change Password</string>
-    <string name="facial_recognition">Add Facial Recognition</string>
+    <string name="facial_recognition">Add biometric login</string>
     <string name="privacy">Privacy</string>
     <string name="legal">Legal</string>
     <string name="warnings_content">Warnings content</string>
