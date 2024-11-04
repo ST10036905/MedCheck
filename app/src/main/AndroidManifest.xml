@@ -60,26 +60,14 @@
         </activity>
 
         <activity
-            android:name=".Login"
-            android:exported="false">
-
-        </activity>
-
-
-            android:exported="false" />
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".Preferences"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Preferences"
-            android:exported="false" />
+
         <activity
             android:name=".MyMedicine"
             android:exported="false" />
@@ -98,9 +86,6 @@
             android:exported="false" >
         </activity>
 
-
-            android:exported="false" /> <!-- Firebase configuration -->
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -112,7 +97,7 @@
             android:resource="@drawable/ic_stat_ic_notification" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
+            android:resource="@color/preferences_text" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" /> <!-- Firebase Messaging Service -->
