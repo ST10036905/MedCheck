@@ -2,6 +2,7 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -17,14 +18,13 @@ import com.google.firebase.auth.FirebaseAuth
 class AddMedicine : AppCompatActivity() {
     // Declare binding variable to link XML layout components
     private var binding: ActivityAddMedicineBinding? = null
-
     // Declare a Firebase database reference
     private var databaseReference: DatabaseReference? = null
     private var databaseHandler: DatabaseHandler? = null
     private lateinit var firebaseAuth: FirebaseAuth // Firebase Auth instance
 
     private var selectedFrequency = ""
-
+//--------------------------------ON CREATE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,10 +34,8 @@ class AddMedicine : AppCompatActivity() {
 
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
-
         // Initialize Firebase database and point to the "medicines" node
         databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
-
         // Initialize DatabaseHandler
         databaseHandler = DatabaseHandler(this)
 
@@ -47,43 +45,39 @@ class AddMedicine : AppCompatActivity() {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding!!.frequencySpinner.adapter = spinnerAdapter
 
-        // Handle item selection in the Spinner
-        binding!!.frequencySpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?, view: View, position: Int, id: Long
-                ) {
-                    if (position > 0) {
-                        selectedFrequency = frequencyOptions[position]
-                    }
-                }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Do nothing if no item is selected
+        // Handle item selection in the Spinner
+        binding!!.frequencySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+                if (position > 0) {
+                    selectedFrequency = frequencyOptions[position]
                 }
             }
 
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
         // OnClickListener to save data
-        binding!!.saveMedicationBtn.setOnClickListener { v ->
+        binding!!.saveMedicationBtn.setOnClickListener {
             val name = binding!!.nameInput.text.toString()
             val dosage = binding!!.strenghtInput.text.toString()
 
             if (name.isEmpty() || dosage.isEmpty() || selectedFrequency.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                // Save to both Firebase and SQLite independently
                 storeMedicineInFirebase(name, dosage, selectedFrequency)
                 saveMedicine(name, dosage, selectedFrequency)
             }
         }
+
     }
 
     // Method to store the medication data in Firebase
     private fun storeMedicineInFirebase(name: String, dosage: String, frequency: String) {
-        val userId = firebaseAuth.currentUser?.uid // Get the current user's ID
+        val userId = firebaseAuth.currentUser?.uid
         if (userId == null) {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
-            return // Early exit if user is not logged in
+            return
         }
 
         val id = databaseReference!!.push().key
@@ -92,15 +86,13 @@ class AddMedicine : AppCompatActivity() {
         medicineData["name"] = name
         medicineData["dosage"] = dosage
         medicineData["frequency"] = frequency
-        medicineData["userId"] = userId // Add user ID to medicine data
+        medicineData["userId"] = userId
 
         if (id != null) {
             databaseReference!!.child(id).setValue(medicineData)
                 .addOnCompleteListener { task: Task<Void?> ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Medicine added to Firebase", Toast.LENGTH_SHORT).show()
-                        // Optionally navigate after saving
-                        // Navigate based on selected frequency
                         val nextActivity = when (selectedFrequency) {
                             "As Needed" -> Dashboard::class.java
                             "Scheduled Dose" -> ScheduleDose::class.java
@@ -109,6 +101,7 @@ class AddMedicine : AppCompatActivity() {
 
                         if (nextActivity != null) {
                             val intent = Intent(this, nextActivity)
+                            intent.putExtra("medicineId", id)
                             startActivity(intent)
                         }
                     } else {

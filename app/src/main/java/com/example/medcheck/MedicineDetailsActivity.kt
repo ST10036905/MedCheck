@@ -132,22 +132,25 @@ class MedicineDetailsActivity : AppCompatActivity() {
 		databaseReference?.child(medicineId)?.addListenerForSingleValueEvent(object : ValueEventListener {
 			override fun onDataChange(snapshot: DataSnapshot) {
 				if (snapshot.exists()) {
-					// Fetch and display medicine details (name, dosage, frequency) in the UI
 					val name = snapshot.child("name").getValue(String::class.java)
 					val dosage = snapshot.child("dosage").getValue(String::class.java)
 					val frequency = snapshot.child("frequency").getValue(String::class.java)
 					binding.medicineNameInput.setText(name)
 					binding.medicineStrengthInput.setText(dosage)
 					binding.frequencyInput.setText(frequency)
+
+					// Retrieve and display dose schedule details if needed
+					val schedulesSnapshot = snapshot.child("schedules")
+					// Code to display schedules...
 				} else {
 					Toast.makeText(this@MedicineDetailsActivity, "Medicine not found", Toast.LENGTH_SHORT).show()
 				}
 			}
 
 			override fun onCancelled(error: DatabaseError) {
-				// Notify the user if an error occurs during data retrieval
 				Toast.makeText(this@MedicineDetailsActivity, "Error retrieving data", Toast.LENGTH_SHORT).show()
 			}
 		})
 	}
+
 }
