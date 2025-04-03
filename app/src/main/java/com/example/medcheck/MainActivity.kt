@@ -6,9 +6,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import com.example.medcheck.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -80,8 +81,32 @@ class MainActivity : AppCompatActivity() {
 
         // Set a click listener on the "Get Started" button to navigate to the Welcome activity
         binding.getStartedBtn.setOnClickListener {
-            val intent = Intent(this, Welcome::class.java)
-            startActivity(intent) // Start the Welcome activity
+            // Prepare both activities for transition
+            val intent = Intent(this, Login::class.java)
+
+            // Enable transition in both windows
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+                // Convert to AndroidX Pairs explicitly
+                androidx.core.util.Pair.create(binding.logo, "logo_transition"),
+                androidx.core.util.Pair.create(binding.textWelcome, "welcome_text_transition"),
+                androidx.core.util.Pair.create(binding.getStartedBtn, "button_transition")
+            ).apply {
+                // Additional transition customization
+                toBundle()?.putBoolean("EXTRA_TRANSITION_ANIMATION", true)
+            }
+
+            // Ensure hardware acceleration is enabled
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
+            )
+
+            // Start with transition
+            startActivity(intent, options.toBundle())
+
+            // Optional: Disable default override
+            overridePendingTransition(0, 0)
         }
     }
 

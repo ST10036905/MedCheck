@@ -93,6 +93,13 @@
         <item name="android:windowSharedElementsUseOverlay">false</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <!-- Enter/exit transitions -->
+        <item name="android:windowEnterTransition">@transition/slide_up</item>
+        <item name="android:windowExitTransition">@transition/slide_up</item>
+        <item name="android:windowReturnTransition">@transition/slide_down</item>
+        <item name="android:windowReenterTransition">@transition/slide_down</item>
+
+
     </style>
 
 

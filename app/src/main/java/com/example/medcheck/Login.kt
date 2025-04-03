@@ -7,6 +7,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityLoginBinding
@@ -14,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.biometric.BiometricManager
+import androidx.core.view.doOnPreDraw
 
 import java.util.concurrent.Executor
 
@@ -32,9 +37,28 @@ class Login : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Enable transitions before super.onCreate()
+        with(window) {
+            requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+            requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+            sharedElementsUseOverlay = false
+            allowEnterTransitionOverlap = true
+            allowReturnTransitionOverlap = true
+        }
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Postpone transition until views are ready
+        postponeEnterTransition()
+        binding.root.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+        // Enable hardware acceleration
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
+        )
         createNotificationChannel()
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
@@ -78,6 +102,17 @@ class Login : AppCompatActivity() {
             startActivity(Intent(this, Dashboard::class.java))
             finish()
         }
+    }
+
+    // Add to a Kotlin extensions file
+    fun View.doOnPreDraw(callback: () -> Unit) {
+        viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                viewTreeObserver.removeOnPreDrawListener(this)
+                callback()
+                return true
+            }
+        })
     }
 
     private fun setupBiometricPrompt() {

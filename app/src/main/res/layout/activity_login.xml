@@ -17,6 +17,7 @@
         android:src="@drawable/medcheck_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:transitionName="logo_transition"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Login Title -->
@@ -31,6 +32,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:transitionName="welcome_text_transition"
         app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <!-- Email Field -->
@@ -94,6 +96,7 @@
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:transitionName="button_transition"
         app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
 
     <!-- Back Button (As Text Button) -->
