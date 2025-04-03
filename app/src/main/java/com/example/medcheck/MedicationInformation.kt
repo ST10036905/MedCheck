@@ -6,19 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.medcheck.databinding.ActivityMainBinding
+import androidx.appcompat.widget.SearchView
 import com.example.medcheck.databinding.ActivityMedicationInformationBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.net.URLEncoder
 import java.util.Calendar
 
@@ -45,12 +42,15 @@ class MedicationInformation : AppCompatActivity() {
         // Set up the SearchView listener to handle drug search queries
         setupSearchListener()
 
+        /*
         // Handling system insets for edge-to-edge display
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+         */
 
         //---------------------------------------BOTTOM NAVIGATION-------------------------------------------------
         // Set up the BottomNavigationView for handling navigation between different activities
@@ -100,16 +100,13 @@ class MedicationInformation : AppCompatActivity() {
     // Setting up the SearchView listener for when the user submits a query to search for a medication
     private fun setupSearchListener() {
         binding.searchMedication.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            // Handling the event when the user submits a search query
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    // Call function to fetch drug information based on the search query
                     fetchDrugInfo(it)
                 }
-                return false
+                return true // Return true to indicate the query has been handled
             }
 
-            // Optional function to handle real-time text changes (unused in this case)
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }

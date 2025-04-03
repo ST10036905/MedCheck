@@ -1,143 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BgColor"
+    android:background="@color/m3_surface_container"
+    android:fitsSystemWindows="true"
     tools:context=".ScheduleDose">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/step2"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/red"
-                android:textSize="24sp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/schedule_text"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/cafe"
-                android:textSize="20sp"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Medicine name input -->
-            <TextView
-                android:id="@+id/timeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/when_to_take"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_medium"
-                android:layout_marginBottom="4dp" />
-
-            <EditText
-                android:id="@+id/timeTakenInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/select_time"
-                android:inputType="none"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_marginBottom="16dp"
-                android:drawableRight="@drawable/time" />
-
-            <TextView
-                android:id="@+id/oftenLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/how_often"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_medium"
-                android:layout_marginBottom="4dp" />
-
-            <Spinner
-                android:id="@+id/oftenSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_marginBottom="16dp" />
-
-
-            <TextView
-                android:id="@+id/dosesLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/how_many"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_medium"
-                android:layout_marginBottom="4dp" />
-
-            <EditText
-                android:id="@+id/howManyInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/edit_text_background"
-                android:drawableRight="@drawable/manydose"
-                android:hint="1"
-                android:inputType="number"
-                android:padding="12dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-    </ScrollView>
-
-
-
-    <FrameLayout
-        android:id="@+id/scheduleBtnContainer"
+    <!-- App Bar with shared element transition -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:background="@android:color/transparent"
+        android:elevation="0dp"
+        app:liftOnScroll="true">
 
-        <ImageButton
-            android:id="@+id/scheduleDoseBtn"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/cancel"
+            app:navigationContentDescription="@string/back"
+            app:title="@string/step2"
+            app:titleTextColor="@color/m3_on_surface"
+            android:transitionName="toolbar_transition"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Content with smooth scrolling -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="24dp"
+        android:paddingBottom="120dp"
+        android:clipToPadding="false">
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motionLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_1"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:background="@null" />
+            app:layoutDescription="@xml/motion_scene_schedule_dose"
+            android:transitionName="content_transition">
 
-        <TextView
-            android:id="@+id/scheduleDoseBtnText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/schedule_dose"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/poppins_bold" />
-    </FrameLayout>
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Header Section -->
+                <LinearLayout
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="24dp"
+                    android:transitionName="header_transition">
+
+                    <TextView
+                        android:id="@+id/stepText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/step2"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins_bold"
+                        android:letterSpacing="0.1"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/instructionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/schedule_text"
+                        android:textColor="@color/m3_on_surface_variant"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+
+                <!-- Form Card with elevation animation -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/formCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/m3_surface"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="@color/m3_outline"
+                    app:strokeWidth="1dp"
+                    android:transitionName="form_card_transition">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Time Picker with animated icon -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/timeInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:hint="@string/when_to_take"
+                            app:startIconDrawable="@drawable/ic_time"
+                            app:startIconTint="@color/m3_primary"
+                            app:startIconContentDescription="@string/schedule_dose"
+                            app:boxBackgroundColor="@color/m3_surface"
+                            app:boxBackgroundMode="outline"
+                            app:boxStrokeColor="@color/m3_primary"
+                            app:cornerRadius="8dp"
+                            app:boxStrokeWidth="1dp"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="dropdown_menu"
+                            app:endIconDrawable="@drawable/ic_arrow_drop_down"
+                            app:errorEnabled="true">
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/timeTakenInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:paddingStart="12dp"
+                                android:paddingEnd="12dp"
+                                android:focusable="false"
+                                android:clickable="true"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Frequency Dropdown with animation -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/frequencyInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:hint="@string/how_often"
+                            app:startIconDrawable="@drawable/ic_repeat"
+                            app:startIconTint="@color/m3_primary"
+                            app:boxBackgroundColor="@color/m3_surface"
+                            app:cornerRadius="8dp"
+                            app:boxStrokeWidth="1dp"
+                            app:boxStrokeWidthFocused="2dp">
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/oftenSpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/poppins_regular"
+                                android:paddingStart="12dp"
+                                android:paddingEnd="12dp"
+                                android:textSize="16sp"
+                                android:completionThreshold="1"
+                                android:dropDownHeight="wrap_content"
+                                android:dropDownVerticalOffset="8dp"
+                                android:inputType="none"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Dose Count Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/doseCountInputLayout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:hint="@string/how_many"
+                            app:startIconDrawable="@drawable/pill"
+                            app:startIconTint="@color/m3_primary"
+                            app:boxBackgroundColor="@color/m3_surface"
+                            app:cornerRadius="8dp"
+                            app:boxStrokeWidth="1dp"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:suffixText="pills">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/howManyInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:text="1"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:paddingStart="12dp"
+                                android:paddingEnd="12dp"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Save Button with motion animation -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/scheduleDoseBtn"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/schedule_dose"
+        android:textColor="@color/m3_on_primary"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_medium"
+        android:letterSpacing="0.1"
+        app:backgroundTint="@color/m3_primary"
+        app:cornerRadius="12dp"
+        app:elevation="2dp"
+        app:icon="@drawable/ic_schedule"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconTint="@color/m3_on_primary"
+        app:layout_anchor="@id/nestedScrollView"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        app:layout_insetEdge="bottom"
+        android:transitionName="action_button_transition"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

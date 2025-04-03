@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.medcheck.R.*
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -34,12 +35,12 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.chip.ChipGroup
 import java.util.Calendar
 
 
 class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
 
-    private lateinit var radioGroup: RadioGroup
     // declaring the map variable
     private var map : GoogleMap? = null
     private lateinit var mapSearchView: SearchView
@@ -49,29 +50,24 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private var mapOptionMenu: ImageButton? = null
     private var isRadioGroupVisible = true // State to track visibility
+    private lateinit var mapTypeGroup: ChipGroup
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_google_map)
+        setContentView(layout.activity_google_map)
         // resizes the nav bar icons depending of the screen size of the phone or device used
-        val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
+        val bottomNavView = findViewById<BottomNavigationView>(id.bottom_navigation)
+        bottomNavView.itemIconSize = resources.getDimensionPixelSize(dimen.icon_size)
         // Initialize views
-        radioGroup = findViewById(R.id.radioGroup);
-        mapOptionMenu = findViewById(R.id.mapOptionMenu);
+        mapTypeGroup = findViewById(id.mapTypeGroup)
+        mapOptionMenu = findViewById(id.mapOptionMenu);
 
         // Set click listener on the mapOptionMenu button
-        // Set click listener on the mapOptionMenu button
         mapOptionMenu?.setOnClickListener {
-            // Toggle visibility of RadioGroup
-            if (isRadioGroupVisible) {
-                radioGroup.visibility = View.GONE // Hide RadioGroup
-            } else {
-                radioGroup.visibility = View.VISIBLE // Show RadioGroup
-            }
-            isRadioGroupVisible = !isRadioGroupVisible // Toggle state
+            mapTypeGroup.visibility = if (isRadioGroupVisible) View.GONE else View.VISIBLE
+            isRadioGroupVisible = !isRadioGroupVisible
         }
 
         val applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
@@ -82,7 +78,7 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         placesClient = Places.createClient(this)
 
         // initialize the autocompleteSupport fragment for the search bar
-        val autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autoComplete_fragment)
+        val autocompleteFragment = supportFragmentManager.findFragmentById(id.autoComplete_fragment)
                 as AutocompleteSupportFragment
 
         // specify the type of place data to return
@@ -108,64 +104,51 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         })
 
         // set up map fragment
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
-        radioGroup = findViewById(R.id.radioGroup)
-        radioGroup.setOnCheckedChangeListener{ _ , itemId : Int ->
-            when(itemId){
-                R.id.btnNormal ->{
-                    map?.mapType = GoogleMap.MAP_TYPE_NORMAL
-                }
-                R.id.btnHybrid ->{
-                    map?.mapType = GoogleMap.MAP_TYPE_HYBRID
-                }
-                R.id.btnSatellite ->{
-                    map?.mapType = GoogleMap.MAP_TYPE_SATELLITE
-                }
-                R.id.btnTerrain ->{
-                    map?.mapType = GoogleMap.MAP_TYPE_TERRAIN
-                }
+        mapTypeGroup = findViewById(id.mapTypeGroup)
+        mapTypeGroup.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId) {
+                id.btnNormal -> map?.mapType = GoogleMap.MAP_TYPE_NORMAL
+                id.btnSatellite -> map?.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                id.btnHybrid -> map?.mapType = GoogleMap.MAP_TYPE_HYBRID
+                id.btnTerrain -> map?.mapType = GoogleMap.MAP_TYPE_TERRAIN
             }
         }
 
         //---------------------------------------BOTTOM NAV-------------------------------------------------
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNavigationView = findViewById<BottomNavigationView>(id.bottom_navigation)
 
         // Handle navigation item selection
         bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
             when (item.itemId) {
-                R.id.nav_preferences -> {
+                id.nav_preferences -> {
                     // Navigates to preferences
                     startActivity(Intent(this, Preferences::class.java))
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.nav_calendar -> {
+                id.nav_calendar -> {
                     // Navigate to Calendar Activity
                     startActivity(Intent(this, Calendar::class.java))
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.nav_dashboard -> {
+                id.nav_dashboard -> {
                     // Navigate to Dashboard Activity
                     startActivity(Intent(this, Dashboard::class.java))
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.nav_konw_your_med -> {
+                id.nav_konw_your_med -> {
                     // Navigate to About Med Activity
                     startActivity(Intent(this, MedicationInformation::class.java))
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.nav_medication -> {
+                id.nav_medication -> {
                     // Navigate to Medication Activity
                     startActivity(Intent(this, MyMedicine::class.java))
                     return@setOnNavigationItemSelectedListener true
@@ -180,7 +163,7 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
 
         this.map = googleMap
         // setting a style for the map
-        map?.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+        map?.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, raw.map_style))
         // function to set the map type
         map?.mapType = GoogleMap.MAP_TYPE_NORMAL
 
@@ -209,10 +192,10 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
         // adds the marker to the map location
        val marker = map?.addMarker(markerOptions)
 
-        marker?.tag = CustomInfoWindowData("XYZ Pharmacy", getString(R.string.pharmacy_description), R.drawable.pharmacy)
+        marker?.tag = CustomInfoWindowData("XYZ Pharmacy", getString(string.pharmacy_description), drawable.pharmacy)
         // checks the permission to get user location
         checkLocationPermission()
-        markerOptions.icon(getBitmapFromDrawable(R.drawable.location)?.let {
+        markerOptions.icon(getBitmapFromDrawable(drawable.location)?.let {
             BitmapDescriptorFactory.fromBitmap(
                 it
             )

@@ -3,80 +3,111 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/m3_surface_container"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient_background"
-        android:orientation="vertical">
-
-
-        <ImageButton
-            android:id="@+id/logoBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="0dp"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/medcheck_logo" />
-
-        <TextView
-            android:id="@+id/textWelcome"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/welcome"
-            android:textAlignment="center"
-            android:textColor="@color/textBlue"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/textWelcomeUser"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/textBlue"
-            android:textSize="20sp"
-            android:fontFamily="@font/poppins_bold"/>
-
-    </LinearLayout>
-
-
-    <FrameLayout
-        android:id="@+id/unableBtnContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/medcheck_logo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/getStartedBtn"
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/textWelcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/lato_italic"
+        android:text="@string/welcome"
+        android:textAlignment="center"
+        android:textColor="@color/m3_primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
+
+    <!-- User-Specific Greeting (e.g., "Hello, Dr. Smith!") -->
+    <TextView
+        android:id="@+id/textWelcomeUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:textAlignment="center"
+        android:textColor="@color/m3_on_surface"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textWelcome" />
+
+    <!-- Optional: Subtle Tagline -->
+    <TextView
+        android:id="@+id/textTagline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/your_health_simplified"
+        android:textAlignment="center"
+        android:textColor="@color/m3_on_surface_variant"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textWelcomeUser" />
+
+    <!-- Get Started Button (Modern Card) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/getStartedBtn"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/m3_primary"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/m3_primary_container">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_1"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:background="@null" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/getStartedBtnText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/start"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/poppins_bold" />
-    </FrameLayout>
+            <TextView
+                android:id="@+id/getStartedBtnText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
+            <!-- Optional: Arrow icon -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/advance"
+                app:tint="@android:color/white" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

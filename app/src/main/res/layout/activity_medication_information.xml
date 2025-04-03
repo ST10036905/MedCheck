@@ -3,60 +3,69 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/medication_container"
+    android:id="@+id/main"
+    android:background="@color/m3_surface_container"
     tools:context=".MedicationInformation">
 
+    <!-- Search Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/search_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:strokeColor="@color/m3_outline"
+        app:strokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="8dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/search_medication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="Search medication..."
-            android:iconifiedByDefault="false"
             android:background="@android:color/transparent"
+            android:queryHint="Search medication..."
+            app:iconifiedByDefault="false"
+            app:searchHintIcon="@drawable/search"
+            app:closeIcon="@drawable/cancel"
             android:layout_margin="8dp"/>
     </com.google.android.material.card.MaterialCardView>
 
-    <ScrollView
+    <!-- Information Cards -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/search_card"
-        app:layout_constraintStart_toStartOf="parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_card">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp">
 
+            <!-- Drug Name Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/gradientBlue"
                     android:padding="16dp">
 
                     <TextView
@@ -64,33 +73,40 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/name_of_drug"
-                        android:textSize="20sp"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/black"/>
+                        android:fontFamily="@font/poppins_bold"
+                        android:drawableStart="@drawable/pill"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                     <TextView
                         android:id="@+id/tv_drug_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/drug_name"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="4dp"/>
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Description Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/gradientBlue"
                     android:padding="16dp">
 
                     <TextView
@@ -98,143 +114,173 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/description"
-                        android:textSize="20sp"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/black"/>
+                        android:fontFamily="@font/poppins_bold"
+                        android:drawableStart="@drawable/ic_description"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                     <TextView
                         android:id="@+id/tv_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/description_content"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="4dp"/>
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Dosage & Warnings Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/gradientBlue"
                     android:padding="16dp">
 
+                    <!-- Dosage Section -->
                     <TextView
                         android:id="@+id/label_dosage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dosage"
-                        android:textSize="20sp"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/black"/>
+                        android:fontFamily="@font/poppins_bold"
+                        android:drawableStart="@drawable/pill"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                     <TextView
                         android:id="@+id/tv_dosage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/dosage_content"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="4dp"/>
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"/>
 
+                    <!-- Warnings Section -->
                     <TextView
                         android:id="@+id/label_warnings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
                         android:text="@string/warnings"
-                        android:textSize="20sp"
+                        android:textColor="@color/m3_error"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_marginTop="16dp"/>
+                        android:fontFamily="@font/poppins_bold"
+                        android:drawableStart="@drawable/ic_warning"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_error"/>
 
                     <TextView
                         android:id="@+id/tv_warnings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/warnings_content"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/holo_red_light"
-                        android:layout_marginTop="4dp"/>
+                        android:textColor="@color/m3_error"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Indications & Reactions Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/gradientBlue"
                     android:padding="16dp">
 
+                    <!-- Indications Section -->
                     <TextView
                         android:id="@+id/label_indications"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/indications"
-                        android:textSize="20sp"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/black"/>
+                        android:fontFamily="@font/poppins_bold"
+                        android:drawableStart="@drawable/ic_indications"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                     <TextView
                         android:id="@+id/tv_indications"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/indications_content"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="4dp"/>
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"/>
 
+                    <!-- Adverse Reactions Section -->
                     <TextView
                         android:id="@+id/label_adverse_reactions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
                         android:text="@string/adverse_reactions"
-                        android:textSize="20sp"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="16dp"/>
+                        android:fontFamily="@font/poppins_bold"
+                        android:drawableStart="@drawable/ic_reaction"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                     <TextView
                         android:id="@+id/tv_adverse_reactions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/adverse_reactions_content"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="4dp"/>
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:background="@color/m3_surface"
+        app:elevation="8dp"
         app:itemIconSize="24dp"
-        app:itemTextAppearanceActive="@style/ActiveTabTextStyle"
-        app:itemTextAppearanceInactive="@style/InactiveTabTextStyle"
-        app:backgroundTint="@color/navBG"
-        android:elevation="8dp"
-        app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:itemIconTint="@drawable/bottom_nav_color_selector"
+        app:itemTextColor="@drawable/bottom_nav_color_selector"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

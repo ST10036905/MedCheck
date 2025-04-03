@@ -44,11 +44,10 @@ class Preferences : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_preferences)
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        enableEdgeToEdge()
         //---------resizes the nav bar icons depending of the screen size of the phone or device used
         val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
@@ -70,8 +69,26 @@ class Preferences : AppCompatActivity() {
 
         setupBiometricPrompt()
 
-        binding.enableBiometricButton.setOnClickListener {
+        binding.biometricSwitch.setOnClickListener {
             setupBiometricAuthentication()
+        }
+
+        binding.themeSwitch.isChecked = isDarkModeEnabled
+        binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            setDarkMode(isChecked)
+            editor.putBoolean(DARK_MODE_KEY, isChecked).apply()
+        }
+
+        binding.logoutButton.setOnClickListener {
+            logout()
+        }
+
+        // Set up fragment transactions
+        binding.termsAndConditions.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main, Terms_and_condition_fragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -79,17 +96,6 @@ class Preferences : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        val themeSwitch = findViewById<SwitchCompat>(R.id.themeSwitch)
-        themeSwitch.isChecked = isDarkModeEnabled
-        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            setDarkMode(isChecked)
-            editor.putBoolean(DARK_MODE_KEY, isChecked).apply()
-        }
-
-        val logoutMode = findViewById<RelativeLayout>(R.id.logoutRL)
-        logoutMode.setOnClickListener {
-            logout()
-        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -97,15 +103,8 @@ class Preferences : AppCompatActivity() {
             insets
         }
 
-        binding.termsAndConditionsRL.setOnClickListener {
-            val termsFragment = Terms_and_condition_fragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.main, termsFragment)
-                .addToBackStack(null)
-                .commit()
-        }
 
-        binding.FAQRL.setOnClickListener {
+        binding.faqBtn.setOnClickListener {
             val faqFragment = FaqFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main, faqFragment)
@@ -113,7 +112,7 @@ class Preferences : AppCompatActivity() {
                 .commit()
         }
 
-        binding.whatsNewRL.setOnClickListener {
+        binding.whatsNewBtn.setOnClickListener {
             val whatsNew = WhatsNewOnMedCheck()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main, whatsNew)
@@ -121,7 +120,7 @@ class Preferences : AppCompatActivity() {
                 .commit()
         }
 
-        binding.LangaugeRL.setOnClickListener {
+        binding.languageBtn.setOnClickListener {
             val languagePre = LanguageFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main, languagePre)

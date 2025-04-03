@@ -3,64 +3,77 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BgColor"
+    android:background="@color/m3_surface_container"
     tools:context=".Welcome">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:gravity="center">
+    <!-- App Logo -->
+    <ImageView
+        android:id="@+id/logoBtn"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/medcheck_logo"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/logoBtn"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="0dp"
-            android:background="@null"
-            android:src="@drawable/medcheck_logo"
-            android:scaleType="fitCenter" />
+    <!-- Create Account Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createAccBtn"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/create"
+        android:backgroundTint="@color/m3_primary"
+        android:textSize="18sp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/user_icon"
+        app:iconTint="@android:color/white"
+        app:iconPadding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoBtn" />
 
-        <Button
-            android:id="@+id/createAccBtn"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="90dp"
-            android:gravity="center"
-            android:text="@string/create"
-            android:backgroundTint="@color/gradientBlue"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/white" />
+    <!-- Login Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/loginBtn"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/login"
+        android:textColor="@color/m3_primary"
+        android:textSize="18sp"
+        app:icon="@drawable/arrow"
+        app:iconTint="@color/m3_primary"
+        app:strokeColor="@color/m3_primary"
+        app:strokeWidth="1dp"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/createAccBtn" />
 
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:text="@string/login"
-            android:backgroundTint="@color/gradientBlue"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="18sp"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/backBtn"
-            android:layout_width="180dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:gravity="center"
-            android:text="@string/back"
-            android:backgroundTint="@color/gradientBlue"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
+    <!-- Back Button (Text Style) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backBtn"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/back"
+        android:textColor="@color/m3_error"
+        app:icon="@drawable/logout_icon"
+        app:iconTint="@color/m3_error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

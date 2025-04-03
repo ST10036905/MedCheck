@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetStart="@+id/start"
+        app:constraintSetEnd="@+id/end"
+        app:duration="300">
+        <OnClick
+            app:targetId="@id/scheduleDoseBtn"
+            app:clickAction="transitionToEnd" />
+        <KeyFrameSet>
+            <KeyAttribute
+                app:motionTarget="@id/formCard"
+                app:framePosition="50"
+                android:translationZ="8dp"/>
+            <KeyAttribute
+                app:motionTarget="@id/scheduleDoseBtn"
+                app:framePosition="50"
+                android:scaleX="0.95"
+                android:scaleY="0.95"/>
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/formCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:translationZ="0dp"/>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/time_selected">
+        <Constraint
+            android:id="@+id/formCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:translationZ="16dp"/>
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/formCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:translationZ="12dp"/>
+    </ConstraintSet>
+</MotionScene>

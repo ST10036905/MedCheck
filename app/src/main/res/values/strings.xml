@@ -50,7 +50,7 @@
     <string name="when_to_take">When is the dose taken?</string>
     <string name="how_often">How often is the dose taken?</string>
     <string name="how_many">"How many of each doses are taken?</string>
-    <string name="welcome">Your health is our priority. Med Check is here to help you stay on track with your medication schedule.</string>
+    <string name="welcome">With MedCheck, staying on top of your health has never been easier. It’s more than an app, it’s a step toward better health and wellness.</string>
     <string name="image">Image</string>
     <string name="push_notification">Push Notification</string>
     <string name="night_mode">Night Mode</string>
@@ -163,11 +163,33 @@
     <string name="all_taken">All Taken</string>
 
     <string name="MAPS_KEY" translatable="false">AIzaSyDiUmzGCP2DrEDHC3dwkba3y0Mh0FcjKQc</string>
+    <string name="clear_cabinet">Clear cabinet</string>
+    <string name="view_my_medicine">View My Medicine</string>
+    <string name="theme_settings">Theme settings</string>
+
+    <string name="english_language_option">English language option</string>
+    <string name="portuguese_language_option">Portuguese language option</string>
+    <string name="afrikaans_language_option">Afrikaans language option</string>
+    <string name="save_language_settings">Save language settings</string>
+    <string name="language_changed_successfully">Language changed successfully</string>
+    <string name="dismiss">DISMISS</string>
+    <string name="accept_terms">Accept Terms</string>
+    <string name="terms_accepted_confirmation">Terms and conditions accepted</string>
+
+    <string name="got_it">Got it</string>
+    <string name="your_health_simplified">Your health, simplified</string>
+    <string name="next_step">Next Step</string>
 
     <string-array name="language_options">
         <item>English</item>
         <item>Português</item>
         <item>Afrikaans</item>
+    </string-array>
+
+    <string-array name="frequency_options">
+        <item>Select frequency</item>
+        <item>Scheduled Dose</item>
+        <item>As Needed</item>
     </string-array>
 
 </resources>

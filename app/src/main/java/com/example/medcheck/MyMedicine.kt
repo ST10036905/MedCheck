@@ -14,6 +14,8 @@ import com.google.firebase.database.*
 import com.example.medcheck.Database.DatabaseHandler
 import android.database.Cursor
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 
 class MyMedicine : AppCompatActivity() {
@@ -21,29 +23,32 @@ class MyMedicine : AppCompatActivity() {
 	// Declare binding variable and Firebase reference
 	private var binding: ActivityMyMedicineBinding? = null
 	private var databaseReference: DatabaseReference? = null
-	private lateinit var medicineListView: ListView // ListView to display the list of medicines
 	private lateinit var medicines: MutableList<String> // Mutable list to hold medicine names
 	private lateinit var databaseHandler: DatabaseHandler
+	private lateinit var adapter: MedicineAdapter
 	private var latestMedicine: String? = null // Variable to hold the latest medicine name
 	private var userId: String? = null // Store user ID to filter medicines
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-
 		// Enable edge-to-edge mode
 		binding = ActivityMyMedicineBinding.inflate(layoutInflater)
 		setContentView(binding!!.root)
-
 		// Get the current user's ID
 		userId = FirebaseAuth.getInstance().currentUser?.uid
-
 		// Initialize Firebase Database reference
 		databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
+
+		// Setup RecyclerView
+		adapter = MedicineAdapter(emptyList())
+		binding?.medicineRecyclerView?.layoutManager = LinearLayoutManager(this)
+		binding?.medicineRecyclerView?.adapter = adapter
+
 		// resizes the nav bar icons depending of the screen size of the phone or device used
 		val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 		bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
-		// Initialize ListView and medicines list
-		medicineListView = binding!!.medicineListView
+
+		//medicineListView = binding!!.medicineListView
 		medicines = mutableListOf()
 
 		// Initialize the database handler
@@ -95,37 +100,38 @@ class MyMedicine : AppCompatActivity() {
 		}
 	}
 
+	override fun onDestroy() {
+		super.onDestroy()
+		binding = null
+	}
+
 	private fun fetchMedicinesFromFirebase() {
-		val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-		if (userId != null) {
-			databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
-
-			databaseReference!!.orderByChild("userId").equalTo(userId)
-				.addValueEventListener(object : ValueEventListener {
+		userId?.let { uid ->
+			databaseReference?.orderByChild("userId")?.equalTo(uid)
+				?.addValueEventListener(object : ValueEventListener {
 					override fun onDataChange(dataSnapshot: DataSnapshot) {
-						medicines.clear()
+						medicines = mutableListOf()
 						for (snapshot in dataSnapshot.children) {
-							val medicineName = snapshot.child("name").getValue(String::class.java)
-							if (medicineName != null) {
-								medicines.add(medicineName)
+							snapshot.child("name").getValue(String::class.java)?.let {
+								medicines.add(it)
 							}
 						}
-
-						val adapter = ArrayAdapter(this@MyMedicine, android.R.layout.simple_list_item_1, medicines)
-						medicineListView.adapter = adapter
-
-						latestMedicine = if (medicines.isNotEmpty()) medicines.last() else null
+						adapter = MedicineAdapter(medicines)
+						binding?.medicineRecyclerView?.adapter = adapter
+						latestMedicine = medicines.lastOrNull()
 					}
 
 					override fun onCancelled(databaseError: DatabaseError) {
-						Toast.makeText(this@MyMedicine, "Failed to load medicines: ${databaseError.message}", Toast.LENGTH_SHORT).show()
+						Toast.makeText(this@MyMedicine,
+							"Failed to load medicines: ${databaseError.message}",
+							Toast.LENGTH_SHORT).show()
 					}
 				})
-		} else {
+		} ?: run {
 			Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show()
 		}
 	}
+
 
 	// Handle the result when returning from AddMedicine
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -177,12 +183,10 @@ class MyMedicine : AppCompatActivity() {
 
 	// Function to clear medicines and display a toast message
 	private fun clearMedicines() {
-		medicines.clear() // Clear the list of medicines
-
-		// Notify the ListView adapter that the data set has changed
-		(medicineListView.adapter as? ArrayAdapter<*>)?.notifyDataSetChanged()
-
-		// Display a toast message
-		Toast.makeText(this, "Medicine cabinet will be cleared.", Toast.LENGTH_SHORT).show()
+		medicines.clear()
+		adapter.notifyDataSetChanged()
+		Toast.makeText(this, "Medicine cabinet cleared.", Toast.LENGTH_SHORT).show()
 	}
 }
+
+

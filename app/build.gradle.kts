@@ -90,5 +90,7 @@ dependencies {
 
     implementation ("androidx.biometric:biometric:1.2.0-alpha05")  // latest stable version as of the last update
 
+    implementation ("com.google.android.material:material:1.11.0")
+    implementation ("androidx.core:core-ktx:1.12.0")
 
 }

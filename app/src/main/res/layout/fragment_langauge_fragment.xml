@@ -1,56 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/BgColor"
+    android:background="@color/m3_surface_container"
+    android:fillViewport="true"
     tools:context=".LanguageFragment">
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/container"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="24dp">
 
-        <RadioGroup
-            android:id="@+id/languageRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <!-- Header with icon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
 
-            <RadioButton
-                android:id="@+id/radioEnglish"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_language"
+                android:layout_marginEnd="12dp"
+                app:tint="@color/m3_primary" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/terracotta"
-                android:textSize="18sp"
+                android:text="Select a language"
+                android:textColor="@color/m3_on_surface"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:text="@string/english" />
+                android:letterSpacing="0.01"/>
+        </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/radioPortuguese"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/terracotta"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="@string/portugues" />
+        <!-- Language selection card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Material3.CardView.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/m3_surface"
+            app:strokeColor="@color/m3_outline"
+            app:strokeWidth="1dp">
 
-            <RadioButton
-                android:id="@+id/radioAfrikaans"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/terracotta"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="@string/afrikaans" />
-        </RadioGroup>
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioEnglish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/english"
+                    android:textColor="@color/m3_on_surface"
+                    android:textSize="16sp"
+                    app:buttonTint="@drawable/radio_button_tint"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:color="@color/m3_outline"/>
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioPortuguese"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/portugues"
+                    android:textColor="@color/m3_on_surface"
+                    android:textSize="16sp"
+                    app:buttonTint="@drawable/radio_button_tint"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:color="@color/m3_outline"/>
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioAfrikaans"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/afrikaans"
+                    android:textColor="@color/m3_on_surface"
+                    android:textSize="16sp"
+                    app:buttonTint="@drawable/radio_button_tint"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Save button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Save"
+            android:textColor="@color/m3_on_primary"
+            app:backgroundTint="@color/m3_primary"/>
     </LinearLayout>
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

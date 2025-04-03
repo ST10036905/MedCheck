@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
+
         // Gets the shared preferences
         sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE)
         // Get saved language preference
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         val config = resources.configuration
         config.setLocale(locale)
         createConfigurationContext(config)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // calls the notification channel
@@ -50,6 +52,9 @@ class MainActivity : AppCompatActivity() {
         // Enable view binding to inflate layout and access UI elements
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // NOW you can animate the button via binding
+        binding.getStartedBtn.animate().alpha(1f).setDuration(800).start()
 
         // Initialize Firebase Authentication instance
         mAuth = FirebaseAuth.getInstance()

@@ -23,4 +23,8 @@
     <color name="containerColor">#292828</color>
     <color name="BgColor">#0C0B0B</color>
     <color name="navBG">#19121E</color>
+
+    <!-- NEW COLORS -->
+    <color name="m3_primary">#7AB4FF</color>
+    <color name="m3_surface_container">#1A1C1E</color>
 </resources>

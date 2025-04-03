@@ -1,81 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/BgColor"
-    android:padding="16dp"
+    android:background="@color/m3_surface_container"
+    android:fillViewport="true"
     tools:context=".FaqFragment">
 
-    <TextView
-        android:id="@+id/faqTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/frequently_asked_question"
-        android:textColor="@color/terracotta"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Frequently Asked Questions -->
-
-    <TextView
-        android:id="@+id/question1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/_1_what_is_this_app"
-        android:textColor="@color/terracotta"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <TextView
-        android:id="@+id/answer1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/this_app_helps_users_manage"
-        android:textColor="@color/BrownText"
-        android:textSize="16sp"
-        android:layout_marginBottom="16dp" />
+        <!-- Header with icon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
 
-    <TextView
-        android:id="@+id/question2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/_2_how_do_i_set_reminders_for_my_medications"
-        android:textColor="@color/terracotta"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_faq"
+                android:layout_marginEnd="12dp"
+                app:tint="@color/m3_primary" />
 
-    <TextView
-        android:id="@+id/answer2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/you_can_set_reminders"
-        android:textColor="@color/BrownText"
-        android:textSize="16sp"
-        android:layout_marginBottom="16dp" />
+            <TextView
+                android:id="@+id/faqTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/frequently_asked_question"
+                android:textColor="@color/m3_on_surface"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.01"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"/>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/question3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/_3_can_i_add_my_own_medications"
-        android:textColor="@color/terracotta"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
+        <!-- FAQ Items using MaterialCardView -->
+        <androidx.cardview.widget.CardView
+            style="@style/Widget.Material3.CardView.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/m3_surface"
+            app:strokeColor="@color/m3_outline"
+            app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/answer3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/yes_you_can_add_medications"
-        android:textColor="@color/BrownText"
-        android:textSize="16sp"
-        android:layout_marginBottom="16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/question1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_1_what_is_this_app"
+                    android:textColor="@color/m3_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:drawablePadding="8dp"
+                    android:lineSpacingExtra="4sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/answer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/this_app_helps_users_manage"
+                    android:textColor="@color/m3_on_surface_variant"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/Widget.Material3.CardView.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/m3_surface"
+            app:strokeColor="@color/m3_outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/question2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_2_how_do_i_set_reminders_for_my_medications"
+                    android:textColor="@color/m3_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:drawablePadding="8dp"
+                    android:lineSpacingExtra="4sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/answer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/you_can_set_reminders"
+                    android:textColor="@color/m3_on_surface_variant"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/Widget.Material3.CardView.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/m3_surface"
+            app:strokeColor="@color/m3_outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/question3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_3_can_i_add_my_own_medications"
+                    android:textColor="@color/m3_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:drawablePadding="8dp"
+                    android:lineSpacingExtra="4sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/answer3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yes_you_can_add_medications"
+                    android:textColor="@color/m3_on_surface_variant"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

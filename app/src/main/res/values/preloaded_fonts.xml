@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/alegreya</item>
+        <item>@font/goudy_bookletter_1911</item>
+        <item>@font/lato_italic</item>
         <item>@font/merienda_light</item>
+        <item>@font/mulish_light</item>
+        <item>@font/nunito_light</item>
         <item>@font/poppins_bold</item>
         <item>@font/poppins_medium</item>
     </array>

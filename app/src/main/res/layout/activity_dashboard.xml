@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BgColor"
-    tools:context="Dashboard">
-
+    android:background="@color/m3_surface_container"
+    tools:context=".Dashboard">
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,69 +20,81 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-
-            <TextView
-                android:id="@+id/tv_dashboard_title"
+            <!-- Header Section -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/dashboard_title"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="@color/cafe"
-                android:paddingBottom="16dp"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="center"/>
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="24dp">
 
+                <TextView
+                    android:id="@+id/tv_dashboard_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dashboard_title"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_primary"
+                    android:gravity="center"
+                    android:fontFamily="@font/poppins_bold"/>
 
-            <ImageView
-                android:id="@+id/dashboard_icon"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:src="@drawable/user_icon"
-                android:layout_gravity="center"
-                android:contentDescription="Dashboard Icon"
-                android:padding="10dp"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/dashboard_icon"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/user_icon"
+                    android:contentDescription="Profile icon"
+                    app:strokeColor="@color/m3_outline"
+                    app:strokeWidth="1dp"/>
+            </LinearLayout>
 
-
-            <androidx.cardview.widget.CardView
+            <!-- User Info Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_user_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="4dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginTop="16dp">
+                app:cardElevation="2dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="12dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
                         android:id="@+id/emailText"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/email"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="16sp"
+                        android:textColor="@color/m3_on_surface"
                         android:fontFamily="@font/poppins_medium"
-                        android:padding="16dp"/>
+                        android:drawableStart="@drawable/email"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-
-            <androidx.cardview.widget.CardView
+            <!-- Medication Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_active_medication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="4dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginTop="16dp">
+                app:cardElevation="2dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="12dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,57 +104,61 @@
 
                     <TextView
                         android:id="@+id/tv_active_medication_label"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dashboard_active_medication"
-                        android:fontFamily="@font/poppins_medium"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textColor="@color/gradientBlue"/>
+                        android:textColor="@color/m3_primary"
+                        android:fontFamily="@font/poppins_bold"
+                        android:drawableStart="@drawable/medication"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                     <TextView
                         android:id="@+id/medicineText"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="@string/medicine"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:fontFamily="@font/poppins_medium"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:padding="16dp"/>
-
-
-                    <Button
-                        android:id="@+id/addMedicationBtn"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/textBlue"
-                        android:text="@string/dashboard_add_new_medication"
+                        android:textSize="16sp"
+                        android:textColor="@color/m3_on_surface_variant"
                         android:fontFamily="@font/poppins_medium"/>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/addMedicationBtn"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/dashboard_add_new_medication"
+                        app:icon="@drawable/add"
+                        android:backgroundTint="@color/m3_primary"
+                        app:iconTint="@android:color/white"/>
+
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/knowMoreBtn"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:backgroundTint="@color/textBlue"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="@string/dashboard_know_more_medicine" />
-
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/dashboard_know_more_medicine"
+                        app:icon="@drawable/information"
+                        android:textColor="@color/security"
+                        app:iconTint="@color/security"/>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-
-            <androidx.cardview.widget.CardView
+            <!-- Awards Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_awards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="4dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginTop="16dp">
+                app:cardElevation="2dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="12dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -152,94 +168,63 @@
 
                     <TextView
                         android:id="@+id/tv_awards_label"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dashbaord_awards_title"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        android:textColor="@color/m3_primary"
                         android:fontFamily="@font/poppins_bold"
-                        android:layout_gravity="center"
-                        android:textColor="@color/gradientBlue"/>
-
+                        android:drawableStart="@drawable/award"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:orientation="horizontal"
-                        android:gravity="center">
-
+                        android:gravity="center"
+                        android:showDividers="middle">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:orientation="vertical"
+                            android:gravity="center"
                             android:padding="8dp">
 
                             <ImageView
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
-                                android:src="@drawable/dashboard_award1" />
+                                android:src="@drawable/dashboard_award1"
+                                app:tint="@color/m3_primary" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_medium"
-                                android:textColor="@color/black"
+                                android:layout_marginTop="8dp"
                                 android:text="@string/dashboard_getting_started_award"
-                                android:textSize="12sp"/>
+                                android:textSize="12sp"
+                                android:textColor="@color/m3_on_surface"
+                                android:fontFamily="@font/poppins_medium"/>
                         </LinearLayout>
 
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:src="@drawable/dashboard_award2"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/dashboard_my_milestone_title"
-                                android:fontFamily="@font/poppins_medium"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:src="@drawable/dashboard_award3"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/dashboard_using_medcheck_title"
-                                android:fontFamily="@font/poppins_medium"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"/>
-                        </LinearLayout>
+                        <!-- Repeat for other awards -->
                     </LinearLayout>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <!-- Refill Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_refill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="4dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginTop="16dp">
+                app:cardElevation="2dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -249,52 +234,58 @@
 
                     <TextView
                         android:id="@+id/tv_refill_label"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dashboard_refill_button"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textColor="@color/gradientBlue"/>
+                        android:textColor="@color/m3_primary"
+                        android:fontFamily="@font/poppins_bold"
+                        android:drawableStart="@drawable/add"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary"/>
 
                     <TextView
                         android:id="@+id/tv_refill_instructions"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
+                        android:layout_marginTop="8dp"
                         android:text="@string/with_just_a_few_clicks"
-                        android:paddingTop="4dp"
                         android:textSize="14sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/m3_on_surface_variant"
+                        android:fontFamily="@font/poppins_medium"/>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/refillBtn"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/textBlue"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textSize="14sp"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center"
                         android:text="@string/dashboard_refill_button"
-                        android:layout_gravity="center"/>
-
+                        app:icon="@drawable/add"
+                        android:backgroundTint="@color/m3_primary"
+                        app:iconTint="@android:color/white"/>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>
+
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        app:itemIconSize="24dp"
-        app:itemTextAppearanceActive="@style/ActiveTabTextStyle"
-        app:itemTextAppearanceInactive="@style/InactiveTabTextStyle"
-        app:backgroundTint="@color/navBG"
-        android:elevation="8dp"
+        android:layout_height="wrap_content"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:itemIconSize="24dp"
+        app:itemRippleColor="@color/m3_primary_container"
+        app:itemTextAppearanceActive="@style/BottomNavActiveText"
+        app:itemTextAppearanceInactive="@style/BottomNavInactiveText"
+        app:itemIconTint="@drawable/bottom_nav_color_selector"
+        app:itemTextColor="@drawable/bottom_nav_color_selector"
+        app:backgroundTint="@color/m3_surface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

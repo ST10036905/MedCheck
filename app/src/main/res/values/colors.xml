@@ -49,4 +49,24 @@
     <color name="gray_text">#757575</color>
 
     <color name="black_background">#000000</color>
+
+    <!-- NEW COLORS -->
+    <!-- Material 3 Color Palette (Medical-App Friendly) -->
+    <color name="m3_primary">#2563EB</color>  <!-- Deep Blue (Trust/Medical) -->
+    <color name="m3_secondary">#4C9AFF</color>  <!-- Lighter Blue -->
+    <color name="m3_surface_container">#F8FAFC</color>  <!-- Soft Background -->
+    <color name="m3_error">#FF4D4F</color>  <!-- For input errors -->
+
+    <!-- Modern Medical Colors -->
+    <color name="m3_primary_container">#D6E3FF</color>  <!-- Ripple effect color -->
+    <color name="m3_on_surface">#1A1C1E</color>  <!-- High-contrast text -->
+    <color name="m3_on_surface_variant">#45474A</color>  <!-- Subdued text -->
+    <!-- Add to res/values/colors.xml -->
+    <color name="m3_on_primary">#FFFFFF</color>
+    <color name="m3_surface">#FFFFFF</color>
+    <color name="m3_outline">#E0E0E0</color>
+
+
+
+
 </resources>

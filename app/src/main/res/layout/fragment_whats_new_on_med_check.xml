@@ -1,145 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WhatsNewOnMedCheck"
-    android:background="@color/BgColor"
-    android:padding="16dp">
+    android:background="@color/m3_surface_container"
+    tools:context=".WhatsNewOnMedCheck">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="32dp">
+        android:background="@android:color/transparent"
+        android:elevation="0dp">
 
-        <!-- Title for What's New -->
-        <TextView
-            android:id="@+id/whats_new_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/what_s_new_in_medcheck"
-            android:textSize="30sp"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textColor="@color/caramel"
-            android:layout_marginBottom="16dp" />
-
-        <ScrollView
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/BgColor"
-            android:paddingBottom="32dp">
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/m3_primary_container"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <LinearLayout
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:title="@string/what_s_new_in_medcheck"
+                app:titleTextColor="@color/m3_primary_container"/>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="72dp">
+
+            <!-- Feature 1 -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="18dp">
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/m3_surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
 
-        <!-- Feature 1: Medication Search -->
-        <TextView
-            android:id="@+id/feature_1_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_for_medications"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/caramel"
-            android:layout_marginBottom="8dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-        <TextView
-            android:id="@+id/feature_1_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/you_can_now_search"
-            android:textSize="16sp"
-            android:textColor="@color/BrownText"
-            android:layout_marginBottom="16dp" />
+                    <TextView
+                        android:id="@+id/feature_1_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_for_medications"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/search"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-        <!-- Feature 2: Refill Medications -->
-        <TextView
-            android:id="@+id/feature_2_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/refill_your_medications"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/caramel"
-            android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:id="@+id/feature_1_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/you_can_now_search"
+                        android:textColor="@color/m3_on_surface_variant"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="4sp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/feature_2_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/with_just_a_few_clicks"
-            android:textSize="16sp"
-            android:textColor="@color/BrownText"
-            android:layout_marginBottom="16dp" />
+            <!-- Feature 2 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/m3_surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
 
-        <!-- Feature 3: Nearby Pharmacies -->
-        <TextView
-            android:id="@+id/feature_3_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_for_nearby_pharmacies"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/caramel"
-            android:layout_marginBottom="8dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-        <TextView
-            android:id="@+id/feature_3_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/find_the_nearest_pharmacies"
-            android:textSize="16sp"
-            android:textColor="@color/BrownText"
-            android:layout_marginBottom="16dp" />
+                    <TextView
+                        android:id="@+id/feature_2_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/refill_your_medications"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/medication"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-        <!-- Feature 4: Medication Reminders -->
-        <TextView
-            android:id="@+id/feature_4_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/medication_reminders"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/caramel"
-            android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:id="@+id/feature_2_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/with_just_a_few_clicks"
+                        android:textColor="@color/m3_on_surface_variant"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="4sp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/feature_4_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/never_forget_to_take"
-            android:textSize="16sp"
-            android:textColor="@color/BrownText"
-            android:layout_marginBottom="16dp" />
+            <!-- Feature 3 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/m3_surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
 
-        <!-- Feature 5: Track Dosages -->
-        <TextView
-            android:id="@+id/feature_5_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/track_your_dosages"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/caramel"
-            android:layout_marginBottom="8dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-        <TextView
-            android:id="@+id/feature_5_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/keep_track_of_your_dosage"
-            android:textSize="16sp"
-            android:textColor="@color/BrownText"
-            android:layout_marginBottom="16dp" />
+                    <TextView
+                        android:id="@+id/feature_3_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_for_nearby_pharmacies"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/ic_pharmacy"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
+                    <TextView
+                        android:id="@+id/feature_3_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/find_the_nearest_pharmacies"
+                        android:textColor="@color/m3_on_surface_variant"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="4sp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
-</ScrollView>
-    </LinearLayout>
-</ScrollView>
+            <!-- Feature 4 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/m3_surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/feature_4_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/medication_reminders"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/ic_schedule"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+
+                    <TextView
+                        android:id="@+id/feature_4_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/never_forget_to_take"
+                        android:textColor="@color/m3_on_surface_variant"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="4sp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Feature 5 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/m3_surface"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="@color/m3_outline"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/feature_5_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/track_your_dosages"
+                        android:textColor="@color/m3_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/m3_primary_container"
+                        android:drawableStart="@drawable/pill"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+
+                    <TextView
+                        android:id="@+id/feature_5_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/keep_track_of_your_dosage"
+                        android:textColor="@color/m3_on_surface_variant"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="4sp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Got It Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGotIt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:text="@string/got_it"
+        android:textColor="@color/m3_on_primary"
+        app:backgroundTint="@color/m3_primary"
+        app:cornerRadius="8dp"
+        app:icon="@drawable/ic_checkmark"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconTint="@color/m3_on_primary"
+        style="@style/Widget.Material3.Button.ElevatedButton"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
