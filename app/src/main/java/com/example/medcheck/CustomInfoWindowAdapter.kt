@@ -7,22 +7,35 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
+import com.makeramen.roundedimageview.RoundedImageView
 
-class CustomInfoWindowAdapter (private val context : Context) : GoogleMap.InfoWindowAdapter{
+class CustomInfoWindowAdapter(private val context: Context) : GoogleMap.InfoWindowAdapter {
+
     override fun getInfoContents(marker: Marker): View? {
         val view = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null)
-        val title : TextView = view.findViewById(R.id.infoWindowTitle)
-        val desc : TextView = view.findViewById(R.id.infoWindowContent)
-        val image : ImageView = view.findViewById(R.id.infoWindow)
+        val title: TextView = view.findViewById(R.id.infoWindowTitle)
+        val desc: TextView = view.findViewById(R.id.infoWindowContent)
+        val image: RoundedImageView = view.findViewById(R.id.infoWindow)
 
-        val data = marker.tag as CustomInfoWindowData
-        title.text = data.title
-        desc.text = data.desc
-        data.image.let { image.setImageResource(it) }
+        when (val data = marker.tag) {
+            is CustomInfoWindowData -> {
+                // Handle custom info window data
+                title.text = data.title
+                desc.text = data.desc
+                image.setImageResource(data.image)
+            }
+            else -> {
+                // Fallback for markers without custom data
+                title.text = marker.title ?: "Location"
+                desc.text = marker.snippet ?: ""
+                image.visibility = View.GONE // Hide image if no custom data
+            }
+        }
+
         return view
     }
 
     override fun getInfoWindow(marker: Marker): View? {
-       return null
+        return null // Use default window frame
     }
 }

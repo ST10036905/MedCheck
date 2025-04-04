@@ -43,6 +43,15 @@ class Preferences : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Initialize sharedPreferences FIRST
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        // Set theme before super.onCreate
+        if (sharedPreferences.getBoolean(DARK_MODE_KEY, false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         super.onCreate(savedInstanceState)
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -56,9 +65,9 @@ class Preferences : AppCompatActivity() {
         currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null) {
             Toast.makeText(this, "No user is logged in", Toast.LENGTH_SHORT).show()
-            // Optionally, redirect to login screen here
+
         } else {
-            Toast.makeText(this, "Welcome, ${currentUser?.email}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Hello, ${currentUser?.email}", Toast.LENGTH_SHORT).show()
         }
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
@@ -75,8 +84,7 @@ class Preferences : AppCompatActivity() {
 
         binding.themeSwitch.isChecked = isDarkModeEnabled
         binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            setDarkMode(isChecked)
-            editor.putBoolean(DARK_MODE_KEY, isChecked).apply()
+            setDarkMode(isChecked)  // The method now handles the check internally
         }
 
         binding.logoutButton.setOnClickListener {
@@ -102,7 +110,6 @@ class Preferences : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
 
         binding.faqBtn.setOnClickListener {
             val faqFragment = FaqFragment()
@@ -152,13 +159,30 @@ class Preferences : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(DARK_MODE_KEY, binding.themeSwitch.isChecked)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        binding.themeSwitch.isChecked = savedInstanceState.getBoolean(DARK_MODE_KEY, false)
+    }
+
     private fun setDarkMode(isEnabled: Boolean) {
-        if (isEnabled) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        sharedPreferences.edit().putBoolean(DARK_MODE_KEY, isEnabled).apply()
+
+        val currentMode = AppCompatDelegate.getDefaultNightMode()
+        val newMode = if (isEnabled) AppCompatDelegate.MODE_NIGHT_YES
+        else AppCompatDelegate.MODE_NIGHT_NO
+
+        if (currentMode != newMode) {
+            AppCompatDelegate.setDefaultNightMode(newMode)
+            // Add a slight delay for smoother transition
+            binding.root.postDelayed({ recreate() }, 150)
         }
     }
+
 
     private fun signOut() {
         mGoogleSignInClient!!.signOut().addOnCompleteListener(this) {

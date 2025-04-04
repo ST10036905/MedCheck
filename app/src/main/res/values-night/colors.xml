@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FFFFFF</color>
-    <color name="white">#FFFFFF</color>
-    <color name="white1">#2E2E2E</color>
-    <color name="gradientBlue">#0E2835</color>
-    <color name="textBlue">#B0BEC5</color>
-    <color name="red">#EF5350</color>
-    <color name="cafe">#8D6E63</color>
-    <color name="settingsBrown">#424242</color>
-    <color name="BrownText">#6D4C41</color>
-    <color name="BTN_darkerTextBlue">#78909C</color>
-    <color name="dashboardDarkerGradientBlue">#546E7A</color>
-    <color name="DarkBrown">#8D4D00</color>
-    <color name="night_mode">#121212</color>
-    <color name="notifications">#0288D1</color>
-    <color name="private_account">#FFD54F</color>
-    <color name="security">#E57373</color>
-    <color name="terracotta">#8E6B5D</color>
-    <color name="caramel">#A1887F</color>
-    <color name="preferences_text">#4E4D4D</color>
-    <color name="medication_container">#546E7A</color>
-    <color name="containerColor">#292828</color>
-    <color name="BgColor">#0C0B0B</color>
-    <color name="navBG">#19121E</color>
+    <!-- Night Mode version of your colors - same names, dark-appropriate values -->
+    <color name="black_background">#121212</color>  <!-- Softer black for dark mode -->
 
-    <!-- NEW COLORS -->
-    <color name="m3_primary">#7AB4FF</color>
-    <color name="m3_surface_container">#1A1C1E</color>
+    <!-- Material 3 Color Palette (Dark Medical-App) -->
+    <color name="m3_primary">#5B8DF5</color>  <!-- Softer blue for dark mode -->
+    <color name="m3_secondary">#7BA6FF</color>  <!-- Lighter accent blue -->
+    <color name="m3_surface_container">#1E1E1E</color>  <!-- Dark container -->
+    <color name="m3_error">#FF6E6E</color>  <!-- Brighter red for visibility in dark -->
+
+    <!-- Modern Medical Dark Colors -->
+    <color name="m3_primary_container">#1E293B</color>  <!-- Dark container for primary -->
+    <color name="m3_on_surface">#E1E1E1</color>  <!-- Light text for dark bg -->
+    <color name="m3_on_surface_variant">#A1A1A1</color>  <!-- Secondary text -->
+    <color name="m3_on_primary">#FFFFFF</color>  <!-- White text on colored buttons -->
+    <color name="m3_surface">#121212</color>  <!-- Dark surface -->
+    <color name="m3_outline">#2D2D2D</color>  <!-- Dark outlines -->
 </resources>

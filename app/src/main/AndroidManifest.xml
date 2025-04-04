@@ -9,6 +9,11 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +24,8 @@
         android:roundIcon="@drawable/medcheck_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedCheck"
-        tools:targetApi="31">
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="tiramisu">
 
         <activity
             android:name=".MainActivity"
@@ -33,7 +39,14 @@
             android:name=".TakenMedicine"
             android:exported="false" />
 
-        <receiver android:name=".MedicationReminderReceiver" />
+        <receiver
+            android:name=".MedicationReminderReceiver"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".MyFirebaseMessagingService"
@@ -77,8 +90,6 @@
             android:name=".Register"
             android:exported="false" />
 
-        <receiver android:name=".MedicationReminderReceiver" />
-
         <activity
             android:name=".Dashboard"
             android:exported="true" />
@@ -91,12 +102,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/MAPS_KEY" />
 
+        <!-- For Places API -->
+        <meta-data
+            android:name="com.google.android.libraries.places.PLACES_API_KEY"
+            android:value="AIzaSyDiUmzGCP2DrEDHC3dwkba3y0Mh0FcjKQc"/>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_stat_ic_notification" />
-        <!--meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" /-->
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" /> <!-- Firebase Messaging Service -->

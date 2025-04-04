@@ -1,22 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/medicineName"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/medicineName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black_background"/>
+
+        <TextView
+            android:id="@+id/medicineDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/m3_primary"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/editButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"/>
+        android:layout_marginEnd="8dp"
+        app:tint="@color/m3_primary"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/edit_medicine"
+        android:src="@drawable/ic_terms" />
 
-    <TextView
-        android:id="@+id/medicineDetails"
+    <ImageButton
+        android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/m3_primary"
-        android:layout_marginTop="4dp"/>
+        android:src="@drawable/ic_clear"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/delete_medicine"
+        app:tint="@color/m3_error" />
 </LinearLayout>

@@ -44,12 +44,11 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/dashboard_icon"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginTop="16dp"
-                    android:src="@drawable/user_icon"
+                    android:src="@drawable/medcheck_logo2"
                     android:contentDescription="Profile icon"
-                    app:strokeColor="@color/m3_outline"
                     app:strokeWidth="1dp"/>
             </LinearLayout>
 
@@ -111,9 +110,9 @@
                         android:textStyle="bold"
                         android:textColor="@color/m3_primary"
                         android:fontFamily="@font/poppins_bold"
-                        android:drawableStart="@drawable/medication"
                         android:drawablePadding="8dp"
-                        android:drawableTint="@color/m3_primary"/>
+                        app:drawableStartCompat="@drawable/medication"
+                        app:drawableTint="@color/m3_primary" />
 
                     <TextView
                         android:id="@+id/medicineText"
@@ -144,8 +143,8 @@
                         android:layout_marginTop="8dp"
                         android:text="@string/dashboard_know_more_medicine"
                         app:icon="@drawable/information"
-                        android:textColor="@color/security"
-                        app:iconTint="@color/security"/>
+                        android:textColor="@color/m3_error"
+                        app:iconTint="@color/m3_error"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

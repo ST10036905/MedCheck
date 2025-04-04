@@ -155,12 +155,36 @@
 
     <string name="yes_you_can_add_medications">Ja, jy kan medikasie handmatig byvoeg deur die "Voeg medikasie by"-funksie in die toepassing.</string>
     <string name="dashboard">Kontroleskerm</string>
-
     <string name="nav_preferences">Voorkeure</string>
     <string name="calendar">Kalender</string>
     <string name="about_med">Oor Med</string>
     <string name="medication">Medikasie</string>
     <string name="all_taken">Alles geneem</string>
+
+    <string name="clear_cabinet">Skoon kas</string>
+    <string name="view_my_medicine">Sien my medisyne</string>
+    <string name="theme_settings">Tema-instellings</string>
+
+    <string name="english_language_option">Engelse taal opsie</string>
+    <string name="portuguese_language_option">Portugese taal opsie</string>
+    <string name="afrikaans_language_option">Afrikaanse taal opsie</string>
+    <string name="save_language_settings">Stoor taalinstellings</string>
+    <string name="language_changed_successfully">Taal het suksesvol verander</string>
+    <string name="dismiss">VRYSTELLING</string>
+    <string name="accept_terms">Aanvaar bepalings</string>
+    <string name="terms_accepted_confirmation">Bepalings en voorwaardes aanvaar</string>
+    <string name="navigate_title">Navigeer na bestemming</string>
+    <string name="in_app_directions">Kry aanwysings op hierdie toepassing</string>
+    <string name="open_google_maps">Maak oop in Google Maps</string>
+    <string name="cancel">Kanselleer</string>
+    <string name="calculating_route">Bereken roete…</string>
+    <string name="location_unavailable">Kan nie huidige ligging kry nie</string>
+    <string name="got_it">Ek het verstaan</string>
+    <string name="your_health_simplified">Jou gesondheid, eenvoudig gemaak</string>
+    <string name="next_step">Volgende stap</string>
+    <string name="edit_medicine">Redigeer medisyne</string>
+    <string name="delete_medicine">Vee medisyne uit</string>
+    <string name="delete_medicine_confirmation">Is jy seker jy wil uitvee %1$s?</string>
 
 
     <string-array name="language_options">

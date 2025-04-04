@@ -1,4 +1,11 @@
 <resources>
+
+    <string name="MAPS_KEY" translatable="false">AIzaSyDiUmzGCP2DrEDHC3dwkba3y0Mh0FcjKQc</string>
+    <string name="default_web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
+    <string name="google_maps_key">AIzaSyDiUmzGCP2DrEDHC3dwkba3y0Mh0FcjKQc</string>
+
+
     <string name="my_medicine_screen_title">My Medicine</string>
     <string name="medicine_details_name">Name</string>
     <string name="calendar_title">Calendar</string>
@@ -18,8 +25,6 @@
     <string name="dashboard_refill_title">Refill</string>
     <string name="another_dose">Schedule another dose</string>"
 
-    <string name="default_web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
-    <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
     <string name="strength">Strength</string>
     <string name="how_are">How are the dose taken</string>
     <string name="today">Today</string>
@@ -155,18 +160,15 @@
     <string name="calendar">Calendar</string>
     <string name="about_med">About Med</string>
     <string name="medication">Medication</string>
-
     <string name="yes_you_can_add_medications">Yes you can add medications manually through the Add Medication feature in the app.</string>
-
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="msg_token_fmt" translatable="false">FCM Registration Token: %1$s</string>
     <string name="all_taken">All Taken</string>
 
-    <string name="MAPS_KEY" translatable="false">AIzaSyDiUmzGCP2DrEDHC3dwkba3y0Mh0FcjKQc</string>
+
     <string name="clear_cabinet">Clear cabinet</string>
     <string name="view_my_medicine">View My Medicine</string>
     <string name="theme_settings">Theme settings</string>
-
     <string name="english_language_option">English language option</string>
     <string name="portuguese_language_option">Portuguese language option</string>
     <string name="afrikaans_language_option">Afrikaans language option</string>
@@ -175,10 +177,19 @@
     <string name="dismiss">DISMISS</string>
     <string name="accept_terms">Accept Terms</string>
     <string name="terms_accepted_confirmation">Terms and conditions accepted</string>
-
+    <string name="navigate_title">Navigate to destination</string>
+    <string name="in_app_directions">Get directions in this app</string>
+    <string name="open_google_maps">Open in Google Maps</string>
+    <string name="cancel">Cancel</string>
+    <string name="calculating_route">Calculating route...</string>
+    <string name="location_unavailable">Could not get current location</string>
     <string name="got_it">Got it</string>
     <string name="your_health_simplified">Your health, simplified</string>
     <string name="next_step">Next Step</string>
+    <string name="edit_medicine">Edit medicine</string>
+    <string name="delete_medicine">Delete medicine</string>
+    <string name="delete_medicine_confirmation">Are you sure you want to delete %1$s?</string>
+
 
     <string-array name="language_options">
         <item>English</item>

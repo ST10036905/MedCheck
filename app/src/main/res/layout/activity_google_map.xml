@@ -35,26 +35,31 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- Search Bar with Places Autocomplete -->
-    <com.google.android.material.card.MaterialCardView
+    <FrameLayout
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mapOptionMenu"
-        app:cardCornerRadius="25dp"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        app:strokeColor="@color/m3_outline"
-        app:strokeWidth="1dp"
-        app:cardElevation="2dp">
+        android:layout_marginEnd="8dp">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/autoComplete_fragment"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_height="50dp"
+            app:cardCornerRadius="25dp"
+            app:strokeColor="@color/m3_outline"
+            app:strokeWidth="1dp"
+            app:cardElevation="2dp">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/autoComplete_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
     <!-- Map Type Selector -->
     <com.google.android.material.card.MaterialCardView

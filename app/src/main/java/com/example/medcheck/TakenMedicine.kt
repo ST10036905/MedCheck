@@ -24,6 +24,23 @@ class TakenMedicine : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_taken_medicine)
 
+        if (intent?.action == "ACTION_TAKEN") {
+            // Handle marking medication as taken
+            val medicineName = intent.getStringExtra("medicineName")
+            val doseAmount = intent.getStringExtra("doseAmount")
+
+            // Cancel the notification
+            val notificationId = intent.getIntExtra("notificationId", 0)
+            NotificationManagerCompat.from(this).cancel(notificationId)
+
+            // Save to database that dose was taken
+            // ... your implementation here ...
+
+            Toast.makeText(this, "Marked $medicineName ($doseAmount) as taken",
+                Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
         // Set up window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

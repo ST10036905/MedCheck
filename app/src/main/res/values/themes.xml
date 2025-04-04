@@ -2,33 +2,46 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MedCheck" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/m3_primary</item>
+        <item name="colorOnPrimary">@color/m3_on_primary</item>
+        <item name="colorPrimaryContainer">@color/m3_primary_container</item>
+
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/m3_surface</item>
+        <item name="colorOnSurface">@color/m3_on_surface</item>
+        <item name="colorSurfaceVariant">@color/m3_surface_container</item>
+
+        <!-- Other colors -->
+        <item name="colorError">@color/m3_error</item>
+        <item name="colorOutline">@color/m3_outline</item>
+
+
     </style>
 
-    <style
-        name="Theme.Google.SignIn" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.Google.SignIn" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Add any customizations for Google SignIn if needed -->
     </style>
 
     <style name="Theme.MedCheck" parent="Base.Theme.MedCheck" />
 
     <style name="nightModeSwitch" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated">@color/night_mode</item>
-        <item name="colorSwitchThumbNormal">#FFFFFF</item>
-        <item name="android:colorForeground">#BFBABA</item>
+        <item name="colorControlActivated">@color/m3_primary</item>  <!-- Changed from @color/night_mode -->
+        <item name="colorSwitchThumbNormal">@color/m3_surface</item>  <!-- Changed from hardcoded #FFFFFF -->
+        <item name="android:colorForeground">@color/m3_on_surface_variant</item>  <!-- Changed from hardcoded #BFBABA -->
     </style>
 
     <style name="textView_style">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/m3_on_surface</item>  <!-- Changed from @color/white -->
     </style>
 
     <!-- For bottom nav -->
     <style name="ActiveTabTextStyle" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">@color/textBlue</item>
+        <item name="android:textColor">@color/m3_primary</item>  <!-- Changed from @color/textBlue -->
     </style>
 
     <style name="InactiveTabTextStyle" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">@color/preferences_text</item>
+        <item name="android:textColor">@color/m3_on_surface_variant</item>  <!-- Changed from @color/preferences_text -->
     </style>
-
-
 </resources>

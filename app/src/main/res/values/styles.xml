@@ -98,9 +98,15 @@
         <item name="android:windowExitTransition">@transition/slide_up</item>
         <item name="android:windowReturnTransition">@transition/slide_down</item>
         <item name="android:windowReenterTransition">@transition/slide_down</item>
+        <!-- this will prevent flickering -->
+        <item name="android:windowDisablePreview">true</item>
 
-
+        <item name="android:windowAnimationStyle">@style/ThemeAnimation</item>
     </style>
 
+    <style name="ThemeAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
 
 </resources>

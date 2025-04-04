@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.ArrayAdapter
@@ -22,6 +23,7 @@ import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
+import java.util.Date
 
 class ScheduleDose : AppCompatActivity() {
 
@@ -112,9 +114,12 @@ class ScheduleDose : AppCompatActivity() {
 
         // Save button click listener
         binding.scheduleDoseBtn.setOnClickListener {
-            motionLayout.transitionToEnd()
+            Log.d("ScheduleDose", "Schedule button clicked")
+            //motionLayout.transitionToEnd()
+            saveMedicationSchedule(medicineId)
             motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
                 override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+                    Log.d("ScheduleDose", "Transition completed")
                     saveMedicationSchedule(medicineId)
                 }
                 override fun onTransitionStarted(motionLayout: MotionLayout, startId: Int, endId: Int) {}
@@ -134,23 +139,28 @@ class ScheduleDose : AppCompatActivity() {
             return
         }
 
-        val doseData = hashMapOf(
+        val doseData = mapOf(
             "doseTime" to doseTime,
             "howOften" to howOften,
-            "howMany" to howMany
+            "howMany" to howMany,
+            "medicineName" to (intent.getStringExtra("medicineName") ?: "Unknown Medication")
         )
 
         databaseReference.child(medicineId).child("schedules").push().setValue(doseData)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    Log.d("ScheduleDose", "Firebase write successful")
                     Toast.makeText(this, "Dose scheduled successfully", Toast.LENGTH_SHORT).show()
-                    scheduleNotification(medicineId, doseTime, howOften)
+                    scheduleNotification(medicineId, doseTime, howOften, howMany)
                     navigateToMedicineDetails(medicineId)
                 } else {
-                    Toast.makeText(this, "Failed to schedule dose", Toast.LENGTH_SHORT).show()
+                    Log.e("ScheduleDose", "Firebase error", task.exception)
+                    Toast.makeText(this, "Failed to schedule dose: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT).show()
                 }
             }
     }
+
 
     private fun checkNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -171,24 +181,31 @@ class ScheduleDose : AppCompatActivity() {
     private fun navigateToMedicineDetails(medicineId: String) {
         Intent(this, MyMedicine::class.java).apply {
             putExtra("medicineId", medicineId)
-            // MODIFIED: Add transition animation
+            // Create proper Pair objects for transition
             val options = androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this@ScheduleDose,
-                androidx.core.util.Pair(binding.toolbar as View, "toolbar_transition"),
-                androidx.core.util.Pair(binding.formCard as View, "form_card_transition")
+                *arrayOf(
+                    androidx.core.util.Pair.create(binding.toolbar as View, "toolbar_transition"),
+                    androidx.core.util.Pair.create(binding.formCard as View, "form_card_transition")
+                )
             )
             startActivity(this, options.toBundle())
             finish()
         }
     }
 
-    private fun scheduleNotification(medicineId: String, doseTime: String, howOften: String) {
+    private fun scheduleNotification(medicineId: String, doseTime: String, howOften: String, howMany: String) {
+        Log.d("ScheduleDose", "Scheduling notification for $doseTime")
         val (hour, minute) = doseTime.split(":").map { it.toInt() }
 
         val calendar = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, hour)
             set(Calendar.MINUTE, minute)
             set(Calendar.SECOND, 0)
+            // If time is in the past, schedule for next day
+            if (timeInMillis < System.currentTimeMillis()) {
+                add(Calendar.DAY_OF_YEAR, 1)
+            }
         }
 
         val intervalMillis = when (howOften) {
@@ -201,8 +218,10 @@ class ScheduleDose : AppCompatActivity() {
         }
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, MedicationReminderReceiver::class.java).apply {
-            putExtra("medicineName", "Your Medicine Name")
+        val notificationIntent = Intent(this, MedicationReminderReceiver::class.java).apply {
+            putExtra("medicineName", intent.getStringExtra("medicineName") ?: "Medication")
+            putExtra("doseAmount", "$howMany pills")
+            putExtra("notificationId", medicineId.hashCode())
         }
 
         val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -214,16 +233,22 @@ class ScheduleDose : AppCompatActivity() {
         val pendingIntent = PendingIntent.getBroadcast(
             this,
             medicineId.hashCode(),
-            intent,
+            notificationIntent,
             pendingIntentFlags
         )
-
+        Log.d("ScheduleDose", "Setting alarm for ${calendar.time}")
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
             intervalMillis,
             pendingIntent
         )
+
+        // Verify the alarm is set
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val alarmInfo = alarmManager.nextAlarmClock
+            Log.d("ScheduleDose", "Next alarm: ${alarmInfo?.triggerTime?.let { Date(it) }}")
+        }
     }
 
     override fun onRequestPermissionsResult(

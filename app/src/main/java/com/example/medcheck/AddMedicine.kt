@@ -24,6 +24,8 @@ class AddMedicine : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var databaseHandler: DatabaseHandler
     private var selectedFrequency: String = ""
+    private var isEditMode = false
+    private var medicineId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Set up window transitions before super.onCreate()
@@ -43,6 +45,30 @@ class AddMedicine : AppCompatActivity() {
         binding = ActivityAddMedicineBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Check if we're in edit mode
+        isEditMode = intent.getBooleanExtra("EDIT_MODE", false)
+        if (isEditMode) {
+            medicineId = intent.getStringExtra("MEDICINE_ID")
+            val name = intent.getStringExtra("MEDICINE_NAME") ?: ""
+            val dosage = intent.getStringExtra("MEDICINE_DOSAGE") ?: ""
+            val frequency = intent.getStringExtra("MEDICINE_FREQUENCY") ?: ""
+
+            binding.nameInput.setText(name)
+            binding.strenghtInput.setText(dosage)
+            selectedFrequency = frequency
+
+            // Set the spinner selection
+            val frequencyOptions = resources.getStringArray(R.array.frequency_options)
+            val index = frequencyOptions.indexOf(frequency)
+            if (index >= 0) {
+                binding.frequencySpinner.setText(frequencyOptions[index], false)
+            }
+
+            // Update UI for edit mode
+            supportActionBar?.title = "Edit Medicine"
+            binding.saveMedicationBtn.text = "Update"
+        }
+
         // Initialize Firebase
         firebaseAuth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
@@ -50,6 +76,46 @@ class AddMedicine : AppCompatActivity() {
 
         setupFrequencySpinner()
         setupSaveButton()
+    }
+
+    private fun validateAndSaveMedication() {
+        val name = binding.nameInput.text.toString().trim()
+        val dosage = binding.strenghtInput.text.toString().trim()
+
+        when {
+            name.isEmpty() -> showToast("Please enter medicine name")
+            dosage.isEmpty() -> showToast("Please enter dosage")
+            selectedFrequency.isEmpty() -> showToast("Please select frequency")
+            else -> {
+                if (isEditMode) {
+                    updateMedicineInFirebase(name, dosage)
+                } else {
+                    storeMedicineInFirebase(name, dosage)
+                }
+                saveToLocalDatabase(name, dosage)
+            }
+        }
+    }
+
+    private fun updateMedicineInFirebase(name: String, dosage: String) {
+        medicineId?.let { id ->
+            val updates = hashMapOf<String, Any>(
+                "name" to name,
+                "dosage" to dosage,
+                "frequency" to selectedFrequency
+            )
+
+            databaseReference?.child(id)?.updateChildren(updates)
+                ?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        showToast("Medicine updated")
+                        setResult(RESULT_OK)
+                        finish()
+                    } else {
+                        showToast("Failed to update medicine")
+                    }
+                }
+        } ?: showToast("Error: Medicine ID not found")
     }
 
     private fun setupFrequencySpinner() {
@@ -76,20 +142,6 @@ class AddMedicine : AppCompatActivity() {
         }
     }
 
-    private fun validateAndSaveMedication() {
-        val name = binding.nameInput.text.toString().trim()
-        val dosage = binding.strenghtInput.text.toString().trim()
-
-        when {
-            name.isEmpty() -> showToast("Please enter medicine name")
-            dosage.isEmpty() -> showToast("Please enter dosage")
-            selectedFrequency.isEmpty() -> showToast("Please select frequency")
-            else -> {
-                storeMedicineInFirebase(name, dosage)
-                saveToLocalDatabase(name, dosage)
-            }
-        }
-    }
 
     private fun storeMedicineInFirebase(name: String, dosage: String) {
         val userId = firebaseAuth.currentUser?.uid ?: run {

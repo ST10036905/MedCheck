@@ -162,6 +162,30 @@
     <string name="medication">Medicamento</string>
     <string name="all_taken">Tomado</string>
 
+    <string name="clear_cabinet">Limpar armário</string>
+    <string name="view_my_medicine">Ver meu remédio</string>
+    <string name="theme_settings">Configurações do tema</string>
+    <string name="english_language_option">Opção de língua inglesa</string>
+    <string name="portuguese_language_option">Opção de língua portuguesa</string>
+    <string name="afrikaans_language_option">Opção de idioma africâner</string>
+    <string name="save_language_settings">Salvar configurações de idioma</string>
+    <string name="language_changed_successfully">Idioma alterado com sucesso</string>
+    <string name="dismiss">LIBERAR</string>
+    <string name="accept_terms">Aceitar Termos</string>
+    <string name="terms_accepted_confirmation">Termos e condições aceitos</string>
+    <string name="navigate_title">Navegar até o destino</string>
+    <string name="in_app_directions">Obtenha direções neste aplicativo</string>
+    <string name="open_google_maps">Abrir no Google Maps</string>
+    <string name="cancel">Cancelar</string>
+    <string name="calculating_route">Calculando rota…</string>
+    <string name="location_unavailable">Não foi possível obter a localização atual</string>
+    <string name="got_it">Entendi</string>
+    <string name="your_health_simplified">Sua saúde, simplificada</string>
+    <string name="next_step">Próximo passo</string>
+    <string name="edit_medicine">Editar medicamento</string>
+    <string name="delete_medicine">Apagar medicamento</string>
+    <string name="delete_medicine_confirmation">Tem certeza de que deseja excluir %1$s?</string>
+
     <string-array name="language_options">
         <item>Inglês</item>
         <item>Português</item>

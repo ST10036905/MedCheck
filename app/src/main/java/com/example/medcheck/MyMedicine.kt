@@ -3,8 +3,6 @@ package com.example.medcheck
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +10,14 @@ import com.example.medcheck.databinding.ActivityMyMedicineBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.*
 import com.example.medcheck.Database.DatabaseHandler
-import android.database.Cursor
-import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MyMedicine : AppCompatActivity() {
 
@@ -34,13 +35,19 @@ class MyMedicine : AppCompatActivity() {
 		// Enable edge-to-edge mode
 		binding = ActivityMyMedicineBinding.inflate(layoutInflater)
 		setContentView(binding!!.root)
+		// Initialize progress bar
+		binding?.progressBar?.visibility = View.GONE
 		// Get the current user's ID
 		userId = FirebaseAuth.getInstance().currentUser?.uid
 		// Initialize Firebase Database reference
 		databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 
-		// Setup RecyclerView
-		adapter = MedicineAdapter(emptyList())
+		// Initialize adapter with click listeners
+		adapter = MedicineAdapter(emptyList(),
+			onEditClick = { medicine -> editMedicine(medicine) },
+			onDeleteClick = { medicine -> deleteMedicine(medicine) }
+		)
+
 		binding?.medicineRecyclerView?.layoutManager = LinearLayoutManager(this)
 		binding?.medicineRecyclerView?.adapter = adapter
 
@@ -63,10 +70,10 @@ class MyMedicine : AppCompatActivity() {
 			startActivityForResult(addMedicineIntent, ADD_MEDICINE_REQUEST_CODE)
 		}
 
-		// Set up click listener for the retrieve button
-		val retrieveButton = findViewById<Button>(R.id.viewMedicineBtn)
-		retrieveButton.setOnClickListener {
-			retrieveMedicines() // Fetch medicines from SQLite and display them
+		// Button to navigate to GoogleMap activity for refilling medications
+		binding!!.RefillMedicineBtn.setOnClickListener {
+			val intent = Intent(this, GoogleMap::class.java)
+			startActivity(intent)
 		}
 
 		// Set up click listener for the clear button
@@ -106,32 +113,81 @@ class MyMedicine : AppCompatActivity() {
 	}
 
 	private fun fetchMedicinesFromFirebase() {
+		binding?.progressBar?.visibility = View.VISIBLE
+
 		userId?.let { uid ->
 			databaseReference?.orderByChild("userId")?.equalTo(uid)
-				?.addValueEventListener(object : ValueEventListener {
+				?.limitToFirst(20)
+				?.addListenerForSingleValueEvent(object : ValueEventListener {
 					override fun onDataChange(dataSnapshot: DataSnapshot) {
-						medicines = mutableListOf()
-						for (snapshot in dataSnapshot.children) {
-							snapshot.child("name").getValue(String::class.java)?.let {
-								medicines.add(it)
+						val medicineList = mutableListOf<MedicineAdapter.Medicine>()
+
+						// Process data in background thread
+						CoroutineScope(Dispatchers.Default).launch {
+							for (snapshot in dataSnapshot.children) {
+								val name = snapshot.child("name").getValue(String::class.java) ?: ""
+								val dosage = snapshot.child("dosage").getValue(String::class.java) ?: ""
+								val frequency = snapshot.child("frequency").getValue(String::class.java) ?: ""
+								val id = snapshot.key ?: ""
+
+								medicineList.add(MedicineAdapter.Medicine(id, name, dosage, frequency))
+							}
+
+							// Update UI on main thread
+							withContext(Dispatchers.Main) {
+								adapter.updateList(medicineList)
+								latestMedicine = medicineList.lastOrNull()?.name
+								binding?.progressBar?.visibility = View.GONE
 							}
 						}
-						adapter = MedicineAdapter(medicines)
-						binding?.medicineRecyclerView?.adapter = adapter
-						latestMedicine = medicines.lastOrNull()
 					}
 
 					override fun onCancelled(databaseError: DatabaseError) {
-						Toast.makeText(this@MyMedicine,
+						binding?.progressBar?.visibility = View.GONE
+						Toast.makeText(
+							this@MyMedicine,
 							"Failed to load medicines: ${databaseError.message}",
-							Toast.LENGTH_SHORT).show()
+							Toast.LENGTH_SHORT
+						).show()
 					}
 				})
 		} ?: run {
-			Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show()
+			binding?.progressBar?.visibility = View.GONE
 		}
 	}
 
+	private fun editMedicine(medicine: MedicineAdapter.Medicine) {
+		val intent = Intent(this, AddMedicine::class.java).apply {
+			putExtra("EDIT_MODE", true)
+			putExtra("MEDICINE_ID", medicine.id)
+			putExtra("MEDICINE_NAME", medicine.name)
+			putExtra("MEDICINE_DOSAGE", medicine.dosage)
+			putExtra("MEDICINE_FREQUENCY", medicine.frequency)
+		}
+		startActivityForResult(intent, EDIT_MEDICINE_REQUEST_CODE)
+	}
+
+	private fun deleteMedicine(medicine: MedicineAdapter.Medicine) {
+		AlertDialog.Builder(this)
+			.setTitle("Delete Medicine")
+			.setMessage("Are you sure you want to delete ${medicine.name}?")
+			.setPositiveButton("Delete") { _, _ ->
+				databaseReference?.child(medicine.id)?.removeValue()
+					?.addOnSuccessListener {
+						Toast.makeText(this, "${medicine.name} deleted", Toast.LENGTH_SHORT).show()
+					}
+					?.addOnFailureListener { e ->
+						Toast.makeText(this, "Failed to delete: ${e.message}", Toast.LENGTH_SHORT).show()
+					}
+			}
+			.setNegativeButton("Cancel", null)
+			.show()
+	}
+
+	companion object {
+		private const val ADD_MEDICINE_REQUEST_CODE = 1
+		private const val EDIT_MEDICINE_REQUEST_CODE = 2
+	}
 
 	// Handle the result when returning from AddMedicine
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -145,48 +201,47 @@ class MyMedicine : AppCompatActivity() {
 		}
 	}
 
-	// Define a request code
-	companion object {
-		private const val ADD_MEDICINE_REQUEST_CODE = 1
-	}
-
-	// SQLite: retrieving from the database after the user taps on the View button.
-	private fun retrieveMedicines() {
-		Log.d("MyMedicine", "retrieveMedicines: Retrieving medicines from SQLite.")
-		val cursor: Cursor? = databaseHandler.getAllMedicines()
-		val medicinesList = StringBuilder()
-
-		cursor?.use {
-			if (it.moveToFirst()) {
-				do {
-					val medicineName = it.getString(it.getColumnIndexOrThrow("name"))
-					val strength = it.getString(it.getColumnIndexOrThrow("strength"))
-					val frequency = it.getString(it.getColumnIndexOrThrow("frequency"))
-
-					// Format each record
-					medicinesList.append("Medicine: $medicineName\nStrength: $strength\nFrequency: $frequency\n\n")
-				} while (it.moveToNext())
-				Log.d("MyMedicine", "retrieveMedicines: Data retrieved successfully.")
-			} else {
-				Log.d("MyMedicine", "retrieveMedicines: No medicines found in SQLite.")
-				medicinesList.append("No medicines found.")
-			}
-		}
-
-		// Show a Toast with retrieved data or update the ListView if desired
-		if (medicinesList.isNotEmpty()) {
-			Toast.makeText(this, medicinesList.toString(), Toast.LENGTH_LONG).show() // Display medicines in a Toast
-		} else {
-			Toast.makeText(this, "No medicines found.", Toast.LENGTH_SHORT).show()
-		}
-	}
 
 	// Function to clear medicines and display a toast message
 	private fun clearMedicines() {
-		medicines.clear()
-		adapter.notifyDataSetChanged()
-		Toast.makeText(this, "Medicine cabinet cleared.", Toast.LENGTH_SHORT).show()
+		binding?.progressBar?.visibility = View.VISIBLE
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				userId?.let { uid ->
+					val task = databaseReference?.orderByChild("userId")?.equalTo(uid)
+						?.addListenerForSingleValueEvent(object : ValueEventListener {
+							override fun onDataChange(dataSnapshot: DataSnapshot) {
+								for (snapshot in dataSnapshot.children) {
+									snapshot.ref.removeValue()
+								}
+							}
+							override fun onCancelled(databaseError: DatabaseError) {
+								// Handle error in the coroutine
+								throw databaseError.toException()
+							}
+						})
+				}
+
+				withContext(Dispatchers.Main) {
+					medicines.clear()
+					adapter.updateList(emptyList())
+					binding?.progressBar?.visibility = View.GONE
+					Toast.makeText(
+						this@MyMedicine,
+						"Medicine cabinet cleared.",
+						Toast.LENGTH_SHORT
+					).show()
+				}
+			} catch (e: Exception) {
+				withContext(Dispatchers.Main) {
+					binding?.progressBar?.visibility = View.GONE
+					Toast.makeText(
+						this@MyMedicine,
+						"Error clearing medicines: ${e.message}",
+						Toast.LENGTH_SHORT
+					).show()
+				}
+			}
+		}
 	}
 }
-
-

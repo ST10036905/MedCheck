@@ -92,5 +92,7 @@ dependencies {
 
     implementation ("com.google.android.material:material:1.11.0")
     implementation ("androidx.core:core-ktx:1.12.0")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("com.google.maps:google-maps-services:2.2.0")
 
 }

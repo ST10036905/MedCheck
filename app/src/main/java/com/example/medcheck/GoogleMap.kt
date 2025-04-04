@@ -1,17 +1,22 @@
 package com.example.medcheck
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -27,8 +32,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
@@ -70,36 +77,62 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
             isRadioGroupVisible = !isRadioGroupVisible
         }
 
-        val applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
-        val apiKey = applicationInfo.metaData.getString("com.google.android.geo.API_KEY")
-
-        // initializing the places API with API key
-        Places.initialize(applicationContext,"MAPS_KEY")
-        placesClient = Places.createClient(this)
+        // Initialize Places API with the correct key
+        try {
+            val apiKey = resources.getString(R.string.google_maps_key) // Store key in strings.xml
+            if (!Places.isInitialized()) {
+                Places.initialize(applicationContext, apiKey)
+            }
+            placesClient = Places.createClient(this)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Failed to initialize Places API: ${e.message}", Toast.LENGTH_LONG).show()
+            finish()
+        }
 
         // initialize the autocompleteSupport fragment for the search bar
-        val autocompleteFragment = supportFragmentManager.findFragmentById(id.autoComplete_fragment)
+        val autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autoComplete_fragment)
                 as AutocompleteSupportFragment
 
-        // specify the type of place data to return
-        autocompleteFragment.setPlaceFields(
-            listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG)
-        )
+        // Customize the appearance
+        autocompleteFragment.setHint("Search for places...")
+        autocompleteFragment.view?.findViewById<EditText>(resources.getIdentifier(
+            "places_autocomplete_search_input",
+            "id",
+            packageName
+        ))?.let { editText ->
+            editText.setTextColor(ContextCompat.getColor(this, R.color.m3_on_surface))
+            editText.setHintTextColor(ContextCompat.getColor(this, R.color.m3_on_surface_variant))
+            editText.background = null
+        }
+
+        // Specify the types of place data to return
+        autocompleteFragment.setPlaceFields(listOf(
+            Place.Field.ID,
+            Place.Field.NAME,
+            Place.Field.LAT_LNG,
+            Place.Field.ADDRESS
+        ))
+
 
         // set up a listener to handle the place selection
-        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                // Respond to the places selected
                 val latLng = place.latLng
                 latLng?.let {
                     map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-                    map?.addMarker(MarkerOptions().position(latLng).title(place.name))
+                    map?.addMarker(
+                        MarkerOptions()
+                            .position(latLng)
+                            .title(place.name)
+                            .snippet(place.address)
+                    )
                 }
             }
 
-            override fun onError(p0: Status) {
-                // handles the error that may occour
-                Toast.makeText(this@GoogleMap, "An error occurred: ",Toast.LENGTH_SHORT).show()
+            override fun onError(status: Status) {
+                Toast.makeText(this@GoogleMap,
+                    "Error: ${status.statusMessage}",
+                    Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -183,24 +216,119 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
 
 
         // marker options
-        val markerOptions =MarkerOptions()
-        markerOptions.position(latLng)
-        markerOptions.title("Location")
-        markerOptions.snippet("You are here.")
-        markerOptions.draggable(true)
-        markerOptions.flat(true)
-        // adds the marker to the map location
-       val marker = map?.addMarker(markerOptions)
+        val defaultLocation = LatLng(-33.9590961632977, 18.46986167931326)
+        val markerOptions = MarkerOptions()
+            .position(defaultLocation)
+            .title("Location")
+            .snippet("You are here.")
+            .draggable(true)
+            .flat(true)
+            .icon(getBitmapFromDrawable(R.drawable.location)?.let {
+                BitmapDescriptorFactory.fromBitmap(it)
+            })
 
-        marker?.tag = CustomInfoWindowData("XYZ Pharmacy", getString(string.pharmacy_description), drawable.pharmacy)
+        val marker = map?.addMarker(markerOptions)
+        marker?.tag = CustomInfoWindowData(
+            "XYZ Pharmacy",
+            getString(R.string.pharmacy_description),
+            R.drawable.pharmacy
+        )
+
+        // Set marker click listener
+        map?.setOnMarkerClickListener { marker ->
+            showNavigationOptions(marker.position)
+            true // Return true to indicate we've handled the event
+        }
+
+        // Set info window click listener
+        map?.setOnInfoWindowClickListener { marker ->
+            showNavigationOptions(marker.position)
+        }
+
+        // Set adapter with null checks
+        map?.setInfoWindowAdapter(CustomInfoWindowAdapter(this))
         // checks the permission to get user location
         checkLocationPermission()
-        markerOptions.icon(getBitmapFromDrawable(drawable.location)?.let {
-            BitmapDescriptorFactory.fromBitmap(
-                it
+
+    }
+
+    private fun showNavigationOptions(destination: LatLng) {
+        val options = arrayOf(
+            "Get directions in this app",
+            "Open in Google Maps",
+            "Cancel"
+        )
+
+        AlertDialog.Builder(this)
+            .setTitle("Navigate to destination")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> showInAppDirections(destination)
+                    1 -> openInGoogleMaps(destination)
+                    // 2 is Cancel, does nothing
+                }
+            }
+            .show()
+    }
+
+    private fun showInAppDirections(destination: LatLng) {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
             )
-        })
-        map?.setInfoWindowAdapter(CustomInfoWindowAdapter(this))
+            return
+        }
+
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            if (location != null) {
+                val origin = LatLng(location.latitude, location.longitude)
+
+                // Show loading
+                Toast.makeText(this, "Calculating route...", Toast.LENGTH_SHORT).show()
+
+                // In a real app, you would call Directions API here
+                // This is a simplified version that just draws a straight line
+                map?.addPolyline(
+                    PolylineOptions()
+                        .add(origin, destination)
+                        .width(5f)
+                        .color(Color.BLUE)
+                )
+
+                // Move camera to show both points
+                val bounds = LatLngBounds.builder()
+                    .include(origin)
+                    .include(destination)
+                    .build()
+                map?.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
+            } else {
+                Toast.makeText(this, "Could not get current location", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun openInGoogleMaps(destination: LatLng) {
+        val uri = Uri.parse("google.navigation:q=${destination.latitude},${destination.longitude}")
+        val mapIntent = Intent(Intent.ACTION_VIEW, uri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+
+        try {
+            startActivity(mapIntent)
+        } catch (e: ActivityNotFoundException) {
+            // Google Maps app not installed, open in browser
+            val webUri = Uri.parse(
+                "https://www.google.com/maps/dir/?api=1&destination=" +
+                        "${destination.latitude},${destination.longitude}"
+            )
+            startActivity(Intent(Intent.ACTION_VIEW, webUri))
+        }
     }
 
     private fun enableUserLocation() {
@@ -209,18 +337,24 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
 
             map?.isMyLocationEnabled = true
 
-            // Get the current location
             val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                 if (location != null) {
                     val currentLatLng = LatLng(location.latitude, location.longitude)
                     map?.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17f))
 
-                    // Add a marker at the user's location
-                    val markerOptions = MarkerOptions().position(currentLatLng).title("Current Location")
-                    map?.addMarker(markerOptions)
-                } else {
-                    Toast.makeText(this, "Could not retrieve location", Toast.LENGTH_SHORT).show()
+                    // Updated marker creation with tag
+                    val marker = map?.addMarker(
+                        MarkerOptions()
+                            .position(currentLatLng)
+                            .title("Current Location")
+                            .snippet("Your current position")
+                    )
+                    marker?.tag = CustomInfoWindowData(
+                        "Your Location",
+                        "GPS: ${currentLatLng.latitude}, ${currentLatLng.longitude}",
+                        R.drawable.location
+                    )
                 }
             }
         }
@@ -252,14 +386,18 @@ class GoogleMap : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun getBitmapFromDrawable(resId: Int): Bitmap? {
-        var bitmap : Bitmap? = null
-        val drawable = ResourcesCompat.getDrawable(resources, resId , null)
-        if (drawable != null){
-            bitmap = Bitmap.createBitmap(150, 150 , Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(bitmap)
-            drawable.setBounds(0, 0,canvas.width ,canvas.height)
-            drawable.draw(canvas)
+        return try {
+            val drawable = ResourcesCompat.getDrawable(resources, resId, null)
+            drawable?.let {
+                val bitmap = Bitmap.createBitmap(150, 150, Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(bitmap)
+                it.setBounds(0, 0, canvas.width, canvas.height)
+                it.draw(canvas)
+                bitmap
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error creating marker icon", Toast.LENGTH_SHORT).show()
+            null
         }
-        return bitmap
     }
 }
