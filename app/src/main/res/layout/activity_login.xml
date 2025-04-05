@@ -69,6 +69,7 @@
         android:layout_marginEnd="24dp"
         android:hint="@string/password"
         app:boxStrokeColor="@color/m3_primary"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailInputLayout">
@@ -80,6 +81,21 @@
             android:inputType="textPassword"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Error Message TextView -->
+    <TextView
+        android:id="@+id/errorMessageTxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/m3_error"
+        android:visibility="gone"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
 
     <!-- Submit Button -->
     <com.google.android.material.button.MaterialButton
@@ -99,7 +115,65 @@
         android:transitionName="button_transition"
         app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
 
-    <!-- Back Button (As Text Button) -->
+
+    <View
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="#80000000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loadingContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/loginProgressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:indicatorColor="@color/m3_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/progressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/logging_in"
+            android:textColor="@color/m3_primary_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginProgressBar"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelLoginBtn"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/cancel"
+            android:textColor="@color/m3_error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginProgressBar"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Back Button - Move this to be after the loadingContainer -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/backBtn"
         style="@style/Widget.Material3.Button.TextButton"
@@ -111,6 +185,19 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/submitBtn" />
+        app:layout_constraintTop_toBottomOf="@id/forgotPasswordBtn" />
+
+    <!-- Forgot Password Button - Constrain to submitBtn -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/forgotPasswordBtn"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/m3_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/submitBtn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

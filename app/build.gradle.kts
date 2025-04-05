@@ -76,6 +76,7 @@ dependencies {
     // Google Sign-In SDK
     // Dependency for translation
     implementation(libs.mlkit)
+    implementation(libs.firebase.firestore.ktx)
     //implementing messaging feature
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -94,5 +95,8 @@ dependencies {
     implementation ("androidx.core:core-ktx:1.12.0")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation ("com.google.maps:google-maps-services:2.2.0")
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
 
 }

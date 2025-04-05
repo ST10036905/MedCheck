@@ -112,6 +112,7 @@ class ScheduleDose : AppCompatActivity() {
             timePicker.show(supportFragmentManager, "TIME_PICKER")
         }
 
+
         // Save button click listener
         binding.scheduleDoseBtn.setOnClickListener {
             Log.d("ScheduleDose", "Schedule button clicked")

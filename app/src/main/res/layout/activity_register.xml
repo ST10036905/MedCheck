@@ -198,6 +198,76 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/submitBtn" />
 
+            <!-- Password Strength Indicator -->
+            <LinearLayout
+                android:id="@+id/passwordStrengthContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passwordInputLayout">
+
+                <TextView
+                    android:id="@+id/passwordStrengthLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/password_strength"
+                    android:textColor="@color/m3_on_surface_variant"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/passwordStrengthText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/weak"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:id="@+id/strengthMeter"
+                    android:layout_width="0dp"
+                    android:layout_height="4dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/strengthMeter1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/weak_password" />
+
+                    <View
+                        android:id="@+id/strengthMeter2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/weak_password" />
+
+                    <View
+                        android:id="@+id/strengthMeter3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/weak_password" />
+
+                    <View
+                        android:id="@+id/strengthMeter4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/weak_password" />
+                </LinearLayout>
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

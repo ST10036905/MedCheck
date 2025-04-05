@@ -189,7 +189,24 @@
     <string name="edit_medicine">Edit medicine</string>
     <string name="delete_medicine">Delete medicine</string>
     <string name="delete_medicine_confirmation">Are you sure you want to delete %1$s?</string>
-
+    <string name="logging_in">Logging-in</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="reset_password_sent">Password reset email sent to %s</string>
+    <string name="reset_password_failed">Failed to send reset email: %s</string>
+    <string name="max_attempts_message">sorry you have reached your attempts.</string>
+    <string name="retry">Retry</string>
+    <string name="password_requirements">Password must contain:\n- At least 8 characters\n- 1 uppercase letter\n- 1 lowercase letter\n- 1 number\n- 1 special character</string>
+    <string name="weak">Weak</string>
+    <string name="medium">Medium</string>
+    <string name="strong">Strong</string>
+    <string name="very_strong">Very Strong</string>
+    <string name="wrong_password">Wrong password. Please try again.</string>
+    <string name="account_not_found">Account not found. Please check your email.</string>
+    <string name="invalid_email">Invalid email format. Please check your email.</string>
+    <string name="two_factor_authentication">Two-Factor Authentication</string>
+    <string name="password_strength">Password Strength</string>
+    <string name="select_a_language">Select a language</string>
+    <string name="save">Save</string>
 
     <string-array name="language_options">
         <item>English</item>

@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
@@ -32,6 +33,7 @@ class Preferences : AppCompatActivity() {
         private const val PREFS_NAME = "MedCheckPrefs"
         private const val BIOMETRIC_ENABLED_KEY = "biometricEnabled"
         private const val DARK_MODE_KEY = "night"
+        private const val TWO_FA_ENABLED_KEY = "twoFaEnabled"
     }
 
     private lateinit var sharedPreferences: SharedPreferences
@@ -77,6 +79,7 @@ class Preferences : AppCompatActivity() {
         setDarkMode(isDarkModeEnabled)
 
         setupBiometricPrompt()
+        setupSecuritySection()
 
         binding.biometricSwitch.setOnClickListener {
             setupBiometricAuthentication()
@@ -183,6 +186,47 @@ class Preferences : AppCompatActivity() {
         }
     }
 
+    // Add this to your Preferences class
+    private fun setupSecuritySection() {
+        // Set initial state of 2FA switch
+        val twoFaEnabled = sharedPreferences.getBoolean(TWO_FA_ENABLED_KEY, false)
+        binding.twoFaSwitch.isChecked = twoFaEnabled
+
+        // Set up 2FA switch listener
+        binding.twoFaSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                show2FAEnableDialog()
+            } else {
+                sharedPreferences.edit().putBoolean(TWO_FA_ENABLED_KEY, false).apply()
+                Toast.makeText(this, "Two-factor authentication disabled", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Set up biometric switch
+        binding.biometricSwitch.isChecked = sharedPreferences.getBoolean(BIOMETRIC_ENABLED_KEY, false)
+        binding.biometricSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                setupBiometricAuthentication()
+            } else {
+                sharedPreferences.edit().putBoolean(BIOMETRIC_ENABLED_KEY, false).apply()
+                Toast.makeText(this, "Biometric login disabled", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun show2FAEnableDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Enable Two-Factor Authentication")
+            .setMessage("You'll need to verify your identity with a code sent to your email when logging in.")
+            .setPositiveButton("Enable") { _, _ ->
+                sharedPreferences.edit().putBoolean(TWO_FA_ENABLED_KEY, true).apply()
+                Toast.makeText(this, "Two-factor authentication enabled", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("Cancel") { _, _ ->
+                binding.twoFaSwitch.isChecked = false
+            }
+            .show()
+    }
 
     private fun signOut() {
         mGoogleSignInClient!!.signOut().addOnCompleteListener(this) {

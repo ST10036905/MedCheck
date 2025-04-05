@@ -186,6 +186,24 @@
     <string name="delete_medicine">Vee medisyne uit</string>
     <string name="delete_medicine_confirmation">Is jy seker jy wil uitvee %1$s?</string>
 
+    <string name="logging_in">Meld aan</string>
+    <string name="forgot_password">Wagwoord vergeet</string>
+    <string name="reset_password_sent">Wagwoordterugstelling e-pos gestuur na %s</string>
+    <string name="reset_password_failed">Kon nie terugstel-e-pos stuur nie: %s</string>
+    <string name="max_attempts_message">jammer jy het jou pogings bereik.</string>
+    <string name="retry">Retry</string>
+    <string name="password_requirements">Wagwoord moet bevat:\n- Ten minste 8 karakters\n- 1 hoofletter\n- 1 kleinletter\n- 1 syfer\n- 1 spesiale karakter</string>
+    <string name="weak">Swak</string>
+    <string name="medium">Medium</string>
+    <string name="strong">Sterk</string>
+    <string name="very_strong">Baie sterk</string>
+    <string name="wrong_password">Verkeerde wagwoord. Probeer asseblief weer.</string>
+    <string name="account_not_found">Rekening nie gevind nie. Gaan asseblief jou e-pos na.</string>
+    <string name="invalid_email">Ongeldige e-posformaat. Gaan asseblief jou e-pos na.</string>
+    <string name="two_factor_authentication">Twee-faktor-verifikasie</string>
+    <string name="password_strength">Wagwoord sterkte</string>
+    <string name="select_a_language">Kies \'n taal</string>
+    <string name="save">Stoor</string>
 
     <string-array name="language_options">
         <item>Engels</item>

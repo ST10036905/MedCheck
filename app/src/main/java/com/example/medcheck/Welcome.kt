@@ -36,6 +36,11 @@ class Welcome : AppCompatActivity() {
             startActivity(Intent(this, Login::class.java))
         }
 
+        // Set up button listener for "Back button"
+        binding.backBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
         // Check if the user is logged in when returning to the Welcome screen after logout
         if (firebaseAuth.currentUser != null) {
             firebaseAuth.signOut()  // Ensure the user is logged out on returning to Welcome

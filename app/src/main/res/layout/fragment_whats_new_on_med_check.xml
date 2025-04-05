@@ -230,9 +230,9 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:drawablePadding="8dp"
-                        android:drawableTint="@color/m3_primary_container"
                         android:drawableStart="@drawable/pill"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        app:drawableTint="@color/m3_primary_container" />
 
                     <TextView
                         android:id="@+id/feature_5_description"

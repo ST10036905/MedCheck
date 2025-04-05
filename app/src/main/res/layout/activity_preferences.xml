@@ -210,6 +210,14 @@
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         />
 
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/twoFaSwitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/two_factor_authentication"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/logoutButton"
                         style="@style/Widget.Material3.Button.OutlinedButton"

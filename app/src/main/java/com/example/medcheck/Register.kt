@@ -3,9 +3,12 @@ package com.example.medcheck
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.medcheck.databinding.ActivityRegisterBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -18,13 +21,10 @@ class Register : AppCompatActivity() {
 
     // Binding for the register activity layout
     private lateinit var binding: ActivityRegisterBinding
-
     // Firebase Authentication instance
     private lateinit var firebaseAuth: FirebaseAuth
-
     // Firebase Database instance
     private lateinit var database: FirebaseDatabase
-
     // Google Sign-In client instance
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -71,6 +71,12 @@ class Register : AppCompatActivity() {
 
             // Check if all fields are filled
             if (email.isNotEmpty() && age.isNotEmpty() && weight.isNotEmpty() && height.isNotEmpty() && pass.isNotEmpty() && pass2.isNotEmpty()) {
+
+                if (!PasswordStrengthChecker.meetsRequirements(pass)) {
+                    Toast.makeText(this, getString(R.string.password_requirements), Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
                 if (pass == pass2) { // Ensure passwords match
 
                     // Create user with email and password
@@ -105,6 +111,8 @@ class Register : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
+
+        setupPasswordStrengthChecker()
     }
 
     // Handle Google Sign-In
@@ -132,6 +140,55 @@ class Register : AppCompatActivity() {
             // Display error message if Google Sign-In fails
             Toast.makeText(this, "Google Sign-In failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun setupPasswordStrengthChecker() {
+        binding.textPass.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    updatePasswordStrength(it.toString())
+                }
+            }
+        })
+    }
+
+    private fun updatePasswordStrength(password: String) {
+        val strength = PasswordStrengthChecker.calculateStrength(password)
+
+        when (strength) {
+            PasswordStrengthChecker.Strength.WEAK -> {
+                binding.passwordStrengthText.text = getString(R.string.weak)
+                binding.passwordStrengthText.setTextColor(ContextCompat.getColor(this, R.color.weak_password))
+                updateStrengthMeter(R.color.weak_password, 1)
+            }
+            PasswordStrengthChecker.Strength.MEDIUM -> {
+                binding.passwordStrengthText.text = getString(R.string.medium)
+                binding.passwordStrengthText.setTextColor(ContextCompat.getColor(this, R.color.medium_password))
+                updateStrengthMeter(R.color.medium_password, 2)
+            }
+            PasswordStrengthChecker.Strength.STRONG -> {
+                binding.passwordStrengthText.text = getString(R.string.strong)
+                binding.passwordStrengthText.setTextColor(ContextCompat.getColor(this, R.color.strong_password))
+                updateStrengthMeter(R.color.strong_password, 3)
+            }
+            PasswordStrengthChecker.Strength.VERY_STRONG -> {
+                binding.passwordStrengthText.text = getString(R.string.very_strong)
+                binding.passwordStrengthText.setTextColor(ContextCompat.getColor(this, R.color.very_strong_password))
+                updateStrengthMeter(R.color.very_strong_password, 4)
+            }
+        }
+    }
+
+    private fun updateStrengthMeter(colorRes: Int, segments: Int) {
+        val color = ContextCompat.getColor(this, colorRes)
+
+        binding.strengthMeter1.setBackgroundColor(color)
+        binding.strengthMeter2.setBackgroundColor(if (segments >= 2) color else ContextCompat.getColor(this, R.color.m3_outline))
+        binding.strengthMeter3.setBackgroundColor(if (segments >= 3) color else ContextCompat.getColor(this, R.color.m3_outline))
+        binding.strengthMeter4.setBackgroundColor(if (segments >= 4) color else ContextCompat.getColor(this, R.color.m3_outline))
     }
 
     // Function to initiate Google Sign-In

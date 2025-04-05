@@ -161,7 +161,6 @@
     <string name="about_med">Sobre a Med</string>
     <string name="medication">Medicamento</string>
     <string name="all_taken">Tomado</string>
-
     <string name="clear_cabinet">Limpar armário</string>
     <string name="view_my_medicine">Ver meu remédio</string>
     <string name="theme_settings">Configurações do tema</string>
@@ -185,6 +184,25 @@
     <string name="edit_medicine">Editar medicamento</string>
     <string name="delete_medicine">Apagar medicamento</string>
     <string name="delete_medicine_confirmation">Tem certeza de que deseja excluir %1$s?</string>
+
+    <string name="logging_in">Efetuando login</string>
+    <string name="forgot_password">Esqueceu sua senha</string>
+    <string name="reset_password_sent">E-mail de redefinição de senha enviado para %s</string>
+    <string name="reset_password_failed">Falha ao enviar e-mail de redefinição: %s</string>
+    <string name="max_attempts_message">Desculpe você ter atingido suas tentativas.</string>
+    <string name="retry">Tentar novamente</string>
+    <string name="password_requirements">A senha deve conter:\n- Pelo menos 8 caracteres\n- 1 letra maiúscula\n- 1 letra minúscula\n- 1 número\n- 1 caractere especial</string>
+    <string name="weak">Fraca</string>
+    <string name="medium">Média</string>
+    <string name="strong">Forte</string>
+    <string name="very_strong">Muito forte</string>
+    <string name="wrong_password">Senha errada. Por favor, tente novamente.</string>
+    <string name="account_not_found">Conta não encontrada. Por favor, verifique seu e-mail.</string>
+    <string name="invalid_email">Formato de e-mail inválido. Verifique seu e-mail.</string>
+    <string name="two_factor_authentication">Autenticação de dois fatores</string>
+    <string name="password_strength">Força da senha</string>
+    <string name="select_a_language">Selecione um idioma</string>
+    <string name="save">Salvar</string>
 
     <string-array name="language_options">
         <item>Inglês</item>

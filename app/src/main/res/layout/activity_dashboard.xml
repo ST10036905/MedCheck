@@ -44,12 +44,11 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/dashboard_icon"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="300dp"
+                    android:layout_height="250dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/medcheck_logo2"
-                    android:contentDescription="Profile icon"
-                    app:strokeWidth="1dp"/>
+                    android:contentDescription="Profile icon"/>
             </LinearLayout>
 
             <!-- User Info Card -->
@@ -139,7 +138,7 @@
                         android:id="@+id/knowMoreBtn"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="8dp"
                         android:text="@string/dashboard_know_more_medicine"
                         app:icon="@drawable/information"

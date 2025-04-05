@@ -25,15 +25,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     // Declare FirebaseAuth for managing Firebase authentication
     private lateinit var mAuth: FirebaseAuth
-    //
     private lateinit var sharedPreferences: SharedPreferences
-
     // Declare a binding variable for using view binding to access views
     private lateinit var binding: ActivityMainBinding
 
-    // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
-
         // Gets the shared preferences
         sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE)
         // Get saved language preference
@@ -107,20 +103,6 @@ class MainActivity : AppCompatActivity() {
 
             // Optional: Disable default override
             overridePendingTransition(0, 0)
-        }
-    }
-
-    // Function to sign out the user from Firebase and Google, and then navigate to the Login activity
-    private fun signOutAndStartSignInActivity() {
-        // Sign out from Firebase Authentication
-        mAuth.signOut()
-
-        // Sign out from Google Sign-In and upon completion, navigate to the Login activity
-        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-            // After signing out, start the Login activity
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-            finish() // Close the current activity so the user can't return with the back button
         }
     }
 
