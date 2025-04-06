@@ -209,6 +209,21 @@
     <string name="welcome_user">Bem-vindo, %1$s</string>
     <string name="welcome_guest">Bem-vindo, convidado</string>
     <string name="error_too_many_attempts">Muitas tentativas falhadas. Por favor, tente novamente em %1$d segundos.</string>
+
+    <string name="full_name">Nome completo</string>
+    <string name="phone_number">Número de telefone</string>
+    <string name="select_country">Selecione o país</string>
+    <string name="location">Localização</string>
+    <string name="i_agree_to_terms">Eu concordo com os Termos e Condições</string>
+    <string name="read_terms_and_conditions">Leia os Termos e Condições</string>
+    <string name="accept_terms_error">Por favor, aceite os termos e condições</string>
+    <string name="location_required">Localização é necessária</string>
+    <string name="verification_email_sent">E-mail de verificação enviado. Por favor, verifique seu e-mail.</string>
+    <string name="verification_email_failed">Falha ao enviar e-mail de verificação</string>
+    <string name="agree">Concordar</string>
+    <string name="registration_failed">O registro falhou</string>
+
+
     <string-array name="language_options">
         <item>Inglês</item>
         <item>Português</item>

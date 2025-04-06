@@ -209,7 +209,18 @@
     <string name="welcome_user">Welkom, %1$s</string>
     <string name="welcome_guest">Welkom, gas</string>
     <string name="error_too_many_attempts">Te veel mislukte pogings. Probeer asseblief weer oor %1$d sekondes.</string>
-
+    <string name="full_name">Volle Naam</string>
+    <string name="phone_number">Telefoonnommer</string>
+    <string name="select_country">Kies Land</string>
+    <string name="location">Ligging</string>
+    <string name="i_agree_to_terms">Ek stem in tot die Bepalings en Voorwaardes</string>
+    <string name="read_terms_and_conditions">Lees Bepalings en Voorwaardes</string>
+    <string name="accept_terms_error">Aanvaar asseblief die bepalings en voorwaardes</string>
+    <string name="location_required">Ligging word vereis</string>
+    <string name="verification_email_sent">Verifikasie-e-pos gestuur. Verifieer asseblief jou e-pos.</string>
+    <string name="verification_email_failed">Kon nie verifikasie-e-pos stuur nie</string>
+    <string name="agree">Stem saam</string>
+    <string name="registration_failed">Registrasie het misluk</string>
     <string-array name="language_options">
         <item>Engels</item>
         <item>Portugese</item>

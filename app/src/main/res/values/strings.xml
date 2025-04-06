@@ -212,6 +212,22 @@
     <string name="welcome_user">Welcome, %1$s</string>
     <string name="welcome_guest">Welcome, Guest</string>
     <string name="error_too_many_attempts">Too many failed attempts. Please try again in %1$d seconds.</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="select_country">Select Country</string>
+    <string name="location">Location</string>
+    <string name="i_agree_to_terms">I agree to the Terms and Conditions</string>
+    <string name="read_terms_and_conditions">Read Terms and Conditions</string>
+    <string name="accept_terms_error">Please accept the terms and conditions</string>
+    <string name="location_required">Location is required</string>
+
+    <string name="verification_email_failed">Failed to send verification email</string>
+    <string name="agree">Agree</string>
+    <string name="registration_failed">Registration failed</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="verification_email_sent">Verification email sent to %s .Please verify your email</string>
+    <string name="email_not_verified">Email not verified</string>
+    <string name="email_verified">Email verified</string>
 
     <string-array name="language_options">
         <item>English</item>
