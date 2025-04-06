@@ -514,7 +514,7 @@ class Login : AppCompatActivity() {
         val lastFailedLogin = prefs.getLong(LAST_FAILED_LOGIN_KEY, 0)
         val remainingTime = (COOL_DOWN_PERIOD - (System.currentTimeMillis() - lastFailedLogin)) / 1000
 
-        showErrorWithRetry("Too many failed attempts. Please try again in ${remainingTime} seconds.")
+        showErrorWithRetry(getString(R.string.error_too_many_attempts, remainingTime))
         disableForm()
 
         // Enable form after cool down period

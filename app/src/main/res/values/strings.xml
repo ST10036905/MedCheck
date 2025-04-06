@@ -207,6 +207,11 @@
     <string name="password_strength">Password Strength</string>
     <string name="select_a_language">Select a language</string>
     <string name="save">Save</string>
+    <string name="no_user_logged_in">No user is logged in</string>
+    <string name="welcome_message">Hello, %1$s</string>
+    <string name="welcome_user">Welcome, %1$s</string>
+    <string name="welcome_guest">Welcome, Guest</string>
+    <string name="error_too_many_attempts">Too many failed attempts. Please try again in %1$d seconds.</string>
 
     <string-array name="language_options">
         <item>English</item>

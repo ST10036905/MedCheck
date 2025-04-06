@@ -204,6 +204,11 @@
     <string name="select_a_language">Selecione um idioma</string>
     <string name="save">Salvar</string>
 
+    <string name="no_user_logged_in">Nenhum usuário está logado</string>
+    <string name="welcome_message">Olá, %1$s</string>
+    <string name="welcome_user">Bem-vindo, %1$s</string>
+    <string name="welcome_guest">Bem-vindo, convidado</string>
+    <string name="error_too_many_attempts">Muitas tentativas falhadas. Por favor, tente novamente em %1$d segundos.</string>
     <string-array name="language_options">
         <item>Inglês</item>
         <item>Português</item>

@@ -204,6 +204,11 @@
     <string name="password_strength">Wagwoord sterkte</string>
     <string name="select_a_language">Kies \'n taal</string>
     <string name="save">Stoor</string>
+    <string name="no_user_logged_in">Geen gebruiker is aangemeld nie</string>
+    <string name="welcome_message">Hallo, %1$s</string>
+    <string name="welcome_user">Welkom, %1$s</string>
+    <string name="welcome_guest">Welkom, gas</string>
+    <string name="error_too_many_attempts">Te veel mislukte pogings. Probeer asseblief weer oor %1$d sekondes.</string>
 
     <string-array name="language_options">
         <item>Engels</item>

@@ -45,14 +45,9 @@ class Preferences : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeUtils.applyTheme(this)
         // Initialize sharedPreferences FIRST
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        // Set theme before super.onCreate
-        if (sharedPreferences.getBoolean(DARK_MODE_KEY, false)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
 
         super.onCreate(savedInstanceState)
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
@@ -66,17 +61,17 @@ class Preferences : AppCompatActivity() {
         // Initialize Firebase user
         currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null) {
-            Toast.makeText(this, "No user is logged in", Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(this, getString(R.string.no_user_logged_in), Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Hello, ${currentUser?.email}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                getString(R.string.welcome_message, currentUser?.email ?: ""),
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-
-        val isDarkModeEnabled = sharedPreferences.getBoolean(DARK_MODE_KEY, false)
-        setDarkMode(isDarkModeEnabled)
 
         setupBiometricPrompt()
         setupSecuritySection()
@@ -85,9 +80,12 @@ class Preferences : AppCompatActivity() {
             setupBiometricAuthentication()
         }
 
-        binding.themeSwitch.isChecked = isDarkModeEnabled
+        // Initialize switch state
+        binding.themeSwitch.isChecked = ThemeUtils.isDarkMode(this)
+
+        // Set switch listener
         binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            setDarkMode(isChecked)  // The method now handles the check internally
+            ThemeUtils.setDarkMode(this, isChecked)
         }
 
         binding.logoutButton.setOnClickListener {
@@ -172,19 +170,6 @@ class Preferences : AppCompatActivity() {
         binding.themeSwitch.isChecked = savedInstanceState.getBoolean(DARK_MODE_KEY, false)
     }
 
-    private fun setDarkMode(isEnabled: Boolean) {
-        sharedPreferences.edit().putBoolean(DARK_MODE_KEY, isEnabled).apply()
-
-        val currentMode = AppCompatDelegate.getDefaultNightMode()
-        val newMode = if (isEnabled) AppCompatDelegate.MODE_NIGHT_YES
-        else AppCompatDelegate.MODE_NIGHT_NO
-
-        if (currentMode != newMode) {
-            AppCompatDelegate.setDefaultNightMode(newMode)
-            // Add a slight delay for smoother transition
-            binding.root.postDelayed({ recreate() }, 150)
-        }
-    }
 
     // Add this to your Preferences class
     private fun setupSecuritySection() {
@@ -228,14 +213,6 @@ class Preferences : AppCompatActivity() {
             .show()
     }
 
-    private fun signOut() {
-        mGoogleSignInClient!!.signOut().addOnCompleteListener(this) {
-            val intent = Intent(this@Preferences, Welcome::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
-        }
-    }
 
     private fun logout() {
         Toast.makeText(this, "User is being logged out...", Toast.LENGTH_SHORT).show()

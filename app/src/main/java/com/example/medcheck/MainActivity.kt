@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
 import com.example.medcheck.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeUtils.applyTheme(this)
         // Gets the shared preferences
         sharedPreferences = getSharedPreferences("Preferences", MODE_PRIVATE)
         // Get saved language preference
@@ -69,10 +71,10 @@ class MainActivity : AppCompatActivity() {
         val user = Firebase.auth.currentUser
         if (user != null) {
             // If user is logged in, display their email in the welcome TextView
-            binding.textWelcomeUser.text = "Welcome, ${user.email}"
+            binding.textWelcomeUser.text = getString(R.string.welcome_user, user.email ?: "")
         } else {
             // If user is not logged in, display a default welcome message
-            binding.textWelcomeUser.text = "Welcome, Guest"
+            binding.textWelcomeUser.text = getString(R.string.welcome_guest)
         }
 
         // Set a click listener on the "Get Started" button to navigate to the Welcome activity
