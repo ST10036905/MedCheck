@@ -12,7 +12,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import android.widget.Filter
 import android.widget.TextView
 import com.google.android.libraries.places.api.model.TypeFilter
-import io.opencensus.stats.View
+
 
 
 class PlaceAutocompleteAdapter(

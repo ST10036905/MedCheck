@@ -1,5 +1,6 @@
 package com.example.medcheck
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 class MedicineAdapter(
     private var medicines: List<Medicine>,
     private val onEditClick: (Medicine) -> Unit,
-    private val onDeleteClick: (Medicine) -> Unit
+    private val onDeleteClick: (Medicine) -> Unit,
+    private val onScheduleClick: (Medicine) -> Unit
 ) : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {
 
     // Create a data class to hold medicine information
@@ -29,7 +31,9 @@ class MedicineAdapter(
         val medicineDetails: TextView = itemView.findViewById(R.id.medicineDetails)
         val editButton: ImageButton = itemView.findViewById(R.id.editButton)
         val deleteButton: ImageButton = itemView.findViewById(R.id.deleteButton)
+        val scheduleButton: ImageButton? = itemView.findViewById(R.id.scheduleButton)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -48,6 +52,12 @@ class MedicineAdapter(
 
         holder.deleteButton.setOnClickListener {
             onDeleteClick(medicine)
+        }
+
+        // Only set click listener if button exists
+        holder.scheduleButton?.setOnClickListener {
+            Log.d("ScheduleDebug", "Scheduling ${medicine.name} (${medicine.id})")
+            onScheduleClick(medicine)
         }
     }
 

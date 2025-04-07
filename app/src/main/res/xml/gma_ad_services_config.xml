@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ad-services-config>
+    <ad-services-consent>
+        <is-consent-given>false</is-consent-given>
+    </ad-services-consent>
+</ad-services-config>

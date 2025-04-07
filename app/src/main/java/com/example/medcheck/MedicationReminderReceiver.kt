@@ -52,14 +52,6 @@ class MedicationReminderReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun checkBatteryOptimization(context: Context): Boolean {
-        val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            pm.isIgnoringBatteryOptimizations(context.packageName)
-        } else {
-            true
-        }
-    }
 
     private fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -90,10 +82,14 @@ class MedicationReminderReceiver : BroadcastReceiver() {
         doseAmount: String,
         notificationId: Int
     ): Notification {
+
+        val fullDoseInfo = "$doseAmount pills of $medicineName"
+
         // Intent for "Mark as Taken"
         val takenIntent = Intent(context, TakenMedicine::class.java).apply {
             putExtra("medicineName", medicineName)
             putExtra("doseAmount", doseAmount)
+            putExtra("fullDoseInfo", fullDoseInfo) // Pass the combined info
             putExtra("notificationId", notificationId)
             action = "ACTION_TAKEN"
         }
@@ -109,6 +105,7 @@ class MedicationReminderReceiver : BroadcastReceiver() {
         val snoozeIntent = Intent(context, MedicationReminderReceiver::class.java).apply {
             putExtra("medicineName", medicineName)
             putExtra("doseAmount", doseAmount)
+            putExtra("fullDoseInfo", fullDoseInfo) // Pass the combined info
             putExtra("notificationId", notificationId)
             action = "ACTION_SNOOZE"
         }
@@ -123,9 +120,9 @@ class MedicationReminderReceiver : BroadcastReceiver() {
         return NotificationCompat.Builder(context, "medication_channel")
             .setSmallIcon(R.drawable.medcheck_logo)
             .setContentTitle("Time to take your medication")
-            .setContentText("$medicineName - $doseAmount")
+            .setContentText(fullDoseInfo) // Use the combined info here
             .setStyle(NotificationCompat.BigTextStyle()
-                .bigText("It's time to take your $medicineName. Dose: $doseAmount"))
+                .bigText("It's time to take your medication: $fullDoseInfo"))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setAutoCancel(true)

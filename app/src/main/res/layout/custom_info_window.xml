@@ -24,21 +24,6 @@
             android:layout_height="wrap_content"
             android:paddingVertical="8dp">
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/infoWindow"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginHorizontal="8dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/pharmacy"
-                app:riv_corner_radius="16dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteY="8dp" />
-
             <TextView
                 android:id="@+id/infoWindowTitle"
                 android:layout_width="0dp"
@@ -52,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/infoWindow"/>
+                app:layout_constraintTop_toBottomOf="@id/infoWindowContent"/>
 
             <TextView
                 android:id="@+id/infoWindowContent"

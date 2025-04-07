@@ -47,4 +47,13 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/delete_medicine"
         app:tint="@color/m3_error" />
+
+    <ImageButton
+        android:id="@+id/scheduleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/schedule_dose"
+        android:src="@drawable/ic_time"
+        app:tint="@color/m3_primary" />
 </LinearLayout>

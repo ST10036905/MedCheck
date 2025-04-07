@@ -2,6 +2,7 @@ package com.example.medcheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import android.widget.Button
@@ -13,6 +14,9 @@ import com.example.medcheck.Database.DatabaseHandler
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,9 +33,11 @@ class MyMedicine : AppCompatActivity() {
 	private lateinit var adapter: MedicineAdapter
 	private var latestMedicine: String? = null // Variable to hold the latest medicine name
 	private var userId: String? = null // Store user ID to filter medicines
+	private lateinit var adView: AdView
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+
 		// Enable edge-to-edge mode
 		binding = ActivityMyMedicineBinding.inflate(layoutInflater)
 		setContentView(binding!!.root)
@@ -45,8 +51,14 @@ class MyMedicine : AppCompatActivity() {
 		// Initialize adapter with click listeners
 		adapter = MedicineAdapter(emptyList(),
 			onEditClick = { medicine -> editMedicine(medicine) },
-			onDeleteClick = { medicine -> deleteMedicine(medicine) }
+			onDeleteClick = { medicine -> deleteMedicine(medicine) },
+			onScheduleClick = { medicine -> scheduleDose(medicine) }  // Add this
 		)
+
+		MobileAds.initialize(this) {}
+		adView = findViewById(R.id.adView)
+		val adRequest = AdRequest.Builder().build()
+		adView.loadAd(adRequest)
 
 		binding?.medicineRecyclerView?.layoutManager = LinearLayoutManager(this)
 		binding?.medicineRecyclerView?.adapter = adapter
@@ -107,9 +119,30 @@ class MyMedicine : AppCompatActivity() {
 		}
 	}
 
+	private fun scheduleDose(medicine: MedicineAdapter.Medicine) {
+		Log.d("ScheduleFlow", "Starting schedule for ${medicine.name}")
+		Log.d("ScheduleFlow", "ID: ${medicine.id}, Name: ${medicine.name}")
+
+		val intent = Intent(this, ScheduleDose::class.java).apply {
+			putExtra("medicineId", medicine.id)
+			putExtra("medicineName", medicine.name)
+		}
+		startActivity(intent)
+	}
+
+	override fun onPause() {
+		adView.pause()
+		super.onPause()
+	}
+
+	override fun onResume() {
+		super.onResume()
+		adView.resume()
+	}
+
 	override fun onDestroy() {
+		adView.destroy()
 		super.onDestroy()
-		binding = null
 	}
 
 	private fun fetchMedicinesFromFirebase() {

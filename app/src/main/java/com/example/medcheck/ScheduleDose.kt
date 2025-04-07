@@ -8,6 +8,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.Window
@@ -18,6 +20,16 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.medcheck.databinding.ActivityScheduleDoseBinding
+import com.google.ads.mediation.admob.AdMobAdapter
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.database.DatabaseReference
@@ -31,6 +43,8 @@ class ScheduleDose : AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
     private lateinit var motionLayout: MotionLayout
     private val REQUEST_NOTIFICATION_PERMISSION = 1
+    private var interstitialAd: InterstitialAd? = null
+    private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Enable activity transitions
@@ -50,8 +64,29 @@ class ScheduleDose : AppCompatActivity() {
             true
         }
 
+        // ------------ Logs for medicine name
+        Log.d("MedNameDebug", "Received extras: ${intent.extras?.keySet()}")
+        Log.d("MedNameDebug", "Medicine name: ${intent.getStringExtra("medicineName")}")
+
         // Initialize MotionLayout
         motionLayout = binding.motionLayout
+
+        // Initialize AdMob
+        MobileAds.initialize(this) {}
+
+        // Initialize Banner Ad
+        adView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
+        // Set AdListener
+        adView.adListener = object : AdListener() {
+            override fun onAdClosed() {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    adView.loadAd(AdRequest.Builder().build())
+                }, 60000)
+            }
+        }
 
         // Initialize Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
@@ -68,6 +103,58 @@ class ScheduleDose : AppCompatActivity() {
         setupFrequencyDropdown()
         setupClickListeners(medicineId)
         checkNotificationPermission()
+    }
+
+    private fun loadInterstitial() {
+        val adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            this,
+            "ca-app-pub-1252634716456493/9223171327",
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.e("AdMob", "Interstitial failed: ${adError.message}")
+                    interstitialAd = null
+                }
+
+                override fun onAdLoaded(ad: InterstitialAd) {
+                    interstitialAd = ad
+                    // Set ad show callback
+                    ad.setOnPaidEventListener { adValue ->
+                        Log.d("AdMob", "Paid event: ${adValue.valueMicros}")
+                    }
+                    ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+                        override fun onAdDismissedFullScreenContent() {
+                            loadInterstitial() // Preload next ad
+                        }
+                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                            Log.e("AdMob", "Ad failed to show: ${adError.message}")
+                        }
+                    }
+                }
+            }
+        )
+    }
+
+
+    // Call this after successful dose save
+    private fun showInterstitial() {
+        interstitialAd?.let { ad ->
+            ad.show(this)
+        } ?: run {
+            Log.d("AdMob", "Ad wasn't ready")
+            loadInterstitial()
+        }
+    }
+
+    // Call this when you want to show the ad (e.g., after saving a dose)
+    private fun afterDoseSaved() {
+        if (interstitialAd != null) {
+            showInterstitial()
+        } else {
+            loadInterstitial()
+        }
     }
 
     private fun setupToolbar() {
@@ -131,6 +218,7 @@ class ScheduleDose : AppCompatActivity() {
     }
 
     private fun saveMedicationSchedule(medicineId: String) {
+        // Get all fields first
         val doseTime = binding.timeTakenInput.text.toString()
         val howOften = binding.oftenSpinner.text.toString()
         val howMany = binding.howManyInput.text.toString()
@@ -140,26 +228,43 @@ class ScheduleDose : AppCompatActivity() {
             return
         }
 
+        // First try to get name from intent, then from database if needed
+        val medicineName = intent.getStringExtra("medicineName") ?: run {
+            // Fetch from database if not in intent
+            databaseReference.child(medicineId).child("name").get().addOnSuccessListener { snapshot ->
+                val nameFromDb = snapshot.getValue(String::class.java) ?: "Unknown Medication"
+                completeScheduleSave(medicineId, doseTime, howOften, howMany, nameFromDb)
+            }.addOnFailureListener {
+                completeScheduleSave(medicineId, doseTime, howOften, howMany, "Unknown Medication")
+            }
+            return
+        }
+
+        completeScheduleSave(medicineId, doseTime, howOften, howMany, medicineName)
+
+        afterDoseSaved()
+    }
+
+    private fun completeScheduleSave(medicineId: String, doseTime: String,
+                                     howOften: String, howMany: String, medicineName: String) {
         val doseData = mapOf(
             "doseTime" to doseTime,
             "howOften" to howOften,
             "howMany" to howMany,
-            "medicineName" to (intent.getStringExtra("medicineName") ?: "Unknown Medication")
+            "medicineName" to medicineName
         )
 
         databaseReference.child(medicineId).child("schedules").push().setValue(doseData)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("ScheduleDose", "Firebase write successful")
-                    Toast.makeText(this, "Dose scheduled successfully", Toast.LENGTH_SHORT).show()
-                    scheduleNotification(medicineId, doseTime, howOften, howMany)
+                    scheduleNotification(medicineId, doseTime, howOften, howMany, medicineName)
                     navigateToMedicineDetails(medicineId)
                 } else {
-                    Log.e("ScheduleDose", "Firebase error", task.exception)
-                    Toast.makeText(this, "Failed to schedule dose: ${task.exception?.message}",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Failed to schedule dose", Toast.LENGTH_SHORT).show()
                 }
             }
+
+        afterDoseSaved()
     }
 
 
@@ -195,61 +300,82 @@ class ScheduleDose : AppCompatActivity() {
         }
     }
 
-    private fun scheduleNotification(medicineId: String, doseTime: String, howOften: String, howMany: String) {
-        Log.d("ScheduleDose", "Scheduling notification for $doseTime")
-        val (hour, minute) = doseTime.split(":").map { it.toInt() }
+    private fun scheduleNotification(medicineId: String, doseTime: String,
+                                     howOften: String, howMany: String, medicineName: String) {
+        try {
+            val (hour, minute) = doseTime.split(":").map { it.toInt() }
 
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, hour)
-            set(Calendar.MINUTE, minute)
-            set(Calendar.SECOND, 0)
-            // If time is in the past, schedule for next day
-            if (timeInMillis < System.currentTimeMillis()) {
-                add(Calendar.DAY_OF_YEAR, 1)
+            val calendar = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, hour)
+                set(Calendar.MINUTE, minute)
+                set(Calendar.SECOND, 0)
+                if (timeInMillis < System.currentTimeMillis()) {
+                    add(Calendar.DAY_OF_YEAR, 1)
+                }
             }
+
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val notificationIntent = Intent(this, MedicationReminderReceiver::class.java).apply {
+                putExtra("medicineName", medicineName)
+                putExtra("doseAmount", howMany)
+                putExtra("notificationId", medicineId.hashCode())
+            }
+
+            val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+
+            val pendingIntent = PendingIntent.getBroadcast(
+                this,
+                medicineId.hashCode(),
+                notificationIntent,
+                flags
+            )
+
+            // For Android 6.0+ (API 23+)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    pendingIntent
+                )
+            } else {
+                alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    pendingIntent
+                )
+            }
+
+            // Set repeating alarm if needed
+            if (howOften != "Once") {
+                val interval = when (howOften) {
+                    "Every 4 Hours" -> AlarmManager.INTERVAL_HOUR * 4
+                    "Every 8 Hours" -> AlarmManager.INTERVAL_HOUR * 8
+                    "Every 12 Hours" -> AlarmManager.INTERVAL_HOUR * 12
+                    "Daily" -> AlarmManager.INTERVAL_DAY
+                    "Weekly" -> AlarmManager.INTERVAL_DAY * 7
+                    else -> 0
+                }
+                if (interval > 0) {
+                    alarmManager.setRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        calendar.timeInMillis,
+                        interval,
+                        pendingIntent
+                    )
+                }
+            }
+
+            Log.d("AlarmDebug", "Alarm set for $medicineName at $doseTime")
+        } catch (e: Exception) {
+            Log.e("AlarmError", "Failed to set alarm", e)
+            Toast.makeText(this, "Error setting reminder", Toast.LENGTH_SHORT).show()
         }
 
-        val intervalMillis = when (howOften) {
-            "Every 4 Hours" -> AlarmManager.INTERVAL_HOUR * 4
-            "Every 8 Hours" -> AlarmManager.INTERVAL_HOUR * 8
-            "Every 12 Hours" -> AlarmManager.INTERVAL_HOUR * 12
-            "Daily" -> AlarmManager.INTERVAL_DAY
-            "Weekly" -> AlarmManager.INTERVAL_DAY * 7
-            else -> AlarmManager.INTERVAL_DAY
-        }
-
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val notificationIntent = Intent(this, MedicationReminderReceiver::class.java).apply {
-            putExtra("medicineName", intent.getStringExtra("medicineName") ?: "Medication")
-            putExtra("doseAmount", "$howMany pills")
-            putExtra("notificationId", medicineId.hashCode())
-        }
-
-        val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        } else {
-            PendingIntent.FLAG_UPDATE_CURRENT
-        }
-
-        val pendingIntent = PendingIntent.getBroadcast(
-            this,
-            medicineId.hashCode(),
-            notificationIntent,
-            pendingIntentFlags
-        )
-        Log.d("ScheduleDose", "Setting alarm for ${calendar.time}")
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            intervalMillis,
-            pendingIntent
-        )
-
-        // Verify the alarm is set
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val alarmInfo = alarmManager.nextAlarmClock
-            Log.d("ScheduleDose", "Next alarm: ${alarmInfo?.triggerTime?.let { Date(it) }}")
-        }
+        afterDoseSaved()
     }
 
     override fun onRequestPermissionsResult(
