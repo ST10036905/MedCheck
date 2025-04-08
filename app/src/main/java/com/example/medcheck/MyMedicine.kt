@@ -147,45 +147,54 @@ class MyMedicine : AppCompatActivity() {
 
 	private fun fetchMedicinesFromFirebase() {
 		binding?.progressBar?.visibility = View.VISIBLE
+		Log.d("MyMedicine", "Fetching medicines for user: $userId")
 
 		userId?.let { uid ->
 			databaseReference?.orderByChild("userId")?.equalTo(uid)
-				?.limitToFirst(20)
 				?.addListenerForSingleValueEvent(object : ValueEventListener {
 					override fun onDataChange(dataSnapshot: DataSnapshot) {
+						Log.d("MyMedicine", "DataSnapshot: ${dataSnapshot.value}")
 						val medicineList = mutableListOf<MedicineAdapter.Medicine>()
 
-						// Process data in background thread
-						CoroutineScope(Dispatchers.Default).launch {
-							for (snapshot in dataSnapshot.children) {
-								val name = snapshot.child("name").getValue(String::class.java) ?: ""
-								val dosage = snapshot.child("dosage").getValue(String::class.java) ?: ""
-								val frequency = snapshot.child("frequency").getValue(String::class.java) ?: ""
-								val id = snapshot.key ?: ""
+						if (!dataSnapshot.exists()) {
+							Log.d("MyMedicine", "No data found for user $uid")
+							binding?.progressBar?.visibility = View.GONE
+							return
+						}
 
-								medicineList.add(MedicineAdapter.Medicine(id, name, dosage, frequency))
-							}
+						for (snapshot in dataSnapshot.children) {
+							val name = snapshot.child("name").getValue(String::class.java) ?: ""
+							val dosage = snapshot.child("dosage").getValue(String::class.java) ?: ""
+							val frequency = snapshot.child("frequency").getValue(String::class.java) ?: ""
+							val id = snapshot.key ?: ""
+							Log.d("MyMedicine", "Found medicine: $name, $dosage, $frequency")
 
-							// Update UI on main thread
-							withContext(Dispatchers.Main) {
-								adapter.updateList(medicineList)
-								latestMedicine = medicineList.lastOrNull()?.name
-								binding?.progressBar?.visibility = View.GONE
-							}
+							medicineList.add(MedicineAdapter.Medicine(id, name, dosage, frequency))
+						}
+
+						runOnUiThread {
+							adapter.updateList(medicineList)
+							latestMedicine = medicineList.lastOrNull()?.name
+							binding?.progressBar?.visibility = View.GONE
+							Log.d("MyMedicine", "Updated adapter with ${medicineList.size} items")
 						}
 					}
 
 					override fun onCancelled(databaseError: DatabaseError) {
-						binding?.progressBar?.visibility = View.GONE
-						Toast.makeText(
-							this@MyMedicine,
-							"Failed to load medicines: ${databaseError.message}",
-							Toast.LENGTH_SHORT
-						).show()
+						Log.e("MyMedicine", "Error fetching medicines", databaseError.toException())
+						runOnUiThread {
+							binding?.progressBar?.visibility = View.GONE
+							Toast.makeText(
+								this@MyMedicine,
+								"Failed to load medicines: ${databaseError.message}",
+								Toast.LENGTH_SHORT
+							).show()
+						}
 					}
 				})
 		} ?: run {
 			binding?.progressBar?.visibility = View.GONE
+			Log.e("MyMedicine", "User ID is null")
 		}
 	}
 

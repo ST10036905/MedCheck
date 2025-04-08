@@ -218,12 +218,15 @@
     <string name="read_terms_and_conditions">Leia os Termos e Condições</string>
     <string name="accept_terms_error">Por favor, aceite os termos e condições</string>
     <string name="location_required">Localização é necessária</string>
-    <string name="verification_email_sent">E-mail de verificação enviado. Por favor, verifique seu e-mail.</string>
+    <string name="verification_email_sent">E-mail de verificação enviado para %s. Por favor, verifique seu e-mail.</string>
     <string name="verification_email_failed">Falha ao enviar e-mail de verificação</string>
     <string name="agree">Concordar</string>
     <string name="registration_failed">O registro falhou</string>
 
-
+    <string name="verify_email">Verificar e-mail</string>
+    <string name="email_not_verified">E-mail não verificado</string>
+    <string name="email_verified">E-mail verificado</string>
+    <string name="don_t_have_an_account_register">Não tem uma conta? Registre-se agora.</string>
     <string-array name="language_options">
         <item>Inglês</item>
         <item>Português</item>

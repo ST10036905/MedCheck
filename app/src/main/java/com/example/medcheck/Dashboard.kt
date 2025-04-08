@@ -8,9 +8,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medcheck.databinding.ActivityDashboardBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class Dashboard : AppCompatActivity() {
 
@@ -18,18 +26,25 @@ class Dashboard : AppCompatActivity() {
 	private lateinit var auth: FirebaseAuth
 	private lateinit var databaseReference: DatabaseReference
 	private lateinit var binding: ActivityDashboardBinding
-
 	// UI elements for displaying user info
 	private lateinit var emailTextView: TextView
 	private lateinit var medicineTextView: TextView
-
+	private lateinit var adView: AdView
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_dashboard)
-
 		binding = ActivityDashboardBinding.inflate(layoutInflater)
 		setContentView(binding.root)
+
+		// Initialize AdMob
+		MobileAds.initialize(this) {}
+		adView = binding.adView
+		loadAd()
+
+		setupUI()
+		setupFirebase()
+		setupBottomNavigation()
+		setupClickListeners()
 
 		// resizes the nav bar icons depending of the screen size of the phone or device used
 		val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -62,38 +77,98 @@ class Dashboard : AppCompatActivity() {
 			startActivity(intent)
 		}
 
-		//---------------------------------------BOTTOM NAVIGATION SETUP-------------------------------------------------
-		// Initialize the BottomNavigationView and handle navigation item selection
-		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+	}
 
-		// Set a listener for navigation item selection
+	private fun setupUI() {
+		emailTextView = binding.emailText
+		medicineTextView = binding.medicineText
+
+		// Resize nav bar icons
+		val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+		bottomNavView.itemIconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
+	}
+
+	private fun setupClickListeners() {
+		binding.addMedicationBtn.setOnClickListener {
+			startActivity(Intent(this, AddMedicine::class.java))
+		}
+
+		binding.knowMoreBtn.setOnClickListener {
+			startActivity(Intent(this, MedicationInformation::class.java))
+		}
+
+		binding.refillBtn.setOnClickListener {
+			startActivity(Intent(this, GoogleMap::class.java))
+		}
+	}
+
+	private suspend fun fetchLatestMedicine(userId: String): String? {
+		return try {
+			val snapshot = FirebaseDatabase.getInstance()
+				.getReference("medicines")
+				.orderByChild("userId")
+				.equalTo(userId)
+				.get()
+				.await()
+
+			if (snapshot.exists()) {
+				snapshot.children.lastOrNull()?.child("name")?.getValue(String::class.java)
+			} else {
+				null
+			}
+		} catch (e: Exception) {
+			Log.e("Dashboard", "Error fetching medicine", e)
+			null
+		}
+	}
+
+	override fun onResume() {
+		super.onResume()
+		adView.resume()
+	}
+
+	override fun onPause() {
+		adView.pause()
+		super.onPause()
+	}
+
+	override fun onDestroy() {
+		adView.destroy()
+		super.onDestroy()
+	}
+
+	private fun setupFirebase() {
+		auth = FirebaseAuth.getInstance()
+		databaseReference = FirebaseDatabase.getInstance().getReference("users")
+	}
+
+	private fun loadAd() {
+		val adRequest = AdRequest.Builder().build()
+		adView.loadAd(adRequest)
+	}
+
+	private fun setupBottomNavigation() {
+		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 		bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
 			when (item.itemId) {
 				R.id.nav_preferences -> {
-					// Navigate to the Preferences activity
 					startActivity(Intent(this, Preferences::class.java))
-					return@setOnNavigationItemSelectedListener true
+					true
 				}
-
 				R.id.nav_calendar -> {
-					// Navigate to the Calendar activity
 					startActivity(Intent(this, Calendar::class.java))
-					return@setOnNavigationItemSelectedListener true
+					true
 				}
-
 				R.id.nav_konw_your_med -> {
-					// Navigate to the MedicationInformation activity
 					startActivity(Intent(this, MedicationInformation::class.java))
-					return@setOnNavigationItemSelectedListener true
+					true
 				}
-
 				R.id.nav_medication -> {
-					// Navigate to the MyMedicine activity
 					startActivity(Intent(this, MyMedicine::class.java))
-					return@setOnNavigationItemSelectedListener true
+					true
 				}
+				else -> false
 			}
-			false
 		}
 	}
 

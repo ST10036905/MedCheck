@@ -27,6 +27,7 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -149,6 +150,12 @@ class Login : AppCompatActivity() {
         }
 
         setupTextListeners()
+
+        val registerLink = findViewById<TextView>(R.id.registerLink)
+        registerLink.setOnClickListener {
+            val intent = Intent(this, Register::class.java)
+            startActivity(intent)
+        }
 
         binding.cancelLoginBtn.setOnClickListener {
             cancelLoginProcess()

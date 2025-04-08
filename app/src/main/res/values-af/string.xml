@@ -221,6 +221,11 @@
     <string name="verification_email_failed">Kon nie verifikasie-e-pos stuur nie</string>
     <string name="agree">Stem saam</string>
     <string name="registration_failed">Registrasie het misluk</string>
+
+    <string name="verify_email">Verifieer e-pos</string>
+    <string name="email_not_verified">E-pos nie geverifieer nie</string>
+    <string name="email_verified">E-pos geverifieer</string>
+    <string name="don_t_have_an_account_register">Het jy nie \'n rekening nie? Registreer nou.</string>
     <string-array name="language_options">
         <item>Engels</item>
         <item>Portugese</item>

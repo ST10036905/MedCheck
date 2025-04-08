@@ -112,15 +112,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                app:adSize="BANNER"
-                app:adUnitId="ca-app-pub-1252634716456493/9223171327"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
             <!-- Medicine List -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -141,6 +132,15 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- Move this outside NestedScrollView -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-1252634716456493/9223171327"
+    app:layout_constraintBottom_toTopOf="@id/bottom_navigation"/>
 
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

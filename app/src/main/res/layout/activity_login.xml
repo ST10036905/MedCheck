@@ -173,21 +173,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Back Button - Move this to be after the loadingContainer -->
+    <!-- Forgot Password Button - Constrain to submitBtn -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/backBtn"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:text="@string/back"
         android:textColor="@color/m3_error"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/forgotPasswordBtn" />
 
-    <!-- Forgot Password Button - Constrain to submitBtn -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/forgotPasswordBtn"
         style="@style/Widget.Material3.Button.TextButton"
@@ -199,5 +199,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/submitBtn"/>
+
+    <TextView
+        android:id="@+id/registerLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/don_t_have_an_account_register"
+        android:textColor="@color/m3_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/forgotPasswordBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

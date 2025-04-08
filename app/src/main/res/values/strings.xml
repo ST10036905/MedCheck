@@ -4,6 +4,7 @@
     <string name="default_web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
     <string name="web_client_id">949339555333-b5ker837781uu300ulpiue4r2i4d3gmo.apps.googleusercontent.com</string>
     <string name="google_maps_key">AIzaSyDiUmzGCP2DrEDHC3dwkba3y0Mh0FcjKQc</string>
+    <string name="AdMob_ID" translatable="false">ca-app-pub-1252634716456493~1671984360</string>
 
 
     <string name="my_medicine_screen_title">My Medicine</string>
@@ -228,6 +229,7 @@
     <string name="verification_email_sent">Verification email sent to %s .Please verify your email</string>
     <string name="email_not_verified">Email not verified</string>
     <string name="email_verified">Email verified</string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? Register now.</string>
 
     <string-array name="language_options">
         <item>English</item>

@@ -85,6 +85,9 @@ dependencies {
     // If you use coroutines (optional)
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
 
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
     // Test dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

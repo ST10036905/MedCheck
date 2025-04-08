@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.medcheck.databinding.ActivityScheduleDoseBinding
 import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.AdListener
@@ -30,12 +31,20 @@ import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 import java.util.Date
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.gms.ads.admanager.AdManagerAdRequest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class ScheduleDose : AppCompatActivity() {
 
@@ -45,6 +54,11 @@ class ScheduleDose : AppCompatActivity() {
     private val REQUEST_NOTIFICATION_PERMISSION = 1
     private var interstitialAd: InterstitialAd? = null
     private lateinit var adView: AdView
+    private var rewardedAd: RewardedAd? = null
+    private val REWARDED_AD_UNIT_ID = "ca-app-pub-1252634716456493/9636375922"
+    private var wasRewardEarned = false
+    private var isAdLoading = false
+    private var lastAdLoadTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Enable activity transitions
@@ -88,6 +102,8 @@ class ScheduleDose : AppCompatActivity() {
             }
         }
 
+        loadRewardedAd()
+
         // Initialize Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("medicines")
 
@@ -103,6 +119,13 @@ class ScheduleDose : AppCompatActivity() {
         setupFrequencyDropdown()
         setupClickListeners(medicineId)
         checkNotificationPermission()
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        rewardedAd?.fullScreenContentCallback = null
+        rewardedAd = null
+        super.onDestroy()
     }
 
     private fun loadInterstitial() {
@@ -163,6 +186,78 @@ class ScheduleDose : AppCompatActivity() {
         }
     }
 
+    private fun loadRewardedAd() {
+        // Don't load if already loading or loaded recently
+        if (isAdLoading || System.currentTimeMillis() - lastAdLoadTime < 30000) {
+            return
+        }
+
+        isAdLoading = true
+        val adRequest = AdManagerAdRequest.Builder().build()
+
+        RewardedAd.load(this, REWARDED_AD_UNIT_ID, adRequest,
+            object : RewardedAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.e("AdMob", "Rewarded ad failed to load: ${adError.message}")
+                    rewardedAd = null
+                    isAdLoading = false
+                    lastAdLoadTime = System.currentTimeMillis()
+                }
+
+                override fun onAdLoaded(ad: RewardedAd) {
+                    Log.d("AdMob", "Rewarded ad loaded")
+                    rewardedAd = ad
+                    isAdLoading = false
+                    lastAdLoadTime = System.currentTimeMillis()
+                }
+            })
+    }
+
+    private fun showRewardedAd(medicineId: String) {  // Add medicineId parameter
+        rewardedAd?.let { ad ->
+            wasRewardEarned = false
+
+            // Show loading indicator
+            binding.progressBar.visibility = View.VISIBLE
+            binding.scheduleDoseBtn.isEnabled = false
+
+            ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    // Reload the next ad
+                    loadRewardedAd()
+
+                    // Hide loading indicator
+                    binding.progressBar.visibility = View.GONE
+                    binding.scheduleDoseBtn.isEnabled = true
+
+                    // Continue with app flow
+                    if (wasRewardEarned) {
+                        Toast.makeText(this@ScheduleDose,
+                            "Thank you for watching!", Toast.LENGTH_SHORT).show()
+                    }
+                    navigateToMedicineDetails(medicineId)
+                }
+
+                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                    Log.e("AdMob", "Ad failed to show: ${adError.message}")
+                    binding.progressBar.visibility = View.GONE
+                    binding.scheduleDoseBtn.isEnabled = true
+                    navigateToMedicineDetails(medicineId)
+                }
+            }
+
+            ad.show(this) { rewardItem ->
+                wasRewardEarned = true
+                val rewardAmount = rewardItem.amount
+                val rewardType = rewardItem.type
+                Log.d("AdMob", "User earned reward: $rewardAmount $rewardType")
+            }
+        } ?: run {
+            Log.d("AdMob", "Rewarded ad wasn't ready yet")
+            navigateToMedicineDetails(medicineId)
+        }
+    }
+
     private fun setupFrequencyDropdown() {
         val dosageOptions = listOf(
             "Every 4 Hours",
@@ -218,31 +313,57 @@ class ScheduleDose : AppCompatActivity() {
     }
 
     private fun saveMedicationSchedule(medicineId: String) {
-        // Get all fields first
-        val doseTime = binding.timeTakenInput.text.toString()
-        val howOften = binding.oftenSpinner.text.toString()
-        val howMany = binding.howManyInput.text.toString()
+        // Show loading state immediately
+        binding.progressBar.visibility = View.VISIBLE
+        binding.scheduleDoseBtn.isEnabled = false
 
-        if (doseTime.isEmpty() || howMany.isEmpty() || howOften.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            return
-        }
+        // Perform database operations in coroutine
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                // Get all fields first
+                val doseTime = withContext(Dispatchers.Main) { binding.timeTakenInput.text.toString() }
+                val howOften = withContext(Dispatchers.Main) { binding.oftenSpinner.text.toString() }
+                val howMany = withContext(Dispatchers.Main) { binding.howManyInput.text.toString() }
 
-        // First try to get name from intent, then from database if needed
-        val medicineName = intent.getStringExtra("medicineName") ?: run {
-            // Fetch from database if not in intent
-            databaseReference.child(medicineId).child("name").get().addOnSuccessListener { snapshot ->
-                val nameFromDb = snapshot.getValue(String::class.java) ?: "Unknown Medication"
-                completeScheduleSave(medicineId, doseTime, howOften, howMany, nameFromDb)
-            }.addOnFailureListener {
-                completeScheduleSave(medicineId, doseTime, howOften, howMany, "Unknown Medication")
+                // Validate on IO thread
+                if (doseTime.isEmpty() || howMany.isEmpty() || howOften.isEmpty()) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@ScheduleDose, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                        binding.progressBar.visibility = View.GONE
+                        binding.scheduleDoseBtn.isEnabled = true
+                    }
+                    return@launch
+                }
+
+                // Complete save operation
+                completeScheduleSave(medicineId, doseTime, howOften, howMany,
+                    intent.getStringExtra("medicineName") ?: fetchMedicineName(medicineId))
+
+                // Show ad on main thread
+                withContext(Dispatchers.Main) {
+                    if (rewardedAd != null) {
+                        showRewardedAd(medicineId)
+                    } else {
+                        navigateToMedicineDetails(medicineId)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@ScheduleDose, "Error saving medication", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                    binding.scheduleDoseBtn.isEnabled = true
+                }
             }
-            return
         }
+    }
 
-        completeScheduleSave(medicineId, doseTime, howOften, howMany, medicineName)
-
-        afterDoseSaved()
+    private suspend fun fetchMedicineName(medicineId: String): String {
+        return try {
+            val snapshot = databaseReference.child(medicineId).child("name").get().await()
+            snapshot.getValue(String::class.java) ?: "Unknown Medication"
+        } catch (e: Exception) {
+            "Unknown Medication"
+        }
     }
 
     private fun completeScheduleSave(medicineId: String, doseTime: String,
