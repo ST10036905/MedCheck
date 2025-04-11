@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:991660862357:android:3dfbcb461ccc0bb663649c",
         "android_client_info": {
-          "package_name": "com.example.medcheck"
+          "package_name": "com.health.medcheck"
         }
       },
       "oauth_client": [

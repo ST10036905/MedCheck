@@ -342,11 +342,10 @@
             <!-- Terms and Conditions -->
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/termsCheckbox"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/i_agree_to_terms"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passwordConfirmInputLayout" />
 
@@ -357,9 +356,36 @@
                 android:layout_marginTop="4dp"
                 android:text="@string/read_terms_and_conditions"
                 android:textColor="@color/m3_primary"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textStyle="bold"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/termsCheckbox" />
+
+            <!-- Privacy Policy -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/checkboxPrivacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/i_have_read_and_agree_to_the_privacy_policy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/termsLink" />
+
+            <TextView
+                android:id="@+id/textViewPrivacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/view_privacy_policy"
+                android:textColor="@color/m3_primary"
+                android:textStyle="bold"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkboxPrivacyPolicy" />
 
             <!-- Action Buttons -->
             <com.google.android.material.button.MaterialButton
@@ -370,9 +396,9 @@
                 android:layout_marginTop="32dp"
                 android:text="@string/submit"
                 android:backgroundTint="@color/m3_primary"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/termsLink" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewPrivacyPolicy" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/googleSignInBtn"
@@ -381,12 +407,13 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/sign_up"
-                app:icon="@drawable/google_logo"
                 android:textColor="@color/m3_primary"
+                app:icon="@drawable/google_logo"
                 app:iconTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/submitBtn" />
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/backBtn"

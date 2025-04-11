@@ -209,11 +209,10 @@
     <string name="welcome_user">Bem-vindo, %1$s</string>
     <string name="welcome_guest">Bem-vindo, convidado</string>
     <string name="error_too_many_attempts">Muitas tentativas falhadas. Por favor, tente novamente em %1$d segundos.</string>
-
     <string name="full_name">Nome completo</string>
     <string name="phone_number">Número de telefone</string>
     <string name="select_country">Selecione o país</string>
-    <string name="location">Localização</string>
+    <string name="location">País/Região</string>
     <string name="i_agree_to_terms">Eu concordo com os Termos e Condições</string>
     <string name="read_terms_and_conditions">Leia os Termos e Condições</string>
     <string name="accept_terms_error">Por favor, aceite os termos e condições</string>
@@ -222,11 +221,12 @@
     <string name="verification_email_failed">Falha ao enviar e-mail de verificação</string>
     <string name="agree">Concordar</string>
     <string name="registration_failed">O registro falhou</string>
-
     <string name="verify_email">Verificar e-mail</string>
     <string name="email_not_verified">E-mail não verificado</string>
     <string name="email_verified">E-mail verificado</string>
     <string name="don_t_have_an_account_register">Não tem uma conta? Registre-se agora.</string>
+    <string name="i_have_read_and_agree_to_the_privacy_policy">Li e concordo com a Política de Privacidade</string>
+    <string name="view_privacy_policy">Ver Política de Privacidade</string>
     <string-array name="language_options">
         <item>Inglês</item>
         <item>Português</item>

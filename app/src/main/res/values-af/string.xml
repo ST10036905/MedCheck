@@ -212,7 +212,7 @@
     <string name="full_name">Volle Naam</string>
     <string name="phone_number">Telefoonnommer</string>
     <string name="select_country">Kies Land</string>
-    <string name="location">Ligging</string>
+    <string name="location">Land/streek</string>
     <string name="i_agree_to_terms">Ek stem in tot die Bepalings en Voorwaardes</string>
     <string name="read_terms_and_conditions">Lees Bepalings en Voorwaardes</string>
     <string name="accept_terms_error">Aanvaar asseblief die bepalings en voorwaardes</string>
@@ -221,11 +221,12 @@
     <string name="verification_email_failed">Kon nie verifikasie-e-pos stuur nie</string>
     <string name="agree">Stem saam</string>
     <string name="registration_failed">Registrasie het misluk</string>
-
     <string name="verify_email">Verifieer e-pos</string>
     <string name="email_not_verified">E-pos nie geverifieer nie</string>
     <string name="email_verified">E-pos geverifieer</string>
     <string name="don_t_have_an_account_register">Het jy nie \'n rekening nie? Registreer nou.</string>
+    <string name="i_have_read_and_agree_to_the_privacy_policy">Ek het die Privaatheidsbeleid gelees en stem daartoe in</string>
+    <string name="view_privacy_policy">Bekyk Privaatheidsbeleid</string>
     <string-array name="language_options">
         <item>Engels</item>
         <item>Portugese</item>

@@ -6,24 +6,37 @@ plugins {
 }
 
 android {
-    namespace = "com.example.medcheck"
+    namespace = "com.health.medcheck"
     compileSdk = 34
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     defaultConfig {
-        applicationId = "com.example.medcheck"
+        applicationId = "com.health.medcheck"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "MAPS_API_KEY", "\"${project.properties["MAPS_API_KEY"] ?: ""}\"")
+        buildConfigField("String", "ADMOB_APP_ID", "\"ca-app-pub-3940256099942544~3347511713\"")
+        buildConfigField("boolean", "DEBUG_MODE", "false")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            buildConfigField("boolean", "DEBUG_MODE", "true")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -40,10 +53,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
-    }
-
-    buildFeatures {
-        viewBinding = true
     }
 }
 
@@ -74,19 +83,15 @@ dependencies {
 
     // Other dependencies
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
     implementation("com.hbb20:ccp:2.6.1")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    // If you use coroutines (optional)
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
-
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
 
     // Test dependencies
     testImplementation(libs.junit)

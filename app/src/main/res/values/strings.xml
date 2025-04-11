@@ -216,7 +216,7 @@
     <string name="full_name">Full Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="select_country">Select Country</string>
-    <string name="location">Location</string>
+    <string name="location">Country/Region</string>
     <string name="i_agree_to_terms">I agree to the Terms and Conditions</string>
     <string name="read_terms_and_conditions">Read Terms and Conditions</string>
     <string name="accept_terms_error">Please accept the terms and conditions</string>
@@ -230,6 +230,8 @@
     <string name="email_not_verified">Email not verified</string>
     <string name="email_verified">Email verified</string>
     <string name="don_t_have_an_account_register">Don\'t have an account? Register now.</string>
+    <string name="i_have_read_and_agree_to_the_privacy_policy">I have read and agree to the Privacy Policy</string>
+    <string name="view_privacy_policy">View Privacy Policy</string>
 
     <string-array name="language_options">
         <item>English</item>
